@@ -36,11 +36,13 @@ const routes = (
                 <Route name="message-detail" path=":messageId" component={MessageDetail} />
             </Route>
 
-            <Route name="login" path="login" component={Login} />
-            <Route name="signup" path="signup" component={Signup} />
+
             <Route name="about" path="about" component={About} />
         </Route>
+
+        <Route name="login" path="/login" component={Login} />
+        <Route name="signup" path="/signup" component={Signup} />
     </Router>
-)
+);
 
 export default routes
