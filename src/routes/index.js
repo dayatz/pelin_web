@@ -35,8 +35,7 @@ const routes = (
                 <IndexRoute component={MessageList} />
                 <Route name="message-detail" path=":messageId" component={MessageDetail} />
             </Route>
-
-
+            
             <Route name="about" path="about" component={About} />
         </Route>
 

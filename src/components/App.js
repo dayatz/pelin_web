@@ -3,6 +3,7 @@ import getMuiTheme from 'material-ui/lib/styles/getMuiTheme'
 import customTheme from '../config/theme'
 import RaisedButton from 'material-ui/lib/raised-button'
 
+// TODO: design base view in this component
 class App extends React.Component {
     getChildContext() {
         return {
