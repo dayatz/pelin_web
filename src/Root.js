@@ -1,21 +1,13 @@
 import React from 'react'
 import routes from './routes'
-import { Provider } from 'react-redux'
-import { createStore } from 'redux'
+import { Provider, connect } from 'react-redux'
 
-// TODO: create reducers
-const store = createStore(() => {
-    console.log('store created');
-});
+import {store} from './reducers'
 
-class Root extends React.Component {
-    render() {
-        return (
-            <Provider store={store}>
-            {routes}
-            </Provider>
-        )
-    }
+const Root = () => {
+    return (
+        <Provider store={store}>{routes}</Provider>
+    )
 }
 
 export default Root

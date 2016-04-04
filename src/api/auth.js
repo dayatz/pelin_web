@@ -1,3 +1,9 @@
-/**
- * Created by e on 4/3/16.
- */
+import axios from 'axios'
+
+const AuthService = {
+    login: (u, p) => {
+        return axios.get('https://api.myjson.com/bins/1oo9s');
+    }
+}
+
+export default AuthService

@@ -1,5 +1,6 @@
 import React from 'react'
-import {Router, Route, IndexRoute, hashHistory} from 'react-router'
+import {Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 
 import GroupRoute from './group'
 
@@ -19,8 +20,12 @@ import Login from '../pages/auth/Login'
 import Signup from '../pages/auth/Signup'
 import About from '../pages/other/About'
 
+import {store} from '../reducers'
+
+const history = syncHistoryWithStore(browserHistory, store)
+
 const routes = (
-    <Router history={hashHistory}>
+    <Router history={history}>
         <Route name="app-route" path="/" component={App}>
             <IndexRoute component={Home} />
 
@@ -35,7 +40,7 @@ const routes = (
                 <IndexRoute component={MessageList} />
                 <Route name="message-detail" path=":messageId" component={MessageDetail} />
             </Route>
-            
+
             <Route name="about" path="about" component={About} />
         </Route>
 
