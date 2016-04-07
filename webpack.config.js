@@ -20,13 +20,15 @@ module.exports = {
             {
                 test: /\.js?$/,
                 loaders: ['react-hot', 'babel'],
-                exclude: /node_modules/
+                exclude: /node_modules/,
+                include: /src/
             },
             {
                 test: /\.css?$/,
                 loader: 'style!css',
                 exclude: /node_modules/
-            }
+            },
+            { test: /\.jpe?g$|\.gif$|\.png$|\.svg$|\.woff$|\.ttf$|\.wav$|\.mp3$/, loader: "file" }
         ]
     }
 }

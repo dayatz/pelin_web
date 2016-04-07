@@ -1,10 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import TextField from 'material-ui/lib/text-field'
-import RaisedButton from 'material-ui/lib/raised-button'
-import CircularProgress from 'material-ui/lib/circular-progress'
-import FontIcon from 'material-ui/lib/font-icon'
+import LoginForm from '../../components/auth/LoginForm'
+
+import {loginRequest} from '../../actions/'
 
 import AuthService from '../../api/auth'
 import {BASE_URL} from '../../config'
@@ -12,62 +11,53 @@ import {BASE_URL} from '../../config'
 class Login extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {
-            isFetching: false
-        }
     }
 
-    handleClick() {
-        this.setState({isFetching: true});
+    handleClick(u, p) {
+        this.props.loginRequest();
 
-        console.log(this.props);
+        // TODO: call async login action
 
-        const username = this.refs.username.getValue();
-        const password = this.refs.password.getValue();
-
-        AuthService.login(username, password)
-        .then((r) => {
-            console.log(r);
-            console.log(BASE_URL);
-            this.setState({isFetching: false});
-        })
+        // AuthService.login(username, password)
+        // .then((r) => {
+        //     this.setState({isFetching: false});
+        //
+        //     localStorage.setItem('dayat', 'wow');
+        //     this.context.router.push('/');
+        // })
     }
 
     render() {
-        let style = {
-            position: 'absolute',
-            top: '50%',
-            left: '50%',
-            marginLeft: -128,
-            marginTop: -66,
-        }
-
-        if (!this.state.isFetching) {
-            var loginBtn = (
-                <RaisedButton style={{width: '100%'}} label="Login" primary={true} onClick={this.handleClick.bind(this)} />
-            )
-        } else {
-            var loginBtn = (
-                <RaisedButton style={{width: '100%'}} disabled={true}>
-                    <CircularProgress size={0.4} style={{marginTop: -6}} />
-                </RaisedButton>
-            );
+        var bgImg = require('../../assets/img/loginbg.png');
+        let loginPageStyle = {
+            backgroundImage: `url(${bgImg})`,
+            backgroundSize: 'cover',
+            backgroundPositionY: '55%',
+            height: '100%',
+            width: '100%',
+            position: 'fixed'
         }
 
         return (
-            <div style={style}>
-            <TextField ref="username" disabled={this.state.isFetching} hintText="NIM/Username/Email" autoFocus={true} />
-            <br/>
-            <TextField ref="password" disabled={this.state.isFetching} type="password" hintText="Password" />
-            <br/>
-            {loginBtn}
+            <div style={loginPageStyle}>
+                <LoginForm auth={this.props.auth} handleClick={this.handleClick.bind(this)} />
             </div>
         )
     }
 }
 
-Login.willTransitionTo = () => {
-    console.log('asdf');
+Login.contextTypes = {
+    router: React.PropTypes.object.isRequired
+};
+
+function mapStateToProps(state) {
+    return { auth: state.auth }
 }
 
-export default Login
+function mapDispatchToProps(dispatch) {
+    return {
+        loginRequest: () => { dispatch(loginRequest()) } // this should call action creator
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login)

@@ -19,14 +19,22 @@ import MessageDetail from '../pages/message/MessageDetail'
 import Login from '../pages/auth/Login'
 import Signup from '../pages/auth/Signup'
 import About from '../pages/other/About'
-
+import AuthService from '../api/auth'
 import {store} from '../reducers'
 
 const history = syncHistoryWithStore(browserHistory, store)
 
+function isAuthenticated(nextState, replace) {
+    if (!AuthService.isLoggedIn()) {
+        replace({
+            pathname: '/login'
+        });
+    }
+}
+
 const routes = (
     <Router history={history}>
-        <Route name="app-route" path="/" component={App}>
+        <Route name="app-route" path="/" component={App} onEnter={isAuthenticated}>
             <IndexRoute component={Home} />
 
             {GroupRoute}
