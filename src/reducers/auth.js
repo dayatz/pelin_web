@@ -2,7 +2,8 @@ import {loginAction} from '../actions'
 
 const initialState = {
     loading: false,
-    bearer: localStorage.getItem('bearer') || null
+    bearer: localStorage.getItem('bearer') || null,
+    error: ''
 }
 
 const auth = (state = initialState, action) => {
@@ -13,11 +14,19 @@ const auth = (state = initialState, action) => {
             return {}
         case loginAction.start:
             return Object.assign({}, state, {
-                loading: true
+                loading: true,
+                error: ''
             })
         case loginAction.success:
             return Object.assign({}, state, {
-                bearer: action
+                loading: false,
+                bearer: action.bearer,
+                error: ''
+            })
+        case loginAction.fail:
+            return Object.assign({}, state, {
+                loading: false,
+                error: action.error
             })
         default:
             return state

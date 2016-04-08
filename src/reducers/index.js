@@ -18,9 +18,9 @@ const reducers = combineReducers({
 
 const store = createStore(reducers,
     compose(
-        window.devToolsExtension ? window.devToolsExtension() : f => f,
-        applyMiddleware(thunk)
-    )
+        window.devToolsExtension ? window.devToolsExtension() : f => f
+    ),
+    applyMiddleware(thunk)
 );
 
 exports.store = store

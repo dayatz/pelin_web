@@ -1,9 +1,8 @@
 import axios from 'axios'
-import { BASE_URL } from '../config'
 
 var AuthService = {
     login: function(email, password) {
-        return axios.get('https://api.myjson.com/bins/1oo9s', {email, password});
+        return axios.post('http://localhost:8000/api/auth', {email, password});
     },
 
     isLoggedIn: function() {
@@ -16,6 +15,10 @@ var AuthService = {
 
     getToken: function() {
         return localStorage.getItem('bearer') || null
+    },
+
+    setToken: function (token) {
+        localStorage.setItem('bearer', token)
     }
 }
 

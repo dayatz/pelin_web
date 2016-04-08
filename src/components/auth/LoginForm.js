@@ -29,15 +29,23 @@ class LoginForm extends React.Component {
 
         if (!this.props.auth.loading) {
             var loginBtn = (
-                <RaisedButton style={btnStyle} label="Login"
+                <RaisedButton label="Login"
                     primary={true} onClick={this.handleClick.bind(this)} />
             )
         } else {
             var loginBtn = (
-                <RaisedButton style={btnStyle} disabled={true}>
+                <RaisedButton disabled={true}>
                     <CircularProgress size={0.4} style={{marginTop: -6}} />
                 </RaisedButton>
             );
+        }
+
+        if (this.props.auth.error) {
+            var errorMsg = (
+                <p style={{color: '#f44336', fontStyle: 'italic', fontSize: 14}}>{this.props.auth.error}</p>
+            )
+        } else {
+            var errorMsg = ''
         }
 
         return (
@@ -57,8 +65,12 @@ class LoginForm extends React.Component {
                             disabled={this.props.auth.loading}
                             type="password" hintText="Password" />
                     </div>
+                    {errorMsg}
+                    <div style={btnStyle}>
+                        {loginBtn}
+                        <a href="#" style={{float: 'right', fontSize: 13, textDecoration: 'none'}}>Register</a>
+                    </div>
 
-                    {loginBtn}
                 </div>
             </Paper>
         )

@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 
 import LoginForm from '../../components/auth/LoginForm'
 
-import {loginRequest} from '../../actions/'
+import {login} from '../../actions/'
 
 import AuthService from '../../api/auth'
 import {BASE_URL} from '../../config'
@@ -13,18 +13,8 @@ class Login extends React.Component {
         super(props);
     }
 
-    handleClick(u, p) {
-        this.props.loginRequest();
-
-        // TODO: call async login action
-
-        // AuthService.login(username, password)
-        // .then((r) => {
-        //     this.setState({isFetching: false});
-        //
-        //     localStorage.setItem('dayat', 'wow');
-        //     this.context.router.push('/');
-        // })
+    handleClick(email, password) {
+        this.props.loginRequest(email, password, this.context.router);
     }
 
     render() {
@@ -40,7 +30,8 @@ class Login extends React.Component {
 
         return (
             <div style={loginPageStyle}>
-                <LoginForm auth={this.props.auth} handleClick={this.handleClick.bind(this)} />
+                <LoginForm auth={this.props.auth}
+                    handleClick={this.handleClick.bind(this)} />
             </div>
         )
     }
@@ -56,7 +47,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
     return {
-        loginRequest: () => { dispatch(loginRequest()) } // this should call action creator
+        loginRequest: (email, password, router) => {
+            dispatch(login(email, password, router));
+        }
     }
 }
 

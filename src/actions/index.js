@@ -1,16 +1,31 @@
-import {USER_LOGIN_REQUEST} from './constans'
-import {createAsyncAction} from '../config/createAsyncAction'
-
+import { createAsyncAction } from '../config/createAsyncAction'
+import AuthService from '../api/auth'
 export var loginAction = createAsyncAction('LOGIN');
 
-export function loginRequest() {
-    return {
-        type: USER_LOGIN_REQUEST
-    }
-}
-
-export function doLogin(creds) {
+export function login(email, password, router) {
+    console.log(email, password);
     return dispatch => {
-        return
+        dispatch({
+            type: loginAction.start
+        });
+
+        return AuthService.login(email, password)
+            .then((r) => {
+                console.log(r);
+                AuthService.setToken(r.data.token);
+                dispatch({
+                    type: loginAction.success,
+                    bearer: r.data.token
+                });
+                router.replace('/');
+            })
+            .catch((err) => {
+                console.log(err.data);
+                dispatch({
+                    type: loginAction.fail,
+                    error: 'username atau password salah'
+                })
+            })
+
     }
 }
