@@ -1,5 +1,6 @@
 import React from 'react'
-import {Router, Route, IndexRoute, hashHistory} from 'react-router'
+import {Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { syncHistoryWithStore } from 'react-router-redux'
 
 import GroupRoute from './group'
 
@@ -18,10 +19,22 @@ import MessageDetail from '../pages/message/MessageDetail'
 import Login from '../pages/auth/Login'
 import Signup from '../pages/auth/Signup'
 import About from '../pages/other/About'
+import AuthService from '../api/auth'
+import {store} from '../reducers'
+
+const history = syncHistoryWithStore(browserHistory, store)
+
+function isAuthenticated(nextState, replace) {
+    if (!AuthService.isLoggedIn()) {
+        replace({
+            pathname: '/login'
+        });
+    }
+}
 
 const routes = (
-    <Router history={hashHistory}>
-        <Route name="app-route" path="/" component={App}>
+    <Router history={history}>
+        <Route name="app-route" path="/" component={App} onEnter={isAuthenticated}>
             <IndexRoute component={Home} />
 
             {GroupRoute}
@@ -35,7 +48,7 @@ const routes = (
                 <IndexRoute component={MessageList} />
                 <Route name="message-detail" path=":messageId" component={MessageDetail} />
             </Route>
-            
+
             <Route name="about" path="about" component={About} />
         </Route>
 
