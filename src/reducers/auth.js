@@ -1,4 +1,4 @@
-import {loginAction} from '../actions'
+import {loginAction} from '../actions/auth'
 
 const initialState = {
     loading: false,
@@ -7,7 +7,6 @@ const initialState = {
 }
 
 const auth = (state = initialState, action) => {
-    console.log(action);
     switch (action.type) {
         case 'USER_LOGOUT':
             // TODO: call logout function from api/auth.js

@@ -1,12 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
 import LoginForm from '../../components/auth/LoginForm'
-
-import {login} from '../../actions/'
-
+import {login} from '../../actions/auth'
 import AuthService from '../../api/auth'
-import {BASE_URL} from '../../config'
 
 class Login extends React.Component {
     constructor(props) {
@@ -41,16 +37,14 @@ Login.contextTypes = {
     router: React.PropTypes.object.isRequired
 };
 
-function mapStateToProps(state) {
-    return { auth: state.auth }
-}
+const mapStateToProps = state => ({
+    auth: state.auth
+});
 
-function mapDispatchToProps(dispatch) {
-    return {
-        loginRequest: (email, password, router) => {
-            dispatch(login(email, password, router));
-        }
+const mapDispatchToProps = dispatch => ({
+    loginRequest: (email, password, router) => {
+        dispatch(login(email, password, router));
     }
-}
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Login)

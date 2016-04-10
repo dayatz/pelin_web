@@ -4,15 +4,11 @@ import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
 import { routerReducer } from 'react-router-redux'
 import auth from './auth'
-
-function simpleReducer(state=[], action) {
-    console.log('store created');
-    return state;
-}
+import groups from './group'
 
 const reducers = combineReducers({
-    simpleReducer,
     auth,
+    groups,
     routing: routerReducer
 })
 

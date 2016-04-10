@@ -1,3 +1,9 @@
 body {
     margin: 0;
+    background-color: #eee;
+}
+
+.notification-wrapper {
+    float: right;
+    color: #fff;
 }

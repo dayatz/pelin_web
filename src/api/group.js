@@ -1,3 +1,9 @@
-/**
- * Created by e on 4/3/16.
- */
+import { http } from '../config'
+
+const GroupService = {
+    fetchAll: function() {
+        return http.get('groups')
+    }
+}
+
+export default GroupService
