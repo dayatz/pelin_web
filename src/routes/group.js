@@ -20,7 +20,7 @@ const GroupRoute = (
     <Route path="groups" name="groups" component={GroupContainer}>
         <IndexRoute component={Groups} />
 
-        <Route name="group-detail" path=":groupId" copmonent={GroupDetailContainer}>
+        <Route name="group-detail" path=":groupId" component={GroupDetailContainer}>
             <IndexRoute component={Posts} />
             <Route name="members" path="members" component={Members} />
 

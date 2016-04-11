@@ -7,12 +7,12 @@ const customTheme = {
     zIndex: zIndex,
     fontFamily: 'Roboto, sans-serif',
     palette: {
-        primary1Color: Colors.blue700,
-        primary2Color: Colors.blue500,
-        primary3Color: Colors.blue300,
-        accent1Color: Colors.lightBlue700,
-        accent2Color: Colors.lightBlue500,
-        accent3Color: Colors.lightBlue300
+        primary1Color: Colors.blue500,
+        primary2Color: Colors.blue300,
+        primary3Color: Colors.blue100,
+        accent1Color: Colors.pink500,
+        accent2Color: Colors.pink300,
+        accent3Color: Colors.pink100
     }
 };
 

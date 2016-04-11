@@ -26,13 +26,13 @@ class App extends React.Component {
 
                             <div className="notification-wrapper">
                                 <IconButton style={{paddingTop: 5}}>
-                                    <FontIcon hoverColor="#fff" color="#bbb" className="material-icons">event_note</FontIcon>
+                                    <FontIcon hoverColor="#fff" color="rgba(255, 255, 255, 0.701961)" className="material-icons">event_note</FontIcon>
                                 </IconButton>
                                 <IconButton style={{paddingTop: 5}}>
-                                    <FontIcon hoverColor="#fff" color="#bbb" className="material-icons">chat_bubble</FontIcon>
+                                    <FontIcon hoverColor="#fff" color="rgba(255, 255, 255, 0.701961)" className="material-icons">chat_bubble</FontIcon>
                                 </IconButton>
                                 <IconButton style={{paddingTop: 5}}>
-                                    <FontIcon hoverColor="#fff" color="#bbb" className="material-icons">public</FontIcon>
+                                    <FontIcon hoverColor="#fff" color="rgba(255, 255, 255, 0.701961)" className="material-icons">public</FontIcon>
                                 </IconButton>
                             </div>
                         </div>
@@ -44,6 +44,7 @@ class App extends React.Component {
                     }
                     zDepth={2}
                 />
+                {/* TODO: design container */}
                 <div className="container" style={{marginTop: 20}}>
                     <div style={{paddingLeft: 160, paddingRight: 250}}>
                         {this.props.children}

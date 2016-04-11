@@ -3,9 +3,10 @@ import Group from './Group'
 
 const GroupList = (props) => {
     const renderGroup = props.groups.map(g => {
-        console.log(g);
         return (
-            <div className="col-md-6"><Group group={g} key={g.id} /></div>
+            <div className="col-md-6">
+                <Group group={g} key={g.id} />
+            </div>
         )
     })
 
