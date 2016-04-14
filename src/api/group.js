@@ -1,12 +1,12 @@
-import { http } from '../config'
+import { ajax } from './index'
 
 const GroupService = {
     fetchAll: function() {
-        return http.get('groups')
+        return ajax().get('groups')
     },
 
     myGroup: function() {
-        return http.get('me/groups')
+        return ajax().get('users/me/groups')
     }
 }
 

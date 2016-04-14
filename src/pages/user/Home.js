@@ -1,12 +1,14 @@
 import React from 'react'
 import Paper from 'material-ui/lib/paper'
-import {Link} from 'react-router'
+import { Link } from 'react-router'
+import { connect } from 'react-redux'
 import GroupList from '../../components/group/GroupList'
+import { fetchMyGroups } from '../../actions/group'
 
 class Home extends React.Component {
-    // componentDidMount() {
-    //     this.props.fetchAllGroup();
-    // }
+    componentDidMount() {
+        this.props.fetchMyGroups();
+    }
     render() {
         // if (this.props.groups.data.length) {
         //     var renderGroupList = <GroupList groups={this.props.groups.data} />
@@ -27,4 +29,10 @@ class Home extends React.Component {
     }
 }
 
-export default Home
+const mapDispatchToProps = dispatch => ({
+    fetchMyGroups: () => {
+        dispatch(fetchMyGroups())
+    }
+});
+
+export default connect(null, mapDispatchToProps)(Home)

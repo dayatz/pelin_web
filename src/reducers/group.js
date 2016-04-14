@@ -1,4 +1,4 @@
-import {fetchGroupAction} from '../actions/group'
+import { fetchGroupAction, fetchMyGroupAction } from '../actions/group'
 
 /*
     user load to home page:
@@ -44,8 +44,17 @@ const groups = (state = initialState, action) => {
     }
 }
 
-export const myGroups = (state = [], action) => {
+const getMyGroups = (groups, ids) => {
+    { ...groups }
+}
 
+export const myGroups = (state = initialState, action) => {
+    switch (action.type) {
+        case fetchMyGroupAction.start:
+
+        default:
+
+    }
 }
 
 export default groups

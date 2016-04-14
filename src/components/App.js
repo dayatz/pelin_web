@@ -5,11 +5,9 @@ import customTheme from '../config/theme'
 import AppBar from 'material-ui/lib/app-bar'
 import FontIcon from 'material-ui/lib/font-icon'
 import IconMenu from 'material-ui/lib/menus/icon-menu'
-import MenuItem from 'material-ui/lib/menus/menu-item'
 import IconButton from 'material-ui/lib/icon-button'
 import FlatButton from 'material-ui/lib/flat-button'
-import LeftNav from 'material-ui/lib/left-nav'
-
+import NavMenu from '../components/NavMenu'
 import { logout } from '../actions/auth'
 import { connect } from 'react-redux'
 
@@ -23,7 +21,7 @@ class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            leftNavOpen: false
+            navMenuOpen: false
         }
     }
 
@@ -49,33 +47,28 @@ class App extends React.Component {
                         </div>
                     }
                     iconElementRight={
-                        <FlatButton label="username"
+                        <FlatButton label={this.props.auth.user.name.split(' ')[0]}
                             icon={<FontIcon className="material-icons">face</FontIcon>}
                         />
                     }
                     zDepth={2}
                     onLeftIconButtonTouchTap={() => {
-                        this.setState({ leftNavOpen: !this.state.leftNavOpen })
+                        this.setState({ navMenuOpen: !this.state.navMenuOpen })
                     }}
                 />
 
-                <LeftNav
-                    docked={false}
-                    width={250}
-                    open={this.state.leftNavOpen}
-                    onRequestChange={leftNavOpen => this.setState({leftNavOpen})}>
-
-                    <MenuItem onTouchTap={() => {
-                        this.props.logout(this.context.router);
-                    }
-                    }>
-                        Logout
-                    </MenuItem>
-                </LeftNav>
+                <NavMenu open={this.state.navMenuOpen}
+                    handleOpen={ navMenuOpen => {
+                        this.setState({navMenuOpen})
+                    }}
+                    {...this.props}
+                    router={this.context.router}
+                />
 
                 {/* TODO: design container */}
                 <div className="container" style={{marginTop: 20}}>
-                    <div style={{paddingLeft: 160, paddingRight: 250}}>
+                    {/*<div style={{paddingLeft: 160, paddingRight: 250}}>*/}
+                    <div className="col-md-8 col-md-offset-2">
                         {this.props.children}
                     </div>
                 </div>
