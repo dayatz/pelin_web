@@ -3,10 +3,10 @@ import store from 'store'
 
 const initialState = {
     isLoading: false,
-    bearer: null,
+    bearer: store.get('bearer') || null,
     isError: false,
     error: null,
-    user: null
+    user: store.get('user') || null
 }
 
 const auth = (state = initialState, action) => {
@@ -15,18 +15,18 @@ const auth = (state = initialState, action) => {
             return initialState
         case loginAction.start:
             return Object.assign({}, state, {
-                loading: true,
-                error: ''
+                isLoading: true,
+                error: null
             })
         case loginAction.success:
-            return Object.assign({}, state, {
-                loading: false,
+            return Object.assign({}, initialState, {
                 bearer: action.bearer,
-                error: ''
+                user: action.user
             })
         case loginAction.fail:
             return Object.assign({}, state, {
-                loading: false,
+                isLoading: false,
+                isError: true,
                 error: action.error
             })
         default:

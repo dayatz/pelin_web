@@ -1,5 +1,20 @@
 import {fetchGroupAction} from '../actions/group'
 
+/*
+    user load to home page:
+        - get groups from groups store based on myGroups ids
+        if no ids:
+            - return response
+            - store those ids to myGroups store
+
+    user load to /groups:
+        - get groups from store
+        if no groups:
+            - return response
+            - save that response to groups store
+
+*/
+
 const initialState = {
     isLoading: false,
     isError: false,
@@ -27,6 +42,10 @@ const groups = (state = initialState, action) => {
         default:
             return state
     }
+}
+
+export const myGroups = (state = [], action) => {
+
 }
 
 export default groups

@@ -93,7 +93,7 @@ App.contextTypes = {
 };
 
 const mapStateToProps = state => ({
-    groups: state.groups
+    auth: state.auth
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -102,4 +102,4 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(null, mapDispatchToProps)(App)
+export default connect(mapStateToProps, mapDispatchToProps)(App)

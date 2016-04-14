@@ -7,9 +7,6 @@ class Home extends React.Component {
     // componentDidMount() {
     //     this.props.fetchAllGroup();
     // }
-    componentDidMount() {
-        console.log(this.context.store.getState());
-    }
     render() {
         // if (this.props.groups.data.length) {
         //     var renderGroupList = <GroupList groups={this.props.groups.data} />
@@ -28,10 +25,6 @@ class Home extends React.Component {
             </div>
         )
     }
-}
-
-Home.contextTypes = {
-    store: React.PropTypes.object
 }
 
 export default Home

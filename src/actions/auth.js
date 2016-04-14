@@ -2,6 +2,7 @@ import { createAsyncAction } from '../config/createAsyncAction'
 export var loginAction = createAsyncAction('LOGIN');
 
 import AuthService from '../api/auth'
+import UserService from '../api/user'
 
 export function login(email, password, router) {
     return dispatch => {
@@ -11,13 +12,26 @@ export function login(email, password, router) {
 
         return AuthService.login(email, password)
             .then((r) => {
-                console.log(r);
-                AuthService.setToken(r.data.token);
-                dispatch({
-                    type: loginAction.success,
-                    bearer: r.data.token
-                });
-                router.replace('/');
+                const token = r.data.token;
+                AuthService.setToken(token);
+                UserService.me()
+                    .then((r) => {
+                        const user = r.data;
+                        UserService.saveUser(user);
+                        dispatch({
+                            type: loginAction.success,
+                            bearer: token,
+                            user
+                        });
+                        router.replace('/');
+                    })
+                    .catch((err) => {
+                        console.log(err.data);
+                        dispatch({
+                            type: loginAction.fail,
+                            error: 'username atau password salah'
+                        })
+                    })
             })
             .catch((err) => {
                 console.log(err.data);
@@ -31,7 +45,6 @@ export function login(email, password, router) {
 }
 
 export function logout(router) {
-    console.log(router);
     router.replace('/login');
     AuthService.logout();
     return {
