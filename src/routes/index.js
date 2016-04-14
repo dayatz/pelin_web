@@ -2,10 +2,10 @@ import React from 'react'
 import {Router, Route, IndexRoute, browserHistory } from 'react-router'
 import { syncHistoryWithStore } from 'react-router-redux'
 
-import GroupRoute from './group'
-
 import App from '../components/App'
 import Home from '../pages/user/Home'
+import Groups from '../pages/group/Groups'
+import Group from '../pages/group/Group'
 
 import MyProfile from '../pages/user/MyProfile'
 import UserDetail from '../pages/user/UserDetail'
@@ -37,7 +37,8 @@ const routes = (
         <Route name="app-route" path="/" component={App} onEnter={isAuthenticated}>
             <IndexRoute component={Home} />
 
-            {GroupRoute}
+            <Route path="groups" name="groups" component={Groups} />
+            <Route name="group-detail" path="groups/:groupId" component={Group} />
 
             <Route name="my-profile" path="me" component={MyProfile} />
             <Route name="user-detail" path="users/:userId" component={UserDetail} />

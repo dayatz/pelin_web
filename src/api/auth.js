@@ -1,4 +1,5 @@
 import axios from 'axios'
+import store from 'store'
 
 var AuthService = {
     login: function(email, password) {
@@ -10,15 +11,15 @@ var AuthService = {
     },
 
     logout: function() {
-        localStorage.removeItem('bearer');
+        store.clear();
     },
 
     getToken: function() {
-        return localStorage.getItem('bearer') || null
+        return store.get('bearer', null)
     },
 
     setToken: function (token) {
-        localStorage.setItem('bearer', token)
+        store.set('bearer', token)
     }
 }
 

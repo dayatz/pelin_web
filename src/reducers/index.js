@@ -1,7 +1,6 @@
-// in this file, combine all reducers to produce store
-
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+// import promiseMiddleware from 'redux-promise'
 import { routerReducer } from 'react-router-redux'
 import auth from './auth'
 import groups from './group'

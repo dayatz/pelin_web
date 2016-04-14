@@ -4,7 +4,6 @@ export var loginAction = createAsyncAction('LOGIN');
 import AuthService from '../api/auth'
 
 export function login(email, password, router) {
-    console.log(email, password);
     return dispatch => {
         dispatch({
             type: loginAction.start
@@ -28,5 +27,14 @@ export function login(email, password, router) {
                 })
             })
 
+    }
+}
+
+export function logout(router) {
+    console.log(router);
+    router.replace('/login');
+    AuthService.logout();
+    return {
+        type: 'USER_LOGOUT'
     }
 }

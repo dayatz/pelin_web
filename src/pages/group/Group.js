@@ -6,7 +6,7 @@ import FontIcon from 'material-ui/lib/font-icon'
 import Paper from 'material-ui/lib/paper'
 import SwipeableViews from 'react-swipeable-views'
 
-class GroupDetailContainer extends React.Component {
+class Group extends React.Component {
     constructor(props) {
         super(props);
 
@@ -61,32 +61,34 @@ class GroupDetailContainer extends React.Component {
                     onChangeIndex={this.handleTabChange}>
 
                     <div>
+                        {/* TODO: post list */}
                         {/*<PostList posts={this.props.posts.data} />*/}
                         posts
                     </div>
 
                     <div>
+                        {/* TODO: lesson list */}
                         {/*<LessonList posts={this.props.lessons.data} />*/}
                         materi
                     </div>
 
                     <div>
+                        {/* TODO: assignment list */}
                         {/*<AssignmentList posts={this.props.assignments.data} />*/}
                         tugas
                     </div>
 
                     <div>
+                        {/* TODO: member list */}
                         {/*<MemberList posts={this.props.members.data} />*/}
                         {this.state.tabContent}
                     </div>
 
                 </SwipeableViews>
-
-                <div>{this.props.children}</div>
             </Paper>
             </div>
         )
     }
 }
 
-export default GroupDetailContainer
+export default Group

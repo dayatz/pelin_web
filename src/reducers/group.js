@@ -1,9 +1,9 @@
 import {fetchGroupAction} from '../actions/group'
 
 const initialState = {
-    loading: false,
-    error: false,
-    errorData: null,
+    isLoading: false,
+    isError: false,
+    error: null,
     data: []
 }
 
@@ -11,18 +11,18 @@ const groups = (state = initialState, action) => {
     switch (action.type) {
         case fetchGroupAction.start:
             return Object.assign({}, state, {
-                loading: true
+                isLoading: true
             })
         case fetchGroupAction.success:
             return Object.assign({}, state, {
-                loading: false,
+                isLoading: false,
                 data: action.data
             })
         case fetchGroupAction.fail:
             return Object.assign({}, state, {
-                loading: false,
-                error: true,
-                errorData: action.data
+                isLoading: false,
+                isError: true,
+                error: action.error
             })
         default:
             return state
