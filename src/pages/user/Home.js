@@ -4,30 +4,50 @@ import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import GroupList from '../../components/group/GroupList'
 import { fetchMyGroups } from '../../actions/group'
+import { getMyGroups } from '../../reducers/group'
+import GroupService from '../../api/group'
 
 class Home extends React.Component {
+    // constructor(props) {
+    //     super(props)
+    //     this.state = {
+    //         groups: null
+    //     }
+    // }
     componentDidMount() {
-        this.props.fetchMyGroups();
+        // GroupService.myGroup()
+        //     .then(r => {
+        //         this.setState({
+        //             groups: r.data
+        //         });
+        //     })
+        this.props.fetchMyGroups()
     }
     render() {
-        // if (this.props.groups.data.length) {
-        //     var renderGroupList = <GroupList groups={this.props.groups.data} />
-        // } else if (!this.props.groups.data.length && this.props.groups.error) {
-        //     // TODO: render error message
-        //     var renderGroupList = 'terjadi kesalahan'
-        // } else {
-        //     // TODO: render loading message
-        //     var renderGroupList = 'Loading...'
-        //
-        // }
+        if (this.props.myGroups.isLoading) {
+            // TODO: render loading message
+            var renderGroupList = 'Loading...'
+        } else {
+            var renderGroupList = <GroupList groups={this.props.myGroups.items} />
+
+        }
         return (
             <div>
                 <h4>Grup Yang Diikuti</h4>
-                {/*{renderGroupList}*/}
+                {renderGroupList}
             </div>
         )
     }
 }
+
+Home.contextTypes = {
+    store: React.PropTypes.object
+}
+
+const mapStateToProps = state => ({
+    myGroups: state.myGroups
+    // myGroups: getMyGroups(state)
+})
 
 const mapDispatchToProps = dispatch => ({
     fetchMyGroups: () => {
@@ -35,4 +55,5 @@ const mapDispatchToProps = dispatch => ({
     }
 });
 
-export default connect(null, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
+// export default Home

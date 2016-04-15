@@ -9,36 +9,49 @@ export var createGroupAction = createAsyncAction('CREATE_GROUP');
 
 
 export function fetchAllGroup() {
-    return dispatch => {
+    return (dispatch, getState) => {
+        const groups = getState().groups.items;
+        if (groups.length) return Promise.resolve();
+
         dispatch({ type: fetchGroupAction.start});
 
         return GroupService.fetchAll()
             .then((r) => {
+                const items = r.data;
                 dispatch({
                     type: fetchGroupAction.success,
-                    data: r.data
+                    items
                 })
             })
-            .catch((err) => {
-                console.log(err);
+            .catch((error) => {
+                console.log(error);
                 dispatch({
                     type: fetchGroupAction.fail,
-                    error: err
+                    error
                 })
             })
     }
 }
 
 export function fetchMyGroups() {
-    return dispatch => {
+    return (dispatch, getState) => {
+        const groups = getState().myGroups.items;
+        if (groups.length) return Promise.resolve();
+
         dispatch({ type: fetchMyGroupAction.start });
 
         return GroupService.myGroup()
             .then((r) => {
-                console.log(r);
+                const items = r.data;
                 dispatch({
                     type: fetchMyGroupAction.success,
-                    data: r.data
+                    items
+                });
+            })
+            .catch((error) => {
+                dispatch({
+                    type: fetchMyGroups.fail,
+                    error
                 })
             })
     }

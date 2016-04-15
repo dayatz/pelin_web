@@ -1,5 +1,6 @@
 import React from 'react'
-import {Router, Route, IndexRoute, browserHistory } from 'react-router'
+import { Router, Route, IndexRoute, useRouterHistory } from 'react-router'
+import createHashHistory from 'history/lib/createHashHistory'
 import { syncHistoryWithStore } from 'react-router-redux'
 
 import App from '../components/App'
@@ -20,15 +21,22 @@ import Login from '../pages/auth/Login'
 import Signup from '../pages/auth/Signup'
 import About from '../pages/other/About'
 import AuthService from '../api/auth'
+import UserService from '../api/user'
 import {store} from '../reducers'
 
+const browserHistory = useRouterHistory(createHashHistory)({queryKey: false});
+// TODO: use browserHistory provided by react-router
 const history = syncHistoryWithStore(browserHistory, store)
 
 function isAuthenticated(nextState, replace) {
-    if (!AuthService.isLoggedIn()) {
-        replace({
-            pathname: '/login'
-        });
+    if (!AuthService.isLoggedIn() && !UserService.getUserFromStore()) {
+        replace({ pathname: '/login' });
+    }
+}
+
+function isLoggedIn(nextState, replace) {
+    if (AuthService.isLoggedIn() && UserService.getUserFromStore()) {
+        replace({ pathname: '/' })
     }
 }
 
@@ -53,7 +61,7 @@ const routes = (
             <Route name="about" path="about" component={About} />
         </Route>
 
-        <Route name="login" path="/login" component={Login} />
+        <Route name="login" path="/login" component={Login} onEnter={isLoggedIn} />
         <Route name="signup" path="/signup" component={Signup} />
     </Router>
 );

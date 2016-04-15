@@ -1,6 +1,7 @@
 import React from 'react'
 import LeftNav from 'material-ui/lib/left-nav'
 import MenuItem from 'material-ui/lib/menus/menu-item'
+import { Link } from 'react-router'
 
 const NavMenu = (props) => {
     return (
@@ -16,6 +17,11 @@ const NavMenu = (props) => {
                 }
             }}>
                 Logout
+            </MenuItem>
+            <MenuItem onTouchTap={() => {
+                props.router.push('/groups');
+            }}>
+                Cari Grup
             </MenuItem>
         </LeftNav>
     )

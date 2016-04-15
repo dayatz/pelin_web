@@ -1,17 +1,34 @@
 import React from 'react'
+import GroupService from '../../api/group'
+import GroupList from '../../components/group/GroupList'
+import { fetchAllGroup } from '../../actions/group'
+import { connect } from 'react-redux'
 
 class Groups extends React.Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         groups: null,
+    //         isError: false,
+    //         error: null
+    //     }
+    // }
+
+    componentDidMount() {
+        // GroupService.fetchAll()
+        //     .then(r => {
+        //         this.setState({groups: r.data});
+        //     })
+        this.props.fetchAllGroup();
+    }
 
     render() {
-        if (this.props.groups.data.length) {
-            var renderGroupList = <GroupList groups={this.props.groups.data} />
-        } else if (!this.props.groups.data.length && this.props.groups.error) {
-            // TODO: render error message
-            var renderGroupList = 'terjadi kesalahan'
-        } else {
+        // TODO: render error message
+        if (!this.props.groups.items) {
             // TODO: render loading message
             var renderGroupList = 'Loading...'
-
+        } else {
+            var renderGroupList = <GroupList groups={this.props.groups.items} />
         }
 
         return (
@@ -23,4 +40,14 @@ class Groups extends React.Component {
     }
 }
 
-export default Groups
+const mapStateToProps = state => ({
+    groups: state.groups
+});
+
+const mapDispatchToProps = dispatch => ({
+    fetchAllGroup: () => {
+        dispatch(fetchAllGroup())
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Groups)

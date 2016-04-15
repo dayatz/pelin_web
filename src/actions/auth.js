@@ -45,8 +45,8 @@ export function login(email, password, router) {
 }
 
 export function logout(router) {
-    router.replace('/login');
     AuthService.logout();
+    router.replace('/login');
     return {
         type: 'USER_LOGOUT'
     }

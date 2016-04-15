@@ -19,41 +19,43 @@ const initialState = {
     isLoading: false,
     isError: false,
     error: null,
-    data: []
+    items: []
 }
 
 const groups = (state = initialState, action) => {
     switch (action.type) {
         case fetchGroupAction.start:
-            return Object.assign({}, state, {
-                isLoading: true
-            })
+            return { ...state, isLoading: true }
         case fetchGroupAction.success:
-            return Object.assign({}, state, {
-                isLoading: false,
-                data: action.data
-            })
+            return {...state,
+                    isLoading: false,
+                    items: action.items
+                }
         case fetchGroupAction.fail:
-            return Object.assign({}, state, {
+            return { ...state,
                 isLoading: false,
                 isError: true,
-                error: action.error
-            })
+                error: action.error }
         default:
             return state
     }
 }
 
-const getMyGroups = (groups, ids) => {
-    { ...groups }
-}
-
 export const myGroups = (state = initialState, action) => {
     switch (action.type) {
         case fetchMyGroupAction.start:
-
+            return { ...state, isLoading: true }
+        case fetchMyGroupAction.success:
+            return { ...state,
+                isLoading: false,
+                isError: false,
+                error: null,
+                items: action.items
+            }
+        case fetchMyGroupAction.fail:
+            return { ...state, isError: true, error: action.error }
         default:
-
+            return state
     }
 }
 

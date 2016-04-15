@@ -3,11 +3,12 @@ import thunk from 'redux-thunk'
 // import promiseMiddleware from 'redux-promise'
 import { routerReducer } from 'react-router-redux'
 import auth from './auth'
-import groups from './group'
+import groups, { myGroups } from './group'
 
 const reducers = combineReducers({
     auth,
     groups,
+    myGroups,
     routing: routerReducer
 })
 

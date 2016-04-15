@@ -8,6 +8,10 @@ const UserService = {
 
     saveUser: function(user) {
         store.set('user', user)
+    },
+
+    getUserFromStore: function() {
+        return store.get('user') || null
     }
 }
 
