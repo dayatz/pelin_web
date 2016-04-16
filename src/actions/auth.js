@@ -1,4 +1,4 @@
-import { createAsyncAction } from '../config/createAsyncAction'
+import createAsyncAction from '../actions/createAsyncAction'
 export var loginAction = createAsyncAction('LOGIN');
 
 import AuthService from '../api/auth'

@@ -1,21 +1,45 @@
 import React from 'react'
 import bindFunctions from '../../config/bindFunctions'
+import { connect } from 'react-redux'
 import Tabs from 'material-ui/lib/tabs/tabs'
 import Tab from 'material-ui/lib/tabs/tab'
 import FontIcon from 'material-ui/lib/font-icon'
 import Paper from 'material-ui/lib/paper'
 import SwipeableViews from 'react-swipeable-views'
+import { groupById } from '../../reducers/group'
+import { getAssignmentsGroup } from '../../reducers/assignment'
+import { fetchAllAssignment } from '../../actions/assignment'
 
 class Group extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            groupId: null,
             slideIndex: 0,
-            tabContent: ''
+            tabContent: '',
+            groupAssignments: null
         }
 
         bindFunctions.call(this, ['handleTabChange', 'handleActive']);
+    }
+
+    componentWillMount() {
+        this.setState({
+            groupId: this.props.params.groupId
+        });
+    }
+
+    componentDidMount() {
+        this.props.fetchAllAssignment(this.state.groupId);
+        
+        if (this.props.assignments.items){
+            const groupAssignments = getAssignmentsGroup(
+                this.props.assignments.items,
+                this.state.groupId
+                );
+            this.setState({ groupAssignments });
+        }
     }
 
     handleTabChange(value) {
@@ -91,4 +115,14 @@ class Group extends React.Component {
     }
 }
 
-export default Group
+const mapStateToProps = state => ({
+    assignments: state.assignments
+});
+
+const mapDispatchToProps = dispatch => ({
+    fetchAllAssignment: (groupId) => {
+        dispatch(fetchAllAssignment(groupId));
+    }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Group)

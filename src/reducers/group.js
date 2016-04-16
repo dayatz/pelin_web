@@ -59,4 +59,10 @@ export const myGroups = (state = initialState, action) => {
     }
 }
 
+export const groupById = (state, id) => {
+    return state.groups.find(group => {
+        return group.id == id
+    })
+}
+
 export default groups

@@ -1,4 +1,4 @@
-import { createAsyncAction } from '../config/createAsyncAction'
+import createAsyncAction from '../actions/createAsyncAction'
 import GroupService from '../api/group'
 
 export var fetchGroupAction = createAsyncAction('FETCH_GROUP');

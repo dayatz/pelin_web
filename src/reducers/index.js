@@ -4,11 +4,13 @@ import thunk from 'redux-thunk'
 import { routerReducer } from 'react-router-redux'
 import auth from './auth'
 import groups, { myGroups } from './group'
+import assignments from './assignment'
 
 const reducers = combineReducers({
     auth,
     groups,
     myGroups,
+    assignments,
     routing: routerReducer
 })
 
