@@ -60,9 +60,19 @@ export const myGroups = (state = initialState, action) => {
 }
 
 export const groupById = (state, id) => {
-    return state.groups.find(group => {
+    const { groups, myGroups } = state;
+
+    var group = groups.items.find(group => {
         return group.id == id
-    })
+    });
+
+    if (!group) {
+        group = myGroups.items.find(group => {
+            return group.id == id
+        });
+    }
+
+    return group;
 }
 
 export default groups

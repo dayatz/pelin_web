@@ -7,7 +7,6 @@ import bindFunctions from '../../config/bindFunctions'
 class GroupTabs extends React.Component {
     constructor(props) {
         super(props);
-
         this.state = {
             selectedTab: 0
         }
@@ -16,10 +15,15 @@ class GroupTabs extends React.Component {
     }
 
     handleActive(tab) {
+        // TODO: current active tab based on current route
         if (this.state.selectedTab != tab.props.value) {
             this.setState({selectedTab: tab.props.value});
-            console.log(tab.props.label);
-            this.props.router.push(tab.props.route);
+
+            var route = `/groups/${this.props.groupId}`
+            if (tab.props.route) {
+                route += `/${tab.props.route}`
+            }
+            this.props.router.push(route);
         } else {
             console.log(`you already in tab ${tab.props.label}`);
         }
@@ -32,25 +36,27 @@ class GroupTabs extends React.Component {
                 value={0}
                 icon={<FontIcon className="material-icons">forum</FontIcon>}
                 label="Diskusi"
-                route='/'
                 onActive={this.handleActive} />
 
             <Tab
                 value={1}
                 icon={<FontIcon className="material-icons">import_contacts</FontIcon>}
                 label="Materi"
+                route='lessons'
                 onActive={this.handleActive} />
 
             <Tab
                 value={2}
                 icon={<FontIcon className="material-icons">event_note</FontIcon>}
                 label="Tugas"
+                route='assignments'
                 onActive={this.handleActive} />
 
             <Tab
                 value={3}
                 icon={<FontIcon className="material-icons">people</FontIcon>}
                 label="Member"
+                route='members'
                 onActive={this.handleActive} />
         </Tabs>
         )

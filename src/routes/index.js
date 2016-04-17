@@ -6,7 +6,7 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import App from '../components/App'
 import Home from '../pages/user/Home'
 import Groups from '../pages/group/Groups'
-import Group from '../pages/group/Group'
+// import Group from '../pages/group/Group'
 
 import MyProfile from '../pages/user/MyProfile'
 import UserDetail from '../pages/user/UserDetail'
@@ -23,6 +23,8 @@ import About from '../pages/other/About'
 import AuthService from '../api/auth'
 import UserService from '../api/user'
 import {store} from '../reducers'
+
+import GroupRoute from './group'
 
 const browserHistory = useRouterHistory(createHashHistory)({queryKey: false});
 // TODO: use browserHistory provided by react-router
@@ -46,7 +48,8 @@ const routes = (
             <IndexRoute component={Home} />
 
             <Route path="groups" name="groups" component={Groups} />
-            <Route name="group-detail" path="groups/:groupId" component={Group} />
+            {/*<Route name="group-detail" path="groups/:groupId" component={Group} />*/}
+            {GroupRoute}
 
             <Route name="my-profile" path="me" component={MyProfile} />
             <Route name="user-detail" path="users/:userId" component={UserDetail} />
