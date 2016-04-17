@@ -12,6 +12,7 @@ export var fetchAllAssignment = groupId => {
         }
 
         dispatch({ type: fetchAssignmentAction.start });
+        
         return AssignmentService(groupId).fetchAll()
             .then(r => {
                 console.log(r);
