@@ -23,7 +23,7 @@ class GroupTabs extends React.Component {
             if (tab.props.route) {
                 route += `/${tab.props.route}`
             }
-            this.props.router.push(route);
+            this.props.router.replace(route);
         } else {
             console.log(`you already in tab ${tab.props.label}`);
         }
