@@ -24,12 +24,12 @@ class Home extends React.Component {
         this.props.fetchMyGroups()
     }
     render() {
-        if (this.props.myGroups.isLoading) {
+        if (!this.props.myGroups.ids.length) {
             // TODO: render loading message
             var renderGroupList = 'Loading...'
         } else {
-            var renderGroupList = <GroupList groups={this.props.myGroups.items} />
-
+            const myGroups = getMyGroups(this.context.store.getState())
+            var renderGroupList = <GroupList groups={myGroups} />
         }
         return (
             <div>

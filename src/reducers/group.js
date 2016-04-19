@@ -1,4 +1,4 @@
-import { fetchGroupAction, fetchMyGroupAction } from '../actions/group'
+import { fetchGroupAction, fetchMyGroupAction, fetchSingleGroupAction } from '../actions/group'
 
 /*
     user load to home page:
@@ -19,29 +19,47 @@ const initialState = {
     isLoading: false,
     isError: false,
     error: null,
-    items: []
+    items: {}
 }
 
 const groups = (state = initialState, action) => {
     switch (action.type) {
         case fetchGroupAction.start:
+        case fetchSingleGroupAction.start:
             return { ...state, isLoading: true }
+
         case fetchGroupAction.success:
-            return {...state,
-                    isLoading: false,
-                    items: action.items
-                }
+            const { items } = state;
+            for (const i of action.items) {
+                items[i.id] = i
+            }
+            return {...state, isLoading: false, items }
+
         case fetchGroupAction.fail:
+        case fetchSingleGroupAction.fail:
             return { ...state,
                 isLoading: false,
                 isError: true,
-                error: action.error }
+                error: action.error
+            }
+
+        case fetchSingleGroupAction.success:
+            const { items: is } = state;
+            const { item } = action;
+            is[item.id] = item;
+            return { ...state, isLoading: false, items:is }
+
         default:
             return state
     }
 }
 
-export const myGroups = (state = initialState, action) => {
+export const myGroups = (state = {
+    isLoading: false,
+    isError: false,
+    error: null,
+    ids: []
+    }, action) => {
     switch (action.type) {
         case fetchMyGroupAction.start:
             return { ...state, isLoading: true }
@@ -50,7 +68,7 @@ export const myGroups = (state = initialState, action) => {
                 isLoading: false,
                 isError: false,
                 error: null,
-                items: action.items
+                ids: action.ids
             }
         case fetchMyGroupAction.fail:
             return { ...state, isError: true, error: action.error }
@@ -59,20 +77,15 @@ export const myGroups = (state = initialState, action) => {
     }
 }
 
-export const groupById = (state, id) => {
-    const { groups, myGroups } = state;
-
-    var group = groups.items.find(group => {
-        return group.id == id
+export const getGroupByIds = (state, ids) => {
+    return ids.map(id => {
+        return state.groups.items[id]
     });
+}
 
-    if (!group) {
-        group = myGroups.items.find(group => {
-            return group.id == id
-        });
-    }
-
-    return group;
+export const getMyGroups = (state) => {
+    console.log(state.myGroups.ids);
+    return getGroupByIds(state, state.myGroups.ids);
 }
 
 export default groups
