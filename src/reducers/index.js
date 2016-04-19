@@ -1,18 +1,16 @@
-// in this file, combine all reducers to produce store
-
 import { createStore, combineReducers, compose, applyMiddleware } from 'redux'
 import thunk from 'redux-thunk'
+// import promiseMiddleware from 'redux-promise'
 import { routerReducer } from 'react-router-redux'
 import auth from './auth'
-
-function simpleReducer(state=[], action) {
-    console.log('store created');
-    return state;
-}
+import groups, { myGroups } from './group'
+import assignments from './assignment'
 
 const reducers = combineReducers({
-    simpleReducer,
     auth,
+    groups,
+    myGroups,
+    assignments,
     routing: routerReducer
 })
 

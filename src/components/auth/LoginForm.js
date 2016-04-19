@@ -27,7 +27,7 @@ class LoginForm extends React.Component {
             position: 'absolute'
         }
 
-        if (!this.props.auth.loading) {
+        if (!this.props.auth.isLoading) {
             var loginBtn = (
                 <RaisedButton label="Login"
                     primary={true} onClick={this.handleClick.bind(this)} />
@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
             );
         }
 
-        if (this.props.auth.error) {
+        if (this.props.auth.isError) {
             var errorMsg = (
                 <p style={{color: '#f44336', fontStyle: 'italic', fontSize: 14}}>{this.props.auth.error}</p>
             )
@@ -54,7 +54,7 @@ class LoginForm extends React.Component {
                     <div>
                         <TextField
                             ref="username"
-                            disabled={this.props.auth.loading}
+                            disabled={this.props.auth.isLoading}
                             hintText="NIM/Username/Email"
                             autoFocus={true} />
                     </div>
@@ -62,7 +62,7 @@ class LoginForm extends React.Component {
                     <div style={{marginTop: 20}}>
                         <TextField
                             ref="password"
-                            disabled={this.props.auth.loading}
+                            disabled={this.props.auth.isLoading}
                             type="password" hintText="Password" />
                     </div>
                     {errorMsg}

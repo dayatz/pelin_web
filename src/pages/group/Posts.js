@@ -1,11 +1,9 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 
 class Posts extends React.Component {
-    render() {
-        return (
-            <div>posts</div>
-        )
+    render () {
+        return <span>posts</span>
     }
 }
 
-export default Posts
+export default Posts;

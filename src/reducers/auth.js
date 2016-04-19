@@ -1,31 +1,32 @@
-import {loginAction} from '../actions'
+import { loginAction } from '../actions/auth'
+import store from 'store'
 
 const initialState = {
-    loading: false,
-    bearer: localStorage.getItem('bearer') || null,
-    error: ''
+    isLoading: false,
+    bearer: store.get('bearer') || null,
+    isError: false,
+    error: null,
+    user: store.get('user') || null
 }
 
 const auth = (state = initialState, action) => {
-    console.log(action);
     switch (action.type) {
         case 'USER_LOGOUT':
-            // TODO: call logout function from api/auth.js
-            return {}
+            return initialState
         case loginAction.start:
             return Object.assign({}, state, {
-                loading: true,
-                error: ''
+                isLoading: true,
+                error: null
             })
         case loginAction.success:
-            return Object.assign({}, state, {
-                loading: false,
+            return Object.assign({}, initialState, {
                 bearer: action.bearer,
-                error: ''
+                user: action.user
             })
         case loginAction.fail:
             return Object.assign({}, state, {
-                loading: false,
+                isLoading: false,
+                isError: true,
                 error: action.error
             })
         default:
