@@ -75,7 +75,7 @@ export function fetchMyGroups() {
 }
 
 export var fetchSingleGroupAction = createAsyncAction('FETCH_SINGLE_GROUP');
-export function fetchGroup(groupId) {
+export function fetchSingleGroup(groupId) {
     return (dispatch, getState) => {
         const group = getState().groups.items[groupId];
         if (group) return Promise.resolve();
@@ -90,7 +90,11 @@ export function fetchGroup(groupId) {
                 })
             })
             .catch((error) => {
-
+                console.log(error);
+                dispatch({
+                    type: fetchSingleGroupAction.fail,
+                    error
+                })
             })
     }
 }

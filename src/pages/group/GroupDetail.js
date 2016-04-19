@@ -1,6 +1,8 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import Paper from 'material-ui/lib/paper'
 import GroupTabs from '../../components/group/GroupTabs'
+import { fetchSingleGroup } from '../../actions/group'
 
 class Group extends React.Component {
     constructor(props) {
@@ -14,7 +16,8 @@ class Group extends React.Component {
 
     getChildContext() {
         return {
-            groupId: this.state.groupId
+            groupId: this.state.groupId,
+            group: this.state.group
         }
     }
 
@@ -22,24 +25,26 @@ class Group extends React.Component {
         const groupId = this.props.params.groupId;
         this.setState({ groupId });
 
-        const group = this.context.store.getState().groups.items[groupId];
-        this.setState({ group });
+        // const group = this.context.store.getState().groups.items[groupId];
+        // this.setState({ group });
         // TODO: get group on page refresh, and save group to store
     }
 
     componentDidMount() {
         // const group = this.context.store.getState().groups.items[groupId];
         // this.setState({ group });
-        if (!this.state.group) {
-            // TODO: dispatch fetchSingleGroup(groupId);
+        console.log(this.props.groups.items[this.state.groupId])
+        if (!this.props.groups.items[this.state.groupId]) {
+            this.props.fetchSingleGroup(this.state.groupId);
         }
     }
 
     render() {
-        if (this.state.group) {
+        if (this.props.groups.items[this.state.groupId]) {
+            const group = this.props.groups.items[this.state.groupId];
             var renderGroupDetail = (
                 <div>
-                    <h4>{this.state.group.title}</h4>
+                    <h4>{group.title}</h4>
                     <Paper>
                         <GroupTabs router={this.context.router} groupId={this.state.groupId} />
                         <div>
@@ -62,11 +67,22 @@ class Group extends React.Component {
 
 Group.contextTypes = {
     router: React.PropTypes.object,
-    store: React.PropTypes.object
+    // store: React.PropTypes.object
 }
 
 Group.childContextTypes = {
-    groupId: React.PropTypes.string
+    groupId: React.PropTypes.string,
+    group: React.PropTypes.object
 }
 
-export default Group
+const mapStateToProps = state => ({
+    groups: state.groups
+})
+
+const mapDispatchToProps = dispatch => ({
+    fetchSingleGroup: (groupId) => {
+        dispatch(fetchSingleGroup(groupId))
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Group)
