@@ -33,7 +33,6 @@ class Group extends React.Component {
     componentDidMount() {
         // const group = this.context.store.getState().groups.items[groupId];
         // this.setState({ group });
-        console.log(this.props.groups.items[this.state.groupId])
         if (!this.props.groups.items[this.state.groupId]) {
             this.props.fetchSingleGroup(this.state.groupId);
         }
