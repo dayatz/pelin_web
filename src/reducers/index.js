@@ -5,20 +5,27 @@ import { routerReducer } from 'react-router-redux'
 import auth from './auth'
 import groups, { myGroups } from './group'
 import assignments from './assignment'
+import members from './member'
+
+export const initialState = {
+    isLoading: false,
+    isError: false,
+    error: null,
+    items: {}
+}
 
 const reducers = combineReducers({
     auth,
     groups,
     myGroups,
     assignments,
+    members,
     routing: routerReducer
 })
 
-const store = createStore(reducers,
+export const store = createStore(reducers,
     compose(
         window.devToolsExtension ? window.devToolsExtension() : f => f
     ),
     applyMiddleware(thunk)
 );
-
-exports.store = store

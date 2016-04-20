@@ -1,11 +1,5 @@
 import { fetchAssignmentAction } from '../actions/assignment.js'
-
-const initialState = {
-    isLoading: false,
-    isError: false,
-    error: null,
-    items: {}
-}
+import { initialState } from './index'
 
 export const assignments = (state = initialState, action) => {
     switch (action.type) {

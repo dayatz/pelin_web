@@ -1,6 +1,5 @@
 import { ajax } from './index'
 
-
 const AssignmentService = groupId => {
     const url = `groups/${groupId}/assignments`;
     return {

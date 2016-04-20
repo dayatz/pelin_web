@@ -1,28 +1,13 @@
 import { fetchGroupAction, fetchMyGroupAction, fetchSingleGroupAction } from '../actions/group'
 
-/*
-    user load to home page:
-        - get groups from groups store based on myGroups ids
-        if no ids:
-            - return response
-            - store those ids to myGroups store
-
-    user load to /groups:
-        - get groups from store
-        if no groups:
-            - return response
-            - save that response to groups store
-
-*/
-
-const initialState = {
+export const initialState = {
     isLoading: false,
     isError: false,
     error: null,
     items: {}
 }
 
-const groups = (state = initialState, action) => {
+const groups = (state=initialState, action) => {
     switch (action.type) {
         case fetchGroupAction.start:
         case fetchSingleGroupAction.start:
@@ -84,7 +69,6 @@ export const getGroupByIds = (state, ids) => {
 }
 
 export const getMyGroups = (state) => {
-    console.log(state.myGroups.ids);
     return getGroupByIds(state, state.myGroups.ids);
 }
 

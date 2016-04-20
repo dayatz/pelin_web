@@ -16,7 +16,7 @@ class Group extends React.Component {
 
     getChildContext() {
         return {
-            groupId: this.state.groupId,
+            groupId: this.props.params.groupId,
             group: this.state.group
         }
     }
