@@ -67,7 +67,6 @@ class App extends React.Component {
 
                 {/* TODO: design container */}
                 <div className="container" style={{marginTop: 20}}>
-                    {/*<div style={{paddingLeft: 160, paddingRight: 250}}>*/}
                     <div className="col-md-8 col-md-offset-2">
                         {this.props.children}
                     </div>

@@ -11,8 +11,7 @@ class Group extends React.Component {
 
         this.state = {
             groupId: null,
-            group: null,
-            selectedTab: 0
+            group: null
         }
     }
 
@@ -23,22 +22,12 @@ class Group extends React.Component {
         }
     }
 
-    handleTab(value) {
-        this.setState({ selectedTab: value})
-    }
-
     componentWillMount() {
         const groupId = this.props.params.groupId;
         this.setState({ groupId });
-
-        // const group = this.context.store.getState().groups.items[groupId];
-        // this.setState({ group });
-        // TODO: get group on page refresh, and save group to store
     }
 
     componentDidMount() {
-        // const group = this.context.store.getState().groups.items[groupId];
-        // this.setState({ group });
         if (!this.props.groups.items[this.state.groupId]) {
             this.props.fetchSingleGroup(this.state.groupId);
         }
@@ -47,13 +36,23 @@ class Group extends React.Component {
     render() {
         const group = this.props.groups.items[this.state.groupId];
         if (group) {
+            if (group.is_joined) {
+                var buttonStatus = <button>Leave</button>
+            } else {
+                var buttonStatus = <button>Join</button>
+            }
+
             var renderGroupDetail = (
                 <div>
-                    <h4>{group.title}</h4>
+                    <h4>
+                        {group.title}
+                        {buttonStatus}
+                    </h4>
                     <Paper style={{minHeight: 500}}>
                         <div>
                             <GroupTabs
                                 router={this.context.router}
+                                location={this.props.location}
                                 groupId={this.state.groupId} />
                             {this.props.children}
                         </div>
