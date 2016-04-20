@@ -1,5 +1,11 @@
-import { initialState } from './index'
 import { fetchMemberAction } from '../actions/member'
+
+const initialState = {
+    isLoading: false,
+    isError: false,
+    error: null,
+    items: {}
+}
 
 const members = (state=initialState, action) => {
     switch (action.type) {

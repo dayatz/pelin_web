@@ -1,6 +1,6 @@
 import { fetchGroupAction, fetchMyGroupAction, fetchSingleGroupAction } from '../actions/group'
 
-export const initialState = {
+const initialState = {
     isLoading: false,
     isError: false,
     error: null,

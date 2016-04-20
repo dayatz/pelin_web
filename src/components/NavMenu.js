@@ -12,16 +12,21 @@ const NavMenu = (props) => {
             onRequestChange={leftNavOpen => props.handleOpen(leftNavOpen)}>
 
             <MenuItem onTouchTap={() => {
-                if(confirm('Apakah anda ingin logout?')) {
-                    props.logout(props.router)
-                }
-            }}>
-                Logout
+                    props.router.push('/');
+                }}>
+                Home
             </MenuItem>
             <MenuItem onTouchTap={() => {
                 props.router.push('/groups');
             }}>
                 Cari Grup
+            </MenuItem>
+            <MenuItem onTouchTap={() => {
+                if(confirm('Apakah anda ingin logout?')) {
+                    props.logout(props.router)
+                }
+            }}>
+                Logout
             </MenuItem>
         </LeftNav>
     )

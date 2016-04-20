@@ -6,4 +6,8 @@ class Posts extends React.Component {
     }
 }
 
+Posts.contextTypes = {
+    groupId: PropTypes.string
+}
+
 export default Posts;

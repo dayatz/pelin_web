@@ -5,14 +5,17 @@ import MemberList from '../../components/group/MemberList'
 
 class Members extends React.Component {
     componentDidMount() {
+        console.log('[Members] mounted');
         this.props.fetchMembers(this.context.groupId);
     }
     render () {
         const members = this.props.members.items[this.context.groupId];
-        if (members) {
+        if (members && members.length) {
             var renderMembers = <MemberList members={members} />
+        } else if (members && !members.length) {
+            var renderMembers = <span>No members</span>
         } else {
-            var renderMembers = <span>Loding...</span>
+            var renderMembers = <span>Loading...</span>
         }
         return (
             <div>

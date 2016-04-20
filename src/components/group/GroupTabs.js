@@ -27,6 +27,7 @@ class GroupTabs extends React.Component {
         } else {
             console.log(`you already in tab ${tab.props.label}`);
         }
+        // this.props.handleTab(tab.props.value);
     }
 
     render () {

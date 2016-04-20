@@ -1,5 +1,11 @@
 import { fetchLessonAction } from '../actions/lesson'
-import { initialState } from './index'
+
+const initialState = {
+    isLoading: false,
+    isError: false,
+    error: null,
+    items: {}
+}
 
 const lessons = (state = initialState, action) => {
     switch (action.type) {

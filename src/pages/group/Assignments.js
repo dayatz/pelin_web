@@ -10,8 +10,10 @@ class Assignments extends React.Component {
 
     render () {
         const groupAssignment = this.props.assignments.items[this.context.groupId];
-        if (groupAssignment) {
+        if (groupAssignment && groupAssignment.length) {
             var renderAssignmentList = <AssignmentList assignments={groupAssignment} />
+        } else if (groupAssignment && !groupAssignment.length) {
+            var renderAssignmentList = <span>No assignments</span>
         } else {
             var renderAssignmentList = <span>Loading...</span>
         }

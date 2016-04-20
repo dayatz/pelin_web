@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Paper from 'material-ui/lib/paper'
 import GroupTabs from '../../components/group/GroupTabs'
 import { fetchSingleGroup } from '../../actions/group'
+import { Link } from 'react-router'
 
 class Group extends React.Component {
     constructor(props) {
@@ -10,7 +11,8 @@ class Group extends React.Component {
 
         this.state = {
             groupId: null,
-            group: null
+            group: null,
+            selectedTab: 0
         }
     }
 
@@ -19,6 +21,10 @@ class Group extends React.Component {
             groupId: this.props.params.groupId,
             group: this.state.group
         }
+    }
+
+    handleTab(value) {
+        this.setState({ selectedTab: value})
     }
 
     componentWillMount() {
@@ -39,14 +45,16 @@ class Group extends React.Component {
     }
 
     render() {
-        if (this.props.groups.items[this.state.groupId]) {
-            const group = this.props.groups.items[this.state.groupId];
+        const group = this.props.groups.items[this.state.groupId];
+        if (group) {
             var renderGroupDetail = (
                 <div>
                     <h4>{group.title}</h4>
-                    <Paper>
-                        <GroupTabs router={this.context.router} groupId={this.state.groupId} />
+                    <Paper style={{minHeight: 500}}>
                         <div>
+                            <GroupTabs
+                                router={this.context.router}
+                                groupId={this.state.groupId} />
                             {this.props.children}
                         </div>
                     </Paper>
