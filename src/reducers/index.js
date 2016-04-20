@@ -6,6 +6,7 @@ import auth from './auth'
 import groups, { myGroups } from './group'
 import assignments from './assignment'
 import members from './member'
+import lessons from './lesson'
 
 export const initialState = {
     isLoading: false,
@@ -18,6 +19,7 @@ const reducers = combineReducers({
     auth,
     groups,
     myGroups,
+    lessons,
     assignments,
     members,
     routing: routerReducer

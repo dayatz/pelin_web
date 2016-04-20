@@ -22,7 +22,7 @@ const GroupRoute = (
         <Route name="members" path="members" component={Members} />
 
         <Route name="lessons" path="lessons" component={LessonContainer}>
-            <IndexRoute copmonent={Lessons} />
+            <IndexRoute component={Lessons} />
             <Route name="lesson-add" path="add" component={LessonAdd} />
         </Route>
 
