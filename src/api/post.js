@@ -8,11 +8,19 @@ const PostService = groupId => {
         },
 
         fetch: function(postId) {
-            return ajax().get(url + `/${postId}`)
+            return ajax().get(`${url}/${postId}`)
         },
 
         create: function(post) {
             return ajax().post(url, post);
+        },
+
+        fetchComments: function(postId) {
+            return ajax().get(`${url}/${postId}/comments`)
+        },
+
+        addComment: function(postId, comment) {
+            return ajax().post(`${url}/${postId}/comments`, comment)
         }
     }
 }
