@@ -8,20 +8,14 @@ import { getMyGroups } from '../../reducers/group'
 import GroupService from '../../api/group'
 
 class Home extends React.Component {
-    // constructor(props) {
-    //     super(props)
-    //     this.state = {
-    //         groups: null
-    //     }
-    // }
     componentDidMount() {
-        // GroupService.myGroup()
-        //     .then(r => {
-        //         this.setState({
-        //             groups: r.data
-        //         });
-        //     })
         this.props.fetchMyGroups()
+    }
+    renderAddGroupButton() {
+        if (this.context.auth.user.is_teacher) {
+            return (<button>add group</button>)
+        }
+        return;
     }
     render() {
         if (!this.props.myGroups.ids.length) {
@@ -34,6 +28,7 @@ class Home extends React.Component {
         return (
             <div>
                 <h4>Grup Yang Diikuti</h4>
+                {this.renderAddGroupButton()}
                 {renderGroupList}
             </div>
         )
@@ -41,7 +36,8 @@ class Home extends React.Component {
 }
 
 Home.contextTypes = {
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    auth: React.PropTypes.object
 }
 
 const mapStateToProps = state => ({

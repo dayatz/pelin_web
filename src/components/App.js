@@ -14,7 +14,8 @@ import { connect } from 'react-redux'
 class App extends React.Component {
     getChildContext() {
         return {
-            muiTheme: getMuiTheme(customTheme)
+            muiTheme: getMuiTheme(customTheme),
+            auth: this.context.store.getState().auth
         }
     }
 
@@ -77,11 +78,13 @@ class App extends React.Component {
 }
 
 App.childContextTypes = {
-    muiTheme: React.PropTypes.object
+    muiTheme: React.PropTypes.object,
+    auth: React.PropTypes.object
 };
 
 App.contextTypes = {
-    router: React.PropTypes.object.isRequired
+    router: React.PropTypes.object.isRequired,
+    store: React.PropTypes.object
 };
 
 const mapStateToProps = state => ({

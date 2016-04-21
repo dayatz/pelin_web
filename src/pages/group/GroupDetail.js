@@ -4,6 +4,7 @@ import Paper from 'material-ui/lib/paper'
 import GroupTabs from '../../components/group/GroupTabs'
 import { fetchSingleGroup } from '../../actions/group'
 import { Link } from 'react-router'
+import RaisedButton from 'material-ui/lib/raised-button'
 
 class Group extends React.Component {
     constructor(props) {
@@ -37,17 +38,18 @@ class Group extends React.Component {
         const group = this.props.groups.items[this.state.groupId];
         if (group) {
             if (group.is_joined) {
-                var buttonStatus = <button>Leave</button>
+                var buttonStatus = <RaisedButton>Leave</RaisedButton>
             } else {
-                var buttonStatus = <button>Join</button>
+                var buttonStatus = <RaisedButton>Join</RaisedButton>
             }
 
             var renderGroupDetail = (
                 <div>
-                    <h4>
-                        {group.title}
-                        {buttonStatus}
-                    </h4>
+                    <div>
+                        <h4 style={{float: 'left'}}>{group.title}</h4>
+                        <div style={{float: 'right'}}>{buttonStatus}</div>
+                        <div style={{clear: 'both'}}></div>
+                    </div>
                     <Paper style={{minHeight: 500}}>
                         <div>
                             <GroupTabs

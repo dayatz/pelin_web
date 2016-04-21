@@ -15,7 +15,6 @@ class GroupTabs extends React.Component {
     }
     componentDidMount() {
         const pathname = this.props.location.pathname.split('/')[3];
-        console.log(pathname);
         if (pathname) {
             switch(pathname) {
                 case 'lessons':
@@ -31,7 +30,6 @@ class GroupTabs extends React.Component {
     }
 
     handleActive(tab) {
-        // TODO: current active tab based on current route
         if (this.state.selectedTab != tab.props.value) {
             this.setState({selectedTab: tab.props.value});
 
