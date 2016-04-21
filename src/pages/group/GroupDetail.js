@@ -3,6 +3,8 @@ import { connect } from 'react-redux'
 import Paper from 'material-ui/lib/paper'
 import GroupTabs from '../../components/group/GroupTabs'
 import { fetchSingleGroup } from '../../actions/group'
+import { Link } from 'react-router'
+import RaisedButton from 'material-ui/lib/raised-button'
 
 class Group extends React.Component {
     constructor(props) {
@@ -24,29 +26,36 @@ class Group extends React.Component {
     componentWillMount() {
         const groupId = this.props.params.groupId;
         this.setState({ groupId });
-
-        // const group = this.context.store.getState().groups.items[groupId];
-        // this.setState({ group });
-        // TODO: get group on page refresh, and save group to store
     }
 
     componentDidMount() {
-        // const group = this.context.store.getState().groups.items[groupId];
-        // this.setState({ group });
         if (!this.props.groups.items[this.state.groupId]) {
             this.props.fetchSingleGroup(this.state.groupId);
         }
     }
 
     render() {
-        if (this.props.groups.items[this.state.groupId]) {
-            const group = this.props.groups.items[this.state.groupId];
+        const group = this.props.groups.items[this.state.groupId];
+        if (group) {
+            if (group.is_joined) {
+                var buttonStatus = <RaisedButton>Leave</RaisedButton>
+            } else {
+                var buttonStatus = <RaisedButton>Join</RaisedButton>
+            }
+
             var renderGroupDetail = (
                 <div>
-                    <h4>{group.title}</h4>
-                    <Paper>
-                        <GroupTabs router={this.context.router} groupId={this.state.groupId} />
+                    <div>
+                        <h4 style={{float: 'left'}}>{group.title}</h4>
+                        <div style={{float: 'right'}}>{buttonStatus}</div>
+                        <div style={{clear: 'both'}}></div>
+                    </div>
+                    <Paper style={{minHeight: 500}}>
                         <div>
+                            <GroupTabs
+                                router={this.context.router}
+                                location={this.props.location}
+                                groupId={this.state.groupId} />
                             {this.props.children}
                         </div>
                     </Paper>

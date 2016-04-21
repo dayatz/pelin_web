@@ -13,9 +13,23 @@ class GroupTabs extends React.Component {
 
         bindFunctions.call(this, ['handleActive']);
     }
+    componentDidMount() {
+        const pathname = this.props.location.pathname.split('/')[3];
+        if (pathname) {
+            switch(pathname) {
+                case 'lessons':
+                    this.setState({ selectedTab: 1 });
+                    break;
+                case 'assignments':
+                    this.setState({ selectedTab: 2 });
+                    break;
+                case 'members':
+                    this.setState({ selectedTab: 3 });
+            }
+        }
+    }
 
     handleActive(tab) {
-        // TODO: current active tab based on current route
         if (this.state.selectedTab != tab.props.value) {
             this.setState({selectedTab: tab.props.value});
 
@@ -31,7 +45,7 @@ class GroupTabs extends React.Component {
 
     render () {
         return (
-        <Tabs>
+        <Tabs value={this.state.selectedTab}>
             <Tab
                 value={0}
                 icon={<FontIcon className="material-icons">forum</FontIcon>}

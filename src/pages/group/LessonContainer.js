@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 
 class LessonContainer extends React.Component {
     render () {
-        return <span>LessonContainer</span>
+        return <div>{this.props.children}</div>
     }
 }
 

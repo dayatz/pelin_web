@@ -1,4 +1,4 @@
-import { fetchAssignmentAction } from '../actions/assignment.js'
+import { fetchLessonAction } from '../actions/lesson'
 
 const initialState = {
     isLoading: false,
@@ -6,11 +6,12 @@ const initialState = {
     error: null,
     items: {}
 }
-export const assignments = (state = initialState, action) => {
+
+const lessons = (state = initialState, action) => {
     switch (action.type) {
-        case fetchAssignmentAction.start:
-            return {...state, isLoading: true}
-        case fetchAssignmentAction.success:
+        case fetchLessonAction.start:
+            return { ...state, isLoading: true}
+        case fetchLessonAction.success:
             const { items } = state;
             items[action.groupId] = action.items;
             return {...state,
@@ -19,19 +20,16 @@ export const assignments = (state = initialState, action) => {
                 error: null,
                 items
             }
-        case fetchAssignmentAction.fail:
-            return {...state,
+        case fetchLessonAction.fail:
+            return { ...state,
                 isLoading: false,
                 isError: true,
                 error: action.error
             }
         default:
             return state
+
     }
 }
 
-export var getAssignmentsGroup = (items, groupId) => {
-    return items[groupId];
-}
-
-export default assignments
+export default lessons

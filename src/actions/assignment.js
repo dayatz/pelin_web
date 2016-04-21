@@ -14,7 +14,6 @@ export var fetchAllAssignment = groupId => {
 
         return AssignmentService(groupId).fetchAll()
             .then(r => {
-                console.log(r);
                 dispatch({
                     type: fetchAssignmentAction.success,
                     items: r.data,
