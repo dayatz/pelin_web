@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
-import { fetchPost } from '../../actions/post'
+import { fetchPost, fetchComment } from '../../actions/post'
 import PostList from '../../components/group/PostList'
 
 class Posts extends React.Component {

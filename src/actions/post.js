@@ -27,3 +27,30 @@ export var fetchPost = groupId => {
             })
     }
 }
+
+export var fetchCommentAction = createAsyncAction('FETCH_POST_COMMENT');
+export var fetchComment = (groupId, postId) => {
+    return (dispatch, getState) => {
+        const comments = getState().comments.items[postId];
+        if (comments && comments.length) {
+            return Promise.resolve();
+        }
+
+        dispatch({ type: fetchCommentAction.start });
+
+        return PostService(groupId).fetchComment(postId)
+            .then(r => {
+                dispatch({
+                    type: fetchCommentAction.success,
+                    items: r.data,
+                    postId
+                })
+            })
+            .catch(error => {
+                dispatch({
+                    type: fetchCommentAction.fail,
+                    error
+                })
+            })
+    }
+}

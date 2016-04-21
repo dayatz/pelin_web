@@ -15,7 +15,7 @@ const PostService = groupId => {
             return ajax().post(url, post);
         },
 
-        fetchComments: function(postId) {
+        fetchComment: function(postId) {
             return ajax().get(`${url}/${postId}/comments`)
         },
 
