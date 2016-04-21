@@ -7,18 +7,13 @@ import groups, { myGroups } from './group'
 import assignments from './assignment'
 import members from './member'
 import lessons from './lesson'
-
-export const initialState = {
-    isLoading: false,
-    isError: false,
-    error: null,
-    items: {}
-}
+import posts from './post'
 
 const reducers = combineReducers({
     auth,
     groups,
     myGroups,
+    posts,
     lessons,
     assignments,
     members,

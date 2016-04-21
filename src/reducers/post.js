@@ -1,4 +1,4 @@
-import { fetchMemberAction } from '../actions/member'
+import { fetchPostAction } from '../actions/post'
 
 const initialState = {
     isLoading: false,
@@ -7,11 +7,11 @@ const initialState = {
     items: {}
 }
 
-const members = (state = initialState, action) => {
+const posts = (state = initialState, action) => {
     switch (action.type) {
-        case fetchMemberAction.start:
+        case fetchPostAction.start:
             return { ...state, isLoading: true }
-        case fetchMemberAction.success:
+        case fetchPostAction.success:
             const { items } = state;
             items[action.groupId] = action.items;
             return { ...state,
@@ -19,7 +19,7 @@ const members = (state = initialState, action) => {
                 isError: false,
                 items
             }
-        case fetchMemberAction.fail:
+        case fetchPostAction.fail:
             return { ...state,
                 isLoading: false,
                 isError: true,
@@ -30,4 +30,4 @@ const members = (state = initialState, action) => {
     }
 }
 
-export default members
+export default posts

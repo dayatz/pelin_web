@@ -7,7 +7,7 @@ const initialState = {
     items: {}
 }
 
-const groups = (state=initialState, action) => {
+const groups = (state = initialState, action) => {
     switch (action.type) {
         case fetchGroupAction.start:
         case fetchSingleGroupAction.start:

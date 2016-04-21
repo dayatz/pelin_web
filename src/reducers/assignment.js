@@ -6,6 +6,7 @@ const initialState = {
     error: null,
     items: {}
 }
+
 export const assignments = (state = initialState, action) => {
     switch (action.type) {
         case fetchAssignmentAction.start:
