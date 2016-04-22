@@ -26,6 +26,10 @@ const posts = (state = initialState, action) => {
                 isError: true,
                 error: action.error
             }
+        case 'ADD_NEW_POST':
+            const { items: its } = state;
+            its[action.groupId].unshift(action.item);
+            return { ...state, items: its }
         default:
             return state
     }
