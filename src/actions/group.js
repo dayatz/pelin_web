@@ -10,8 +10,8 @@ export var addGroupAction = createAsyncAction('ADD_GROUP');
 
 export function fetchAllGroup() {
     return (dispatch, getState) => {
-        const groups = getState().groups.items;
-        if (groups.length) return Promise.resolve();
+        // const groups = getState().groups.items;
+        // if (groups.length) return Promise.resolve();
 
         dispatch({ type: fetchGroupAction.start});
 

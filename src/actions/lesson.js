@@ -5,10 +5,10 @@ export var fetchLessonAction = createAsyncAction("FETCH_LESSONS");
 
 export var fetchLessons = groupId => {
     return (dispatch, getState) => {
-        const lessons = getState().lessons.items[groupId];
-        if (lessons && lessons.length) {
-            return Promise.resolve();
-        }
+        // const lessons = getState().lessons.items[groupId];
+        // if (lessons && lessons.length) {
+        //     return Promise.resolve();
+        // }
 
         dispatch({ type: fetchLessonAction.start });
 

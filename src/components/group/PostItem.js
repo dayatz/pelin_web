@@ -56,7 +56,10 @@ class PostItem extends React.Component {
                 <FlatButton label="comment" secondary={true}
                     onClick={() => {
                         this.setState({ showComment: !this.state.showComment });
-                        this.props.fetchComment(this.context.groupId, this.props.post.id);
+                        if (!this.state.showComment) {
+                            this.props.fetchComment(this.context.groupId,
+                                this.props.post.id);
+                        }
                     }} />
             </div>
         )

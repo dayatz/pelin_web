@@ -2,8 +2,13 @@ import React, { PropTypes } from 'react'
 import { connect } from 'react-redux'
 import { fetchPost, fetchComment } from '../../actions/post'
 import PostList from '../../components/group/PostList'
+import NewPostForm from '../../components/group/NewPostForm'
 
 class Posts extends React.Component {
+    constructor(props) {
+        super(props);
+    }
+
     componentDidMount() {
         this.props.fetchPost(this.context.groupId);
     }
@@ -19,7 +24,7 @@ class Posts extends React.Component {
         }
         return (
             <div>
-                {/*<NewPostForm />*/}
+                <NewPostForm />
                 {renderPosts}
             </div>
         )

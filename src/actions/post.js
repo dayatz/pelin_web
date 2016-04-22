@@ -4,10 +4,10 @@ import PostService from '../api/post'
 export var fetchPostAction = createAsyncAction('FETCH_POST');
 export var fetchPost = groupId => {
     return (dispatch, getState) => {
-        const posts = getState().posts.items[groupId];
-        if (posts && posts.length) {
-            return Promise.resolve();
-        }
+        // const posts = getState().posts.items[groupId];
+        // if (posts && posts.length) {
+        //     return Promise.resolve();
+        // }
 
         dispatch({ type: fetchPostAction.start });
 
@@ -31,10 +31,10 @@ export var fetchPost = groupId => {
 export var fetchCommentAction = createAsyncAction('FETCH_POST_COMMENT');
 export var fetchComment = (groupId, postId) => {
     return (dispatch, getState) => {
-        const comments = getState().comments.items[postId];
-        if (comments && comments.length) {
-            return Promise.resolve();
-        }
+        // const comments = getState().comments.items[postId];
+        // if (comments && comments.length) {
+        //     return Promise.resolve();
+        // }
 
         dispatch({ type: fetchCommentAction.start });
 
