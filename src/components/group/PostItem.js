@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchComment } from '../../actions/post'
+import CommentList from '../../components/group/CommentList'
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
 
@@ -19,8 +20,19 @@ class PostItem extends React.Component {
 
     render() {
         const post = this.props.post;
+        var renderCommentText = ''
         if (this.state.showComment) {
+            const comments = this.props.comments.items[post.id];
+            renderCommentList = '';
+            if (comments && comments.length) {
+                var renderCommentList = (
+                    <div><CommentList comments={comments} /></div>
+                )
+            }
+
             var renderCommentText = (
+                <div>
+                {renderCommentList}
                 <TextField
                     value={this.state.commentText}
                     id={post.id.toString()}
@@ -28,18 +40,18 @@ class PostItem extends React.Component {
                     onChange={this.handleChange.bind(this)}
                     autoFocus={true}
                     />
+                </div>
             )
-        } else {
-            var renderCommentText = ''
         }
+
         return (
             <div>
                 <div>
                     <b>{post.user.name}</b>
                     <span>:{post.text}</span>
                     {/*<div><CommentList comments={comments} /></div>*/}
-                    {this.state.commentText}
                 </div>
+                {/*<NewCommentForm />*/}
                 <div>{renderCommentText}</div>
                 <FlatButton label="comment" secondary={true}
                     onClick={() => {

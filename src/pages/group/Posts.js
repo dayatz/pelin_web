@@ -19,6 +19,7 @@ class Posts extends React.Component {
         }
         return (
             <div>
+                {/*<NewPostForm />*/}
                 {renderPosts}
             </div>
         )
