@@ -53,6 +53,10 @@ export const comments = (state = {
                 isError: false,
                 items
             }
+        case 'ADD_COMMENT':
+            const { items: its } = state;
+            its[action.postId].push(action.item)
+            return { ...state, items: its }
         case fetchCommentAction.fail:
             return { ...state,
                 isLoading: false,

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchComment } from '../../actions/post'
 import CommentList from '../../components/group/CommentList'
+import NewCommentForm from '../../components/group/NewCommentForm'
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
 
@@ -18,9 +19,17 @@ class PostItem extends React.Component {
         this.setState({ commentText: e.target.value })
     }
 
+    toggleComment() {
+        this.setState({ showComment: !this.state.showComment });
+        if (!this.state.showComment) {
+            this.props.fetchComment(this.context.groupId,
+                this.props.post.id);
+        }
+    }
+
     render() {
         const post = this.props.post;
-        var renderCommentText = ''
+        var renderComments = ''
         if (this.state.showComment) {
             const comments = this.props.comments.items[post.id];
             renderCommentList = '';
@@ -30,16 +39,10 @@ class PostItem extends React.Component {
                 )
             }
 
-            var renderCommentText = (
+            var renderComments = (
                 <div>
                 {renderCommentList}
-                <TextField
-                    value={this.state.commentText}
-                    id={post.id.toString()}
-                    multilie={true}
-                    onChange={this.handleChange.bind(this)}
-                    autoFocus={true}
-                    />
+                <NewCommentForm postId={post.id} />
                 </div>
             )
         }
@@ -51,16 +54,9 @@ class PostItem extends React.Component {
                     <span>:{post.text}</span>
                     {/*<div><CommentList comments={comments} /></div>*/}
                 </div>
-                {/*<NewCommentForm />*/}
-                <div>{renderCommentText}</div>
+                <div>{renderComments}</div>
                 <FlatButton label="comment" secondary={true}
-                    onClick={() => {
-                        this.setState({ showComment: !this.state.showComment });
-                        if (!this.state.showComment) {
-                            this.props.fetchComment(this.context.groupId,
-                                this.props.post.id);
-                        }
-                    }} />
+                    onClick={this.toggleComment.bind(this)} />
             </div>
         )
     }

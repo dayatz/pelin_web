@@ -19,7 +19,7 @@ const PostService = groupId => {
             return ajax().get(`${url}/${postId}/comments`)
         },
 
-        addComment: function(postId, comment) {
+        comment: function(postId, comment) {
             return ajax().post(`${url}/${postId}/comments`, comment)
         }
     }

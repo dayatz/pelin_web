@@ -42,6 +42,7 @@ class NewPostForm extends React.Component {
                 <TextField
                     value={this.state.value}
                     disabled={this.state.sending}
+                    multiline={true}
                     onChange={this.onChange.bind(this)}
                     autoComplete='off' id='new-post' />
 
