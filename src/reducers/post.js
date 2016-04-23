@@ -32,19 +32,10 @@ const posts = (state = initialState, action) => {
             return { ...state, items: newItems }
         case 'DELETE_POST':
             const { items: deletedItems } = state;
-            const posts = deletedItems[action.groupId];
-            console.log('[before] ', posts);
-            for (var i = 0; i < posts.length; i++) {
-                if (posts[i].id == action.postId) {
-                    posts.splice(i, 1);
-                }
-            }
-            console.log('[after] ', posts);
-            deletedItems[action.groupId] = posts;
-            // const newItemsAfterDelete = deletedItems[action.groupId].map(item => {
-            //     if (item.id != action.postId) return item
-            // });
-            // deletedItems[action.groupId] = newItemsAfterDelete
+            deletedItems[action.groupId] = deletedItems[action.groupId]
+                .filter(item => {
+                    return item.id != action.postId
+                });
             return {...state, items: deletedItems}
         default:
             return state
