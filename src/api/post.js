@@ -15,6 +15,10 @@ const PostService = groupId => {
             return ajax().post(url, post);
         },
 
+        delete: function(postId) {
+            return ajax().delete(`${url}/${postId}`)
+        },
+
         fetchComment: function(postId) {
             return ajax().get(`${url}/${postId}/comments`)
         },

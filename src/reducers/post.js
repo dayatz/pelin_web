@@ -27,9 +27,25 @@ const posts = (state = initialState, action) => {
                 error: action.error
             }
         case 'ADD_NEW_POST':
-            const { items: its } = state;
-            its[action.groupId].unshift(action.item);
-            return { ...state, items: its }
+            const { items: newItems } = state;
+            newItems[action.groupId].unshift(action.item);
+            return { ...state, items: newItems }
+        case 'DELETE_POST':
+            const { items: deletedItems } = state;
+            const posts = deletedItems[action.groupId];
+            console.log('[before] ', posts);
+            for (var i = 0; i < posts.length; i++) {
+                if (posts[i].id == action.postId) {
+                    posts.splice(i, 1);
+                }
+            }
+            console.log('[after] ', posts);
+            deletedItems[action.groupId] = posts;
+            // const newItemsAfterDelete = deletedItems[action.groupId].map(item => {
+            //     if (item.id != action.postId) return item
+            // });
+            // deletedItems[action.groupId] = newItemsAfterDelete
+            return {...state, items: deletedItems}
         default:
             return state
     }
