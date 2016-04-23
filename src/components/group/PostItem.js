@@ -14,7 +14,7 @@ class PostItem extends React.Component {
             showComment: false
         }
     }
-    
+
     handleChange(e) {
         this.setState({ commentText: e.target.value })
     }
@@ -32,7 +32,7 @@ class PostItem extends React.Component {
         var renderComments = ''
         if (this.state.showComment) {
             const comments = this.props.comments.items[post.id];
-            renderCommentList = '';
+            renderCommentList = <span>Loading...</span>;
             if (comments && comments.length) {
                 var renderCommentList = (
                     <div><CommentList comments={comments} /></div>

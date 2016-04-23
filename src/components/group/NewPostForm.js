@@ -24,17 +24,19 @@ class NewPostForm extends React.Component {
         e.preventDefault();
         this.setState({ sending: true })
 
-        const comment = this.state.value;
-        PostService(this.context.groupId)
-        .create({ text: comment })
-        .then(r => {
-            this.context.store.dispatch({
-                type: 'ADD_NEW_POST',
-                item: r.data,
-                groupId: this.context.groupId
+        const text = this.state.value.trim();
+        if (text) {
+            PostService(this.context.groupId)
+            .create({ text })
+            .then(r => {
+                this.context.store.dispatch({
+                    type: 'ADD_NEW_POST',
+                    item: r.data,
+                    groupId: this.context.groupId
+                })
+                this.clean();
             })
-            this.clean();
-        })
+        }
     }
     render() {
         return (
@@ -42,7 +44,8 @@ class NewPostForm extends React.Component {
                 <TextField
                     value={this.state.value}
                     disabled={this.state.sending}
-                    multiline={true}
+                    multiLine={true}
+                    rows={2}
                     onChange={this.onChange.bind(this)}
                     autoComplete='off' id='new-post' />
 

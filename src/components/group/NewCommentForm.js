@@ -17,24 +17,25 @@ class NewCommentForm extends React.Component {
     onSubmit(e) {
         e.preventDefault();
         this.setState({ sending: true })
-        
-        const postId = this.props.postId;
-        const text = this.state.commentText;
-        PostService(this.context.groupId)
-            .comment(postId, { text })
-            .then(r => {
-                this.context.store.dispatch({
-                    type: 'ADD_COMMENT',
-                    item: r.data,
-                    postId
-                })
-            })
-            .catch( error => {
-                console.log(error)
-            })
 
-        console.log(this.state.commentText);
-        this.clean();
+        const postId = this.props.postId;
+        const text = this.state.commentText.trim();
+
+        if (text) {
+            PostService(this.context.groupId)
+                .comment(postId, { text })
+                .then(r => {
+                    this.context.store.dispatch({
+                        type: 'ADD_COMMENT',
+                        item: r.data,
+                        postId
+                    });
+                    this.clean();
+                })
+                .catch( error => {
+                    console.log(error)
+                })
+        }
     }
     clean() {
         this.setState({ commentText: '', sending: false });
