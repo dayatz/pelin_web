@@ -7,7 +7,7 @@ const initialState = {
     items: {}
 }
 
-const members = (state=initialState, action) => {
+const members = (state = initialState, action) => {
     switch (action.type) {
         case fetchMemberAction.start:
             return { ...state, isLoading: true }

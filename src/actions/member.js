@@ -4,10 +4,10 @@ import MemberService from '../api/member'
 export var fetchMemberAction = createAsyncAction('FETCH_MEMBERS');
 export var fetchMembers = groupId => {
     return (dispatch, getState) => {
-        const members = getState().members.items[groupId];
-        if (members && members.length) {
-            return Promise.resolve();
-        }
+        // const members = getState().members.items[groupId];
+        // if (members && members.length) {
+        //     return Promise.resolve();
+        // }
 
         dispatch({ type: fetchMemberAction.start });
 
