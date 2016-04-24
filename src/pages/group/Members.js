@@ -2,10 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { fetchMembers } from '../../actions/member'
 import MemberList from '../../components/group/MemberList'
+import InviteMemberForm from '../../components/group/InviteMemberForm'
 
 class Members extends React.Component {
     componentDidMount() {
-        console.log('[Members] mounted');
         this.props.fetchMembers(this.context.groupId);
     }
     render () {
@@ -19,6 +19,7 @@ class Members extends React.Component {
         }
         return (
             <div>
+                <InviteMemberForm />
                 {renderMembers}
             </div>
         )
