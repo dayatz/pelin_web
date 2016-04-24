@@ -19,6 +19,31 @@ class Members extends React.Component {
                 )
             })
     }
+    onInviteFormSubmit(nim, clean) {
+        MemberService(this.context.groupId)
+            .invite(nim)
+            .then(r => {
+                if (r.status == 201) {
+                    this.context.showSnackbar(`${nim} berhasil ditambahkan.`);
+                    this.props.fetchMembers(this.context.groupId);
+                } else {
+                    this.context.showSnackbar('Tunggu konfirmasi dari dosen.');
+                }
+                clean();
+            })
+            .catch(error => {
+                if (error.status == 400) {
+                    if (error.data.error.indexOf('Already') > -1) {
+                        this.context.showSnackbar(`${nim} sudah menjadi member.`)
+                    } else {
+                        this.context.showSnackbar('Tunggu konfirmasi dosen.');
+                        clean();
+                    }
+                } else if (error.status == 404) {
+                    this.context.showSnackbar(`${nim} tidak ditemukan.`);
+                }
+            });
+    }
     render () {
         const members = this.props.members.items[this.context.groupId];
         if (members && members.length) {
@@ -34,7 +59,7 @@ class Members extends React.Component {
         }
         return (
             <div>
-                <InviteMemberForm />
+                <InviteMemberForm onInviteFormSubmit={this.onInviteFormSubmit.bind(this)} />
                 {renderMembers}
             </div>
         )

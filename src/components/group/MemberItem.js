@@ -1,6 +1,4 @@
 import React from 'react'
-import { fetchMembers } from '../../actions/member'
-import MemberService from '../../api/member'
 import FlatButton from 'material-ui/lib/flat-button'
 import FontIcon from 'material-ui/lib/font-icon'
 
@@ -8,10 +6,9 @@ class MemberItem extends React.Component {
     kick() {
         this.props.kick(this.props.member.student.nim);
     }
-    render() {
-        var renderKickButton;
+    renderKickButton() {
         if (this.context.group.is_owner) {
-            renderKickButton = (
+            return (
                 <FlatButton
                     secondary={true}
                     onClick={this.kick.bind(this)}>
@@ -19,11 +16,14 @@ class MemberItem extends React.Component {
                 </FlatButton>
             )
         }
+        return;
+    }
+    render() {
         return (
             <div>
                 <p>
                     {this.props.member.name}
-                    {renderKickButton}
+                    {this.renderKickButton()}
                 </p>
             </div>
         )
@@ -31,10 +31,7 @@ class MemberItem extends React.Component {
 }
 
 MemberItem.contextTypes = {
-    groupId: React.PropTypes.string,
-    group: React.PropTypes.object,
-    store: React.PropTypes.object,
-    showSnackbar: React.PropTypes.func
+    group: React.PropTypes.object
 }
 
 export default MemberItem
