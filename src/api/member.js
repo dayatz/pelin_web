@@ -13,7 +13,7 @@ const MemberService = groupId => {
             return ajax().get(url + '/leave')
         },
         kick: function(nim) {
-            return ajax().get(url + '/kick')
+            return ajax().get(url + `/kick?nim=${nim}`)
         },
 
         fetchAllPendings: function() {
