@@ -27,3 +27,30 @@ export var fetchMembers = groupId => {
             })
     }
 }
+
+export var fetchPendingAction = createAsyncAction('FETCH_PENDINGS_MEMBER');
+export var fetchPendings = groupId => {
+    return (dispatch, getState) => {
+        // const pendings = getState().pendings.items[groupId];
+        // if (pendings && pendings.length) {
+        //     return Promise.resolve();
+        // }
+
+        dispatch({ type: fetchPendingAction.start });
+
+        return MemberService(groupId).fetchAllPendings()
+            .then(r => {
+                dispatch({
+                    type: fetchPendingAction.success,
+                    items: r.data,
+                    groupId
+                })
+            })
+            .catch(error => {
+                dispatch({
+                    type: fetchPendingAction.fail,
+                    error
+                })
+            })
+    }
+}

@@ -1,13 +1,17 @@
 import React from 'react'
 import MemberService from '../../api/member'
 import { connect } from 'react-redux'
-import { fetchMembers } from '../../actions/member'
+import { fetchMembers, fetchPendings } from '../../actions/member'
 import MemberList from '../../components/group/MemberList'
 import InviteMemberForm from '../../components/group/InviteMemberForm'
 
 class Members extends React.Component {
     componentDidMount() {
         this.props.fetchMembers(this.context.groupId);
+
+        if (this.context.group.is_owner) {
+            this.props.fetchPendings(this.context.groupId);
+        }
     }
     kick(nim) {
         MemberService(this.context.groupId)
@@ -37,29 +41,49 @@ class Members extends React.Component {
                         this.context.showSnackbar(`${nim} sudah menjadi member.`)
                     } else {
                         this.context.showSnackbar('Tunggu konfirmasi dosen.');
-                        clean();
                     }
                 } else if (error.status == 404) {
                     this.context.showSnackbar(`${nim} tidak ditemukan.`);
                 }
+                clean();
             });
     }
     render () {
         const members = this.props.members.items[this.context.groupId];
+        var renderMembers = <span>Loading...</span>;
         if (members && members.length) {
-            var renderMembers = (
+            renderMembers = (
                 <MemberList
                     kick={this.kick.bind(this)}
                     members={members} />
             )
-        } else if (members && !members.length) {
-            var renderMembers = <span>No members</span>
         } else {
-            var renderMembers = <span>Loading...</span>
+            renderMembers = <span>No members</span>
         }
+
+        var renderPendings;
+        if (this.context.group.is_owner) {
+            const pendings = this.props.pendings.items[this.context.groupId];
+            renderPendings = <span>Loading...</span>;
+            if (pendings && pendings.length) {
+                console.log(pendings.length)
+                // renderPendings = (
+                //     <hr />
+                //     <PendingList
+                //         decline={this.decline.bind(this)
+                //         accept={this.accept.bind(this)}} />
+                //     <hr />
+                // )
+                renderPendings = 'pd'
+            } else {
+                renderPendings = ''
+            }
+        }
+
         return (
             <div>
                 <InviteMemberForm onInviteFormSubmit={this.onInviteFormSubmit.bind(this)} />
+                {renderPendings}
                 {renderMembers}
             </div>
         )
@@ -68,16 +92,21 @@ class Members extends React.Component {
 
 Members.contextTypes = {
     groupId: React.PropTypes.string,
+    group: React.PropTypes.object,
     showSnackbar: React.PropTypes.func
 }
 
 const mapStateToProps = state => ({
-    members: state.members
+    members: state.members,
+    pendings: state.pendings
 })
 
 const mapDispatchToProps = dispatch => ({
     fetchMembers: (groupId) => {
         dispatch(fetchMembers(groupId))
+    },
+    fetchPendings: (groupId) => {
+        dispatch(fetchPendings(groupId))
     }
 })
 

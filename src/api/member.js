@@ -17,7 +17,7 @@ const MemberService = groupId => {
         },
 
         fetchAllPendings: function() {
-            return ajax().get(url + '/pendings')
+            return ajax().get(`groups/${groupId}/pendings`)
         },
         approve: function(requestId) {
             return ajax().get(url + `/pendings/${requestId}/approve`)

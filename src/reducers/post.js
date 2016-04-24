@@ -1,5 +1,4 @@
-import { fetchPostAction } from '../actions/post'
-import { fetchCommentAction } from '../actions/post'
+import { fetchPostAction, fetchCommentAction } from '../actions/post'
 
 const initialState = {
     isLoading: false,
