@@ -3,6 +3,7 @@ import MemberService from '../../api/member'
 import { connect } from 'react-redux'
 import { fetchMembers, fetchPendings } from '../../actions/member'
 import MemberList from '../../components/group/MemberList'
+import PendingList from '../../components/group/PendingList'
 import InviteMemberForm from '../../components/group/InviteMemberForm'
 
 class Members extends React.Component {
@@ -67,14 +68,14 @@ class Members extends React.Component {
             renderPendings = <span>Loading...</span>;
             if (pendings && pendings.length) {
                 console.log(pendings.length)
-                // renderPendings = (
-                //     <hr />
-                //     <PendingList
-                //         decline={this.decline.bind(this)
-                //         accept={this.accept.bind(this)}} />
-                //     <hr />
-                // )
-                renderPendings = 'pd'
+                renderPendings = (
+                    <div>
+                        <hr />
+                        <p>Persetujuan bergabung</p>
+                        <PendingList pendings={pendings} />
+                        <hr />
+                    </div>
+                )
             } else {
                 renderPendings = ''
             }

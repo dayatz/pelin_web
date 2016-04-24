@@ -2,8 +2,6 @@ import React from 'react'
 import {Route, IndexRoute} from 'react-router'
 
 import GroupDetail from '../pages/group/GroupDetail'
-// import Groups from '../pages/group/Groups'
-// import GroupDetail from '../pages/group/GroupDetailContainer'
 import Posts from '../pages/group/Posts'
 import Members from '../pages/group/Members'
 

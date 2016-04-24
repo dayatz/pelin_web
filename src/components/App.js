@@ -74,6 +74,7 @@ class App extends React.Component {
                         this.setState({navMenuOpen})
                     }}
                     {...this.props}
+                    user={this.context.store.getState().auth.user}
                     router={this.context.router}
                 />
 
