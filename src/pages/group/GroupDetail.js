@@ -11,15 +11,14 @@ class Group extends React.Component {
         super(props);
 
         this.state = {
-            groupId: null,
-            group: null
+            groupId: null
         }
     }
 
     getChildContext() {
         return {
             groupId: this.props.params.groupId,
-            group: this.state.group
+            group: this.props.groups.items[this.state.groupId]
         }
     }
 
