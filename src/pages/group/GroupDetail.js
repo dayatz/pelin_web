@@ -36,10 +36,13 @@ class Group extends React.Component {
     render() {
         const group = this.props.groups.items[this.state.groupId];
         if (group) {
-            if (group.is_joined) {
-                var buttonStatus = <RaisedButton>Leave</RaisedButton>
-            } else {
-                var buttonStatus = <RaisedButton>Join</RaisedButton>
+            var buttonStatus;
+            if (!group.is_owner) {
+                if (group.is_joined) {
+                    var buttonStatus = <RaisedButton label='Leave' />
+                } else {
+                    var buttonStatus = <RaisedButton label='Join' />
+                }
             }
 
             var renderGroupDetail = (

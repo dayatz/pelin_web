@@ -23,10 +23,12 @@ class InviteMemberForm extends React.Component {
         MemberService(this.context.groupId)
             .invite(nim)
             .then(r => {
-                this.setState({
-                    openSnackbar: true,
-                    msg: 'Tunggu konfirmasi dari dosen.'
-                })
+                if (r.status == 201) {
+                    this.setState({ msg: `${this.state.nim} berhasil ditambahkan.` })
+                } else {
+                    this.setState({ msg: 'Tunggu konfirmasi dari dosen.' })
+                }
+                this.setState({ openSnackbar: true });
                 this.clean();
             })
             .catch(error => {
