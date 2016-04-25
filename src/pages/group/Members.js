@@ -1,7 +1,7 @@
 import React from 'react'
 import MemberService from '../../api/member'
 import { connect } from 'react-redux'
-import { fetchMembers, fetchPendings } from '../../actions/member'
+import { fetchMembers, fetchPendings, kickMember } from '../../actions/member'
 import MemberList from '../../components/group/MemberList'
 import PendingList from '../../components/group/PendingList'
 import InviteMemberForm from '../../components/group/InviteMemberForm'
@@ -14,13 +14,13 @@ class Members extends React.Component {
             this.props.fetchPendings(this.context.groupId);
         }
     }
-    kick(nim) {
+    kick(member) {
         MemberService(this.context.groupId)
-            .kick(nim)
+            .kick(member.student.nim)
             .then(r => {
-                this.props.fetchMembers(this.context.groupId);
+                this.props.kickMember(this.context.groupId, member.id);
                 this.context.showSnackbar(
-                    `${nim} berhasil dihapus.`
+                    `${member.student.nim} berhasil dihapus.`
                 )
             })
     }
@@ -41,7 +41,7 @@ class Members extends React.Component {
                     if (error.data.error.indexOf('Already') > -1) {
                         this.context.showSnackbar(`${nim} sudah menjadi member.`)
                     } else {
-                        this.context.showSnackbar('Tunggu konfirmasi dosen.');
+                        this.context.showSnackbar('Sedang menunggu konfirmasi dosen.');
                     }
                 } else if (error.status == 404) {
                     this.context.showSnackbar(`${nim} tidak ditemukan.`);
@@ -107,6 +107,9 @@ const mapDispatchToProps = dispatch => ({
     },
     fetchPendings: (groupId) => {
         dispatch(fetchPendings(groupId))
+    },
+    kickMember: (groupId, memberId) => {
+        dispatch(kickMember(groupId, memberId))
     }
 })
 

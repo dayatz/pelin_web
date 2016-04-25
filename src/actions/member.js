@@ -47,10 +47,20 @@ export var fetchPendings = groupId => {
                 })
             })
             .catch(error => {
+                console.log(error);
                 dispatch({
                     type: fetchPendingAction.fail,
                     error
                 })
             })
+    }
+}
+
+export var kickMember = (groupId, memberId) => {
+    console.log('[action] dispatching kick')
+    return {
+        type: 'KICK_MEMBER',
+        groupId,
+        memberId
     }
 }

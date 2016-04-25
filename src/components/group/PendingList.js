@@ -10,16 +10,26 @@ class PendingList extends React.Component {
                 console.log(r)
             })
     }
-    approve(id) {
+    approve(pending) {
         MemberService(this.context.groupId)
-            .approve(id)
+            .approve(pending.id)
             .then(r => {
-                console.log(r)
+                const groupId = this.context.groupId;
+                this.context.store.dispatch({
+                    type: 'PENDING_APPROVE',
+                    groupId,
+                    id: pending.id
+                });
+                this.context.store.dispatch({
+                    type: 'ADD_MEMBER',
+                    groupId,
+                    item: pending.user
+                });
             })
     }
-    decline(id) {
+    decline(pending) {
         MemberService(this.context.groupId)
-            .decline(id)
+            .decline(pending.id)
             .then(r => {
                 console.log(r);
             })
@@ -45,7 +55,8 @@ class PendingList extends React.Component {
 }
 
 PendingList.contextTypes = {
-    groupId: React.PropTypes.string
+    groupId: React.PropTypes.string,
+    store: React.PropTypes.object
 }
 
 export default PendingList;

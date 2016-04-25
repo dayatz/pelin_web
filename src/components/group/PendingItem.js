@@ -3,12 +3,12 @@ import React from 'react';
 const PendingItem = (props) => {
     return (
         <div>
-            {props.pending.student.name}
+            {props.pending.user.name}
             <button onClick={() => {
-                props.approve(props.pending.id)
+                props.approve(props.pending)
             }}>o</button>
             <button onClick={() => {
-                props.decline(props.pending.id)
+                props.decline(props.pending)
             }}>x</button>
         </div>
     )

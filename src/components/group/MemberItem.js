@@ -4,7 +4,7 @@ import FontIcon from 'material-ui/lib/font-icon'
 
 class MemberItem extends React.Component {
     kick() {
-        this.props.kick(this.props.member.student.nim);
+        this.props.kick(this.props.member);
     }
     renderKickButton() {
         if (this.context.group.is_owner) {

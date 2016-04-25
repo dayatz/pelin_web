@@ -19,6 +19,19 @@ const members = (state = initialState(), action) => {
                 isError: true,
                 error: action.error
             }
+        case 'ADD_MEMBER':
+            const { items: addItems } = state;
+            addItems[action.groupId].unshift(action.item);
+            return { ...state, items: addItems }
+        case 'KICK_MEMBER':
+            const { items: removeItems } = state;
+
+            removeItems[action.groupId] = removeItems[action.groupId]
+                .filter(item => {
+                    return item.id != action.memberId
+                });
+
+            return { ...state, items: removeItems}
         default:
             return state
     }
@@ -42,6 +55,15 @@ export const pendings = ( state = initialState(), action) => {
                 isError: true,
                 error: action.error
             }
+        case 'PENDING_APPROVE':
+            const { items: pendingItems } = state;
+
+            pendingItems[action.groupId] = pendingItems[action.groupId]
+                .filter(item => {
+                    return item.id != action.id
+                });
+
+            return { ...state, items: pendingItems }
         default:
             return state
     }
