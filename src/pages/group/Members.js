@@ -67,7 +67,6 @@ class Members extends React.Component {
             const pendings = this.props.pendings.items[this.context.groupId];
             renderPendings = <span>Loading...</span>;
             if (pendings && pendings.length) {
-                console.log(pendings.length)
                 renderPendings = (
                     <div>
                         <hr />

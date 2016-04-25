@@ -2,6 +2,7 @@ import { ajax } from './index'
 
 const MemberService = groupId => {
      const url = `groups/${groupId}/members`;
+     const pendingUrl = `groups/${groupId}/pendings`;
      return {
         fetchAll: function() {
             return ajax().get(url)
@@ -17,13 +18,16 @@ const MemberService = groupId => {
         },
 
         fetchAllPendings: function() {
-            return ajax().get(`groups/${groupId}/pendings`)
+            return ajax().get(pendingUrl)
         },
         approve: function(requestId) {
-            return ajax().get(url + `/pendings/${requestId}/approve`)
+            return ajax().get(`${pendingUrl}/${requestId}/approve`)
+        },
+        decline: function(requestId) {
+            return ajax().get(`${pendingUrl}/${requestId}/decline`)
         },
         approveAll: function() {
-            return ajax().get(url + '/pendings/approve_all')
+            return ajax().get(`${pendingUrl}/approve_all`)
         }
      }
 }
