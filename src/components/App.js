@@ -3,6 +3,7 @@ import getMuiTheme from 'material-ui/lib/styles/getMuiTheme'
 import customTheme from '../config/theme'
 
 import AppBar from 'material-ui/lib/app-bar'
+import Snackbar from 'material-ui/lib/snackbar'
 import FontIcon from 'material-ui/lib/font-icon'
 import IconMenu from 'material-ui/lib/menus/icon-menu'
 import IconButton from 'material-ui/lib/icon-button'
@@ -15,15 +16,25 @@ class App extends React.Component {
     getChildContext() {
         return {
             muiTheme: getMuiTheme(customTheme),
-            auth: this.context.store.getState().auth
+            auth: this.context.store.getState().auth,
+            showSnackbar: this.showSnackbar.bind(this)
         }
     }
 
     constructor(props) {
         super(props);
         this.state = {
-            navMenuOpen: false
+            navMenuOpen: false,
+            snackbarOpen: false,
+            snackbarMsg: ''
         }
+    }
+
+    showSnackbar(msg) {
+        this.setState({ 
+            snackbarOpen: true,
+            snackbarMsg: msg
+        })
     }
 
     render() {
@@ -63,6 +74,7 @@ class App extends React.Component {
                         this.setState({navMenuOpen})
                     }}
                     {...this.props}
+                    user={this.context.store.getState().auth.user}
                     router={this.context.router}
                 />
 
@@ -72,6 +84,15 @@ class App extends React.Component {
                         {this.props.children}
                     </div>
                 </div>
+
+                <Snackbar
+                    open={this.state.snackbarOpen}
+                    message={this.state.snackbarMsg}
+                    onRequestClose={() => {
+                        this.setState({ snackbarOpen: false });
+                    }}
+                    autoHideDuration={3000}
+                    />
             </div>
         )
     }
@@ -79,7 +100,8 @@ class App extends React.Component {
 
 App.childContextTypes = {
     muiTheme: React.PropTypes.object,
-    auth: React.PropTypes.object
+    auth: React.PropTypes.object,
+    showSnackbar: React.PropTypes.func
 };
 
 App.contextTypes = {

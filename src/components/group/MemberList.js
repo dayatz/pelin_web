@@ -5,7 +5,7 @@ const MemberList = (props) => {
     var renderMember = props.members.map(member => {
         return (
             <div key={member.id}>
-                <MemberItem member={member} />
+                <MemberItem kick={props.kick} member={member} />
             </div>
         )
     })

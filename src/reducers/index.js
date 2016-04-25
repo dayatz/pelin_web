@@ -5,9 +5,18 @@ import { routerReducer } from 'react-router-redux'
 import auth from './auth'
 import groups, { myGroups } from './group'
 import assignments from './assignment'
-import members from './member'
+import members, { pendings } from './member'
 import lessons from './lesson'
 import posts, { comments } from './post'
+
+export const initialState = () => {
+    return {
+        isLoading: false,
+        isError: false,
+        error: null,
+        items: {}
+    }
+}
 
 const reducers = combineReducers({
     auth,
@@ -17,7 +26,7 @@ const reducers = combineReducers({
     comments,
     lessons,
     assignments,
-    members,
+    members, pendings,
     routing: routerReducer
 })
 

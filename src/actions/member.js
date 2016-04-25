@@ -27,3 +27,62 @@ export var fetchMembers = groupId => {
             })
     }
 }
+
+export var fetchPendingAction = createAsyncAction('FETCH_PENDINGS_MEMBER');
+export var fetchPendings = groupId => {
+    return (dispatch, getState) => {
+        // const pendings = getState().pendings.items[groupId];
+        // if (pendings && pendings.length) {
+        //     return Promise.resolve();
+        // }
+
+        dispatch({ type: fetchPendingAction.start });
+
+        return MemberService(groupId).fetchAllPendings()
+            .then(r => {
+                dispatch({
+                    type: fetchPendingAction.success,
+                    items: r.data,
+                    groupId
+                })
+            })
+            .catch(error => {
+                console.log(error);
+                dispatch({
+                    type: fetchPendingAction.fail,
+                    error
+                })
+            })
+    }
+}
+
+export var kickMember = (groupId, memberId) => {
+    return {
+        type: 'KICK_MEMBER',
+        groupId,
+        memberId
+    }
+}
+
+export var approveAll = (groupId) => {
+    return {
+        type: 'PENDING_APPROVE_ALL',
+        groupId
+    }
+}
+
+export var addMember = (groupId, item) => {
+    return {
+        type: 'ADD_MEMBER',
+        groupId,
+        item
+    }
+}
+
+export var pendingApprove = (groupId, pendingId) => {
+    return {
+        type: 'PENDING_APPROVE',
+        groupId,
+        id: pendingId
+    }
+}

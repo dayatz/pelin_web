@@ -42,12 +42,18 @@ function isLoggedIn(nextState, replace) {
     }
 }
 
+function isTeacher(nextState, replace) {
+    if (UserService.getUserFromStore().is_teacher) {
+        replace({ pathname: '/' })
+    }
+}
+
 const routes = (
     <Router history={history}>
         <Route name="app-route" path="/" component={App} onEnter={isAuthenticated}>
             <IndexRoute component={Home} />
 
-            <Route path="groups" name="groups" component={Groups} />
+            <Route path="groups" name="groups" component={Groups} onEnter={isTeacher} />
             {/*<Route name="group-detail" path="groups/:groupId" component={Group} />*/}
             {GroupRoute}
 
