@@ -31,7 +31,12 @@ class PendingList extends React.Component {
         MemberService(this.context.groupId)
             .decline(pending.id)
             .then(r => {
-                console.log(r);
+                const groupId = this.context.groupId;
+                this.context.store.dispatch({
+                    type: 'PENDING_APPROVE',
+                    groupId,
+                    id: pending.id
+                });
             })
     }
     render() {
