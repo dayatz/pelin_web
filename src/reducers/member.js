@@ -64,6 +64,10 @@ export const pendings = ( state = initialState(), action) => {
                 });
 
             return { ...state, items: pendingItems }
+        case 'PENDING_APPROVE_ALL':
+            const { items: approveAll } = state;
+            delete approveAll[action.groupId];
+            return { ...state, items: approveAll}
         default:
             return state
     }

@@ -57,10 +57,32 @@ export var fetchPendings = groupId => {
 }
 
 export var kickMember = (groupId, memberId) => {
-    console.log('[action] dispatching kick')
     return {
         type: 'KICK_MEMBER',
         groupId,
         memberId
+    }
+}
+
+export var approveAll = (groupId) => {
+    return {
+        type: 'PENDING_APPROVE_ALL',
+        groupId
+    }
+}
+
+export var addMember = (groupId, item) => {
+    return {
+        type: 'ADD_MEMBER',
+        groupId,
+        item
+    }
+}
+
+export var pendingApprove = (groupId, pendingId) => {
+    return {
+        type: 'PENDING_APPROVE',
+        groupId,
+        id: pendingId
     }
 }

@@ -1,5 +1,6 @@
 import React from 'react'
 import MemberService from '../../api/member'
+import { fetchMembers, approveAll, addMember, pendingApprove } from '../../actions/member'
 import PendingItem from './PendingItem'
 
 class PendingList extends React.Component {
@@ -7,7 +8,9 @@ class PendingList extends React.Component {
         MemberService(this.context.groupId)
             .approveAll()
             .then(r => {
-                console.log(r)
+                this.context.store.dispatch(approveAll(this.context.groupId));
+                this.context.store.dispatch(fetchMembers(this.context.groupId));
+                this.context.showSnackbar('Berhasil ditambahkan ke grup.');
             })
     }
     approve(pending) {
@@ -15,16 +18,10 @@ class PendingList extends React.Component {
             .approve(pending.id)
             .then(r => {
                 const groupId = this.context.groupId;
-                this.context.store.dispatch({
-                    type: 'PENDING_APPROVE',
-                    groupId,
-                    id: pending.id
-                });
-                this.context.store.dispatch({
-                    type: 'ADD_MEMBER',
-                    groupId,
-                    item: pending.user
-                });
+                this.context.store.dispatch(pendingApprove(groupId, pending.id));
+                this.context.store.dispatch(
+                    addMember(this.context.groupId, pending.user)
+                );
             })
     }
     decline(pending) {
@@ -32,11 +29,7 @@ class PendingList extends React.Component {
             .decline(pending.id)
             .then(r => {
                 const groupId = this.context.groupId;
-                this.context.store.dispatch({
-                    type: 'PENDING_APPROVE',
-                    groupId,
-                    id: pending.id
-                });
+                this.context.store.dispatch(pendingApprove(groupId, pending.id));
             })
     }
     render() {
@@ -61,7 +54,8 @@ class PendingList extends React.Component {
 
 PendingList.contextTypes = {
     groupId: React.PropTypes.string,
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    showSnackbar: React.PropTypes.func
 }
 
 export default PendingList;
