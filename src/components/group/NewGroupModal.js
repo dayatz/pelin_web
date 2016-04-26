@@ -58,6 +58,7 @@ class NewGroupModal extends React.Component {
                         .dispatch(addGroupAction(group));
                     this.context.store
                         .dispatch(addMyGroupAction(group.id));
+                    this.context.router.push(`/groups/${group.id}`);
                     this.closeModal();
                 })
         }
@@ -92,7 +93,8 @@ class NewGroupModal extends React.Component {
 }
 
 NewGroupModal.contextTypes = {
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    router: React.PropTypes.object
 }
 
 export default NewGroupModal;
