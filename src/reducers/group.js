@@ -34,6 +34,11 @@ const groups = (state = initialState, action) => {
             is[item.id] = item;
             return { ...state, isLoading: false, items:is }
 
+        case 'ADD_GROUP':
+            const { items: newGroup } = state;
+            newGroup[action.item.id] = action.item;
+            return { ...state, items: newGroup}
+
         default:
             return state
     }
@@ -57,6 +62,10 @@ export const myGroups = (state = {
             }
         case fetchMyGroupAction.fail:
             return { ...state, isError: true, error: action.error }
+        case 'ADD_MY_GROUP':
+            const { ids } = state;
+            ids.unshift(action.id);
+            return {  ...state, ids }
         default:
             return state
     }
