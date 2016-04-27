@@ -9,8 +9,11 @@ class NewLessonForm extends React.Component {
         super(props);
         this.state = {
             files: [],
-            title: ''
+            loading: false
         }
+    }
+    backButton() {
+        this.context.router.replace(`/groups/${this.context.groupId}/lessons`);
     }
     onSubmit(e) {
         e.preventDefault();
@@ -18,6 +21,7 @@ class NewLessonForm extends React.Component {
         const description = this.refs.description.getValue();
 
         if (title && this.state.files.length) {
+            this.setState({ loading: true })
             var lesson = new FormData();
             this.state.files.map(file => {
                 lesson.append('files', file)
@@ -30,7 +34,10 @@ class NewLessonForm extends React.Component {
             LessonService(this.context.groupId)
                 .create(lesson)
                 .then(r => {
-                    console.log(r);
+                    const lesson = r.data;
+                    console.log(lesson);
+                    this.setState({ loading: false });
+                    this.context.router.replace(`/groups/${this.context.groupId}/lessons`);
                 })
         }
     }
@@ -55,6 +62,7 @@ class NewLessonForm extends React.Component {
                         placeholder='Nama materi'
                         id='title'
                         autoFocus={true}
+                        autoComplete='off'
                         ref='title' />
                 </div>
                 <div>
@@ -62,6 +70,7 @@ class NewLessonForm extends React.Component {
                         placeholder='Keterangan'
                         id='description'
                         ref='description'
+                        autoComplete='off'
                         multiLine={true}
                         rows={2} />
                 </div>
@@ -71,7 +80,7 @@ class NewLessonForm extends React.Component {
                         {renderPreview}
                     </Dropzone>
                 </div>
-                    <RaisedButton label='Batal' />
+                    <RaisedButton label='Batal' onClick={this.backButton.bind(this)} />
                     <RaisedButton type='submit' primary={true} label='Tambah' />
                 </form>
             </div>

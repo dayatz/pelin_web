@@ -8,15 +8,10 @@ class LessonAdd extends React.Component {
             this.context.router.replace(`/groups/${this.context.groupId}/lessons`)
         }
     }
-    backButton() {
-        this.context.router.replace(`/groups/${this.context.groupId}/lessons`)
-    }
     render () {
         return (
             <div>
                 <div>
-                    <FlatButton label='< Back'
-                        onClick={this.backButton.bind(this)} />
                     <h5>Tambah Materi</h5>
                 </div>
                 <NewLessonForm />
