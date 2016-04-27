@@ -15,6 +15,14 @@ class PostList extends React.Component {
                 console.log(r);
             })
     }
+    handleVote(post) {
+        PostService(this.context.groupId)
+            .vote(post.id)
+            .then(r => {
+                console.log(r);
+            })
+    }
+
     render () {
         var renderPost = this.props.posts.map(post => {
             return (
@@ -22,6 +30,7 @@ class PostList extends React.Component {
                     <PostItem
                         post={post}
                         handleDelete={this.handleDelete.bind(this)}
+                        handleVote={this.handleVote.bind(this)}
                         comments={this.props.comments.items[post.id]} />
                 </div>
             )
