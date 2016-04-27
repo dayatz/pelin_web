@@ -1,4 +1,5 @@
 import React from 'react'
+import NewLessonForm from '../../components/group/NewLessonForm.js'
 import FlatButton from 'material-ui/lib/flat-button'
 
 class LessonAdd extends React.Component {
@@ -16,8 +17,9 @@ class LessonAdd extends React.Component {
                 <div>
                     <FlatButton label='< Back'
                         onClick={this.backButton.bind(this)} />
+                    <h5>Tambah Materi</h5>
                 </div>
-                LessonAdd
+                <NewLessonForm />
             </div>
         )
     }
