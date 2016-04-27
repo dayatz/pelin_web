@@ -5,8 +5,6 @@ import { getGroupByIds } from '../reducers/group'
 export var fetchGroupAction = createAsyncAction('FETCH_GROUP');
 export var updateGroupAction = createAsyncAction('UPDATE_GROUP');
 export var deleteGroupAction = createAsyncAction('DELETE_GROUP');
-export var addGroupAction = createAsyncAction('ADD_GROUP');
-
 
 export function fetchAllGroup() {
     return (dispatch, getState) => {
@@ -96,5 +94,19 @@ export function fetchSingleGroup(groupId) {
                     error
                 })
             })
+    }
+}
+
+export var addGroupAction = (group) => {
+    return {
+        type: 'ADD_GROUP',
+        item: group
+    }
+}
+
+export var addMyGroupAction = (id) => {
+    return {
+        type: 'ADD_MY_GROUP',
+        id
     }
 }

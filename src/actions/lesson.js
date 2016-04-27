@@ -29,3 +29,11 @@ export var fetchLessons = groupId => {
             })
     }
 }
+
+export var lessonRemoveAction = (groupId, id) => {
+    return {
+        type: 'LESSON_REMOVE',
+        groupId,
+        id
+    }
+}

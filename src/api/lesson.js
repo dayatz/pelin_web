@@ -10,7 +10,10 @@ const LessonService = groupId => {
             return ajax().get(url + `/${lessonId}`)
         },
         create: function(lesson) {
-            return ajax().post(url, assignment);
+            return ajax().post(url, lesson);
+        },
+        delete: function(lessonId) {
+            return ajax().delete(url + `/${lessonId}`)
         }
     }
 }

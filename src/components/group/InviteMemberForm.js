@@ -16,9 +16,12 @@ class InviteMemberForm extends React.Component {
     }
     onSubmit(e) {
         e.preventDefault();
-        this.setState({ loading: true });
         const nim = this.state.nim;
-        this.props.onInviteFormSubmit(nim, this.clean.bind(this));
+
+        if (nim) {
+            this.setState({ loading: true });
+            this.props.onInviteFormSubmit(nim, this.clean.bind(this));
+        }
     }
     clean() {
         this.setState({ nim: '', loading: false })
