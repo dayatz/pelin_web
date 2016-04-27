@@ -11,6 +11,9 @@ const LessonService = groupId => {
         },
         create: function(lesson) {
             return ajax().post(url, lesson);
+        },
+        delete: function(lessonId) {
+            return ajax().delete(url + `/${lessonId}`)
         }
     }
 }

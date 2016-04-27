@@ -26,6 +26,13 @@ const lessons = (state = initialState, action) => {
                 isError: true,
                 error: action.error
             }
+        case 'LESSON_REMOVE':
+            const { items: removeItems } = state;
+            removeItems[action.groupId] = removeItems[action.groupId]
+                .filter(item => {
+                    return item.id != action.id
+                })
+            return { ...state, items: removeItems }
         default:
             return state
 
