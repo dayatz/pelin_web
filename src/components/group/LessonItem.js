@@ -14,7 +14,12 @@ const LessonItem = (props, context) => {
     }
 
     var renderItemList = props.lesson.files.map(file => {
-        return <FlatButton target='_blank' linkButton={true} label={file.name} href={file.file} />
+        return <FlatButton
+            key={file.name}
+            target='_blank'
+            linkButton={true}
+            label={file.name}
+            href={file.file} />
     });
     return (
         <div style={{width: 300, borderRadius: 10,

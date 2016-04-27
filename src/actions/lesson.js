@@ -14,7 +14,6 @@ export var fetchLessons = groupId => {
 
         return LessonService(groupId).fetchAll()
             .then(r => {
-                console.log(r);
                 dispatch({
                     type: fetchLessonAction.success,
                     items: r.data,

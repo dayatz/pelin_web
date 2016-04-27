@@ -7,7 +7,6 @@ import { fetchLessons } from '../../actions/lesson'
 
 class Lessons extends React.Component {
     componentDidMount() {
-        console.log('[Lessons] mounted');
         this.props.fetchLessons(this.context.groupId)
     }
     renderAddButton() {
