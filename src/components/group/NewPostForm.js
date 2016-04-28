@@ -30,7 +30,7 @@ class NewPostForm extends React.Component {
             .create({ text })
             .then(r => {
                 this.context.store.dispatch({
-                    type: 'ADD_NEW_POST',
+                    type: 'POST_ADD',
                     item: r.data,
                     groupId: this.context.groupId
                 })

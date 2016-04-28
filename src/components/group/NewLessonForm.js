@@ -59,7 +59,7 @@ class NewLessonForm extends React.Component {
                 <form onSubmit={this.onSubmit.bind(this)}>
                 <div>
                     <TextField
-                        placeholder='Nama materi'
+                        hintText='Nama materi'
                         id='title'
                         autoFocus={true}
                         autoComplete='off'
@@ -67,7 +67,7 @@ class NewLessonForm extends React.Component {
                 </div>
                 <div>
                     <TextField
-                        placeholder='Keterangan'
+                        hintText='Keterangan'
                         id='description'
                         ref='description'
                         autoComplete='off'

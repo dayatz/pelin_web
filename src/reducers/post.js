@@ -25,10 +25,13 @@ const posts = (state = initialState, action) => {
                 isError: true,
                 error: action.error
             }
-        case 'ADD_NEW_POST':
-            const { items: newItems } = state;
-            newItems[action.groupId].unshift(action.item);
-            return { ...state, items: newItems }
+        case 'POST_ADD':
+            const { items: postAddItems } = state;
+            postAddItems[action.groupId] = [action.item, ...state.items[action.groupId]];
+            return {
+                ...state,
+                items: postAddItems
+            }
         case 'DELETE_POST':
             const { items: deletedItems } = state;
             deletedItems[action.groupId] = deletedItems[action.groupId]
@@ -61,7 +64,7 @@ export const comments = (state = {
             }
         case 'ADD_COMMENT':
             const { items: its } = state;
-            its[action.postId].push(action.item)
+            its[action.postId] = [...state.items[action.postId], action.item];
             return { ...state, items: its }
         case fetchCommentAction.fail:
             return { ...state,

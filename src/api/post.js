@@ -11,6 +11,10 @@ const PostService = groupId => {
             return ajax().get(`${url}/${postId}`)
         },
 
+        vote: function(postId) {
+            return ajax().get(`${url}/${postId}/vote`)
+        },
+
         create: function(post) {
             return ajax().post(url, post);
         },

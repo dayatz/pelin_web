@@ -26,6 +26,12 @@ export const assignments = (state = initialState, action) => {
                 isError: true,
                 error: action.error
             }
+        case 'ASSIGNMENT_ADD':
+            const { items: assignmentAdd } = state;
+            assignmentAdd[action.groupId] = [ action.item, ...assignmentAdd[action.groupId] ]
+            return {
+                ...state, items: assignmentAdd
+            }
         default:
             return state
     }

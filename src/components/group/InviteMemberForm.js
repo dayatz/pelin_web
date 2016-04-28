@@ -1,7 +1,6 @@
 import React from 'react'
 import TextField from 'material-ui/lib/text-field'
-import FloatingActionButton from 'material-ui/lib/floating-action-button'
-import FontIcon from 'material-ui/lib/font-icon'
+import FabAdd from '../../components/FabAdd'
 
 class InviteMemberForm extends React.Component {
     constructor(props) {
@@ -32,17 +31,11 @@ class InviteMemberForm extends React.Component {
                 <TextField
                     id='nim'
                     value={this.state.nim}
-                    placeholder='Masukkan nim'
+                    hintText='Masukkan nim'
                     autoComplete='off'
                     disabled={this.state.loading}
                     onChange={this.onChange.bind(this)} />
-                <FloatingActionButton
-                    mini={true}
-                    secondary={true}
-                    disabled={this.state.loading}
-                    type='submit'>
-                    <FontIcon className="material-icons">add</FontIcon>
-                </FloatingActionButton>
+                <FabAdd disabled={this.state.loading} type='submit' />
             </form>
         )
     }

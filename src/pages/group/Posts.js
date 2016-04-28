@@ -1,20 +1,16 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
 import { connect } from 'react-redux'
-import { fetchPost, fetchComment } from '../../actions/post'
+import { fetchPost } from '../../actions/post'
 import PostList from '../../components/group/PostList'
 import NewPostForm from '../../components/group/NewPostForm'
 
 class Posts extends React.Component {
-    constructor(props) {
-        super(props);
-    }
-
     componentDidMount() {
         this.props.fetchPost(this.context.groupId);
     }
 
     render () {
-        const posts = this.props.posts.items[this.context.groupId];
+        var posts = this.props.posts.items[this.context.groupId];
         if (posts && posts.length) {
             var renderPosts = <PostList posts={posts} />
         } else if (posts && !posts.length) {
@@ -32,7 +28,7 @@ class Posts extends React.Component {
 }
 
 Posts.contextTypes = {
-    groupId: PropTypes.string
+    groupId: React.PropTypes.string
 }
 
 const mapStateToProps = state => ({

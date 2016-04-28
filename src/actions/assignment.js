@@ -29,3 +29,10 @@ export var fetchAllAssignment = groupId => {
             })
     }
 }
+
+export var assignmentAddAction = (groupId, item) => {
+    return {
+        type: 'ASSIGNMENT_ADD',
+        groupId, item
+    }
+}

@@ -20,6 +20,7 @@ export var fetchPost = groupId => {
                 })
             })
             .catch(error => {
+                console.log(error);
                 dispatch({
                     type: fetchPostAction.fail,
                     error

@@ -1,10 +1,8 @@
 import React from 'react';
 import GroupService from '../../api/group'
 import { addGroupAction, addMyGroupAction } from '../../actions/group'
-
+import FabAdd from '../../components/FabAdd'
 import Dialog from 'material-ui/lib/dialog'
-import FloatingActionButton from 'material-ui/lib/floating-action-button'
-import FontIcon from 'material-ui/lib/font-icon'
 import RaisedButton from 'material-ui/lib/raised-button'
 import FlatButton from 'material-ui/lib/flat-button'
 import TextField from 'material-ui/lib/text-field'
@@ -67,13 +65,7 @@ class NewGroupModal extends React.Component {
     render() {
         return (
             <div>
-                <FloatingActionButton
-                    secondary={true}
-                    mini={true}
-                    onClick={this.openModal.bind(this)}>
-                    
-                    <FontIcon className='material-icons'>add</FontIcon>
-                </FloatingActionButton>
+                <FabAdd onClick={this.openModal.bind(this)} />
 
                 <Dialog
                     actions={this.actions()}

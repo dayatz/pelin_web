@@ -26,8 +26,8 @@ const GroupRoute = (
 
         <Route name="assignments" path="assignments" component={AssignmentContainer}>
             <IndexRoute component={Assignments} />
-            <Route name="assignment-detail" path=":assignmentId" component={AssignmentDetail} />
             <Route name="assignment-add" path="add" component={AssignmentAdd} />
+            <Route name="assignment-detail" path=":assignmentId" component={AssignmentDetail} />
         </Route>
     </Route>
 )
