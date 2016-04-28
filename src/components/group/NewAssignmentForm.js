@@ -13,6 +13,7 @@ class NewAssignmentForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            loading: false,
             files: [],
             date: null,
             time: null
@@ -42,6 +43,8 @@ class NewAssignmentForm extends React.Component {
         const time = this.state.time
 
         if (title && date && time) {
+            this.setState({ loading: true })
+
             date.setHours(time.getHours())
             date.setMinutes(time.getMinutes())
         
@@ -61,8 +64,13 @@ class NewAssignmentForm extends React.Component {
             AssignmentService(this.context.groupId)
                 .create(data)
                 .then(r => {
+                    this.setState({ loading: false })
                     this.context.store.dispatch(assignmentAddAction(this.context.groupId, r.data))
                     this.context.router.replace(`groups/${this.context.groupId}/assignments`)
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.setState({ loading: false })
                 })
         }
 
@@ -81,6 +89,7 @@ class NewAssignmentForm extends React.Component {
             <form onSubmit={this.handleSubmit.bind(this)}>
                 <div>
                     <TextField
+                        disabled={this.state.loading}
                         hintText='Judul tugas'
                         id='title' ref='title'
                         autoComplete='off' />
@@ -88,6 +97,7 @@ class NewAssignmentForm extends React.Component {
 
                 <div>
                     <TextField
+                        disabled={this.state.loading}
                         ref='description' id='description'
                         hintText='Deskripsi tugas'
                         multiLine={true} rows={3}
@@ -97,10 +107,12 @@ class NewAssignmentForm extends React.Component {
                 <div>
                     <p>Batas pengumpulan</p>
                     <CustomDatePicker
+                        disabled={this.state.loading}
                         value={this.state.date}
                         onChange={this._handleDateChange.bind(this)}
                         style={{float: 'left'}} />
                     <TimePicker
+                        disabled={this.state.loading}
                         value={this.state.time}
                         onChange={this._handleTimeChange.bind(this)}
                         format='24hr' hintText='Jam' />
@@ -108,6 +120,7 @@ class NewAssignmentForm extends React.Component {
 
                 <div>
                     <FlatButton
+                        disabled={this.state.loading}
                         onClick={this._openFileDialog.bind(this)}
                         label={btnlabel}
                         style={{cursor: 'pointer'}} />
@@ -117,8 +130,17 @@ class NewAssignmentForm extends React.Component {
                         style={{display: 'none'}} />
                 </div>
 
-                <RaisedButton label='Batal' />
-                <RaisedButton type='submit' primary={true} label='Buat' />
+                <RaisedButton
+                    label='Batal'
+                    disabled={this.state.loading}
+                    onClick={() => {
+                        this.context.router.replace(
+                            `/groups/${this.context.groupId}/assignments`
+                            )
+                    }} />
+                <RaisedButton
+                    type='submit' primary={true}
+                    label='Buat' disabled={this.state.loading} />
             </form>
         )
     }

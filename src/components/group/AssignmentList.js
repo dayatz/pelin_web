@@ -1,12 +1,12 @@
 import React from 'react'
-import Assignment from './Assignment'
+import AssignmentItem from './AssignmentItem'
 
 class AssignmentList extends React.Component {
     render() {
         var renderAssignment = this.props.assignments.map(a => {
             return (
                 <div key={a.id}>
-                    <Assignment assignment={a} />
+                    <AssignmentItem assignment={a} />
                 </div>
             )
         })
