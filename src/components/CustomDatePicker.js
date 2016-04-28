@@ -15,9 +15,6 @@ if (areIntlLocalesSupported('id')) {
 const CustomDatePicker = (props) => {
     var setMinDate = function() {
         return new Date()
-        // const today = new Date()
-        // today.setFullYear(today.getFullYear())
-        // return today
     }
     var formatDate = function(date) {
         const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu']

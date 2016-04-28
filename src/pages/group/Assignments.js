@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import AssignmentList from '../../components/group/AssignmentList'
+import FabAdd from '../../components/FabAdd'
 import { fetchAllAssignment } from '../../actions/assignment'
 
 class Assignments extends React.Component {
@@ -17,8 +18,21 @@ class Assignments extends React.Component {
         } else {
             var renderAssignmentList = <span>Loading...</span>
         }
+
+        var renderAddButton;
+        if (this.context.group.is_owner) {
+            renderAddButton = (
+                <FabAdd onClick={() => {
+                    this.context.router.replace(
+                        `/groups/${this.context.groupId}/assignments/add`
+                        )
+                }} />
+            )
+        }
+
         return (
             <div>
+                {renderAddButton}
                 {renderAssignmentList}
             </div>
         )
@@ -36,7 +50,9 @@ const mapDispatchToProps = dispatch => ({
 })
 
 Assignments.contextTypes = {
-    groupId: React.PropTypes.string
+    groupId: React.PropTypes.string,
+    group: React.PropTypes.object,
+    router: React.PropTypes.object
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Assignments);

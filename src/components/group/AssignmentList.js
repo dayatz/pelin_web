@@ -1,5 +1,4 @@
 import React from 'react'
-import FabAdd from '../../components/FabAdd'
 import Assignment from './Assignment'
 
 class AssignmentList extends React.Component {
@@ -12,20 +11,8 @@ class AssignmentList extends React.Component {
             )
         })
 
-        var renderAddButton;
-        if (this.context.group.is_owner) {
-            renderAddButton = (
-                <FabAdd onClick={() => {
-                    this.context.router.replace(
-                        `/groups/${this.context.groupId}/assignments/add`
-                        )
-                }} />
-            )
-        }
-
         return (
             <div>
-                <div>{renderAddButton}</div>
                 <div>{renderAssignment}</div>
             </div>
         )
@@ -33,9 +20,7 @@ class AssignmentList extends React.Component {
 }
 
 AssignmentList.contextTypes = {
-    group: React.PropTypes.object,
-    groupId: React.PropTypes.string,
-    router: React.PropTypes.object
+    groupId: React.PropTypes.string
 }
 
 export default AssignmentList

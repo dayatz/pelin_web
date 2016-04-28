@@ -1,10 +1,12 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import { assignmentAddAction } from '../../actions/assignment'
 import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
 import TimePicker from 'material-ui/lib/time-picker/time-picker'
 import FlatButton from 'material-ui/lib/flat-button'
 import CustomDatePicker from '../../components/CustomDatePicker'
+import AssignmentService from '../../api/assignment.js'
 
 
 class NewAssignmentForm extends React.Component {
@@ -21,6 +23,7 @@ class NewAssignmentForm extends React.Component {
         fileInput.click()
     }
     _handleFileChange(e) {
+        console.log(e.target.files)
         this.setState({ files: e.target.files })
     }
     _handleDateChange(event, date) {
@@ -37,10 +40,32 @@ class NewAssignmentForm extends React.Component {
 
         const date = this.state.date
         const time = this.state.time
-        date.setHours(time.getHours())
-        date.setMinutes(time.getMinutes())
 
-        data = new FormData()
+        if (title && date && time) {
+            date.setHours(time.getHours())
+            date.setMinutes(time.getMinutes())
+        
+            var data = new FormData()
+            data.append('title', title)
+            data.append('due_date', date.toISOString())
+
+            if (description) {
+                data.append('description', description)
+            }
+            if (this.state.files.length) {
+                for (var i = 0; i < this.state.files.length; i++) {
+                    data.append('files', this.state.files[i])
+                }
+            }
+
+            AssignmentService(this.context.groupId)
+                .create(data)
+                .then(r => {
+                    this.context.store.dispatch(assignmentAddAction(this.context.groupId, r.data))
+                    this.context.router.replace(`groups/${this.context.groupId}/assignments`)
+                })
+        }
+
     }
     
     render() {
@@ -55,11 +80,18 @@ class NewAssignmentForm extends React.Component {
         return (
             <form onSubmit={this.handleSubmit.bind(this)}>
                 <div>
-                <TextField hintText='Judul tugas' id='title' ref='title' />
+                    <TextField
+                        hintText='Judul tugas'
+                        id='title' ref='title'
+                        autoComplete='off' />
                 </div>
 
                 <div>
-                <TextField ref='description' id='description' hintText='Deskripsi tugas' multiLine={true} rows={3} />
+                    <TextField
+                        ref='description' id='description'
+                        hintText='Deskripsi tugas'
+                        multiLine={true} rows={3}
+                        autoComplete='off' />
                 </div>
 
                 <div>
@@ -90,6 +122,12 @@ class NewAssignmentForm extends React.Component {
             </form>
         )
     }
+}
+
+NewAssignmentForm.contextTypes = {
+    groupId: React.PropTypes.string,
+    store: React.PropTypes.object,
+    router: React.PropTypes.object
 }
 
 export default NewAssignmentForm

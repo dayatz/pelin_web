@@ -31,7 +31,7 @@ class InviteMemberForm extends React.Component {
                 <TextField
                     id='nim'
                     value={this.state.nim}
-                    placeholder='Masukkan nim'
+                    hintText='Masukkan nim'
                     autoComplete='off'
                     disabled={this.state.loading}
                     onChange={this.onChange.bind(this)} />
