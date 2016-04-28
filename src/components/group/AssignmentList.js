@@ -4,7 +4,7 @@ import Assignment from './Assignment'
 
 class AssignmentList extends React.Component {
     render() {
-        const renderAssignment = this.props.assignments.map(a => {
+        var renderAssignment = this.props.assignments.map(a => {
             return (
                 <div key={a.id}>
                     <Assignment assignment={a} />
@@ -15,7 +15,11 @@ class AssignmentList extends React.Component {
         var renderAddButton;
         if (this.context.group.is_owner) {
             renderAddButton = (
-                <FabAdd onClick={() => { console.log('add') }} />
+                <FabAdd onClick={() => {
+                    this.context.router.replace(
+                        `/groups/${this.context.groupId}/assignments/add`
+                        )
+                }} />
             )
         }
 
@@ -30,6 +34,7 @@ class AssignmentList extends React.Component {
 
 AssignmentList.contextTypes = {
     group: React.PropTypes.object,
+    groupId: React.PropTypes.string,
     router: React.PropTypes.object
 }
 
