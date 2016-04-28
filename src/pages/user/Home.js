@@ -1,8 +1,6 @@
 import React from 'react'
 import Paper from 'material-ui/lib/paper'
 import Dialog from 'material-ui/lib/dialog'
-import FloatingActionButton from 'material-ui/lib/floating-action-button'
-import FontIcon from 'material-ui/lib/font-icon'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import GroupList from '../../components/group/GroupList'

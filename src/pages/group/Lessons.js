@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import FloatingActionButton from 'material-ui/lib/floating-action-button'
-import FontIcon from 'material-ui/lib/font-icon'
+import FabAdd from '../../components/FabAdd'
 import LessonList from '../../components/group/LessonList'
 import { fetchLessons } from '../../actions/lesson'
 
@@ -12,13 +11,11 @@ class Lessons extends React.Component {
     renderAddButton() {
         if (this.context.group.is_owner) {
             return (
-                <FloatingActionButton mini={true} secondary={true} onClick={() => {
+                <FabAdd onClick={() => {
                     this.context.router.replace(
                         `/groups/${this.context.groupId}/lessons/add`
                     )
-                }}>
-                    <FontIcon className='material-icons'>add</FontIcon>
-                </FloatingActionButton>
+                }} />
             )
         }
         return;
