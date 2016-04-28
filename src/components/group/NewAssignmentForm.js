@@ -1,45 +1,88 @@
 import React from 'react'
+import ReactDOM from 'react-dom'
 import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
-import DatePicker from 'material-ui/lib/date-picker/date-picker'
+import TimePicker from 'material-ui/lib/time-picker/time-picker'
+import FlatButton from 'material-ui/lib/flat-button'
+import CustomDatePicker from '../../components/CustomDatePicker'
 
 
 class NewAssignmentForm extends React.Component {
-    setMinDate() {
-        const today = new Date()
-        today.setFullYear(today.getFullYear())
-        return today
+    constructor(props) {
+        super(props)
+        this.state = {
+            files: [],
+            date: null,
+            time: null
+        }
     }
-    formatDate(date) {
-        const days = ['Minggu','Senin','Selasa','Rabu','Kamis','Jumat','Sabtu'];
-        const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','Nopember','Desember'];
-
-        const day = days[date.getDay()]
-        const month = months[date.getMonth()]
-
-        return `${day}, ${date.getDate()} ${month} ${date.getFullYear()}`
+    _openFileDialog() {
+        var fileInput = ReactDOM.findDOMNode(this.refs.file)
+        fileInput.click()
     }
+    _handleFileChange(e) {
+        this.setState({ files: e.target.files })
+    }
+    _handleDateChange(event, date) {
+        this.setState({ date })
+    }
+    _handleTimeChange(err, time) {
+        this.setState({ time })
+    }
+
+    handleSubmit(e) {
+        e.preventDefault()
+        const title = this.refs.title.getValue()
+        const description = this.refs.description.getValue()
+
+        const date = this.state.date
+        const time = this.state.time
+        date.setHours(time.getHours())
+        date.setMinutes(time.getMinutes())
+
+        data = new FormData()
+    }
+    
     render() {
+        if (this.state.files.length == 1) {
+            var btnlabel = this.state.files[0].name
+        } else if (this.state.files.length > 1) {
+            var btnlabel = this.state.files.length + ' file'
+        } else {
+            var btnlabel = 'Pilih File'
+        }
+
         return (
-            <form>
+            <form onSubmit={this.handleSubmit.bind(this)}>
                 <div>
-                <TextField placeholder='Judul tugas' id='title' />
+                <TextField hintText='Judul tugas' id='title' ref='title' />
                 </div>
 
                 <div>
-                <TextField id='description' placeholder='Deskripsi tugas' multiLine={true} rows={3} />
+                <TextField ref='description' id='description' hintText='Deskripsi tugas' multiLine={true} rows={3} />
                 </div>
 
                 <div>
                     <p>Batas pengumpulan</p>
-                    <DatePicker
-                        hintText='Tanggal'
-                        mode='landscape'
-                        minDate={this.setMinDate()}
-                        onChange={(event, date) => {
-                            console.log(date)
-                        }}
-                        formatDate={this.formatDate} />
+                    <CustomDatePicker
+                        value={this.state.date}
+                        onChange={this._handleDateChange.bind(this)}
+                        style={{float: 'left'}} />
+                    <TimePicker
+                        value={this.state.time}
+                        onChange={this._handleTimeChange.bind(this)}
+                        format='24hr' hintText='Jam' />
+                </div>
+
+                <div>
+                    <FlatButton
+                        onClick={this._openFileDialog.bind(this)}
+                        label={btnlabel}
+                        style={{cursor: 'pointer'}} />
+                    <input
+                        onChange={this._handleFileChange.bind(this)}
+                        ref='file' type='file' multiple
+                        style={{display: 'none'}} />
                 </div>
 
                 <RaisedButton label='Batal' />
