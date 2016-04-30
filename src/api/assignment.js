@@ -8,11 +8,15 @@ const AssignmentService = groupId => {
         },
 
         fetch: function(assignmentId) {
-            return ajax().get(url + `/${assignmentId}`)
+            return ajax().get(`${url}/${assignmentId}`)
         },
 
         create: function(assignment) {
             return ajax().post(url, assignment);
+        },
+
+        submit: function(assignmentId, assignment) {
+            return ajax().post(`${url}/${assignmentId}/submit`, assignment)
         }
     }
 }

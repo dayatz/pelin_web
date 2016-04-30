@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import AssignmentList from '../../components/group/AssignmentList'
+import AssignmentList from '../../components/group/assignment/AssignmentList'
 import FabAdd from '../../components/FabAdd'
 import { fetchAllAssignment } from '../../actions/assignment'
 

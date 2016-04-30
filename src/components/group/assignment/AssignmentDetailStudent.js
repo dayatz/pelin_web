@@ -1,4 +1,5 @@
-import React from 'react';
+import React from 'react'
+import AssignmentSubmitForm from './AssignmentSubmitForm'
 
 class AssignmentDetailStudent extends React.Component {
     renderSubmitAssignmentForm() {
@@ -8,12 +9,21 @@ class AssignmentDetailStudent extends React.Component {
             )
         }
         return (
-        <span>render form submit here</span>
+            <AssignmentSubmitForm />
         )
+    }
+    isSubmitted() {
+        if (this.context.assignment.is_submitted) {
+            return <b>You have been submitted this assignment</b>
+        }
+        return
     }
     render() {
         return (
-        <div>{this.renderSubmitAssignmentForm()}</div>
+        <div>
+            {this.isSubmitted()}
+            {this.renderSubmitAssignmentForm()}
+        </div>
         )
     }
 }

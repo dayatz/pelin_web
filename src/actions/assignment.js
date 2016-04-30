@@ -5,10 +5,10 @@ export var fetchAssignmentAction = createAsyncAction("FETCH_ASSIGNMENT");
 
 export var fetchAllAssignment = groupId => {
     return (dispatch, getState) => {
-        // const assignments = getState().assignments.items[groupId];
-        // if (assignments && assignments.length) {
-        //     return Promise.resolve();
-        // }
+        const assignments = getState().assignments.items[groupId];
+        if (assignments && assignments.length) {
+            return Promise.resolve();
+        }
 
         dispatch({ type: fetchAssignmentAction.start });
 

@@ -1,9 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import AssignmentService from '../../api/assignment'
-import AssignmentInfo from '../../components/group/AssignmentInfo'
-import AssignmentDetailStudent from '../../components/group/AssignmentDetailStudent'
-import AssignmentDetailTeacher from '../../components/group/AssignmentDetailTeacher'
+import AssignmentInfo from '../../components/group/assignment/AssignmentInfo'
+import AssignmentDetailStudent from '../../components/group/assignment/AssignmentDetailStudent'
+import AssignmentDetailTeacher from '../../components/group/assignment/AssignmentDetailTeacher'
 
 
 class AssignmentDetail extends React.Component {
