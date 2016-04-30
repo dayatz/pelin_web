@@ -1,19 +1,16 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { assignmentAddAction } from '../../actions/assignment'
 import AssignmentService from '../../api/assignment'
+import AssignmentInfo from '../../components/group/AssignmentInfo'
+import AssignmentDetailStudent from '../../components/group/AssignmentDetailStudent'
+import AssignmentDetailTeacher from '../../components/group/AssignmentDetailTeacher'
+
 
 class AssignmentDetail extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
             assignmentId: this.props.params.assignmentId,
-            // assignment: (() => {
-            //     return this.props.assignments.items[this.props.params.groupId]
-            //         .filter(a => {
-            //             return a.id == this.props.params.assignmentId
-            //         })
-            // })()[0],
             assignment: null,
             loading: false
         }
@@ -21,20 +18,9 @@ class AssignmentDetail extends React.Component {
     getChildContext() {
         return {
             assignmentId: this.state.assignmentId,
-            // assignment: this.getAssignment()
+            assignment: this.state.assignment
         }
     }
-    /* TODO
-
-        <AssignmentInfo assignment=assignment />
-        <AssignmentDetailTeacher />
-            <SubmittedAssignmentList />
-                <SubmittedAssignmentItem submittedAssignment={submittedAssignment} />
-        ---- or -------
-        <AssignmentDetailStudent />
-            <SubmitAssignmentForm />
-
-    */
     componentDidMount() {
         this.getAssignment()
     }
@@ -58,7 +44,6 @@ class AssignmentDetail extends React.Component {
                 .fetch(this.state.assignmentId)
                 .then(r => {
                     console.log(r.data)
-                    // this.props.assignmentAdd(groupId, r.data)
                     this.setState({ loading: false, assignment: r.data })
                 })
                 .catch(error => {
@@ -67,23 +52,32 @@ class AssignmentDetail extends React.Component {
         }
     }
     render () {
-        var renderAssignment;
+        var renderAssignmentDetail;
         if (this.state.loading && this.state.assignment) {
-            renderAssignment = <span>Loading...</span>
+            renderAssignmentDetail = <span>Loading...</span>
         } else if (!this.state.loading && this.state.assignment) {
-            // AssignmentInfo
-            renderAssignment = (
-                <span>{this.state.assignment.title}</span>
+
+            var renderAssignmentUser;
+            if (this.context.group.is_owner) {
+                renderAssignmentUser = <AssignmentDetailTeacher />
+            } else {
+                renderAssignmentUser = <AssignmentDetailStudent />
+            }
+
+            renderAssignmentDetail = (
+                <div>
+                    <AssignmentInfo assignment={this.state.assignment} />
+                    {renderAssignmentUser}
+                </div>
             )
         } else {
-            renderAssignment = <span>Not found </span>
+            renderAssignmentDetail = <span>Not found </span>
         }
 
         return (
-        <div>
-            {renderAssignment}
-            {/*<AssignmentInfo assignment={this.getAssignment()} />*/}
-        </div>
+            <div>
+                {renderAssignmentDetail}
+            </div>
         )
     }
 }
@@ -94,17 +88,12 @@ AssignmentDetail.contextTypes = {
 }
 
 AssignmentDetail.childContextTypes = {
-    assignmentId: React.PropTypes.string
+    assignmentId: React.PropTypes.string,
+    assignment: React.PropTypes.object
 }
 
 const stateToProps = state => ({
     assignments: state.assignments
 })
 
-const dispatchToProps = dispatch => ({
-    assignmentAdd: (groupId, item) => {
-        dispatch(assignmentAddAction(groupId, item))
-    }
-})
-
-export default connect(stateToProps, dispatchToProps)(AssignmentDetail)
+export default connect(stateToProps, null)(AssignmentDetail)
