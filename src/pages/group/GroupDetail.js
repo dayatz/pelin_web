@@ -11,7 +11,7 @@ class Group extends React.Component {
         super(props);
 
         this.state = {
-            groupId: null
+            groupId: this.props.params.groupId
         }
     }
 
@@ -20,11 +20,6 @@ class Group extends React.Component {
             groupId: this.props.params.groupId,
             group: this.props.groups.items[this.state.groupId]
         }
-    }
-
-    componentWillMount() {
-        const groupId = this.props.params.groupId;
-        this.setState({ groupId });
     }
 
     componentDidMount() {
