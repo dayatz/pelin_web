@@ -17,6 +17,10 @@ const AssignmentService = groupId => {
 
         submit: function(assignmentId, assignment) {
             return ajax().post(`${url}/${assignmentId}/submit`, assignment)
+        },
+
+        fetchSubmitted: function(assignmentId) {
+            return ajax().get(`${url}/${assignmentId}/submitted`)
         }
     }
 }

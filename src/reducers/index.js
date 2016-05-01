@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import { routerReducer } from 'react-router-redux'
 import auth from './auth'
 import groups, { myGroups } from './group'
-import assignments from './assignment'
+import assignments, { submits } from './assignment'
 import members, { pendings } from './member'
 import lessons from './lesson'
 import posts, { comments } from './post'
@@ -25,7 +25,7 @@ const reducers = combineReducers({
     posts,
     comments,
     lessons,
-    assignments,
+    assignments, submits,
     members, pendings,
     routing: routerReducer
 })

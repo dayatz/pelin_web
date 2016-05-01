@@ -1,4 +1,4 @@
-import { fetchAssignmentAction } from '../actions/assignment.js'
+import { fetchAssignmentAction, fetchSubmittedAction } from '../actions/assignment.js'
 
 const initialState = {
     isLoading: false,
@@ -7,7 +7,7 @@ const initialState = {
     items: {}
 }
 
-export const assignments = (state = initialState, action) => {
+const assignments = (state = initialState, action) => {
     switch (action.type) {
         case fetchAssignmentAction.start:
             return {...state, isLoading: true}
@@ -42,3 +42,32 @@ export var getAssignmentsGroup = (items, groupId) => {
 }
 
 export default assignments
+
+export const submits = (state = {
+    isLoading: false,
+    isError: false,
+    error: null,
+    items: {}
+}, action) => {
+    switch (action.type) {
+        case fetchSubmittedAction.start:
+            return {...state, isLoading: true}
+        case fetchSubmittedAction.success:
+            const { items } = state;
+            items[action.assignmentId] = action.items;
+            return {...state,
+                isLoading: false,
+                isError: false,
+                error: null,
+                items
+            }
+        case fetchSubmittedAction.fail:
+            return {...state,
+                isLoading: false,
+                isError: true,
+                error: action.error
+            }
+        default:
+            return state
+    }
+}

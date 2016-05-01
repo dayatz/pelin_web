@@ -22,12 +22,16 @@ class Home extends React.Component {
         return;
     }
     render() {
-        if (!this.props.myGroups.ids.length) {
+        if (this.props.myGroups.isLoading) {
             // TODO: render loading message
             var renderGroupList = 'Loading...'
         } else {
-            const myGroups = getMyGroups(this.context.store.getState())
-            var renderGroupList = <GroupList groups={myGroups} />
+            if (this.props.myGroups.ids.length) {
+                const myGroups = getMyGroups(this.context.store.getState())
+                var renderGroupList = <GroupList groups={myGroups} />
+            } else {
+                var renderGroupList = 'belum ada group'
+            }
         }
         return (
             <div>

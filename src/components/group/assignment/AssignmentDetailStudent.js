@@ -14,6 +14,7 @@ class AssignmentDetailStudent extends React.Component {
     }
     isSubmitted() {
         if (this.context.assignment.is_submitted) {
+            // TODO: load from reducer submits
             return <b>You have been submitted this assignment</b>
         }
         return
