@@ -10,9 +10,6 @@ const MemberService = groupId => {
         invite: function(nim) {
             return ajax().get(url + `/invite?nim=${nim}`)
         },
-        leave: function() {
-            return ajax().get(url + '/leave')
-        },
         kick: function(nim) {
             return ajax().get(url + `/kick?nim=${nim}`)
         },

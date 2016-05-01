@@ -5,30 +5,19 @@ import { fetchAllGroup } from '../../actions/group'
 import { connect } from 'react-redux'
 
 class Groups extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         groups: null,
-    //         isError: false,
-    //         error: null
-    //     }
-    // }
-
     componentDidMount() {
-        // GroupService.fetchAll()
-        //     .then(r => {
-        //         this.setState({groups: r.data});
-        //     })
         this.props.fetchAllGroup();
     }
 
     render() {
         // TODO: render error messages
-        if (!this.props.groups.items) {
+        const groups = this.props.groups.items
+        console.log(groups)
+        if (!groups) {
             // TODO: render loading message
             var renderGroupList = 'Loading...'
         } else {
-            var renderGroupList = <GroupList groups={this.props.groups.items} />
+            var renderGroupList = <GroupList groups={groups} />
         }
 
         return (

@@ -4,6 +4,7 @@ import Paper from 'material-ui/lib/paper'
 import GroupTabs from '../../components/group/GroupTabs'
 import { fetchSingleGroup } from '../../actions/group'
 import { Link } from 'react-router'
+import GroupService from '../../api/group'
 import RaisedButton from 'material-ui/lib/raised-button'
 
 class Group extends React.Component {
@@ -28,13 +29,22 @@ class Group extends React.Component {
         }
     }
 
+    leave() {
+        if (confirm('Apakah anda yakin ingin keluar dari grup ?')) {
+            GroupService.leave(this.state.groupId)
+                .then(r => {
+                    this.context.router.replace('/')
+                })
+        }
+    }
+
     render() {
         const group = this.props.groups.items[this.state.groupId];
         if (group) {
             var buttonStatus;
             if (!group.is_owner) {
                 if (group.is_joined) {
-                    var buttonStatus = <RaisedButton label='Leave' />
+                    var buttonStatus = <RaisedButton onClick={this.leave.bind(this)} label='Leave' />
                 } else {
                     var buttonStatus = <RaisedButton label='Join' />
                 }

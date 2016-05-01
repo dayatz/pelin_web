@@ -17,14 +17,18 @@ class AssignmentDetailTeacher extends React.Component {
             var renderList = <span>Loading...</span>
         } else {
             if (submits && submits.length) {
-                var renderList = <SubmittedAssignmentList submits={submits} />
+                var renderList = (
+                    <div>
+                    <p>Mahasiswa yang mengumpulkan tugas</p>
+                    <SubmittedAssignmentList submits={submits} />
+                    </div>
+                )
             } else {
                 var renderList = <span>belum ada yang mengumpulkan</span>
             }
         }
         return (
             <div>
-                <p>Mahasiswa yang mengumpulkan tugas</p>
                 {renderList}
             </div>
         )
