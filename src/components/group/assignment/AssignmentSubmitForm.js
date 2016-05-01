@@ -32,7 +32,7 @@ class AssignmentSubmitForm extends React.Component {
                     this.context.store.dispatch(
                         submitAddAction(this.context.assignmentId, r.data)
                         )
-                    // this.goBack()
+                    this.goBack()
                     this.context.showSnackbar('Berhasil mengumpulkan tugas')
                 })
                 .catch(error => {

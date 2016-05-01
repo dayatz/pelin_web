@@ -7,11 +7,6 @@ import SubmittedAssignmentList from './SubmittedAssignmentList'
 
 class AssignmentDetailTeacher extends React.Component {
     componentDidMount() {
-        // AssignmentService(this.context.groupId)
-        //     .fetchSubmitted(this.context.assignmentId)
-        //     .then(r => {
-        //         console.log(r)
-        //     })
         this.props.fetchSubmitted(
             this.context.groupId,
             this.context.assignmentId)

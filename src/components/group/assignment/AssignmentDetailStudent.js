@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import { submitAddAction } from '../../../actions/assignment'
+import AssignmentService from '../../../api/assignment'
 import AssignmentSubmitForm from './AssignmentSubmitForm'
 
 class AssignmentDetailStudent extends React.Component {
@@ -18,12 +20,19 @@ class AssignmentDetailStudent extends React.Component {
             const submitted = this.props.submits.items[this.context.assignmentId]
             var renderSubmitted
             if (submitted) {
-                const filename = submitted.file.split('/')[submitted.file.split('/').length - 1]
+                var filename = submitted.file.split('/')
+                filename = filename[filename.length - 1]
                 renderSubmitted = (
                     <div>
                         <p>{submitted.text} <a href={submitted.file}>{filename}</a></p>
                     </div>
                 )
+            } else {
+                AssignmentService(this.context.groupId)
+                    .fetchSubmitted(this.context.assignmentId)
+                    .then(r => {
+                        this.props.submitAdd(this.context.assignmentId, r.data)
+                    })
             }
             return (
                 <div>
@@ -45,6 +54,7 @@ class AssignmentDetailStudent extends React.Component {
 }
 
 AssignmentDetailStudent.contextTypes = {
+    groupId: React.PropTypes.string,
     assignmentId: React.PropTypes.string,
     assignment: React.PropTypes.object
 }
@@ -53,4 +63,10 @@ const stateToProps = state => ({
     submits: state.submits
 })
 
-export default connect(stateToProps, null)(AssignmentDetailStudent)
+const dispatchToProps = dispatch => ({
+    submitAdd: (assignmentId, item) => {
+        dispatch(submitAddAction(assignmentId, item))
+    }
+})
+
+export default connect(stateToProps, dispatchToProps)(AssignmentDetailStudent)
