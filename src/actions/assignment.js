@@ -63,3 +63,11 @@ export var fetchSubmitted = (groupId, assignmentId) => {
             })
     }
 }
+
+export var submitAddAction = (assignmentId, items) => {
+    return {
+        type: fetchSubmittedAction.success,
+        assignmentId,
+        items
+    }
+}

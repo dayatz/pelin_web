@@ -13,6 +13,9 @@ const AssignmentItem = (props, context) => {
     if (assignment.is_passed) {
         style = { backgroundColor: '#eee' }
     }
+    if (assignment.is_submitted) {
+        style = { backgroundColor: '#aaa' }
+    }
     return (
         <div style={style}>
             <Link to={`/groups/${groupId}/assignments/${assignment.id}`}>

@@ -1,4 +1,5 @@
 import React from 'react'
+import { connect } from 'react-redux'
 import AssignmentSubmitForm from './AssignmentSubmitForm'
 
 class AssignmentDetailStudent extends React.Component {
@@ -14,8 +15,22 @@ class AssignmentDetailStudent extends React.Component {
     }
     isSubmitted() {
         if (this.context.assignment.is_submitted) {
-            // TODO: load from reducer submits
-            return <b>You have been submitted this assignment</b>
+            const submitted = this.props.submits.items[this.context.assignmentId]
+            var renderSubmitted
+            if (submitted) {
+                const filename = submitted.file.split('/')[submitted.file.split('/').length - 1]
+                renderSubmitted = (
+                    <div>
+                        <p>{submitted.text} <a href={submitted.file}>{filename}</a></p>
+                    </div>
+                )
+            }
+            return (
+                <div>
+                    <b>Anda telah mengumpulkan tugas ini</b>
+                    {renderSubmitted}
+                </div>
+            )
         }
         return
     }
@@ -30,7 +45,12 @@ class AssignmentDetailStudent extends React.Component {
 }
 
 AssignmentDetailStudent.contextTypes = {
+    assignmentId: React.PropTypes.string,
     assignment: React.PropTypes.object
 }
 
-export default AssignmentDetailStudent
+const stateToProps = state => ({
+    submits: state.submits
+})
+
+export default connect(stateToProps, null)(AssignmentDetailStudent)

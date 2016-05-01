@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import AssignmentService from '../../../api/assignment'
+import { submitAddAction } from '../../../actions/assignment'
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
 import RaisedButton from 'material-ui/lib/raised-button'
@@ -28,12 +29,19 @@ class AssignmentSubmitForm extends React.Component {
             AssignmentService(this.context.groupId)
                 .submit(this.context.assignmentId, data)
                 .then(r => {
-                    console.log(r)
+                    this.context.store.dispatch(
+                        submitAddAction(this.context.assignmentId, r.data)
+                        )
+                    // this.goBack()
+                    this.context.showSnackbar('Berhasil mengumpulkan tugas')
                 })
                 .catch(error => {
                     console.log(error)
                 })
         }
+    }
+    goBack() {
+        this.context.router.replace(`/groups/${this.context.groupId}/assignments`)
     }
     _openFileDialog() {
         var fileInput = ReactDOM.findDOMNode(this.refs.file)
@@ -68,7 +76,7 @@ class AssignmentSubmitForm extends React.Component {
                 </div>
 
                 <div>
-                    <RaisedButton label='Batal' />
+                    <RaisedButton onClick={this.goBack.bind(this)} label='Batal' />
                     <RaisedButton type='submit' primary={true} label='Kumpulkan' />
                 </div>
             </form>
@@ -79,7 +87,9 @@ class AssignmentSubmitForm extends React.Component {
 AssignmentSubmitForm.contextTypes = {
     assignmentId: React.PropTypes.string,
     groupId: React.PropTypes.string,
-    router: React.PropTypes.object
+    router: React.PropTypes.object,
+    showSnackbar: React.PropTypes.func,
+    store: React.PropTypes.object
 }
 
 export default AssignmentSubmitForm
