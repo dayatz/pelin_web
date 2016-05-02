@@ -44,6 +44,12 @@ class Group extends React.Component {
                 console.log(r)
             })
     }
+    cancel() {
+        GroupService.cancel(this.state.groupId)
+            .then(r => {
+                console.log(r)
+            })
+    }
 
     render() {
         const group = this.props.groups.items[this.state.groupId];
@@ -53,7 +59,7 @@ class Group extends React.Component {
                 if (group.is_joined) {
                     var buttonStatus = <RaisedButton onClick={this.leave.bind(this)} label='Leave' />
                 } else if (group.is_pending) {
-                    var buttonStatus = <RaisedButton label='Batal' />
+                    var buttonStatus = <RaisedButton label='Batal' onClick={this.cancel.bind(this)} />
                 } else {
                     var buttonStatus = <RaisedButton onClick={this.join.bind(this)} label='Join' />
                 }

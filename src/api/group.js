@@ -23,6 +23,9 @@ const GroupService = {
     join: function(groupId) {
         return ajax().get(`groups/${groupId}/join`)
     },
+    cancel: function(groupId) {
+        return ajax().get(`groups/${groupId}/cancel`)
+    }
 }
 
 export default GroupService
