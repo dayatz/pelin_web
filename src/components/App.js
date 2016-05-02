@@ -115,6 +115,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     logout: router => {
+        dispatch({ type: 'RESET'})
         dispatch(logout(router))
     }
 });

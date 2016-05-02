@@ -30,7 +30,14 @@ const reducers = combineReducers({
     routing: routerReducer
 })
 
-export const store = createStore(reducers,
+const appReducers = (state, action) => {
+    if (action.type == 'RESET') {
+        state = undefined
+    }
+    return reducers(state, action)
+}
+
+export const store = createStore(appReducers,
     compose(
         window.devToolsExtension ? window.devToolsExtension() : f => f
     ),
