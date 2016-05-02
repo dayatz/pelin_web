@@ -29,9 +29,14 @@ const assignments = (state = initialState, action) => {
         case 'ASSIGNMENT_ADD':
             const { items: assignmentAdd } = state;
             assignmentAdd[action.groupId] = [ action.item, ...assignmentAdd[action.groupId] ]
-            return {
-                ...state, items: assignmentAdd
-            }
+            return { ...state, items: assignmentAdd }
+        case 'ASSIGNMENT_DELETE':
+            const { items: deleteItem } = state
+            deleteItem[action.groupId] = deleteItem[action.groupId]
+                .filter(i => {
+                    return i.id != action.id
+                })
+            return { ...state, items: deleteItem }
         default:
             return state
     }
