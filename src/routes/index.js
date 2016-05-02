@@ -6,7 +6,6 @@ import { syncHistoryWithStore } from 'react-router-redux'
 import App from '../components/App'
 import Home from '../pages/user/Home'
 import Groups from '../pages/group/Groups'
-// import Group from '../pages/group/Group'
 
 import MyProfile from '../pages/user/MyProfile'
 import UserDetail from '../pages/user/UserDetail'
