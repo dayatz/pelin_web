@@ -76,6 +76,11 @@ export var submitAddAction = (assignmentId, items) => {
 export var fetchMyAssignmentAction = createAsyncAction("FETCH_MY_ASSIGNMENT")
 export var fetchMyAssignment = () => {
     return (dispatch, getState) => {
+        const assignments = getState().myAssignments.items
+        if (assignments && assignments.length) {
+            return Promise.resolve()
+        }
+
         dispatch({ type: fetchMyAssignmentAction.start })
 
         return ajax().get('my_assignments')
