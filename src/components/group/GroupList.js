@@ -13,14 +13,6 @@ const GroupList = (props) => {
         )
     }
 
-    // const renderGroup = groups(group => {
-    //     return (
-    //         <div style={{marginBottom: 30}} className="col-md-6" key={group.id}>
-    //             <Group group={group} />
-    //         </div>
-    //     )
-    // })
-
     return (
         <div>{renderGroup}</div>
     )

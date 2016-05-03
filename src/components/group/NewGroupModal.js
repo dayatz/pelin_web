@@ -46,10 +46,15 @@ class NewGroupModal extends React.Component {
 
     submit() {
         // const title = this.state.title;
-        const title = this.refs.title.getValue();
+        const title = this.refs.title.getValue()
+        const description = this.refs.description.getValue()
         if (title) {
             this.setState({ loading: true });
-            GroupService.create({ title })
+            const data = { title:title }
+            if (description) {
+                const data = { title: title, description: description }
+            }
+            GroupService.create(data)
                 .then(r => {
                     const group = r.data;
                     this.context.store
@@ -74,10 +79,19 @@ class NewGroupModal extends React.Component {
                     open={this.state.openModal}
                     >
                         <TextField id='new-group'
+                            hintText='Nama grup'
                             autoComplete='off'
                             disabled={this.state.loading}
                             autoFocus={this.state.openModal}
                             ref='title' />
+                            <br />
+                        <TextField id='description'
+                            hintText='Deskripsi grup'
+                            autoComplete='off'
+                            disabled={this.state.loading}
+                            ref='description'
+                            multiLine={true}
+                            rows={2} />
                 </Dialog>
             </div>
         )

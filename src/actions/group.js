@@ -110,3 +110,10 @@ export var addMyGroupAction = (id) => {
         id
     }
 }
+
+export var myGroupLeaveAction = (id) => {
+    return {
+        type: 'MYGROUP_LEAVE',
+        id
+    }
+}

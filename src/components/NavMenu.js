@@ -4,13 +4,21 @@ import MenuItem from 'material-ui/lib/menus/menu-item'
 import { Link } from 'react-router'
 
 const NavMenu = (props) => {
-    var renderCariGroup;
+    var renderCariGroup
+    var renderAssignments
     if (!props.user.is_teacher) {
         renderCariGroup = (
             <MenuItem onTouchTap={() => {
                 props.router.push('/groups');
             }}>
                 Cari Grup
+            </MenuItem>
+        )
+        renderAssignments = (
+            <MenuItem onTouchTap={() => {
+                props.router.push('/assignments');
+            }}>
+                Tugas Saya
             </MenuItem>
         )
     }
@@ -27,6 +35,7 @@ const NavMenu = (props) => {
                 Home
             </MenuItem>
             {renderCariGroup}
+            {renderAssignments}
             <MenuItem onTouchTap={() => {
                 if(confirm('Apakah anda ingin logout?')) {
                     props.logout(props.router)

@@ -13,9 +13,15 @@ class NewAssignmentForm extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            loading: false,
             files: [],
             date: null,
-            time: null
+            time: null,
+
+            defaultTitle: null,
+            defaultDescription: null,
+
+            editing: false
         }
     }
     _openFileDialog() {
@@ -33,6 +39,20 @@ class NewAssignmentForm extends React.Component {
         this.setState({ time })
     }
 
+    componentWillMount() {
+        const assignment = this.props.assignment
+        if (assignment) {
+            const due_date = new Date(assignment.due_date)
+            this.setState({
+                editing: true,
+                defaultTitle: assignment.title,
+                defaultDescription: assignment.description,
+                date: due_date,
+                time: due_date
+            })
+        }
+    }
+
     handleSubmit(e) {
         e.preventDefault()
         const title = this.refs.title.getValue()
@@ -42,6 +62,8 @@ class NewAssignmentForm extends React.Component {
         const time = this.state.time
 
         if (title && date && time) {
+            this.setState({ loading: true })
+
             date.setHours(time.getHours())
             date.setMinutes(time.getMinutes())
         
@@ -58,14 +80,34 @@ class NewAssignmentForm extends React.Component {
                 }
             }
 
-            AssignmentService(this.context.groupId)
+            const handleSubmitSuccess = (r) => {
+                this.setState({ loading: false })
+                this.context.store.dispatch(assignmentAddAction(this.context.groupId, r.data))
+                this.context.router.replace(`groups/${this.context.groupId}/assignments`)
+            }
+
+            if (this.state.editing) {
+                AssignmentService(this.context.groupId)
+                .update(this.context.assignmentId, data)
+                .then(r => {
+                    handleSubmitSuccess(r)
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.setState({ loading: false })
+                })
+            } else {
+                AssignmentService(this.context.groupId)
                 .create(data)
                 .then(r => {
-                    this.context.store.dispatch(assignmentAddAction(this.context.groupId, r.data))
-                    this.context.router.replace(`groups/${this.context.groupId}/assignments`)
+                    handleSubmitSuccess(r)
                 })
+                .catch(error => {
+                    console.log(error)
+                    this.setState({ loading: false })
+                })
+            }
         }
-
     }
     
     render() {
@@ -77,30 +119,41 @@ class NewAssignmentForm extends React.Component {
             var btnlabel = 'Pilih File'
         }
 
+        if (this.state.editing) {
+            var btnSave = 'Simpan'
+        } else {
+            var btnSave = 'Buat'
+        }
+
         return (
             <form onSubmit={this.handleSubmit.bind(this)}>
                 <div>
                     <TextField
-                        hintText='Judul tugas'
-                        id='title' ref='title'
-                        autoComplete='off' />
+                        disabled={this.state.loading}
+                        hintText='Judul tugas' id='title' ref='title'
+                        autoComplete='off'
+                        defaultValue={this.state.defaultTitle}
+                        autoFocus={true} />
                 </div>
 
                 <div>
                     <TextField
-                        ref='description' id='description'
-                        hintText='Deskripsi tugas'
+                        disabled={this.state.loading}
+                        hintText='Deskripsi tugas' id='description' ref='description'
                         multiLine={true} rows={3}
+                        defaultValue={this.state.defaultDescription}
                         autoComplete='off' />
                 </div>
 
                 <div>
                     <p>Batas pengumpulan</p>
                     <CustomDatePicker
+                        disabled={this.state.loading}
                         value={this.state.date}
                         onChange={this._handleDateChange.bind(this)}
                         style={{float: 'left'}} />
                     <TimePicker
+                        disabled={this.state.loading}
                         value={this.state.time}
                         onChange={this._handleTimeChange.bind(this)}
                         format='24hr' hintText='Jam' />
@@ -108,6 +161,7 @@ class NewAssignmentForm extends React.Component {
 
                 <div>
                     <FlatButton
+                        disabled={this.state.loading}
                         onClick={this._openFileDialog.bind(this)}
                         label={btnlabel}
                         style={{cursor: 'pointer'}} />
@@ -117,8 +171,17 @@ class NewAssignmentForm extends React.Component {
                         style={{display: 'none'}} />
                 </div>
 
-                <RaisedButton label='Batal' />
-                <RaisedButton type='submit' primary={true} label='Buat' />
+                <RaisedButton
+                    label='Batal'
+                    disabled={this.state.loading}
+                    onClick={() => {
+                        this.context.router.replace(
+                            `/groups/${this.context.groupId}/assignments`
+                            )
+                    }} />
+                <RaisedButton
+                    type='submit' primary={true}
+                    label={btnSave} disabled={this.state.loading} />
             </form>
         )
     }
@@ -126,6 +189,7 @@ class NewAssignmentForm extends React.Component {
 
 NewAssignmentForm.contextTypes = {
     groupId: React.PropTypes.string,
+    assignmentId: React.PropTypes.string,
     store: React.PropTypes.object,
     router: React.PropTypes.object
 }

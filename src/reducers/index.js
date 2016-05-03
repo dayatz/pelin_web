@@ -4,7 +4,7 @@ import thunk from 'redux-thunk'
 import { routerReducer } from 'react-router-redux'
 import auth from './auth'
 import groups, { myGroups } from './group'
-import assignments from './assignment'
+import assignments, { myAssignments, submits } from './assignment'
 import members, { pendings } from './member'
 import lessons from './lesson'
 import posts, { comments } from './post'
@@ -25,12 +25,19 @@ const reducers = combineReducers({
     posts,
     comments,
     lessons,
-    assignments,
+    assignments, myAssignments, submits,
     members, pendings,
     routing: routerReducer
 })
 
-export const store = createStore(reducers,
+const appReducers = (state, action) => {
+    if (action.type == 'RESET') {
+        state = undefined
+    }
+    return reducers(state, action)
+}
+
+export const store = createStore(appReducers,
     compose(
         window.devToolsExtension ? window.devToolsExtension() : f => f
     ),

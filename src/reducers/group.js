@@ -66,6 +66,12 @@ export const myGroups = (state = {
             const { ids } = state;
             ids.unshift(action.id);
             return {  ...state, ids }
+        case 'MYGROUP_LEAVE':
+            const { ids: leave } = state
+            const newIds = leave.filter(id => {
+                return id != action.id
+            })
+            return { ...state, ids: newIds }
         default:
             return state
     }
