@@ -1,13 +1,11 @@
 import { fetchGroupAction, fetchMyGroupAction, fetchSingleGroupAction } from '../actions/group'
 
-const initialState = {
-    isLoading: false,
-    isError: false,
-    error: null,
-    items: {}
-}
-
-const groups = (state = initialState, action) => {
+const groups = (state = {
+        isLoading: false,
+        isError: false,
+        error: null,
+        items: {}
+    }, action) => {
     switch (action.type) {
         case fetchGroupAction.start:
         case fetchSingleGroupAction.start:

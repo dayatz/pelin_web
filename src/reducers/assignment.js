@@ -1,13 +1,11 @@
 import { fetchAssignmentAction, fetchSubmittedAction, fetchMyAssignmentAction } from '../actions/assignment.js'
 
-const initialState = {
+const assignments = (state = {
     isLoading: false,
     isError: false,
     error: null,
     items: {}
-}
-
-const assignments = (state = initialState, action) => {
+}, action) => {
     switch (action.type) {
         case fetchAssignmentAction.start:
             return {...state, isLoading: true}

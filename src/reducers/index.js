@@ -9,14 +9,6 @@ import members, { pendings } from './member'
 import lessons from './lesson'
 import posts, { comments } from './post'
 
-export const initialState = () => {
-    return {
-        isLoading: false,
-        isError: false,
-        error: null,
-        items: {}
-    }
-}
 
 const reducers = combineReducers({
     auth,
@@ -31,8 +23,9 @@ const reducers = combineReducers({
 })
 
 const appReducers = (state, action) => {
-    if (action.type == 'RESET') {
+    if (action.type == 'USER_LOGOUT') {
         state = undefined
+        console.log(state)
     }
     return reducers(state, action)
 }
