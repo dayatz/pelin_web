@@ -37,6 +37,11 @@ const groups = (state = {
             newGroup[action.item.id] = action.item;
             return { ...state, items: newGroup}
 
+        case 'GROUP_REMOVE':
+            const { items: groupRemove } = state
+            delete groupRemove[action.id]
+            return { ...state, items:groupRemove }
+
         default:
             return state
     }

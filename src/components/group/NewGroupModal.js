@@ -6,6 +6,8 @@ import Dialog from 'material-ui/lib/dialog'
 import RaisedButton from 'material-ui/lib/raised-button'
 import FlatButton from 'material-ui/lib/flat-button'
 import TextField from 'material-ui/lib/text-field'
+import DropDownMenu from 'material-ui/lib/DropDownMenu'
+import MenuItem from 'material-ui/lib/menus/menu-item'
 
 class NewGroupModal extends React.Component {
     constructor(props) {
@@ -13,7 +15,7 @@ class NewGroupModal extends React.Component {
         this.state = {
             loading: false,
             openModal: false,
-            title: ''
+            major: 'S1 TI'
         }
     }
     openModal() {
@@ -22,8 +24,7 @@ class NewGroupModal extends React.Component {
     closeModal() {
         this.setState({
             loading: false,
-            openModal: false,
-            title: ''
+            openModal: false
         })
     }
     onChange(e) {
@@ -45,14 +46,16 @@ class NewGroupModal extends React.Component {
     }
 
     submit() {
-        // const title = this.state.title;
         const title = this.refs.title.getValue()
         const description = this.refs.description.getValue()
-        if (title) {
+        const semester = this.refs.semester.getValue()
+        const major = this.state.major
+
+        if (title && semester && major) {
             this.setState({ loading: true });
-            const data = { title:title }
+            var data = { title, semester, major }
             if (description) {
-                const data = { title: title, description: description }
+                data['description'] = description
             }
             GroupService.create(data)
                 .then(r => {
@@ -61,10 +64,14 @@ class NewGroupModal extends React.Component {
                         .dispatch(addGroupAction(group));
                     this.context.store
                         .dispatch(addMyGroupAction(group.id));
-                    this.context.router.push(`/groups/${group.id}`);
                     this.closeModal();
+                    this.context.router.push(`/groups/${group.id}`);
                 })
         }
+    }
+
+    _handleDropDown(event, index, value) {
+        this.setState({ major: value })
     }
 
     render() {
@@ -84,7 +91,6 @@ class NewGroupModal extends React.Component {
                             disabled={this.state.loading}
                             autoFocus={this.state.openModal}
                             ref='title' />
-                            <br />
                         <TextField id='description'
                             hintText='Deskripsi grup'
                             autoComplete='off'
@@ -92,6 +98,16 @@ class NewGroupModal extends React.Component {
                             ref='description'
                             multiLine={true}
                             rows={2} />
+                        <br />
+                        <DropDownMenu value={this.state.major} onChange={this._handleDropDown.bind(this)}>
+                            <MenuItem value='S1 TI' primaryText='S1 TI' />
+                            <MenuItem value='D3 TI' primaryText='D3 TI' />
+                            <MenuItem value='D3 MI' primaryText='D3 MI' />
+                        </DropDownMenu>
+                        <TextField id='semester'
+                            ref='semester'
+                            hintText='Semester' />
+
                 </Dialog>
             </div>
         )
