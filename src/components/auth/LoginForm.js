@@ -5,7 +5,8 @@ import CircularProgress from 'material-ui/lib/circular-progress'
 import Paper from 'material-ui/lib/paper'
 
 class LoginForm extends React.Component {
-    handleClick() {
+    onSubmit(e) {
+        e.preventDefault()
         const username = this.refs.username.getValue();
         const password = this.refs.password.getValue();
         this.props.handleClick(username, password);
@@ -29,8 +30,10 @@ class LoginForm extends React.Component {
 
         if (!this.props.auth.isLoading) {
             var loginBtn = (
-                <RaisedButton label="Login"
-                    primary={true} onClick={this.handleClick.bind(this)} />
+                <RaisedButton
+                    type='submit'
+                    label="Login"
+                    primary={true} />
             )
         } else {
             var loginBtn = (
@@ -51,6 +54,7 @@ class LoginForm extends React.Component {
         return (
             <Paper style={paperStyle} zDepth={3}>
                 <div style={{position: 'relative', height: '100%'}}>
+                    <form onSubmit={this.onSubmit.bind(this)}>
                     <div>
                         <TextField
                             ref="username"
@@ -70,7 +74,7 @@ class LoginForm extends React.Component {
                         {loginBtn}
                         <a href="#" style={{float: 'right', fontSize: 13, textDecoration: 'none'}}>Register</a>
                     </div>
-
+                    </form>
                 </div>
             </Paper>
         )
