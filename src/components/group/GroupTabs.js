@@ -61,7 +61,7 @@ class GroupTabs extends React.Component {
 
             <Tab
                 value={2}
-                icon={<FontIcon className="material-icons">event_note</FontIcon>}
+                icon={<FontIcon className="material-icons">assignment</FontIcon>}
                 label="Tugas"
                 route='assignments'
                 onActive={this.handleActive} />
