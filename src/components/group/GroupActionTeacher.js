@@ -5,7 +5,7 @@ import IconButton from 'material-ui/lib/icon-button'
 import FontIcon from 'material-ui/lib/font-icon'
 import Divider from 'material-ui/lib/divider'
 import GroupService from '../../api/group'
-import { groupRemoveAction } from '../../actions/group'
+import { myGroupLeaveAction, groupRemoveAction } from '../../actions/group'
 
 class GroupActionTeacher extends React.Component {
     delete() {
@@ -14,6 +14,8 @@ class GroupActionTeacher extends React.Component {
                 GroupService
                 .delete(this.context.groupId)
                 .then(r => {
+                    this.context.store.dispatch(
+                        myGroupLeaveAction(this.context.groupId))
                     this.context.store.dispatch(
                         groupRemoveAction(this.context.groupId))
                     this.context.router.replace('/')
