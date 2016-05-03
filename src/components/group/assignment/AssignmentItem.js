@@ -20,9 +20,14 @@ const AssignmentItem = (props, context) => {
 
     var renderDeleteBtn;
     if (context.group.is_owner) {
-         renderDeleteBtn = <FlatButton label='x' onClick={() => {
-            props.deleteItem(assignment.id)
-        }} />
+         renderDeleteBtn = (
+            <div style={{ display: 'inline' }}>
+                <Link to={`/groups/${groupId}/assignments/${assignment.id}/edit`}><FlatButton label='e' /></Link>
+                <FlatButton label='x' onClick={() => {
+                    props.deleteItem(assignment.id)
+                }} />
+            </div>
+        )
     }
     return (
         <div style={style}>

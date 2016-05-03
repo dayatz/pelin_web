@@ -17,7 +17,7 @@ class AssignmentEdit extends React.Component {
         return (
             <div>
                 <h5>Edit Tugas</h5>
-                <NewAssignmentForm />
+                <NewAssignmentForm assignment={this.context.assignment} />
             </div>
         )
     }
@@ -26,7 +26,8 @@ class AssignmentEdit extends React.Component {
 AssignmentEdit.contextTypes = {
     group: React.PropTypes.object,
     groupId: React.PropTypes.string,
-    router: React.PropTypes.object
+    router: React.PropTypes.object,
+    assignment: React.PropTypes.object
 }
 
 export default AssignmentEdit;

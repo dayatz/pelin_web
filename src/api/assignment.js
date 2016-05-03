@@ -15,6 +15,9 @@ const AssignmentService = groupId => {
         delete: function(assignmentId) {
             return ajax().delete(`${url}/${assignmentId}`)
         },
+        update: function(assignmentId, assignment) {
+            return ajax().patch(`${url}/${assignmentId}`, assignment)
+        },
         submit: function(assignmentId, assignment) {
             return ajax().post(`${url}/${assignmentId}/submit`, assignment)
         },

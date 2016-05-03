@@ -23,7 +23,7 @@ class Assignments extends React.Component {
         if (this.context.group.is_owner) {
             renderAddButton = (
                 <FabAdd onClick={() => {
-                    this.context.router.replace(
+                    this.context.router.push(
                         `/groups/${this.context.groupId}/assignments/add`
                         )
                 }} />

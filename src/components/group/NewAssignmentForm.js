@@ -16,7 +16,12 @@ class NewAssignmentForm extends React.Component {
             loading: false,
             files: [],
             date: null,
-            time: null
+            time: null,
+
+            defaultTitle: null,
+            defaultDescription: null,
+
+            editing: false
         }
     }
     _openFileDialog() {
@@ -32,6 +37,20 @@ class NewAssignmentForm extends React.Component {
     }
     _handleTimeChange(err, time) {
         this.setState({ time })
+    }
+
+    componentWillMount() {
+        const assignment = this.props.assignment
+        if (assignment) {
+            const due_date = new Date(assignment.due_date)
+            this.setState({
+                editing: true,
+                defaultTitle: assignment.title,
+                defaultDescription: assignment.description,
+                date: due_date,
+                time: due_date
+            })
+        }
     }
 
     handleSubmit(e) {
@@ -61,19 +80,34 @@ class NewAssignmentForm extends React.Component {
                 }
             }
 
-            AssignmentService(this.context.groupId)
-                .create(data)
+            const handleSubmitSuccess = (r) => {
+                this.setState({ loading: false })
+                this.context.store.dispatch(assignmentAddAction(this.context.groupId, r.data))
+                this.context.router.replace(`groups/${this.context.groupId}/assignments`)
+            }
+
+            if (this.state.editing) {
+                AssignmentService(this.context.groupId)
+                .update(this.context.assignmentId, data)
                 .then(r => {
-                    this.setState({ loading: false })
-                    this.context.store.dispatch(assignmentAddAction(this.context.groupId, r.data))
-                    this.context.router.replace(`groups/${this.context.groupId}/assignments`)
+                    handleSubmitSuccess(r)
                 })
                 .catch(error => {
                     console.log(error)
                     this.setState({ loading: false })
                 })
+            } else {
+                AssignmentService(this.context.groupId)
+                .create(data)
+                .then(r => {
+                    handleSubmitSuccess(r)
+                })
+                .catch(error => {
+                    console.log(error)
+                    this.setState({ loading: false })
+                })
+            }
         }
-
     }
     
     render() {
@@ -85,22 +119,29 @@ class NewAssignmentForm extends React.Component {
             var btnlabel = 'Pilih File'
         }
 
+        if (this.state.editing) {
+            var btnSave = 'Simpan'
+        } else {
+            var btnSave = 'Buat'
+        }
+
         return (
             <form onSubmit={this.handleSubmit.bind(this)}>
                 <div>
                     <TextField
                         disabled={this.state.loading}
-                        hintText='Judul tugas'
-                        id='title' ref='title'
-                        autoComplete='off' />
+                        hintText='Judul tugas' id='title' ref='title'
+                        autoComplete='off'
+                        defaultValue={this.state.defaultTitle}
+                        autoFocus={true} />
                 </div>
 
                 <div>
                     <TextField
                         disabled={this.state.loading}
-                        ref='description' id='description'
-                        hintText='Deskripsi tugas'
+                        hintText='Deskripsi tugas' id='description' ref='description'
                         multiLine={true} rows={3}
+                        defaultValue={this.state.defaultDescription}
                         autoComplete='off' />
                 </div>
 
@@ -140,7 +181,7 @@ class NewAssignmentForm extends React.Component {
                     }} />
                 <RaisedButton
                     type='submit' primary={true}
-                    label='Buat' disabled={this.state.loading} />
+                    label={btnSave} disabled={this.state.loading} />
             </form>
         )
     }
@@ -148,6 +189,7 @@ class NewAssignmentForm extends React.Component {
 
 NewAssignmentForm.contextTypes = {
     groupId: React.PropTypes.string,
+    assignmentId: React.PropTypes.string,
     store: React.PropTypes.object,
     router: React.PropTypes.object
 }
