@@ -33,11 +33,11 @@ class GroupTabs extends React.Component {
         if (this.state.selectedTab != tab.props.value) {
             this.setState({selectedTab: tab.props.value});
 
-            var route = `/groups/${this.props.groupId}`
+            var route = `/groups/${this.context.groupId}`
             if (tab.props.route) {
                 route += `/${tab.props.route}`
             }
-            this.props.router.replace(route);
+            this.context.router.replace(route);
         } else {
             console.log(`you already in tab ${tab.props.label}`);
         }
@@ -75,6 +75,11 @@ class GroupTabs extends React.Component {
         </Tabs>
         )
     }
+}
+
+GroupTabs.contextTypes = {
+    groupId: React.PropTypes.string,
+    router: React.PropTypes.object
 }
 
 export default GroupTabs
