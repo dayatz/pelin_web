@@ -4,11 +4,18 @@ import { myGroupLeaveAction } from '../../actions/group'
 import GroupTabs from '../../components/group/GroupTabs'
 import GroupActionTeacher from '../../components/group/GroupActionTeacher'
 import GroupActionStudent from '../../components/group/GroupActionStudent'
+import GroupModal from '../../components/group/GroupModal'
 import Paper from 'material-ui/lib/paper'
 import RaisedButton from 'material-ui/lib/raised-button'
 
 
 class GroupDetailJoined extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            openEditModal: false
+        }
+    }
     leave() {
         if (confirm('Apakah anda yakin ingin keluar dari grup ?')) {
             GroupService.leave(this.context.groupId)
@@ -18,14 +25,27 @@ class GroupDetailJoined extends React.Component {
                 })
         }
     }
+
+    _toggleEditModal() {
+        this.setState({ openEditModal: !this.state.openEditModal })
+    }
     render() {
         var groupAction;
         if (this.context.group.is_owner) {
-            groupAction = <GroupActionTeacher />
+            groupAction = (
+            <div>
+                <GroupModal
+                    toggleModal={this._toggleEditModal.bind(this)}
+                    open={this.state.openEditModal} />
+                <GroupActionTeacher
+                    toggleModal={this._toggleEditModal.bind(this)} />
+            </div>
+            )
         } else {
             groupAction = <GroupActionStudent />
         }
-        return <div>
+        return (
+        <div>
             <div>
                 <h4 style={{float: 'left'}}>{this.context.group.title}</h4>
                 <div style={{float: 'right'}}>
@@ -40,6 +60,7 @@ class GroupDetailJoined extends React.Component {
                 </div>
             </Paper>
         </div>
+        )
     }
 }
 

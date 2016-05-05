@@ -42,6 +42,11 @@ const groups = (state = {
             delete groupRemove[action.id]
             return { ...state, items:groupRemove }
 
+        case 'GROUP_UPDATE':
+            const { items: groupUpdate } = state
+            groupUpdate[action.id] = action.item
+            return { ...state, items: groupUpdate }
+
         default:
             return state
     }

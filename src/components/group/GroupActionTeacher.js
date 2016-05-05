@@ -35,7 +35,10 @@ class GroupActionTeacher extends React.Component {
             targetOrigin={{ horizontal: 'right', vertical: 'top' }} >
             <MenuItem
                 primaryText='Edit'
-                leftIcon={<FontIcon className='material-icons'>mode_edit</FontIcon>} />
+                leftIcon={
+                    <FontIcon className='material-icons'>mode_edit</FontIcon>
+                }
+                onClick={this.props.toggleModal} />
             <Divider />
             <MenuItem
                 style={{ color: 'red' }}

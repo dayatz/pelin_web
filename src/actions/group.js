@@ -124,3 +124,10 @@ export var groupRemoveAction = (id) => {
         id
     }
 }
+
+export var updateGroupAction = (id, item) => {
+    return {
+        type: 'GROUP_UPDATE',
+        id, item
+    }
+}
