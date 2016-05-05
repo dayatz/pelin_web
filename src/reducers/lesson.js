@@ -1,13 +1,11 @@
 import { fetchLessonAction } from '../actions/lesson'
 
-const initialState = {
+const lessons = (state = {
     isLoading: false,
     isError: false,
     error: null,
     items: {}
-}
-
-const lessons = (state = initialState, action) => {
+}, action) => {
     switch (action.type) {
         case fetchLessonAction.start:
             return { ...state, isLoading: true}

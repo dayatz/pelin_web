@@ -1,13 +1,11 @@
 import { fetchGroupAction, fetchMyGroupAction, fetchSingleGroupAction } from '../actions/group'
 
-const initialState = {
-    isLoading: false,
-    isError: false,
-    error: null,
-    items: {}
-}
-
-const groups = (state = initialState, action) => {
+const groups = (state = {
+        isLoading: false,
+        isError: false,
+        error: null,
+        items: {}
+    }, action) => {
     switch (action.type) {
         case fetchGroupAction.start:
         case fetchSingleGroupAction.start:
@@ -38,6 +36,16 @@ const groups = (state = initialState, action) => {
             const { items: newGroup } = state;
             newGroup[action.item.id] = action.item;
             return { ...state, items: newGroup}
+
+        case 'GROUP_REMOVE':
+            const { items: groupRemove } = state
+            delete groupRemove[action.id]
+            return { ...state, items:groupRemove }
+
+        case 'GROUP_UPDATE':
+            const { items: groupUpdate } = state
+            groupUpdate[action.id] = action.item
+            return { ...state, items: groupUpdate }
 
         default:
             return state

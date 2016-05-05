@@ -1,13 +1,11 @@
 import { fetchPostAction, fetchCommentAction } from '../actions/post'
 
-const initialState = {
+const posts = (state = {
     isLoading: false,
     isError: false,
     error: null,
     items: {}
-}
-
-const posts = (state = initialState, action) => {
+}, action) => {
     switch (action.type) {
         case fetchPostAction.start:
             return { ...state, isLoading: true }

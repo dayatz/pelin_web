@@ -4,19 +4,35 @@ import Dialog from 'material-ui/lib/dialog'
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
 import GroupList from '../../components/group/GroupList'
-import NewGroupModal from '../../components/group/NewGroupModal'
+import GroupModal from '../../components/group/GroupModal'
 import { fetchMyGroups } from '../../actions/group'
 import { getMyGroups } from '../../reducers/group'
 import GroupService from '../../api/group'
+import FabAdd from '../../components/FabAdd'
 
 class Home extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            openModal: false
+        }
+    }
     componentDidMount() {
         this.props.fetchMyGroups()
+    }
+
+    _toggleModal() {
+        this.setState({ openModal: !this.state.openModal })
     }
     renderAddGroupButton() {
         if (this.context.auth.user.is_teacher) {
             return (
-                <NewGroupModal />
+                <div>
+                    <FabAdd onClick={this._toggleModal.bind(this)} />
+                    <GroupModal
+                        toggleModal={this._toggleModal.bind(this)}
+                        open={this.state.openModal} />
+                </div>
             )
         }
         return;

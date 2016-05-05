@@ -1,5 +1,10 @@
 import React from 'react'
-import { Router, Route, IndexRoute, useRouterHistory } from 'react-router'
+
+import Router from 'react-router/lib/Router'
+import Route from 'react-router/lib/Route'
+import IndexRoute from 'react-router/lib/IndexRoute'
+import useRouterHistory from 'react-router/lib/useRouterHistory'
+
 import createHashHistory from 'history/lib/createHashHistory'
 import { syncHistoryWithStore } from 'react-router-redux'
 
@@ -53,10 +58,9 @@ const routes = (
             <IndexRoute component={Home} />
 
             <Route path="groups" name="groups" component={Groups} onEnter={isTeacher} />
-            {/*<Route name="group-detail" path="groups/:groupId" component={Group} />*/}
             {GroupRoute}
 
-            <Route name="my-profile" path="me" component={MyProfile} />
+            <Route name="profile" path="profile" component={MyProfile} />
             <Route name="user-detail" path="users/:userId" component={UserDetail} />
             <Route name="my-assignment" path="assignments" component={MyAssignment} />
             <Route name="notifications" path="notifications" component={Notifications} />

@@ -1,7 +1,12 @@
 import { fetchMemberAction, fetchPendingAction } from '../actions/member'
 import { initialState } from './index'
 
-const members = (state = initialState(), action) => {
+const members = (state = {
+        isLoading: false,
+        isError: false,
+        error: null,
+        items: {}
+    }, action) => {
     switch (action.type) {
         case fetchMemberAction.start:
             return { ...state, isLoading: true }
@@ -37,7 +42,12 @@ const members = (state = initialState(), action) => {
     }
 }
 
-export const pendings = ( state = initialState(), action) => {
+export const pendings = ( state = {
+        isLoading: false,
+        isError: false,
+        error: null,
+        items: {}
+    }, action) => {
     switch (action.type) {
         case fetchPendingAction.start:
             return { ...state, isLoading: true }

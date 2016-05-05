@@ -117,3 +117,17 @@ export var myGroupLeaveAction = (id) => {
         id
     }
 }
+
+export var groupRemoveAction = (id) => {
+    return {
+        type: 'GROUP_REMOVE',
+        id
+    }
+}
+
+export var updateGroupAction = (id, item) => {
+    return {
+        type: 'GROUP_UPDATE',
+        id, item
+    }
+}

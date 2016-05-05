@@ -12,7 +12,6 @@ class Groups extends React.Component {
     render() {
         // TODO: render error messages
         const groups = this.props.groups.items
-        console.log(groups)
         if (!groups) {
             // TODO: render loading message
             var renderGroupList = 'Loading...'
