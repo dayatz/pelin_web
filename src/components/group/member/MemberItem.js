@@ -4,7 +4,7 @@ import FontIcon from 'material-ui/lib/font-icon'
 
 class MemberItem extends React.Component {
     kick() {
-        this.props.kick(this.props.member);
+        this.props.kick(this.props.member)
     }
     renderKickButton() {
         if (this.context.group.is_owner) {
@@ -16,7 +16,7 @@ class MemberItem extends React.Component {
                 </FlatButton>
             )
         }
-        return;
+        return
     }
     render() {
         return (

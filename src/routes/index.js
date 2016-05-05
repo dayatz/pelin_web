@@ -30,13 +30,13 @@ import {store} from '../reducers'
 
 import GroupRoute from './group'
 
-const browserHistory = useRouterHistory(createHashHistory)({queryKey: false});
+const browserHistory = useRouterHistory(createHashHistory)({queryKey: false})
 // TODO: use browserHistory provided by react-router
 const history = syncHistoryWithStore(browserHistory, store)
 
 function isAuthenticated(nextState, replace) {
     if (!AuthService.isLoggedIn() && !UserService.getUserFromStore()) {
-        replace({ pathname: '/login' });
+        replace({ pathname: '/login' })
     }
 }
 
@@ -76,6 +76,6 @@ const routes = (
         <Route name="login" path="/login" component={Login} onEnter={isLoggedIn} />
         <Route name="signup" path="/signup" component={Signup} />
     </Router>
-);
+)
 
 export default routes

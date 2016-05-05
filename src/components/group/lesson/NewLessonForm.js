@@ -6,46 +6,46 @@ import LessonService from '../../../api/lesson'
 
 class NewLessonForm extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             files: [],
             loading: false
         }
     }
     backButton() {
-        this.context.router.replace(`/groups/${this.context.groupId}/lessons`);
+        this.context.router.replace(`/groups/${this.context.groupId}/lessons`)
     }
     onSubmit(e) {
-        e.preventDefault();
-        const title = this.refs.title.getValue();
-        const description = this.refs.description.getValue();
+        e.preventDefault()
+        const title = this.refs.title.getValue()
+        const description = this.refs.description.getValue()
 
         if (title && this.state.files.length) {
             this.setState({ loading: true })
-            var lesson = new FormData();
+            var lesson = new FormData()
             this.state.files.map(file => {
                 lesson.append('files', file)
-            });
-            lesson.append('title', title);
+            })
+            lesson.append('title', title)
             if (description) {
-                lesson.append('description', description);
+                lesson.append('description', description)
             }
 
             LessonService(this.context.groupId)
                 .create(lesson)
                 .then(r => {
-                    const lesson = r.data;
-                    console.log(lesson);
-                    this.setState({ loading: false });
-                    this.context.router.replace(`/groups/${this.context.groupId}/lessons`);
+                    const lesson = r.data
+                    console.log(lesson)
+                    this.setState({ loading: false })
+                    this.context.router.replace(`/groups/${this.context.groupId}/lessons`)
                 })
         }
     }
     onDrop(files) {
-        this.setState({ files });
+        this.setState({ files })
     }
     render() {
-        var renderPreview;
+        var renderPreview
         if (this.state.files.length) {
             renderPreview = this.state.files.map(file => {
                 return <div key={file.name} style={{width: 100, border: '1px solid #eee', padding: 5}}>

@@ -18,13 +18,13 @@ class NewPostForm extends React.Component {
         this.setState({
             sending: false,
             value: ''
-        });
+        })
     }
     onSubmit(e) {
-        e.preventDefault();
+        e.preventDefault()
         this.setState({ sending: true })
 
-        const text = this.state.value.trim();
+        const text = this.state.value.trim()
         if (text) {
             PostService(this.context.groupId)
             .create({ text })
@@ -34,7 +34,7 @@ class NewPostForm extends React.Component {
                     item: r.data,
                     groupId: this.context.groupId
                 })
-                this.clean();
+                this.clean()
             })
         }
     }

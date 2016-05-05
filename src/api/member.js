@@ -1,8 +1,8 @@
 import { ajax } from './index'
 
 const MemberService = groupId => {
-     const url = `groups/${groupId}/members`;
-     const pendingUrl = `groups/${groupId}/pendings`;
+     const url = `groups/${groupId}/members`
+     const pendingUrl = `groups/${groupId}/pendings`
      return {
         fetchAll: function() {
             return ajax().get(url)

@@ -10,8 +10,8 @@ const lessons = (state = {
         case fetchLessonAction.start:
             return { ...state, isLoading: true}
         case fetchLessonAction.success:
-            const { items } = state;
-            items[action.groupId] = action.items;
+            const { items } = state
+            items[action.groupId] = action.items
             return {...state,
                 isLoading: false,
                 isError: false,
@@ -25,7 +25,7 @@ const lessons = (state = {
                 error: action.error
             }
         case 'LESSON_REMOVE':
-            const { items: removeItems } = state;
+            const { items: removeItems } = state
             removeItems[action.groupId] = removeItems[action.groupId]
                 .filter(item => {
                     return item.id != action.id

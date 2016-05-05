@@ -26,4 +26,4 @@ LessonAdd.contextTypes = {
     group: React.PropTypes.object
 }
 
-export default LessonAdd;
+export default LessonAdd

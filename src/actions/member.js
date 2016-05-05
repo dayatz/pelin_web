@@ -1,15 +1,15 @@
 import createAsyncAction from '../actions/createAsyncAction.js'
 import MemberService from '../api/member'
 
-export var fetchMemberAction = createAsyncAction('FETCH_MEMBERS');
+export var fetchMemberAction = createAsyncAction('FETCH_MEMBERS')
 export var fetchMembers = groupId => {
     return (dispatch, getState) => {
-        // const members = getState().members.items[groupId];
+        // const members = getState().members.items[groupId]
         // if (members && members.length) {
-        //     return Promise.resolve();
+        //     return Promise.resolve()
         // }
 
-        dispatch({ type: fetchMemberAction.start });
+        dispatch({ type: fetchMemberAction.start })
 
         return MemberService(groupId).fetchAll()
             .then(r => {
@@ -28,15 +28,15 @@ export var fetchMembers = groupId => {
     }
 }
 
-export var fetchPendingAction = createAsyncAction('FETCH_PENDINGS_MEMBER');
+export var fetchPendingAction = createAsyncAction('FETCH_PENDINGS_MEMBER')
 export var fetchPendings = groupId => {
     return (dispatch, getState) => {
-        // const pendings = getState().pendings.items[groupId];
+        // const pendings = getState().pendings.items[groupId]
         // if (pendings && pendings.length) {
-        //     return Promise.resolve();
+        //     return Promise.resolve()
         // }
 
-        dispatch({ type: fetchPendingAction.start });
+        dispatch({ type: fetchPendingAction.start })
 
         return MemberService(groupId).fetchAllPendings()
             .then(r => {
@@ -47,7 +47,7 @@ export var fetchPendings = groupId => {
                 })
             })
             .catch(error => {
-                console.log(error);
+                console.log(error)
                 dispatch({
                     type: fetchPendingAction.fail,
                     error

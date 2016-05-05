@@ -7,11 +7,11 @@ import NewPostForm from '../../components/group/post/NewPostForm'
 
 class Posts extends React.Component {
     componentDidMount() {
-        this.props.fetchPost(this.context.groupId);
+        this.props.fetchPost(this.context.groupId)
     }
 
     render () {
-        var posts = this.props.posts.items[this.context.groupId];
+        var posts = this.props.posts.items[this.context.groupId]
         if (posts && posts.length) {
             var renderPosts = <PostList posts={posts} />
         } else if (posts && !posts.length) {

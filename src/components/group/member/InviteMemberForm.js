@@ -4,7 +4,7 @@ import FabAdd from '../../FabAdd'
 
 class InviteMemberForm extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             nim: '',
             loading: false
@@ -14,12 +14,12 @@ class InviteMemberForm extends React.Component {
         this.setState({ nim: e.target.value })
     }
     onSubmit(e) {
-        e.preventDefault();
-        const nim = this.state.nim;
+        e.preventDefault()
+        const nim = this.state.nim
 
         if (nim) {
-            this.setState({ loading: true });
-            this.props.onInviteFormSubmit(nim, this.clean.bind(this));
+            this.setState({ loading: true })
+            this.props.onInviteFormSubmit(nim, this.clean.bind(this))
         }
     }
     clean() {

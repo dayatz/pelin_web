@@ -35,4 +35,4 @@ export const store = createStore(appReducers,
         window.devToolsExtension ? window.devToolsExtension() : f => f
     ),
     applyMiddleware(thunk)
-);
+)

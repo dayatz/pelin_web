@@ -2,19 +2,19 @@ import axios from 'axios'
 import store from 'store'
 import { BASE_URL } from './index'
 
-const url = 'jwt';
+const url = 'jwt'
 
 var AuthService = {
     login: function(email, password) {
-        return axios.post(BASE_URL + url, {email, password});
+        return axios.post(BASE_URL + url, {email, password})
     },
 
     isLoggedIn: function() {
-        return !!this.getToken();
+        return !!this.getToken()
     },
 
     logout: function() {
-        store.clear();
+        store.clear()
     },
 
     getToken: function() {

@@ -20,10 +20,10 @@ class Lessons extends React.Component {
                 }} />
             )
         }
-        return;
+        return
     }
     render () {
-        const lessons = this.props.lessons.items[this.context.groupId];
+        const lessons = this.props.lessons.items[this.context.groupId]
         if (lessons && lessons.length) {
             var renderLessonList = (
                 <div>

@@ -23,4 +23,4 @@ AssignmentAdd.contextTypes = {
     router: React.PropTypes.object
 }
 
-export default AssignmentAdd;
+export default AssignmentAdd

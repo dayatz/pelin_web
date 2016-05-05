@@ -32,7 +32,7 @@ class GroupDetailJoined extends React.Component {
         this.setState({ openEditModal: !this.state.openEditModal })
     }
     render() {
-        var groupAction;
+        var groupAction
         if (this.context.group.is_owner) {
             groupAction = (
             <div>

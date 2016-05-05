@@ -3,14 +3,14 @@ import { Link } from 'react-router'
 import FlatButton from 'material-ui/lib/flat-button'
 
 const AssignmentItem = (props, context) => {
-    const { assignment } = props;
-    const { groupId } = context;
+    const { assignment } = props
+    const { groupId } = context
 
     const dueDate = new Date(assignment.due_date)
     // TODO: display time format
     // TODO: display time left
     const date = `${dueDate.getDate()} ${dueDate.getMonth()} ${dueDate.getFullYear()} ${dueDate.getHours()}:${dueDate.getMinutes()}`
-    var style;
+    var style
     if (assignment.is_passed) {
         style = { backgroundColor: '#eee' }
     }
@@ -18,7 +18,7 @@ const AssignmentItem = (props, context) => {
         style = { backgroundColor: '#aaa' }
     }
 
-    var renderDeleteBtn;
+    var renderDeleteBtn
     if (context.group.is_owner) {
          renderDeleteBtn = (
             <div style={{ display: 'inline' }}>

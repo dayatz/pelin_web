@@ -5,38 +5,38 @@ import Tab from 'material-ui/lib/tabs/tab'
 
 class GroupTabs extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             selectedTab: 0
         }
     }
     componentDidMount() {
-        const pathname = this.props.location.pathname.split('/')[3];
+        const pathname = this.props.location.pathname.split('/')[3]
         if (pathname) {
             switch(pathname) {
                 case 'lessons':
-                    this.setState({ selectedTab: 1 });
-                    break;
+                    this.setState({ selectedTab: 1 })
+                    break
                 case 'assignments':
-                    this.setState({ selectedTab: 2 });
-                    break;
+                    this.setState({ selectedTab: 2 })
+                    break
                 case 'members':
-                    this.setState({ selectedTab: 3 });
+                    this.setState({ selectedTab: 3 })
             }
         }
     }
 
     handleActive(tab) {
         if (this.state.selectedTab != tab.props.value) {
-            this.setState({selectedTab: tab.props.value});
+            this.setState({selectedTab: tab.props.value})
 
             var route = `/groups/${this.context.groupId}`
             if (tab.props.route) {
                 route += `/${tab.props.route}`
             }
-            this.context.router.replace(route);
+            this.context.router.replace(route)
         } else {
-            console.log(`you already in tab ${tab.props.label}`);
+            console.log(`you already in tab ${tab.props.label}`)
         }
     }
 

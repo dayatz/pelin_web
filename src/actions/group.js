@@ -2,27 +2,27 @@ import createAsyncAction from '../actions/createAsyncAction'
 import GroupService from '../api/group'
 import { getGroupByIds } from '../reducers/group'
 
-export var fetchGroupAction = createAsyncAction('FETCH_GROUP');
-export var updateGroupAction = createAsyncAction('UPDATE_GROUP');
-export var deleteGroupAction = createAsyncAction('DELETE_GROUP');
+export var fetchGroupAction = createAsyncAction('FETCH_GROUP')
+export var updateGroupAction = createAsyncAction('UPDATE_GROUP')
+export var deleteGroupAction = createAsyncAction('DELETE_GROUP')
 
 export function fetchAllGroup() {
     return (dispatch, getState) => {
-        // const groups = getState().groups.items;
-        // if (groups.length) return Promise.resolve();
+        // const groups = getState().groups.items
+        // if (groups.length) return Promise.resolve()
 
-        dispatch({ type: fetchGroupAction.start});
+        dispatch({ type: fetchGroupAction.start})
 
         return GroupService.fetchAll()
             .then((r) => {
-                const items = r.data;
+                const items = r.data
                 dispatch({
                     type: fetchGroupAction.success,
                     items
                 })
             })
             .catch((error) => {
-                console.log(error);
+                console.log(error)
                 dispatch({
                     type: fetchGroupAction.fail,
                     error
@@ -31,20 +31,20 @@ export function fetchAllGroup() {
     }
 }
 
-export var fetchMyGroupAction = createAsyncAction('FETCH_MYGROUP');
+export var fetchMyGroupAction = createAsyncAction('FETCH_MYGROUP')
 export function fetchMyGroups() {
     return (dispatch, getState) => {
-        const ids = getState().myGroups.ids;
-        if (ids.length) return Promise.resolve();
+        const ids = getState().myGroups.ids
+        if (ids.length) return Promise.resolve()
 
-        dispatch({ type: fetchMyGroupAction.start });
+        dispatch({ type: fetchMyGroupAction.start })
 
         return GroupService.myGroup()
             .then((r) => {
-                const data = r.data;
-                const ids = data.map(i => { return i.id });
+                const data = r.data
+                const ids = data.map(i => { return i.id })
 
-                const groupItems = getState().groups.items;
+                const groupItems = getState().groups.items
                 data.map(d => {
                     if (!groupItems[d.id]) {
                         dispatch({
@@ -61,7 +61,7 @@ export function fetchMyGroups() {
                 dispatch({
                     type: fetchMyGroupAction.success,
                     ids
-                });
+                })
             })
             .catch((error) => {
                 dispatch({
@@ -72,13 +72,13 @@ export function fetchMyGroups() {
     }
 }
 
-export var fetchSingleGroupAction = createAsyncAction('FETCH_SINGLE_GROUP');
+export var fetchSingleGroupAction = createAsyncAction('FETCH_SINGLE_GROUP')
 export function fetchSingleGroup(groupId) {
     return (dispatch, getState) => {
-        const group = getState().groups.items[groupId];
-        if (group) return Promise.resolve();
+        const group = getState().groups.items[groupId]
+        if (group) return Promise.resolve()
 
-        dispatch({ type: fetchSingleGroupAction.start });
+        dispatch({ type: fetchSingleGroupAction.start })
 
         return GroupService.fetch(groupId)
             .then((r) => {
@@ -88,7 +88,7 @@ export function fetchSingleGroup(groupId) {
                 })
             })
             .catch((error) => {
-                console.error(error);
+                console.error(error)
                 dispatch({
                     type: fetchSingleGroupAction.fail,
                     error

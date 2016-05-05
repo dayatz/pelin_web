@@ -1,7 +1,7 @@
 import { ajax } from './index'
 
 const AssignmentService = groupId => {
-    const url = `groups/${groupId}/assignments`;
+    const url = `groups/${groupId}/assignments`
     return {
         fetchAll: function() {
             return ajax().get(url)
@@ -10,7 +10,7 @@ const AssignmentService = groupId => {
             return ajax().get(`${url}/${assignmentId}`)
         },
         create: function(assignment) {
-            return ajax().post(url, assignment);
+            return ajax().post(url, assignment)
         },
         delete: function(assignmentId) {
             return ajax().delete(`${url}/${assignmentId}`)

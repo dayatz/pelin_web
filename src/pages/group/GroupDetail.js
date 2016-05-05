@@ -13,7 +13,7 @@ import { fetchSingleGroup } from '../../actions/group'
 
 class Group extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             groupId: this.props.params.groupId

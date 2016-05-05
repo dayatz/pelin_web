@@ -40,7 +40,7 @@ class Home extends React.Component {
                 </div>
             )
         }
-        return;
+        return
     }
     render() {
         if (this.props.myGroups.isLoading) {
@@ -78,7 +78,7 @@ const mapDispatchToProps = dispatch => ({
     fetchMyGroups: () => {
         dispatch(fetchMyGroups())
     }
-});
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 // export default Home

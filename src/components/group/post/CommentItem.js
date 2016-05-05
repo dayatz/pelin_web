@@ -1,8 +1,8 @@
 import React from 'react'
 
 const CommentItem = (props) => {
-    console.log('[CommentItem] rendering');
-    const { comment } = props;
+    console.log('[CommentItem] rendering')
+    const { comment } = props
 
     return (
         <div style={{ marginLeft: 10 }}>

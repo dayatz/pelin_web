@@ -7,14 +7,14 @@ class LessonList extends React.Component {
     onDeleteClick(lesson) {
         this.context.store.dispatch(
             lessonRemoveAction(this.context.groupId, lesson.id)
-        );
+        )
         LessonService(this.context.groupId)
             .delete(lesson.id)
             .then(r => {
-                console.log(r);
+                console.log(r)
             })
             .catch(error => {
-                console.log(error);
+                console.log(error)
             })
     }
     render() {

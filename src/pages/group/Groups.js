@@ -9,7 +9,7 @@ import { fetchAllGroup } from '../../actions/group'
 
 class Groups extends React.Component {
     componentDidMount() {
-        this.props.fetchAllGroup();
+        this.props.fetchAllGroup()
     }
 
     render() {
@@ -33,12 +33,12 @@ class Groups extends React.Component {
 
 const mapStateToProps = state => ({
     groups: state.groups
-});
+})
 
 const mapDispatchToProps = dispatch => ({
     fetchAllGroup: () => {
         dispatch(fetchAllGroup())
     }
-});
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Groups)

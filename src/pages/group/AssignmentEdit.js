@@ -30,4 +30,4 @@ AssignmentEdit.contextTypes = {
     assignment: React.PropTypes.object
 }
 
-export default AssignmentEdit;
+export default AssignmentEdit

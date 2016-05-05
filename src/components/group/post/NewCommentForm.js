@@ -5,7 +5,7 @@ import PostService from '../../../api/post'
 
 class NewCommentForm extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             commentText: '',
             sending: false
@@ -15,11 +15,11 @@ class NewCommentForm extends React.Component {
         this.setState({ commentText: e.target.value })
     }
     onSubmit(e) {
-        e.preventDefault();
+        e.preventDefault()
         this.setState({ sending: true })
 
-        const postId = this.props.postId;
-        const text = this.state.commentText.trim();
+        const postId = this.props.postId
+        const text = this.state.commentText.trim()
 
         if (text) {
             PostService(this.context.groupId)
@@ -29,8 +29,8 @@ class NewCommentForm extends React.Component {
                         type: 'ADD_COMMENT',
                         item: r.data,
                         postId
-                    });
-                    this.clean();
+                    })
+                    this.clean()
                 })
                 .catch( error => {
                     console.log(error)
@@ -38,7 +38,7 @@ class NewCommentForm extends React.Component {
         }
     }
     clean() {
-        this.setState({ commentText: '', sending: false });
+        this.setState({ commentText: '', sending: false })
     }
     render() {
         return (
@@ -53,7 +53,7 @@ class NewCommentForm extends React.Component {
                 <RaisedButton disabled={this.state.sending}
                     type='submit' label='comment' />
             </form>
-        );
+        )
     }
 }
 
@@ -62,4 +62,4 @@ NewCommentForm.contextTypes = {
     store: React.PropTypes.object
 }
 
-export default NewCommentForm;
+export default NewCommentForm

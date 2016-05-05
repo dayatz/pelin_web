@@ -5,21 +5,21 @@ import PostService from '../../../api/post'
 
 class PostList extends React.Component {
     handleDelete(post) {
-        const postId = post.id;
-        const groupId = this.context.groupId;
+        const postId = post.id
+        const groupId = this.context.groupId
         this.props.deletePost(groupId, postId)
 
         PostService(groupId)
             .delete(postId)
             .then(r => {
-                console.log(r);
+                console.log(r)
             })
     }
     handleVote(post) {
         PostService(this.context.groupId)
             .vote(post.id)
             .then(r => {
-                console.log(r);
+                console.log(r)
             })
     }
 
