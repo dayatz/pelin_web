@@ -1,6 +1,6 @@
 import React from 'react'
 import TextField from 'material-ui/lib/text-field'
-import FabAdd from '../../components/FabAdd'
+import FabAdd from '../../FabAdd'
 
 class InviteMemberForm extends React.Component {
     constructor(props) {

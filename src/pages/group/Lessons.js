@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
 import FabAdd from '../../components/FabAdd'
-import LessonList from '../../components/group/LessonList'
+import LessonList from '../../components/group/lesson/LessonList'
+
 import { fetchLessons } from '../../actions/lesson'
 
 class Lessons extends React.Component {

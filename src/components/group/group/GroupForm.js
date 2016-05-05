@@ -1,9 +1,11 @@
 import React from 'react'
+
 import TextField from 'material-ui/lib/text-field'
 import DropDownMenu from 'material-ui/lib/DropDownMenu'
 import MenuItem from 'material-ui/lib/menus/menu-item'
-import GroupService from '../../api/group'
-import { addMyGroupAction, addGroupAction, updateGroupAction } from '../../actions/group'
+
+import GroupService from '../../../api/group'
+import { addMyGroupAction, addGroupAction, updateGroupAction } from '../../../actions/group'
 
 class GroupForm extends React.Component {
     constructor(props) {

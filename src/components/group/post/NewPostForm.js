@@ -1,7 +1,7 @@
 import React from 'react'
-import PostService from '../../api/post'
 import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
+import PostService from '../../../api/post'
 
 class NewPostForm extends React.Component {
     constructor(props) {

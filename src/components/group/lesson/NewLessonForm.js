@@ -1,8 +1,8 @@
 import React from 'react'
-import LessonService from '../../api/lesson'
 import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
 import Dropzone from 'react-dropzone'
+import LessonService from '../../../api/lesson'
 
 class NewLessonForm extends React.Component {
     constructor(props) {

@@ -51,3 +51,10 @@ export function logout(router) {
         type: 'USER_LOGOUT'
     }
 }
+
+export function updateProfile(data) {
+    return {
+        type: 'USER_UPDATE_PROFILE',
+        data
+    }
+}

@@ -1,7 +1,7 @@
 import React from 'react'
-import PostService from '../../api/post'
 import { connect } from 'react-redux'
 import PostItem from './PostItem'
+import PostService from '../../../api/post'
 
 class PostList extends React.Component {
     handleDelete(post) {

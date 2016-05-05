@@ -1,9 +1,11 @@
 import React from 'react'
+
 import Dialog from 'material-ui/lib/dialog'
 import FlatButton from 'material-ui/lib/flat-button'
 import RaisedButton from 'material-ui/lib/raised-button'
 import TextField from 'material-ui/lib/text-field'
-import GroupForm from '../../components/group/GroupForm'
+
+import GroupForm from './GroupForm'
 
 
 class GroupModal extends React.Component {

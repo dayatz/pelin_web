@@ -1,7 +1,7 @@
 import React from 'react'
-import LessonService from '../../api/lesson'
-import { lessonRemoveAction } from '../../actions/lesson'
 import LessonItem from './LessonItem'
+import LessonService from '../../../api/lesson'
+import { lessonRemoveAction } from '../../../actions/lesson'
 
 class LessonList extends React.Component {
     onDeleteClick(lesson) {

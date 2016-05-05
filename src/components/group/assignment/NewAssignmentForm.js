@@ -1,12 +1,15 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import { assignmentAddAction } from '../../actions/assignment'
+
 import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
 import TimePicker from 'material-ui/lib/time-picker/time-picker'
 import FlatButton from 'material-ui/lib/flat-button'
-import CustomDatePicker from '../../components/CustomDatePicker'
-import AssignmentService from '../../api/assignment.js'
+
+import CustomDatePicker from '../../CustomDatePicker'
+
+import AssignmentService from '../../../api/assignment.js'
+import { assignmentAddAction } from '../../../actions/assignment'
 
 
 class NewAssignmentForm extends React.Component {

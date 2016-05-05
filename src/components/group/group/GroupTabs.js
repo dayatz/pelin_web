@@ -2,7 +2,6 @@ import React from 'react'
 import Tabs from 'material-ui/lib/tabs/tabs'
 import FontIcon from 'material-ui/lib/font-icon'
 import Tab from 'material-ui/lib/tabs/tab'
-import bindFunctions from '../../config/bindFunctions'
 
 class GroupTabs extends React.Component {
     constructor(props) {
@@ -10,8 +9,6 @@ class GroupTabs extends React.Component {
         this.state = {
             selectedTab: 0
         }
-
-        bindFunctions.call(this, ['handleActive']);
     }
     componentDidMount() {
         const pathname = this.props.location.pathname.split('/')[3];
@@ -50,28 +47,28 @@ class GroupTabs extends React.Component {
                 value={0}
                 icon={<FontIcon className="material-icons">forum</FontIcon>}
                 label="Diskusi"
-                onActive={this.handleActive} />
+                onActive={this.handleActive.bind(this)} />
 
             <Tab
                 value={1}
                 icon={<FontIcon className="material-icons">import_contacts</FontIcon>}
                 label="Materi"
                 route='lessons'
-                onActive={this.handleActive} />
+                onActive={this.handleActive.bind(this)} />
 
             <Tab
                 value={2}
                 icon={<FontIcon className="material-icons">assignment</FontIcon>}
                 label="Tugas"
                 route='assignments'
-                onActive={this.handleActive} />
+                onActive={this.handleActive.bind(this)} />
 
             <Tab
                 value={3}
                 icon={<FontIcon className="material-icons">people</FontIcon>}
                 label="Member"
                 route='members'
-                onActive={this.handleActive} />
+                onActive={this.handleActive.bind(this)} />
         </Tabs>
         )
     }

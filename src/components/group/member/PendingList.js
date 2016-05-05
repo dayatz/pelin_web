@@ -1,7 +1,7 @@
 import React from 'react'
-import MemberService from '../../api/member'
-import { fetchMembers, approveAll, addMember, pendingApprove } from '../../actions/member'
 import PendingItem from './PendingItem'
+import MemberService from '../../../api/member'
+import { fetchMembers, approveAll, addMember, pendingApprove } from '../../../actions/member'
 
 class PendingList extends React.Component {
     approveAll() {

@@ -4,8 +4,8 @@ import MenuItem from 'material-ui/lib/menus/menu-item'
 import IconButton from 'material-ui/lib/icon-button'
 import FontIcon from 'material-ui/lib/font-icon'
 import Divider from 'material-ui/lib/divider'
-import GroupService from '../../api/group'
-import { myGroupLeaveAction, groupRemoveAction } from '../../actions/group'
+import GroupService from '../../../api/group'
+import { myGroupLeaveAction, groupRemoveAction } from '../../../actions/group'
 
 class GroupActionTeacher extends React.Component {
     delete() {

@@ -1,6 +1,6 @@
 import React from 'react'
-import NewLessonForm from '../../components/group/NewLessonForm.js'
 import FlatButton from 'material-ui/lib/flat-button'
+import NewLessonForm from '../../components/group/lesson/NewLessonForm.js'
 
 class LessonAdd extends React.Component {
     componentWillMount() {

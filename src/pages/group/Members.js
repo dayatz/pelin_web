@@ -1,10 +1,12 @@
 import React from 'react'
-import MemberService from '../../api/member'
 import { connect } from 'react-redux'
+
+import MemberList from '../../components/group/member/MemberList'
+import PendingList from '../../components/group/member/PendingList'
+import InviteMemberForm from '../../components/group/member/InviteMemberForm'
+
+import MemberService from '../../api/member'
 import { fetchMembers, fetchPendings, kickMember } from '../../actions/member'
-import MemberList from '../../components/group/MemberList'
-import PendingList from '../../components/group/PendingList'
-import InviteMemberForm from '../../components/group/InviteMemberForm'
 
 class Members extends React.Component {
     componentDidMount() {

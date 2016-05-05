@@ -1,8 +1,11 @@
 import React from 'react'
-import GroupService from '../../api/group'
-import GroupList from '../../components/group/GroupList'
-import { fetchAllGroup } from '../../actions/group'
 import { connect } from 'react-redux'
+
+import GroupService from '../../api/group'
+import GroupList from '../../components/group/group/GroupList'
+
+import { fetchAllGroup } from '../../actions/group'
+
 
 class Groups extends React.Component {
     componentDidMount() {

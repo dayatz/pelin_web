@@ -1,12 +1,14 @@
 import React from 'react'
-import GroupService from '../../api/group'
-import { myGroupLeaveAction } from '../../actions/group'
-import GroupTabs from '../../components/group/GroupTabs'
-import GroupActionTeacher from '../../components/group/GroupActionTeacher'
-import GroupActionStudent from '../../components/group/GroupActionStudent'
-import GroupModal from '../../components/group/GroupModal'
 import Paper from 'material-ui/lib/paper'
 import RaisedButton from 'material-ui/lib/raised-button'
+
+import GroupTabs from './GroupTabs'
+import GroupActionTeacher from './GroupActionTeacher'
+import GroupActionStudent from './GroupActionStudent'
+import GroupModal from './GroupModal'
+
+import GroupService from '../../../api/group'
+import { myGroupLeaveAction } from '../../../actions/group'
 
 
 class GroupDetailJoined extends React.Component {

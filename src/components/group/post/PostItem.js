@@ -1,11 +1,13 @@
 import React from 'react'
-import { fetchComment } from '../../actions/post'
-import CommentList from '../../components/group/CommentList'
-import NewCommentForm from '../../components/group/NewCommentForm'
+
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
 import IconButton from 'material-ui/lib/icon-button'
 import FontIcon from 'material-ui/lib/font-icon'
+
+import CommentList from './CommentList'
+import NewCommentForm from './NewCommentForm'
+import { fetchComment } from '../../../actions/post'
 
 class PostItem extends React.Component {
     constructor(props) {

@@ -1,7 +1,7 @@
 import React from 'react'
 import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
-import PostService from '../../api/post'
+import PostService from '../../../api/post'
 
 class NewCommentForm extends React.Component {
     constructor(props) {
