@@ -1,13 +1,13 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import UserProfileForm from '../../components/user/UserProfileForm'
+import MyProfileForm from '../../components/user/MyProfileForm'
 import { updateProfile } from '../../actions/auth'
 
 class MyProfile extends React.Component {
     render() {
         return (
-            <UserProfileForm user={this.props.user} />
+            <MyProfileForm user={this.props.user} />
         )
     }
 }

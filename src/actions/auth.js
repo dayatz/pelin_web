@@ -52,9 +52,9 @@ export function logout(router) {
     }
 }
 
-export function updateProfile(data) {
+export function updateProfileAction(user) {
     return {
         type: 'USER_UPDATE_PROFILE',
-        data
+        user
     }
 }

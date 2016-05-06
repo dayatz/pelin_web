@@ -59,7 +59,9 @@ class App extends React.Component {
                         </div>
                     }
                     iconElementRight={
-                        <FlatButton label={this.props.auth.user.name.split(' ')[0]}
+                        <FlatButton
+                            onClick={() => { this.context.router.push('/profile') }}
+                            label={this.props.auth.user.name.split(' ')[0]}
                             icon={<FontIcon className="material-icons">face</FontIcon>}
                         />
                     }
