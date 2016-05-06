@@ -1,15 +1,15 @@
 import createAsyncAction from '../actions/createAsyncAction.js'
 import PostService from '../api/post'
 
-export var fetchPostAction = createAsyncAction('FETCH_POST');
+export var fetchPostAction = createAsyncAction('FETCH_POST')
 export var fetchPost = groupId => {
     return (dispatch, getState) => {
-        // const posts = getState().posts.items[groupId];
+        // const posts = getState().posts.items[groupId]
         // if (posts && posts.length) {
-        //     return Promise.resolve();
+        //     return Promise.resolve()
         // }
 
-        dispatch({ type: fetchPostAction.start });
+        dispatch({ type: fetchPostAction.start })
 
         return PostService(groupId).fetchAll()
             .then(r => {
@@ -20,7 +20,7 @@ export var fetchPost = groupId => {
                 })
             })
             .catch(error => {
-                console.log(error);
+                console.log(error)
                 dispatch({
                     type: fetchPostAction.fail,
                     error
@@ -29,15 +29,15 @@ export var fetchPost = groupId => {
     }
 }
 
-export var fetchCommentAction = createAsyncAction('FETCH_POST_COMMENT');
+export var fetchCommentAction = createAsyncAction('FETCH_POST_COMMENT')
 export var fetchComment = (groupId, postId) => {
     return (dispatch, getState) => {
-        // const comments = getState().comments.items[postId];
+        // const comments = getState().comments.items[postId]
         // if (comments && comments.length) {
-        //     return Promise.resolve();
+        //     return Promise.resolve()
         // }
 
-        dispatch({ type: fetchCommentAction.start });
+        dispatch({ type: fetchCommentAction.start })
 
         return PostService(groupId).fetchComment(postId)
             .then(r => {

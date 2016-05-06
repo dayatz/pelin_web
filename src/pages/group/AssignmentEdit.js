@@ -1,5 +1,5 @@
 import React from 'react'
-import NewAssignmentForm from '../../components/group/NewAssignmentForm'
+import NewAssignmentForm from '../../components/group/assignment/NewAssignmentForm'
 
 class AssignmentEdit extends React.Component {
     constructor(props) {
@@ -30,4 +30,4 @@ AssignmentEdit.contextTypes = {
     assignment: React.PropTypes.object
 }
 
-export default AssignmentEdit;
+export default AssignmentEdit

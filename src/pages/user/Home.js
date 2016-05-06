@@ -1,14 +1,19 @@
 import React from 'react'
-import Paper from 'material-ui/lib/paper'
-import Dialog from 'material-ui/lib/dialog'
+
 import { Link } from 'react-router'
 import { connect } from 'react-redux'
-import GroupList from '../../components/group/GroupList'
-import GroupModal from '../../components/group/GroupModal'
+
+import Paper from 'material-ui/lib/paper'
+import Dialog from 'material-ui/lib/dialog'
+
+import GroupList from '../../components/group/group/GroupList'
+import GroupModal from '../../components/group/group/GroupModal'
+import FabAdd from '../../components/FabAdd'
+
 import { fetchMyGroups } from '../../actions/group'
 import { getMyGroups } from '../../reducers/group'
 import GroupService from '../../api/group'
-import FabAdd from '../../components/FabAdd'
+
 
 class Home extends React.Component {
     constructor(props) {
@@ -35,7 +40,7 @@ class Home extends React.Component {
                 </div>
             )
         }
-        return;
+        return
     }
     render() {
         if (this.props.myGroups.isLoading) {
@@ -73,7 +78,7 @@ const mapDispatchToProps = dispatch => ({
     fetchMyGroups: () => {
         dispatch(fetchMyGroups())
     }
-});
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home)
 // export default Home

@@ -10,8 +10,8 @@ const assignments = (state = {
         case fetchAssignmentAction.start:
             return {...state, isLoading: true}
         case fetchAssignmentAction.success:
-            const { items } = state;
-            items[action.groupId] = action.items;
+            const { items } = state
+            items[action.groupId] = action.items
             return {...state,
                 isLoading: false,
                 isError: false,
@@ -25,7 +25,7 @@ const assignments = (state = {
                 error: action.error
             }
         case 'ASSIGNMENT_ADD':
-            const { items: assignmentAdd } = state;
+            const { items: assignmentAdd } = state
             assignmentAdd[action.groupId] = [ action.item, ...assignmentAdd[action.groupId] ]
             return { ...state, items: assignmentAdd }
         case 'ASSIGNMENT_DELETE':
@@ -41,7 +41,7 @@ const assignments = (state = {
 }
 
 export var getAssignmentsGroup = (items, groupId) => {
-    return items[groupId];
+    return items[groupId]
 }
 
 export default assignments
@@ -56,8 +56,8 @@ export const submits = (state = {
         case fetchSubmittedAction.start:
             return {...state, isLoading: true}
         case fetchSubmittedAction.success:
-            const { items } = state;
-            items[action.assignmentId] = action.items;
+            const { items } = state
+            items[action.assignmentId] = action.items
             return {...state,
                 isLoading: false,
                 isError: false,

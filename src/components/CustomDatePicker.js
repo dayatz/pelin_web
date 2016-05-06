@@ -2,14 +2,14 @@ import React from 'react'
 import DatePicker from 'material-ui/lib/date-picker/date-picker'
 import areIntlLocalesSupported from 'intl-locales-supported'
 
-let DateTimeFormat;
+let DateTimeFormat
 if (areIntlLocalesSupported('id')) {
-    DateTimeFormat = global.Intl.DateTimeFormat;
+    DateTimeFormat = global.Intl.DateTimeFormat
 } else {
-    const IntlPolyfill = require('intl');
-    require('intl/locale-data/jsonp/id');
+    const IntlPolyfill = require('intl')
+    require('intl/locale-data/jsonp/id')
 
-    DateTimeFormat = IntlPolyfill.DateTimeFormat;
+    DateTimeFormat = IntlPolyfill.DateTimeFormat
 }
 
 const CustomDatePicker = (props) => {
@@ -27,7 +27,7 @@ const CustomDatePicker = (props) => {
         return `${day}, ${date.getDate()} ${month} ${date.getFullYear()}`
     }
     var handleChange = function(event, date) {
-        props.onChange(event, date);
+        props.onChange(event, date)
     }
     return (
         <DatePicker

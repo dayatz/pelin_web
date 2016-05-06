@@ -1,5 +1,5 @@
 import React from 'react'
-import NewAssignmentForm from '../../components/group/NewAssignmentForm'
+import NewAssignmentForm from '../../components/group/assignment/NewAssignmentForm'
 
 class AssignmentAdd extends React.Component {
     componentWillMount() {
@@ -23,4 +23,4 @@ AssignmentAdd.contextTypes = {
     router: React.PropTypes.object
 }
 
-export default AssignmentAdd;
+export default AssignmentAdd

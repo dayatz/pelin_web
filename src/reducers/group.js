@@ -12,7 +12,7 @@ const groups = (state = {
             return { ...state, isLoading: true }
 
         case fetchGroupAction.success:
-            const { items } = state;
+            const { items } = state
             for (const i of action.items) {
                 items[i.id] = i
             }
@@ -27,14 +27,14 @@ const groups = (state = {
             }
 
         case fetchSingleGroupAction.success:
-            const { items: is } = state;
-            const { item } = action;
-            is[item.id] = item;
+            const { items: is } = state
+            const { item } = action
+            is[item.id] = item
             return { ...state, isLoading: false, items:is }
 
         case 'ADD_GROUP':
-            const { items: newGroup } = state;
-            newGroup[action.item.id] = action.item;
+            const { items: newGroup } = state
+            newGroup[action.item.id] = action.item
             return { ...state, items: newGroup}
 
         case 'GROUP_REMOVE':
@@ -71,8 +71,8 @@ export const myGroups = (state = {
         case fetchMyGroupAction.fail:
             return { ...state, isError: true, error: action.error }
         case 'ADD_MY_GROUP':
-            const { ids } = state;
-            ids.unshift(action.id);
+            const { ids } = state
+            ids.unshift(action.id)
             return {  ...state, ids }
         case 'MYGROUP_LEAVE':
             const { ids: leave } = state
@@ -88,11 +88,11 @@ export const myGroups = (state = {
 export const getGroupByIds = (state, ids) => {
     return ids.map(id => {
         return state.groups.items[id]
-    });
+    })
 }
 
 export const getMyGroups = (state) => {
-    return getGroupByIds(state, state.myGroups.ids);
+    return getGroupByIds(state, state.myGroups.ids)
 }
 
 export default groups

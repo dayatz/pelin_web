@@ -11,8 +11,8 @@ const members = (state = {
         case fetchMemberAction.start:
             return { ...state, isLoading: true }
         case fetchMemberAction.success:
-            const { items } = state;
-            items[action.groupId] = action.items;
+            const { items } = state
+            items[action.groupId] = action.items
             return { ...state,
                 isLoading: false,
                 isError: false,
@@ -25,16 +25,16 @@ const members = (state = {
                 error: action.error
             }
         case 'ADD_MEMBER':
-            const { items: addItems } = state;
-            addItems[action.groupId].unshift(action.item);
+            const { items: addItems } = state
+            addItems[action.groupId].unshift(action.item)
             return { ...state, items: addItems }
         case 'KICK_MEMBER':
-            const { items: removeItems } = state;
+            const { items: removeItems } = state
 
             removeItems[action.groupId] = removeItems[action.groupId]
                 .filter(item => {
                     return item.id != action.memberId
-                });
+                })
 
             return { ...state, items: removeItems}
         default:
@@ -52,8 +52,8 @@ export const pendings = ( state = {
         case fetchPendingAction.start:
             return { ...state, isLoading: true }
         case fetchPendingAction.success:
-            const { items } = state;
-            items[action.groupId] = action.items;
+            const { items } = state
+            items[action.groupId] = action.items
             return { ...state,
                 isLoading: false,
                 isError: false,
@@ -66,17 +66,17 @@ export const pendings = ( state = {
                 error: action.error
             }
         case 'PENDING_APPROVE':
-            const { items: pendingItems } = state;
+            const { items: pendingItems } = state
 
             pendingItems[action.groupId] = pendingItems[action.groupId]
                 .filter(item => {
                     return item.id != action.id
-                });
+                })
 
             return { ...state, items: pendingItems }
         case 'PENDING_APPROVE_ALL':
-            const { items: approveAll } = state;
-            delete approveAll[action.groupId];
+            const { items: approveAll } = state
+            delete approveAll[action.groupId]
             return { ...state, items: approveAll}
         default:
             return state

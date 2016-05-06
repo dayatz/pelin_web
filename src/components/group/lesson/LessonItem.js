@@ -3,12 +3,12 @@ import Paper from 'material-ui/lib/paper'
 import FlatButton from 'material-ui/lib/flat-button'
 
 const LessonItem = (props, context) => {
-    var renderDeleteButton;
+    var renderDeleteButton
     if (context.group.is_owner) {
         renderDeleteButton = (
         <FlatButton label='x' secondary={true}
                 onClick={() => {
-                    props.onDeleteClick(props.lesson);
+                    props.onDeleteClick(props.lesson)
                 }} />
         )
     }
@@ -20,7 +20,7 @@ const LessonItem = (props, context) => {
             linkButton={true}
             label={file.name}
             href={file.file} />
-    });
+    })
     return (
         <div style={{width: 300, borderRadius: 10,
                     border: '1px solid #eee',

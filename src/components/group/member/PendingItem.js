@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 
 const PendingItem = (props) => {
     return (
@@ -14,4 +14,4 @@ const PendingItem = (props) => {
     )
 }
 
-export default PendingItem;
+export default PendingItem

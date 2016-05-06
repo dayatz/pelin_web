@@ -21,7 +21,7 @@ class AssignmentDetailContainer extends React.Component {
         this.getAssignment()
     }
     getAssignment() {
-        var assignment;
+        var assignment
         try {
             assignment = this.props.assignments.items[this.context.groupId]
                 .filter(a => {
@@ -33,7 +33,7 @@ class AssignmentDetailContainer extends React.Component {
         }
 
         if (!assignment) {
-            const groupId = this.context.groupId;
+            const groupId = this.context.groupId
             this.setState({ loading: true })
 
             AssignmentService(groupId)

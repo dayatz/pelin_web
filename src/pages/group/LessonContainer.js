@@ -6,4 +6,4 @@ class LessonContainer extends React.Component {
     }
 }
 
-export default LessonContainer;
+export default LessonContainer

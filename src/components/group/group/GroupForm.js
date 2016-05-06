@@ -1,9 +1,11 @@
 import React from 'react'
+
 import TextField from 'material-ui/lib/text-field'
 import DropDownMenu from 'material-ui/lib/DropDownMenu'
 import MenuItem from 'material-ui/lib/menus/menu-item'
-import GroupService from '../../api/group'
-import { addMyGroupAction, addGroupAction, updateGroupAction } from '../../actions/group'
+
+import GroupService from '../../../api/group'
+import { addMyGroupAction, addGroupAction, updateGroupAction } from '../../../actions/group'
 
 class GroupForm extends React.Component {
     constructor(props) {
@@ -42,7 +44,7 @@ class GroupForm extends React.Component {
         const major = this.state.major
 
         if (title && semester && major) {
-            this.setState({ loading: true });
+            this.setState({ loading: true })
             var data = { title, semester, major }
             if (description) {
                 data['description'] = description
@@ -59,12 +61,12 @@ class GroupForm extends React.Component {
             } else {
                 GroupService.create(data)
                 .then(r => {
-                    const group = r.data;
+                    const group = r.data
                     this.context.store
-                        .dispatch(addGroupAction(group));
+                        .dispatch(addGroupAction(group))
                     this.context.store
-                        .dispatch(addMyGroupAction(group.id));
-                    this.context.router.push(`/groups/${group.id}`);
+                        .dispatch(addMyGroupAction(group.id))
+                    this.context.router.push(`/groups/${group.id}`)
                 })
             }
         }

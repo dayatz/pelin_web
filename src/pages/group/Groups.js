@@ -1,12 +1,15 @@
 import React from 'react'
-import GroupService from '../../api/group'
-import GroupList from '../../components/group/GroupList'
-import { fetchAllGroup } from '../../actions/group'
 import { connect } from 'react-redux'
+
+import GroupService from '../../api/group'
+import GroupList from '../../components/group/group/GroupList'
+
+import { fetchAllGroup } from '../../actions/group'
+
 
 class Groups extends React.Component {
     componentDidMount() {
-        this.props.fetchAllGroup();
+        this.props.fetchAllGroup()
     }
 
     render() {
@@ -30,12 +33,12 @@ class Groups extends React.Component {
 
 const mapStateToProps = state => ({
     groups: state.groups
-});
+})
 
 const mapDispatchToProps = dispatch => ({
     fetchAllGroup: () => {
         dispatch(fetchAllGroup())
     }
-});
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Groups)

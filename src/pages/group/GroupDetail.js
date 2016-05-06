@@ -1,16 +1,19 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import Paper from 'material-ui/lib/paper'
-import GroupTabs from '../../components/group/GroupTabs'
-import { fetchSingleGroup } from '../../actions/group'
 import Link from 'react-router/lib/Link'
-import GroupDetailJoined from '../../components/group/GroupDetailJoined'
-import GroupDetailNotJoined from '../../components/group/GroupDetailNotJoined'
+
+import Paper from 'material-ui/lib/paper'
 import RaisedButton from 'material-ui/lib/raised-button'
+
+import GroupTabs from '../../components/group/group/GroupTabs'
+import GroupDetailJoined from '../../components/group/group/GroupDetailJoined'
+import GroupDetailNotJoined from '../../components/group/group/GroupDetailNotJoined'
+import { fetchSingleGroup } from '../../actions/group'
+
 
 class Group extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
 
         this.state = {
             groupId: this.props.params.groupId

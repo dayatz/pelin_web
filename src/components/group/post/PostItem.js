@@ -1,15 +1,17 @@
 import React from 'react'
-import { fetchComment } from '../../actions/post'
-import CommentList from '../../components/group/CommentList'
-import NewCommentForm from '../../components/group/NewCommentForm'
+
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
 import IconButton from 'material-ui/lib/icon-button'
 import FontIcon from 'material-ui/lib/font-icon'
 
+import CommentList from './CommentList'
+import NewCommentForm from './NewCommentForm'
+import { fetchComment } from '../../../actions/post'
+
 class PostItem extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             commentText: '',
             votesCount: this.props.post.votes_count,
@@ -34,11 +36,11 @@ class PostItem extends React.Component {
             })
         }
 
-        this.props.handleVote(this.props.post);
+        this.props.handleVote(this.props.post)
     }
 
     toggleComment() {
-        this.setState({ showComment: !this.state.showComment });
+        this.setState({ showComment: !this.state.showComment })
         if (!this.state.showComment) {
             this.context.store.dispatch(
                 fetchComment(this.context.groupId,
@@ -54,15 +56,15 @@ class PostItem extends React.Component {
                     this.props.handleDelete(this.props.post)
                 }} />
         }
-        return;
+        return
     }
 
     render() {
-        const post = this.props.post;
+        const post = this.props.post
         var renderComments = ''
         if (this.state.showComment) {
-            const comments = this.props.comments;
-            renderCommentList = <span>Loading...</span>;
+            const comments = this.props.comments
+            renderCommentList = <span>Loading...</span>
 
             if (comments && comments.length) {
                 var renderCommentList = (

@@ -9,14 +9,14 @@ const NavMenu = (props) => {
     if (!props.user.is_teacher) {
         renderCariGroup = (
             <MenuItem onTouchTap={() => {
-                props.router.push('/groups');
+                props.router.push('/groups')
             }}>
                 Cari Grup
             </MenuItem>
         )
         renderAssignments = (
             <MenuItem onTouchTap={() => {
-                props.router.push('/assignments');
+                props.router.push('/assignments')
             }}>
                 Tugas Saya
             </MenuItem>
@@ -30,7 +30,7 @@ const NavMenu = (props) => {
             onRequestChange={leftNavOpen => props.handleOpen(leftNavOpen)}>
 
             <MenuItem onTouchTap={() => {
-                    props.router.push('/');
+                    props.router.push('/')
                 }}>
                 Home
             </MenuItem>

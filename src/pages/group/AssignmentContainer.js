@@ -12,4 +12,4 @@ AssignmentContainer.contextTypes = {
     groupId: React.PropTypes.string
 }
 
-export default AssignmentContainer;
+export default AssignmentContainer

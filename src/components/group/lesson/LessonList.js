@@ -1,20 +1,20 @@
 import React from 'react'
-import LessonService from '../../api/lesson'
-import { lessonRemoveAction } from '../../actions/lesson'
 import LessonItem from './LessonItem'
+import LessonService from '../../../api/lesson'
+import { lessonRemoveAction } from '../../../actions/lesson'
 
 class LessonList extends React.Component {
     onDeleteClick(lesson) {
         this.context.store.dispatch(
             lessonRemoveAction(this.context.groupId, lesson.id)
-        );
+        )
         LessonService(this.context.groupId)
             .delete(lesson.id)
             .then(r => {
-                console.log(r);
+                console.log(r)
             })
             .catch(error => {
-                console.log(error);
+                console.log(error)
             })
     }
     render() {

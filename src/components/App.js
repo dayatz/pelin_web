@@ -22,7 +22,7 @@ class App extends React.Component {
     }
 
     constructor(props) {
-        super(props);
+        super(props)
         this.state = {
             navMenuOpen: false,
             snackbarOpen: false,
@@ -59,7 +59,9 @@ class App extends React.Component {
                         </div>
                     }
                     iconElementRight={
-                        <FlatButton label={this.props.auth.user.name.split(' ')[0]}
+                        <FlatButton
+                            onClick={() => { this.context.router.push('/profile') }}
+                            label={this.props.auth.user.name.split(' ')[0]}
                             icon={<FontIcon className="material-icons">face</FontIcon>}
                         />
                     }
@@ -89,7 +91,7 @@ class App extends React.Component {
                     open={this.state.snackbarOpen}
                     message={this.state.snackbarMsg}
                     onRequestClose={() => {
-                        this.setState({ snackbarOpen: false });
+                        this.setState({ snackbarOpen: false })
                     }}
                     autoHideDuration={3000}
                     />
@@ -102,22 +104,22 @@ App.childContextTypes = {
     muiTheme: React.PropTypes.object,
     auth: React.PropTypes.object,
     showSnackbar: React.PropTypes.func
-};
+}
 
 App.contextTypes = {
     router: React.PropTypes.object.isRequired,
     store: React.PropTypes.object
-};
+}
 
 const mapStateToProps = state => ({
     auth: state.auth
-});
+})
 
 const mapDispatchToProps = dispatch => ({
     logout: router => {
         // dispatch({ type: 'RESET'})
         dispatch(logout(router))
     }
-});
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(App)

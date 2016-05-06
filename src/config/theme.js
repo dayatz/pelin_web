@@ -14,6 +14,6 @@ const customTheme = {
         accent2Color: Colors.pink300,
         accent3Color: Colors.pink100
     }
-};
+}
 
 export default customTheme

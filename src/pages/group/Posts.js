@@ -1,16 +1,17 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchPost } from '../../actions/post'
-import PostList from '../../components/group/PostList'
-import NewPostForm from '../../components/group/NewPostForm'
+
+import PostList from '../../components/group/post/PostList'
+import NewPostForm from '../../components/group/post/NewPostForm'
 
 class Posts extends React.Component {
     componentDidMount() {
-        this.props.fetchPost(this.context.groupId);
+        this.props.fetchPost(this.context.groupId)
     }
 
     render () {
-        var posts = this.props.posts.items[this.context.groupId];
+        var posts = this.props.posts.items[this.context.groupId]
         if (posts && posts.length) {
             var renderPosts = <PostList posts={posts} />
         } else if (posts && !posts.length) {

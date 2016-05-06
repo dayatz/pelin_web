@@ -6,15 +6,15 @@ import AuthService from '../../api/auth'
 
 class Login extends React.Component {
     constructor(props) {
-        super(props);
+        super(props)
     }
 
     handleClick(email, password) {
-        this.props.loginRequest(email, password, this.context.router);
+        this.props.loginRequest(email, password, this.context.router)
     }
 
     render() {
-        var bgImg = require('../../assets/img/loginbg.png');
+        var bgImg = require('../../assets/img/loginbg.png')
         let loginPageStyle = {
             backgroundImage: `url(${bgImg})`,
             backgroundSize: 'cover',
@@ -35,15 +35,15 @@ class Login extends React.Component {
 
 Login.contextTypes = {
     router: React.PropTypes.object.isRequired
-};
+}
 
 const mapStateToProps = state => ({
     auth: state.auth
-});
+})
 
 const mapDispatchToProps = dispatch => ({
     loginRequest: (email, password, router) => {
-        dispatch(login(email, password, router));
+        dispatch(login(email, password, router))
     }
 })
 

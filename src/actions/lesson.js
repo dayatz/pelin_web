@@ -1,16 +1,16 @@
 import createAsyncAction from './createAsyncAction'
 import LessonService from '../api/lesson'
 
-export var fetchLessonAction = createAsyncAction("FETCH_LESSONS");
+export var fetchLessonAction = createAsyncAction("FETCH_LESSONS")
 
 export var fetchLessons = groupId => {
     return (dispatch, getState) => {
-        // const lessons = getState().lessons.items[groupId];
+        // const lessons = getState().lessons.items[groupId]
         // if (lessons && lessons.length) {
-        //     return Promise.resolve();
+        //     return Promise.resolve()
         // }
 
-        dispatch({ type: fetchLessonAction.start });
+        dispatch({ type: fetchLessonAction.start })
 
         return LessonService(groupId).fetchAll()
             .then(r => {

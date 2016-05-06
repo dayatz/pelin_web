@@ -6,11 +6,11 @@ import { fetchAllAssignment } from '../../actions/assignment'
 
 class Assignments extends React.Component {
     componentDidMount() {
-        this.props.fetchAllAssignment(this.context.groupId);
+        this.props.fetchAllAssignment(this.context.groupId)
     }
 
     render () {
-        const assignments = this.props.assignments.items[this.context.groupId];
+        const assignments = this.props.assignments.items[this.context.groupId]
         if (assignments && assignments.length) {
             var renderAssignmentList = <AssignmentList assignments={assignments} />
         } else if (assignments && !assignments.length) {
@@ -19,7 +19,7 @@ class Assignments extends React.Component {
             var renderAssignmentList = <span>Loading...</span>
         }
 
-        var renderAddButton;
+        var renderAddButton
         if (this.context.group.is_owner) {
             renderAddButton = (
                 <FabAdd onClick={() => {
@@ -45,7 +45,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     fetchAllAssignment: (groupId) => {
-        dispatch(fetchAllAssignment(groupId));
+        dispatch(fetchAllAssignment(groupId))
     }
 })
 
@@ -55,4 +55,4 @@ Assignments.contextTypes = {
     router: React.PropTypes.object
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(Assignments);
+export default connect(mapStateToProps, mapDispatchToProps)(Assignments)

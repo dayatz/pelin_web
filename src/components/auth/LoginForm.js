@@ -7,9 +7,9 @@ import Paper from 'material-ui/lib/paper'
 class LoginForm extends React.Component {
     onSubmit(e) {
         e.preventDefault()
-        const username = this.refs.username.getValue();
-        const password = this.refs.password.getValue();
-        this.props.handleClick(username, password);
+        const username = this.refs.username.getValue()
+        const password = this.refs.password.getValue()
+        this.props.handleClick(username, password)
     }
 
     render() {
@@ -40,7 +40,7 @@ class LoginForm extends React.Component {
                 <RaisedButton disabled={true}>
                     <CircularProgress size={0.4} style={{marginTop: -6}} />
                 </RaisedButton>
-            );
+            )
         }
 
         if (this.props.auth.isError) {

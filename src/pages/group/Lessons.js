@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
 import FabAdd from '../../components/FabAdd'
-import LessonList from '../../components/group/LessonList'
+import LessonList from '../../components/group/lesson/LessonList'
+
 import { fetchLessons } from '../../actions/lesson'
 
 class Lessons extends React.Component {
@@ -18,10 +20,10 @@ class Lessons extends React.Component {
                 }} />
             )
         }
-        return;
+        return
     }
     render () {
-        const lessons = this.props.lessons.items[this.context.groupId];
+        const lessons = this.props.lessons.items[this.context.groupId]
         if (lessons && lessons.length) {
             var renderLessonList = (
                 <div>

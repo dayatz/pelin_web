@@ -1,8 +1,8 @@
-import React from 'react';
+import React from 'react'
 
 class AssignmentInfo extends React.Component {
     render() {
-        const { assignment } = this.props;
+        const { assignment } = this.props
         return (
         <div>
                 <p>{assignment.title}</p>
@@ -14,4 +14,4 @@ class AssignmentInfo extends React.Component {
     }
 }
 
-export default AssignmentInfo;
+export default AssignmentInfo

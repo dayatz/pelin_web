@@ -30,6 +30,8 @@ const auth = (state = {
                 isError: true,
                 error: action.error
             }
+        case 'USER_UPDATE_PROFILE':
+            return { ...state, user: action.user }
         default:
             return state
     }

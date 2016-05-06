@@ -1,7 +1,7 @@
 import React from 'react'
-import GroupService from '../../api/group'
-import { myGroupLeaveAction } from '../../actions/group'
 import RaisedButton from 'material-ui/lib/raised-button'
+import GroupService from '../../../api/group'
+import { myGroupLeaveAction } from '../../../actions/group'
 
 class GroupActionStudent extends React.Component {
     leave() {

@@ -1,24 +1,26 @@
 import React from 'react'
-import MemberService from '../../api/member'
 import { connect } from 'react-redux'
+
+import MemberList from '../../components/group/member/MemberList'
+import PendingList from '../../components/group/member/PendingList'
+import InviteMemberForm from '../../components/group/member/InviteMemberForm'
+
+import MemberService from '../../api/member'
 import { fetchMembers, fetchPendings, kickMember } from '../../actions/member'
-import MemberList from '../../components/group/MemberList'
-import PendingList from '../../components/group/PendingList'
-import InviteMemberForm from '../../components/group/InviteMemberForm'
 
 class Members extends React.Component {
     componentDidMount() {
-        this.props.fetchMembers(this.context.groupId);
+        this.props.fetchMembers(this.context.groupId)
 
         if (this.context.group.is_owner) {
-            this.props.fetchPendings(this.context.groupId);
+            this.props.fetchPendings(this.context.groupId)
         }
     }
     kick(member) {
         MemberService(this.context.groupId)
             .kick(member.student.nim)
             .then(r => {
-                this.props.kickMember(this.context.groupId, member.id);
+                this.props.kickMember(this.context.groupId, member.id)
                 this.context.showSnackbar(
                     `${member.student.nim} berhasil dihapus.`
                 )
@@ -29,29 +31,29 @@ class Members extends React.Component {
             .invite(nim)
             .then(r => {
                 if (r.status == 201) {
-                    this.context.showSnackbar(`${nim} berhasil ditambahkan.`);
-                    this.props.fetchMembers(this.context.groupId);
+                    this.context.showSnackbar(`${nim} berhasil ditambahkan.`)
+                    this.props.fetchMembers(this.context.groupId)
                 } else {
-                    this.context.showSnackbar('Tunggu konfirmasi dari dosen.');
+                    this.context.showSnackbar('Tunggu konfirmasi dari dosen.')
                 }
-                clean();
+                clean()
             })
             .catch(error => {
                 if (error.status == 400) {
                     if (error.data.error.indexOf('Already') > -1) {
                         this.context.showSnackbar(`${nim} sudah menjadi member.`)
                     } else {
-                        this.context.showSnackbar('Sedang menunggu konfirmasi dosen.');
+                        this.context.showSnackbar('Sedang menunggu konfirmasi dosen.')
                     }
                 } else if (error.status == 404) {
-                    this.context.showSnackbar(`${nim} tidak ditemukan.`);
+                    this.context.showSnackbar(`${nim} tidak ditemukan.`)
                 }
-                clean();
-            });
+                clean()
+            })
     }
     render () {
-        const members = this.props.members.items[this.context.groupId];
-        var renderMembers = <span>Loading...</span>;
+        const members = this.props.members.items[this.context.groupId]
+        var renderMembers = <span>Loading...</span>
         if (members && members.length) {
             renderMembers = (
                 <MemberList
@@ -62,10 +64,10 @@ class Members extends React.Component {
             renderMembers = <span>No members</span>
         }
 
-        var renderPendings;
+        var renderPendings
         if (this.context.group.is_owner) {
-            const pendings = this.props.pendings.items[this.context.groupId];
-            renderPendings = <span>Loading...</span>;
+            const pendings = this.props.pendings.items[this.context.groupId]
+            renderPendings = <span>Loading...</span>
             if (pendings && pendings.length) {
                 renderPendings = (
                     <div>

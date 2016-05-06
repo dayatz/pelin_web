@@ -6,7 +6,7 @@ import AssignmentDetailTeacher from '../../components/group/assignment/Assignmen
 
 class AssignmentDetail extends React.Component {
     render () {
-        var renderAssignmentUser;
+        var renderAssignmentUser
         if (this.context.group.is_owner) {
             renderAssignmentUser = <AssignmentDetailTeacher />
         } else {

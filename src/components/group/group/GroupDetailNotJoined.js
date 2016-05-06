@@ -1,6 +1,6 @@
 import React from 'react'
-import GroupService from '../../api/group'
 import RaisedButton from 'material-ui/lib/raised-button'
+import GroupService from '../../../api/group'
 
 class GroupDetailNotJoined extends React.Component {    
     constructor(props) {
