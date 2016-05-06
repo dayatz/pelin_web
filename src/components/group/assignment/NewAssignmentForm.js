@@ -17,7 +17,7 @@ class NewAssignmentForm extends React.Component {
         super(props)
         this.state = {
             loading: false,
-            files: [],
+            file: null,
             date: null,
             time: null,
 
@@ -32,8 +32,7 @@ class NewAssignmentForm extends React.Component {
         fileInput.click()
     }
     _handleFileChange(e) {
-        console.log(e.target.files)
-        this.setState({ files: e.target.files })
+        this.setState({ file: e.target.files[0] })
     }
     _handleDateChange(event, date) {
         this.setState({ date })
@@ -77,10 +76,8 @@ class NewAssignmentForm extends React.Component {
             if (description) {
                 data.append('description', description)
             }
-            if (this.state.files.length) {
-                for (var i = 0; i < this.state.files.length; i++) {
-                    data.append('files', this.state.files[i])
-                }
+            if (this.state.file) {
+                data.append('file', this.state.file)
             }
 
             const handleSubmitSuccess = (r) => {
@@ -114,12 +111,9 @@ class NewAssignmentForm extends React.Component {
     }
     
     render() {
-        if (this.state.files.length == 1) {
-            var btnlabel = this.state.files[0].name
-        } else if (this.state.files.length > 1) {
-            var btnlabel = this.state.files.length + ' file'
-        } else {
-            var btnlabel = 'Pilih File'
+        var btnlabel = 'Pilih File'
+        if (this.state.file) {
+            btnlabel = this.state.files.name
         }
 
         if (this.state.editing) {
