@@ -53,3 +53,10 @@ export function fetchMessage(userId) {
             })
     }
 }
+
+export const sendMsgAction = (userId, item) => {
+    return {
+        type: 'MESSAGE_SEND',
+        userId, item
+    }
+}

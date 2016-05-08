@@ -2,7 +2,6 @@ import React from 'react'
 
 const MessageItem = (props) => {
     const { message } = props
-    console.log(message)
     
     var style
     if (!message.me) {

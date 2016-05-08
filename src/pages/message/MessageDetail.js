@@ -5,6 +5,11 @@ import MessageList from '../../components/message/MessageList'
 import MessageForm from '../../components/message/MessageForm'
 
 class MessageDetail extends React.Component {
+    getChildContext() {
+        return {
+            userId: this.props.params.messageId
+        }
+    }
     componentDidMount() {
         this.props.fetchMessage(this.props.params.messageId)
     }
@@ -31,6 +36,10 @@ class MessageDetail extends React.Component {
             </div>
         )
     }
+}
+
+MessageDetail.childContextTypes = {
+    userId: React.PropTypes.string
 }
 
 const stateToProps = state => ({

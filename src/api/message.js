@@ -7,8 +7,8 @@ const MessageService = {
     fetchMessage: function(id) {
         return ajax().get(`messages/${id}`)
     },
-    send: function(id, data) {
-        return ajax().post(`messages/${id}/reply`)
+    send: function(id, msg) {
+        return ajax().post(`messages/${id}/reply`, msg)
     },
     remove: function(id) {
         return ajax().delete(`messages/${id}`)
