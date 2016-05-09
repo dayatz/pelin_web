@@ -34,6 +34,11 @@ const conversation = (state = {
             }
             return { ...state, items: conversationRemove }
 
+        case 'CONVERSATION_ADD':
+            let { items: conversationAdd } = state
+            conversationAdd.unshift(action.item)
+            return {...state, items: conversationAdd }
+
         default:
             return state
     }
