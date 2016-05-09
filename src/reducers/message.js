@@ -26,7 +26,12 @@ const conversation = (state = {
 
         case 'CONVERSATION_REMOVE':
             const { items: conversationRemove } = state
-            delete conversationRemove[action.id]
+            delete conversationRemove[action.userId]
+            for (var id in conversationRemove) {
+                if (conversationRemove[id].user_id  == action.userId) {
+                    delete conversationRemove[id]
+                }
+            }
             return { ...state, items: conversationRemove }
 
         default:

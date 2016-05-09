@@ -60,3 +60,16 @@ export const sendMsgAction = (userId, item) => {
         userId, item
     }
 }
+
+export function removeConversationAction(userId) {
+    return dispatch => {
+        dispatch({
+            type: 'CONVERSATION_REMOVE',
+            userId
+        })
+        MessageService.remove(userId)
+        .then(r => {
+            console.log(r)
+        })
+    }
+}

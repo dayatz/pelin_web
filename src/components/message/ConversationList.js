@@ -8,7 +8,9 @@ const ConversationList = (props) => {
     for (var id in conversations) {
         items.push(
             <div key={id}>
-                <ConversationItem conversation={conversations[id]} />
+                <ConversationItem
+                    removeConversation={props.removeConversation}
+                    conversation={conversations[id]} />
             </div>
         )
     }
