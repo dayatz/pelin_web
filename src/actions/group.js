@@ -1,4 +1,4 @@
-import createAsyncAction from '../actions/createAsyncAction'
+import createAsyncAction from './createAsyncAction.js'
 import GroupService from '../api/group'
 import { getGroupByIds } from '../reducers/group'
 

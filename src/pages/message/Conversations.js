@@ -36,7 +36,7 @@ class Conversations extends React.Component {
     render() {
         const conversation = this.props.conversation
         var renderConversationList
-        if (conversation.isLoading) {
+        if (conversation.isLoading && !conversation.items) {
             renderConversationList = 'Loading'
         } else {
             if ( conversation.items ) {
