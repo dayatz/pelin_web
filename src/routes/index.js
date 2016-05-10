@@ -17,8 +17,8 @@ import UserDetail from '../pages/user/UserDetail'
 import MyAssignment from '../pages/user/MyAssignment'
 import Notifications from '../pages/user/Notifications'
 
-import MessageContainer from '../pages/message/MessageContainer'
-import MessageList from '../pages/message/MessageList'
+import MessageNoSelected from '../pages/message/MessageNoSelected'
+import Conversations from '../pages/message/Conversations'
 import MessageDetail from '../pages/message/MessageDetail'
 
 import Login from '../pages/auth/Login'
@@ -65,8 +65,8 @@ const routes = (
             <Route name="my-assignment" path="assignments" component={MyAssignment} />
             <Route name="notifications" path="notifications" component={Notifications} />
 
-            <Route path="messages" component={MessageContainer}>
-                <IndexRoute component={MessageList} />
+            <Route path="messages" component={Conversations}>
+                <IndexRoute component={MessageNoSelected} />
                 <Route name="message-detail" path=":messageId" component={MessageDetail} />
             </Route>
 

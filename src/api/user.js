@@ -13,6 +13,9 @@ const UserService = {
     },
     update: function(user) {
         return ajax().patch('users/me', user)
+    },
+    get: function(id) {
+        return ajax().get(`users/${id}`)
     }
 }
 

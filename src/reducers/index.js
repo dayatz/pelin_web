@@ -8,6 +8,8 @@ import assignments, { myAssignments, submits } from './assignment'
 import members, { pendings } from './member'
 import lessons from './lesson'
 import posts, { comments } from './post'
+import conversation, { messages } from './message.js'
+import user from './user'
 
 
 const reducers = combineReducers({
@@ -19,6 +21,8 @@ const reducers = combineReducers({
     lessons,
     assignments, myAssignments, submits,
     members, pendings,
+    conversation, messages,
+    user,
     routing: routerReducer
 })
 
