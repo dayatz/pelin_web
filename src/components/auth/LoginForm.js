@@ -60,14 +60,16 @@ class LoginForm extends React.Component {
                             ref="username"
                             disabled={this.props.auth.isLoading}
                             hintText="NIM/Username/Email"
-                            autoFocus={true} />
+                            autoFocus={true}
+                            autoComplete={false} />
                     </div>
 
                     <div style={{marginTop: 20}}>
                         <TextField
                             ref="password"
                             disabled={this.props.auth.isLoading}
-                            type="password" hintText="Password" />
+                            type="password" hintText="Password"
+                            autoComplete={false} />
                     </div>
                     {errorMsg}
                     <div style={btnStyle}>

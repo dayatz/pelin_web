@@ -1,16 +1,19 @@
 import React from 'react'
+import { logout } from '../actions/auth'
+import { connect } from 'react-redux'
+
 import getMuiTheme from 'material-ui/lib/styles/getMuiTheme'
 import customTheme from '../config/theme'
-
 import AppBar from 'material-ui/lib/app-bar'
 import Snackbar from 'material-ui/lib/snackbar'
 import FontIcon from 'material-ui/lib/font-icon'
 import IconMenu from 'material-ui/lib/menus/icon-menu'
 import IconButton from 'material-ui/lib/icon-button'
 import FlatButton from 'material-ui/lib/flat-button'
+
 import NavMenu from '../components/NavMenu'
-import { logout } from '../actions/auth'
-import { connect } from 'react-redux'
+import Notification from '../components/Notification'
+
 
 class App extends React.Component {
     getChildContext() {
@@ -40,6 +43,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
+                <Notification />
                 <AppBar
                     title={
                         <div className="col-md-8 col-md-offset-2">
