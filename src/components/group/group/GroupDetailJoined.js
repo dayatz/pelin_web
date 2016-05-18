@@ -48,17 +48,13 @@ class GroupDetailJoined extends React.Component {
         }
         return (
         <div>
-            <div>
-                <h4 style={{float: 'left'}}>{this.context.group.title}</h4>
-                <div style={{float: 'right'}}>
-                    {groupAction}
-                </div>
-                <div style={{clear: 'both'}}></div>
+            <div className="group-action">
+                {groupAction}
             </div>
             <Paper style={{minHeight: 500}} zDepth={1}>
                 <div>
                     <GroupTabs location={this.props.location} />
-                    {this.props.children}
+                    <div style={{padding: 30}}>{this.props.children}</div>
                 </div>
             </Paper>
         </div>

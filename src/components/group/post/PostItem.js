@@ -4,6 +4,9 @@ import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
 import IconButton from 'material-ui/lib/icon-button'
 import FontIcon from 'material-ui/lib/font-icon'
+import Paper from 'material-ui/lib/paper'
+import Avatar from 'material-ui/lib/avatar'
+import Divider from 'material-ui/lib/divider'
 
 import CommentList from './CommentList'
 import NewCommentForm from './NewCommentForm'
@@ -16,7 +19,8 @@ class PostItem extends React.Component {
             commentText: '',
             votesCount: this.props.post.votes_count,
             isVoted: this.props.post.is_voted,
-            showComment: false
+            showComment: false,
+            zDepth: 1
         }
     }
 
@@ -59,6 +63,13 @@ class PostItem extends React.Component {
         return
     }
 
+    itemFocus() {
+        this.setState({ zDepth: 3 })
+    }
+    itemUnfocus() {
+        this.setState({ zDepth: 1 })
+    }
+
     render() {
         const post = this.props.post
         var renderComments = ''
@@ -77,42 +88,83 @@ class PostItem extends React.Component {
             var renderComments = (
                 <div>
                 {renderCommentList}
-                <NewCommentForm postId={post.id} />
                 </div>
             )
         }
 
+        // voted
         if (this.state.isVoted) {
-            var iconVoted = <FontIcon color='pink' className='material-icons'>favorite</FontIcon>
+            var iconVoted = <FontIcon color='white' className='material-icons'>favorite</FontIcon>
         } else {
-            var iconVoted = <FontIcon color='pink' className='material-icons'>favorite_border</FontIcon>
+            var iconVoted = <FontIcon className='material-icons'>favorite_border</FontIcon>
+        }
+        var votesCount
+        if (this.state.votesCount) {
+            votesCount = this.state.votesCount
+        }
+
+        // avatar
+        if (post.user.photo && post.user.photo.thumbnail) {
+            var avatar = <Avatar src={post.user.photo.thumbnail} />
+        } else {
+            let name = post.user.name
+            var avatar = <Avatar>{name.charAt(0)}</Avatar>
+        }
+
+        // userStatus
+        var userStatus
+        if (post.user.teacher) {
+            userStatus = <i style={{ color: '#9e9e9e' }}>Dosen</i>
         }
 
         return (
-            <div>
-                <div>
-                    <b>({this.state.votesCount}) {post.user.name}</b>
-                    <span> :{post.text}</span>
+            <Paper className='post-item'
+                zDepth={this.state.zDepth}
+                onMouseEnter={() => { this.itemFocus() }}
+                onMouseLeave={() => { this.itemUnfocus() }}>
+                <div className='post-item__user-info'>
+                    {avatar}
+                    <b className='post-item__user-info__name'>
+                        {post.user.name} {userStatus}
+                    </b>
                 </div>
 
-                <div>{renderComments}</div>
+                <div className='post-item__text'>
+                    <p>{post.text}</p>
+                </div>
 
-                <IconButton onClick={this.handleVote.bind(this)}>
-                    {iconVoted}
-                </IconButton>
+                <div className='post-item__action'>
+                    <IconButton
+                        onClick={this.handleVote.bind(this)}
+                        style={{ background: (this.state.isVoted) ? '#2196F3': '#eee', borderRadius: '50%' }}>
+                        {iconVoted}
+                    </IconButton> {votesCount}
 
-                <FlatButton label="comment" secondary={true}
-                    onClick={this.toggleComment.bind(this)} />
+                    <IconButton
+                        onClick={this.toggleComment.bind(this)}
+                        style={{ background: '#eee', borderRadius: '50%', float: 'right' }}>
+                        <FontIcon className='material-icons'>comment</FontIcon>
+                    </IconButton>
 
-                {this.renderDeleteBtn()}
-            </div>
+                    {/**this.renderDeleteBtn()**/}
+                </div>
+
+                <div className='post-item__comments'>
+                    {renderComments}
+                </div>
+                <Divider />
+                <div className='post-item__new-comment'>
+                    <NewCommentForm postId={post.id} />
+                </div>
+            </Paper>
         )
     }
 }
 
 PostItem.contextTypes = {
     groupId: React.PropTypes.string,
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    masonry: React.PropTypes.object
 }
 
 export default PostItem

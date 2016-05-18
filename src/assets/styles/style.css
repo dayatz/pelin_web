@@ -15,3 +15,37 @@ body {
     top: 60px;
     width: 100%;
 }
+
+.group-action {
+    position: absolute;
+    right: -48px;
+}
+
+.post-item {
+    width: 400px;
+    padding-top: 16px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+
+.post-item__user-info,
+.post-item__text,
+.post-item__action {
+    margin: 0 16px 16px;
+}
+.post-item__user-info__name {
+    margin-left: 8px;
+}
+.post-item__new-comment {
+    padding-left: 16px;
+    background-color: #FAFAFA
+}
+.post-item__new-comment__text {
+    resize: none;
+    border: none;
+    outline: none;
+    overflow: hidden;
+    background-color: #FAFAFA;
+    margin-top: 12px;
+    width: 320px;
+}

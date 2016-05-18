@@ -24,6 +24,7 @@ class Home extends React.Component {
     }
     componentDidMount() {
         this.props.fetchMyGroups()
+        this.context.setPageTitle('Group Anda')
     }
 
     _toggleModal() {
@@ -56,9 +57,10 @@ class Home extends React.Component {
         }
         return (
             <div>
-                <h4>Grup Yang Diikuti</h4>
+                <Paper style={{minHeight: 500}}>
                 {this.renderAddGroupButton()}
                 {renderGroupList}
+                </Paper>
             </div>
         )
     }
@@ -66,7 +68,8 @@ class Home extends React.Component {
 
 Home.contextTypes = {
     store: React.PropTypes.object,
-    auth: React.PropTypes.object
+    auth: React.PropTypes.object,
+    setPageTitle: React.PropTypes.func
 }
 
 const mapStateToProps = state => ({

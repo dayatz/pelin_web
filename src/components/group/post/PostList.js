@@ -1,9 +1,23 @@
 import React from 'react'
+
 import { connect } from 'react-redux'
+import Masonry from 'react-masonry-component'
+
 import PostItem from './PostItem'
 import PostService from '../../../api/post'
 
 class PostList extends React.Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            masonry: null
+        }
+    }
+    getChildContext() {
+        return {
+            masonry: this.state.masonry
+        }
+    }
     handleDelete(post) {
         const postId = post.id
         const groupId = this.context.groupId
@@ -22,6 +36,9 @@ class PostList extends React.Component {
                 console.log(r)
             })
     }
+    componentDidMount() {
+        this.setState({ masonry: this.refs.masonry })
+    }
 
     render () {
         var renderPost = this.props.posts.map(post => {
@@ -37,13 +54,18 @@ class PostList extends React.Component {
         })
 
         return (
-            <div>{renderPost}</div>
+            <Masonry ref='masonry'>
+                {renderPost}
+            </Masonry>
         )
     }
 }
 
 PostList.contextTypes = {
     groupId: React.PropTypes.string
+}
+PostList.childContextTypes = {
+    masonry: React.PropTypes.object
 }
 
 const stateProps = state => ({

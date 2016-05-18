@@ -1,6 +1,10 @@
 import React from 'react'
 import TextField from 'material-ui/lib/text-field'
-import RaisedButton from 'material-ui/lib/raised-button'
+import IconButton from 'material-ui/lib/icon-button'
+import FontIcon from 'material-ui/lib/font-icon'
+
+import TextareaAutosize from 'react-autosize-textarea'
+
 import PostService from '../../../api/post'
 
 class NewCommentForm extends React.Component {
@@ -42,16 +46,24 @@ class NewCommentForm extends React.Component {
     }
     render() {
         return (
-            <form onSubmit={this.onSubmit.bind(this)}>
-                <TextField
+            <form onSubmit={this.onSubmit.bind(this)} style={{ width: '100%' }}>
+                <TextareaAutosize
+                    onResize={() => { this.context.masonry.masonry.layout() }}
                     value={this.state.commentText}
+                    placeholder='Komentari post ini...'
                     id={this.props.postId.toString()}
                     onChange={this.handleChange.bind(this)}
+                    disabled={this.state.sending}
                     autoComplete='off'
-                    autoFocus={true} disabled={this.state.sending}
-                    />
-                <RaisedButton disabled={this.state.sending}
-                    type='submit' label='comment' />
+                    className='post-item__new-comment__text' />
+
+                <IconButton
+                    style={{ float: 'right' }}
+                    disabled={this.state.sending}
+                    type='button'>
+                    <FontIcon className='material-icons'>send</FontIcon>
+                </IconButton>
+                <div style={{clear: 'both'}}></div>
             </form>
         )
     }
@@ -59,7 +71,8 @@ class NewCommentForm extends React.Component {
 
 NewCommentForm.contextTypes = {
     groupId: React.PropTypes.string,
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    masonry: React.PropTypes.object
 }
 
 export default NewCommentForm

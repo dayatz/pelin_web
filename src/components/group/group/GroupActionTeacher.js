@@ -26,6 +26,7 @@ class GroupActionTeacher extends React.Component {
     render() {
         return (
         <IconMenu
+            iconStyle={{fontSize: 32, color: '#fff'}}
             iconButtonElement={
                 <IconButton>
                     <FontIcon className='material-icons'>more_vert</FontIcon>

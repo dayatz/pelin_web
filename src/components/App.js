@@ -20,7 +20,8 @@ class App extends React.Component {
         return {
             muiTheme: getMuiTheme(customTheme),
             auth: this.context.store.getState().auth,
-            showSnackbar: this.showSnackbar.bind(this)
+            showSnackbar: this.showSnackbar.bind(this),
+            setPageTitle: this.setPageTitle.bind(this)
         }
     }
 
@@ -29,7 +30,8 @@ class App extends React.Component {
         this.state = {
             navMenuOpen: false,
             snackbarOpen: false,
-            snackbarMsg: ''
+            snackbarMsg: '',
+            pageTitle: ''
         }
     }
 
@@ -40,6 +42,10 @@ class App extends React.Component {
         })
     }
 
+    setPageTitle(pageTitle) {
+        this.setState({ pageTitle })
+    }
+
     render() {
         return (
             <div>
@@ -47,7 +53,7 @@ class App extends React.Component {
                 <AppBar
                     title={
                         <div className="col-md-8 col-md-offset-2">
-                            <span>Pelin Web</span>
+                            <span>{this.state.pageTitle}</span>
 
                             <div className="notification-wrapper">
                                 <IconButton style={{paddingTop: 5}}>
