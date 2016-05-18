@@ -1,6 +1,7 @@
 import React from 'react'
 import Snackbar from 'material-ui/lib/snackbar'
 import scriptLoader from 'react-async-script-loader'
+import { addNotification } from '../actions/notification'
 
 
 class Notification extends React.Component {
@@ -20,13 +21,15 @@ class Notification extends React.Component {
             if (!data.action_type) {
                 snackbarMsg = `${data.actor.name} ${data.verb} di grup ${data.target.title}`
             } else if (data.action_type == 'post') {
-                snackbarMsg = `${data.actor.name} ${data.verb} postingan anda di grup ${data.target.title}`
+                snackbarMsg = `${data.actor.name} ${data.verb} anda di grup ${data.target.title}`
             } else if (data.action_type == 'lesson') {
                 snackbarMsg = `${data.actor.name} ${data.verb} ${data.action_object.title} di grup ${data.target.title}`
             } else if (data.action_type == 'assignment') {
                 snackbarMsg = `${data.actor.name} ${data.verb} ${data.action_object.title} di grup ${data.target.title}`
             }
             this.setState({ snackbarOpen: true, snackbarMsg })
+
+            this.context.store.dispatch(addNotification(data))
         })
     }
     componentDidMount() {
@@ -66,7 +69,8 @@ class Notification extends React.Component {
 }
 
 Notification.contextTypes = {
-    auth: React.PropTypes.object
+    auth: React.PropTypes.object,
+    store: React.PropTypes.object
 }
 
 export default scriptLoader('http://js.pusher.com/3.1/pusher.min.js')(Notification)

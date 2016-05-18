@@ -69,11 +69,12 @@ class App extends React.Component {
                             icon={<FontIcon className="material-icons">face</FontIcon>}
                         />
                     }
-                    zDepth={2}
+                    zDepth={0}
                     onLeftIconButtonTouchTap={() => {
                         this.setState({ navMenuOpen: !this.state.navMenuOpen })
                     }}
                 />
+                <div className='background-content'></div>
 
                 <NavMenu open={this.state.navMenuOpen}
                     handleOpen={ navMenuOpen => {
@@ -86,7 +87,7 @@ class App extends React.Component {
 
                 {/* TODO: design container */}
                 <div className="container" style={{marginTop: 20}}>
-                    <div className="col-md-8 col-md-offset-2">
+                    <div className="col-md-10 col-md-offset-1">
                         {this.props.children}
                     </div>
                 </div>
@@ -107,7 +108,8 @@ class App extends React.Component {
 App.childContextTypes = {
     muiTheme: React.PropTypes.object,
     auth: React.PropTypes.object,
-    showSnackbar: React.PropTypes.func
+    showSnackbar: React.PropTypes.func,
+    setPageTitle: React.PropTypes.func
 }
 
 App.contextTypes = {

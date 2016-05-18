@@ -61,7 +61,8 @@ class Group extends React.Component {
 
 Group.contextTypes = {
     router: React.PropTypes.object,
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    setPageTitle: React.PropTypes.func
 }
 
 Group.childContextTypes = {

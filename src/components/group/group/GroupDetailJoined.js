@@ -55,7 +55,7 @@ class GroupDetailJoined extends React.Component {
                 </div>
                 <div style={{clear: 'both'}}></div>
             </div>
-            <Paper style={{minHeight: 500}}>
+            <Paper style={{minHeight: 500}} zDepth={1}>
                 <div>
                     <GroupTabs location={this.props.location} />
                     {this.props.children}

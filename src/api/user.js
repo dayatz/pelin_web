@@ -16,6 +16,12 @@ const UserService = {
     },
     get: function(id) {
         return ajax().get(`users/${id}`)
+    },
+    getNotifications() {
+        return ajax().get('notifications')
+    },
+    getNotificationsCount() {
+        return ajax().get('notifications?count')
     }
 }
 
