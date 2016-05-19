@@ -49,3 +49,21 @@ body {
     margin-top: 12px;
     width: 320px;
 }
+.post-item__comments {
+    padding: 16px;
+    background-color: #F5F5F5;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    border-top: 1px solid #eee;
+}
+
+.comment-item {
+    margin-bottom: 16px;
+}
+.comment-item__avatar {
+    float: left;
+}
+.comment-item__body {
+    margin-left: 38px;
+}

@@ -62,7 +62,11 @@ export const comments = (state = {
             }
         case 'ADD_COMMENT':
             const { items: its } = state
-            its[action.postId] = [...state.items[action.postId], action.item]
+            if (its[action.postId] && its[action.postId].length) {
+                its[action.postId] = [...state.items[action.postId], action.item]
+            } else {
+                its[action.postId] = [action.item]
+            }
             return { ...state, items: its }
         case fetchCommentAction.fail:
             return { ...state,

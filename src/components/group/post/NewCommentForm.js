@@ -35,6 +35,7 @@ class NewCommentForm extends React.Component {
                         postId
                     })
                     this.clean()
+                    this.props.openComments()
                 })
                 .catch( error => {
                     console.log(error)
@@ -60,7 +61,7 @@ class NewCommentForm extends React.Component {
                 <IconButton
                     style={{ float: 'right' }}
                     disabled={this.state.sending}
-                    type='button'>
+                    type='submit'>
                     <FontIcon className='material-icons'>send</FontIcon>
                 </IconButton>
                 <div style={{clear: 'both'}}></div>

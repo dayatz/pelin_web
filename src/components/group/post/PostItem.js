@@ -53,6 +53,14 @@ class PostItem extends React.Component {
         }
     }
 
+    openComments() {
+        this.setState({ showComment: true })
+        this.context.store.dispatch(
+            fetchComment(this.context.groupId,
+            this.props.post.id)
+        )
+    }
+
     renderDeleteBtn() {
         if (this.props.post.me) {
             return <FlatButton label="Delete"
@@ -86,7 +94,7 @@ class PostItem extends React.Component {
             }
 
             var renderComments = (
-                <div>
+                <div className='post-item__comments'>
                 {renderCommentList}
                 </div>
             )
@@ -136,25 +144,43 @@ class PostItem extends React.Component {
                 <div className='post-item__action'>
                     <IconButton
                         onClick={this.handleVote.bind(this)}
-                        style={{ background: (this.state.isVoted) ? '#2196F3': '#eee', borderRadius: '50%' }}>
+                        style={{
+                            background: (this.state.isVoted) ? '#2196F3': '#eee', borderRadius: '50%',
+                            height: 32, width: 32, padding: 2,
+                            boxShadow: (this.state.isVoted) ?
+                                '0 2px 5px 0 rgba(0,0,0,0.16),0 2px 10px 0 rgba(0,0,0,0.12)' :
+                                'none'
+                        }}
+                        iconStyle={{
+                            fontSize: 16,
+                            color: (this.state.isVoted) ? '#fff' : '#757575'
+                        }}>
                         {iconVoted}
                     </IconButton> {votesCount}
 
                     <IconButton
                         onClick={this.toggleComment.bind(this)}
-                        style={{ background: '#eee', borderRadius: '50%', float: 'right' }}>
+                        style={{
+                            background: '#eee', borderRadius: '50%', float: 'right',
+                            height: 32, width: 32, padding: 2
+                        }}
+                        iconStyle={{
+                            fontSize: 16,
+                            color: '#757575'
+                        }}>
                         <FontIcon className='material-icons'>comment</FontIcon>
                     </IconButton>
 
                     {/**this.renderDeleteBtn()**/}
                 </div>
 
-                <div className='post-item__comments'>
-                    {renderComments}
-                </div>
+                {renderComments}
+
                 <Divider />
                 <div className='post-item__new-comment'>
-                    <NewCommentForm postId={post.id} />
+                    <NewCommentForm
+                        openComments={this.openComments.bind(this)}
+                        postId={post.id} />
                 </div>
             </Paper>
         )
