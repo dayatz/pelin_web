@@ -19,15 +19,17 @@ class PostList extends React.Component {
         }
     }
     handleDelete(post) {
-        const postId = post.id
-        const groupId = this.context.groupId
-        this.props.deletePost(groupId, postId)
+        if (confirm('Hapus post ?')) {
+            const postId = post.id
+            const groupId = this.context.groupId
+            this.props.deletePost(groupId, postId)
 
-        PostService(groupId)
-            .delete(postId)
-            .then(r => {
-                console.log(r)
-            })
+            PostService(groupId)
+                .delete(postId)
+                .then(r => {
+                    console.log(r)
+                })
+        }
     }
     handleVote(post) {
         PostService(this.context.groupId)

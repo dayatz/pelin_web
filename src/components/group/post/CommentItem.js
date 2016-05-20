@@ -13,8 +13,8 @@ const CommentItem = (props) => {
         <div className='comment-item'>
             <div className='comment-item__avatar'>{avatar}</div>
             <div className='comment-item__body'>
-                <b>{comment.user.name}</b>
-                <p>{comment.text}</p>
+                <b className='comment-item__user'>{comment.user.name}</b>
+                <p className='comment-item__text'>{comment.text}</p>
             </div>
         </div>
     )

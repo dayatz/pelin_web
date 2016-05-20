@@ -8,6 +8,9 @@ import Paper from 'material-ui/lib/paper'
 import Avatar from 'material-ui/lib/avatar'
 import Divider from 'material-ui/lib/divider'
 
+import IconMenu from 'material-ui/lib/menus/icon-menu'
+import MenuItem from 'material-ui/lib/menus/menu-item'
+
 import CommentList from './CommentList'
 import NewCommentForm from './NewCommentForm'
 import { fetchComment } from '../../../actions/post'
@@ -63,10 +66,26 @@ class PostItem extends React.Component {
 
     renderDeleteBtn() {
         if (this.props.post.me) {
-            return <FlatButton label="Delete"
-                onClick={() => {
-                    this.props.handleDelete(this.props.post)
-                }} />
+            return (
+                <IconMenu
+                    iconButtonElement={
+                        <IconButton>
+                            <FontIcon className='material-icons'>more_vert</FontIcon>
+                        </IconButton>
+                    }
+                    anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    >
+                    <MenuItem
+                        primaryText='Hapus'
+                        leftIcon={
+                            <FontIcon className='material-icons'>delete</FontIcon>
+                        }
+                        onClick={ () => {
+                            this.props.handleDelete(this.props.post)
+                        }} />
+                </IconMenu>
+            )
         }
         return
     }
@@ -87,17 +106,14 @@ class PostItem extends React.Component {
 
             if (comments && comments.length) {
                 var renderCommentList = (
-                    <div><CommentList comments={comments} /></div>
+                    <CommentList comments={comments} />
                 )
             } else if (comments && !comments.length) {
-                renderCommentList = ''
+                renderCommentList = 'Belum ada komentar'
             }
 
-            var renderComments = (
-                <div className='post-item__comments'>
-                {renderCommentList}
-                </div>
-            )
+            var renderComments = renderCommentList
+            
         }
 
         // voted
@@ -135,6 +151,7 @@ class PostItem extends React.Component {
                     <b className='post-item__user-info__name'>
                         {post.user.name} {userStatus}
                     </b>
+                    <div className='post-item__option'>{this.renderDeleteBtn()}</div>
                 </div>
 
                 <div className='post-item__text'>
@@ -170,8 +187,6 @@ class PostItem extends React.Component {
                         }}>
                         <FontIcon className='material-icons'>comment</FontIcon>
                     </IconButton>
-
-                    {/**this.renderDeleteBtn()**/}
                 </div>
 
                 {renderComments}

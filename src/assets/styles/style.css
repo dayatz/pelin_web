@@ -33,8 +33,14 @@ body {
 .post-item__action {
     margin: 0 16px 16px;
 }
+.post-item__new-comment__text {
+    font-size: 12px;
+}
 .post-item__user-info__name {
     margin-left: 8px;
+}
+.post-item__option {
+    float: right;
 }
 .post-item__new-comment {
     padding-left: 16px;
@@ -58,7 +64,7 @@ body {
     border-top: 1px solid #eee;
 }
 
-.comment-item {
+.comment-item:not(:last-child) {
     margin-bottom: 16px;
 }
 .comment-item__avatar {
@@ -66,4 +72,8 @@ body {
 }
 .comment-item__body {
     margin-left: 38px;
+}
+.comment-item__user,
+.comment-item__text {
+    font-size: 12px;
 }
