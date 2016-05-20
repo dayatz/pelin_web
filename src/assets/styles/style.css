@@ -56,12 +56,17 @@ body {
     width: 320px;
 }
 .post-item__comments {
-    padding: 16px;
+    padding: 16px 16px 0;
     background-color: #F5F5F5;
     max-height: 300px;
     overflow-y: auto;
     overflow-x: hidden;
     border-top: 1px solid #eee;
+}
+.post-item__votes-count {
+    margin-left: 10px;
+    font-size: 12px;
+    color: #757575;
 }
 
 .comment-item:not(:last-child) {

@@ -13,6 +13,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item'
 
 import CommentList from './CommentList'
 import NewCommentForm from './NewCommentForm'
+import Text from '../../Text'
 import { fetchComment } from '../../../actions/post'
 
 class PostItem extends React.Component {
@@ -155,7 +156,7 @@ class PostItem extends React.Component {
                 </div>
 
                 <div className='post-item__text'>
-                    <p>{post.text}</p>
+                    <p><Text text={post.text} /></p>
                 </div>
 
                 <div className='post-item__action'>
@@ -173,7 +174,8 @@ class PostItem extends React.Component {
                             color: (this.state.isVoted) ? '#fff' : '#757575'
                         }}>
                         {iconVoted}
-                    </IconButton> {votesCount}
+                    </IconButton>
+                    <span className='post-item__votes-count'>{votesCount}</span>
 
                     <IconButton
                         onClick={this.toggleComment.bind(this)}
