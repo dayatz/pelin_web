@@ -4,7 +4,6 @@ import { connect } from 'react-redux'
 import { fetchPost } from '../../actions/post'
 
 import PostList from '../../components/group/post/PostList'
-import NewPostForm from '../../components/group/post/NewPostForm'
 
 class Posts extends React.Component {
     componentDidMount() {

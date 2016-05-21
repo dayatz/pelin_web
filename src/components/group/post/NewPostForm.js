@@ -1,9 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import autosize from 'autosize'
+import TextareaAutosize from 'react-autosize-textarea'
 import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
 import FlatButton from 'material-ui/lib/flat-button'
 import Paper from 'material-ui/lib/paper'
+
+
 import PostService from '../../../api/post'
 
 class NewPostForm extends React.Component {
@@ -12,8 +16,22 @@ class NewPostForm extends React.Component {
         this.state = {
             value: '',
             file: null,
-            sending: false
+            sending: false,
+            zDepth: 1
         }
+    }
+    componentDidMount() {
+        var txt = document.getElementById('new-post')
+        var t = this
+        autosize(txt)
+        txt.addEventListener('autosize:resized', () => {
+            setTimeout(() => {
+                t.relayout()
+            }, 150)
+        })
+    }
+    relayout() {
+        this.context.masonry.masonry.layout()
     }
     onChange(e) {
         this.setState({ value: e.target.value })
@@ -59,27 +77,34 @@ class NewPostForm extends React.Component {
     render() {
         var btnlabel = 'File'
         if (this.state.file) {
-            if (this.state.file.name.length >= 5) {
-                var ext = filename.split('.')[1]
+            if (this.state.file.name.length >= 10) {
+                var ext = this.state.file.name.split('.')[1]
                 btnlabel = this.state.file.name.substring(0,5) + '...' + ext
             } else {
                 btnlabel = this.state.file.name
             }
         }
         return (
-            <Paper className='post-form' id='new-post-form'>
+            <Paper zDepth={this.state.zDepth} className='post-form' id='new-post-form'>
                 <form onSubmit={this.onSubmit.bind(this)}>
                     <div>
                         <TextField
                             style={{ fontSize: 14 }}
-                            fullWidth={true}
+                            fullWidth={true} ref='text'
                             value={this.state.value}
                             disabled={this.state.sending}
                             multiLine={true} rows={2}
                             autoFocus={true}
                             hintText='Posting sesuatu...'
                             autoComplete='off' id='new-post'
-                            onChange={this.onChange.bind(this)} />
+                            onFocus={() => {
+                                this.setState({ zDepth: 2 })
+                            }}
+                            onBlur={() => {
+                                this.setState({ zDepth: 1 })
+                            }}
+                            onChange={this.onChange.bind(this)}>
+                        </TextField>
                     </div>
 
                     <div>
@@ -107,7 +132,8 @@ class NewPostForm extends React.Component {
 
 NewPostForm.contextTypes = {
     groupId: React.PropTypes.string,
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    masonry: React.PropTypes.object
 }
 
 export default NewPostForm

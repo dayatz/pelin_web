@@ -51,7 +51,7 @@ class GroupDetailJoined extends React.Component {
             <div className="group-action">
                 {groupAction}
             </div>
-            <Paper style={{minHeight: 500}} zDepth={1}>
+            <Paper className='paper' zDepth={1}>
                 <div>
                     <GroupTabs location={this.props.location} />
                     <div style={{padding: 30}}>{this.props.children}</div>

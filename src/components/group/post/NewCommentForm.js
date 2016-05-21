@@ -20,12 +20,11 @@ class NewCommentForm extends React.Component {
     }
     onSubmit(e) {
         e.preventDefault()
-        this.setState({ sending: true })
-
         const postId = this.props.postId
         const text = this.state.commentText.trim()
 
         if (text) {
+            this.setState({ sending: true })
             PostService(this.context.groupId)
                 .comment(postId, { text })
                 .then(r => {

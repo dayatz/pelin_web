@@ -2,7 +2,10 @@ body {
     margin: 0;
     background-color: #eee;
 }
-
+.paper {
+    min-height: 500px;
+    background-color: #FAFAFA !important;
+}
 .notification-wrapper {
     float: right;
     color: #fff;

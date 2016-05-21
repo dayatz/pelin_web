@@ -158,9 +158,9 @@ class PostItem extends React.Component {
                 filename = filename.substring(0,10) + '...' + ext
             }
             renderAttachment = (
-                <a className='post-item__attachment' href={post.file}>
+                <a className='post-item__attachment' href={post.file} target='_blank'>
                     <Avatar size={24} style={{ marginRight: 5 }}>
-                        <FontIcon style={{ fontSize: 14, color: '#757575' }} className='material-icons'>cloud_download</FontIcon>
+                        <FontIcon style={{ fontSize: 14, color: '#757575' }} className='material-icons'>attach_file</FontIcon>
                     </Avatar>
                     <span style={{ fontSize: 13 }}>{filename}</span>
                 </a>

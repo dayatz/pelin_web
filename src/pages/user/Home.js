@@ -57,7 +57,7 @@ class Home extends React.Component {
         }
         return (
             <div>
-                <Paper style={{minHeight: 500}}>
+                <Paper className='paper'>
                 {this.renderAddGroupButton()}
                 {renderGroupList}
                 </Paper>
