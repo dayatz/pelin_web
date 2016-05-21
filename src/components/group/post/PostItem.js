@@ -22,6 +22,7 @@ class PostItem extends React.Component {
         this.state = {
             commentText: '',
             votesCount: this.props.post.votes_count,
+            commentsCount: this.props.post.comments_count,
             isVoted: this.props.post.is_voted,
             showComment: false,
             zDepth: 1
@@ -46,6 +47,9 @@ class PostItem extends React.Component {
 
         this.props.handleVote(this.props.post)
     }
+    incrementComment() {
+        this.setState({ commentsCount: this.state.commentsCount + 1 })
+    }
 
     toggleComment() {
         this.setState({ showComment: !this.state.showComment })
@@ -66,7 +70,7 @@ class PostItem extends React.Component {
     }
 
     renderDeleteBtn() {
-        if (this.props.post.me) {
+        if (this.props.post.me || this.context.group.is_owner) {
             return (
                 <IconMenu
                     iconButtonElement={
@@ -103,14 +107,14 @@ class PostItem extends React.Component {
         var renderComments = ''
         if (this.state.showComment) {
             const comments = this.props.comments
-            renderCommentList = <span>Loading...</span>
+            renderCommentList = <div className='post-item__comments'><span>Loading...</span></div>
 
             if (comments && comments.length) {
                 var renderCommentList = (
                     <CommentList comments={comments} />
                 )
             } else if (comments && !comments.length) {
-                renderCommentList = 'Belum ada komentar'
+                renderCommentList = <div className='post-item__comments'>Belum ada komentar</div>
             }
 
             var renderComments = renderCommentList
@@ -127,6 +131,10 @@ class PostItem extends React.Component {
         if (this.state.votesCount) {
             votesCount = this.state.votesCount
         }
+        var commentsCount
+        if (this.state.commentsCount) {
+            commentsCount = this.state.commentsCount
+        }
 
         // avatar
         if (post.user.photo && post.user.photo.thumbnail) {
@@ -140,6 +148,23 @@ class PostItem extends React.Component {
         var userStatus
         if (post.user.teacher) {
             userStatus = <i style={{ color: '#9e9e9e' }}>Dosen</i>
+        }
+
+        var renderAttachment
+        if (post.file) {
+            var filename = post.file.split('/')[post.file.split('/').length-1]
+            if (filename.length >= 10) {
+                var ext = filename.split('.')[1]
+                filename = filename.substring(0,10) + '...' + ext
+            }
+            renderAttachment = (
+                <a className='post-item__attachment' href={post.file}>
+                    <Avatar size={24} style={{ marginRight: 5 }}>
+                        <FontIcon style={{ fontSize: 14, color: '#757575' }} className='material-icons'>cloud_download</FontIcon>
+                    </Avatar>
+                    <span style={{ fontSize: 13 }}>{filename}</span>
+                </a>
+            )
         }
 
         return (
@@ -157,9 +182,11 @@ class PostItem extends React.Component {
 
                 <div className='post-item__text'>
                     <p><Text text={post.text} /></p>
+                    {/**renderAttachment**/}
                 </div>
 
                 <div className='post-item__action'>
+                    <div style={{ float: 'left' }}>
                     <IconButton
                         onClick={this.handleVote.bind(this)}
                         style={{
@@ -176,11 +203,16 @@ class PostItem extends React.Component {
                         {iconVoted}
                     </IconButton>
                     <span className='post-item__votes-count'>{votesCount}</span>
+                    </div>
 
+                    {renderAttachment}
+
+                    <div style={{ float: 'right'}} >
+                    <span className='post-item__comments-count'>{commentsCount}</span>
                     <IconButton
                         onClick={this.toggleComment.bind(this)}
                         style={{
-                            background: '#eee', borderRadius: '50%', float: 'right',
+                            background: '#eee', borderRadius: '50%',
                             height: 32, width: 32, padding: 2
                         }}
                         iconStyle={{
@@ -189,6 +221,9 @@ class PostItem extends React.Component {
                         }}>
                         <FontIcon className='material-icons'>comment</FontIcon>
                     </IconButton>
+                    </div>
+
+                    <div style={{ clear: 'both' }} />
                 </div>
 
                 {renderComments}
@@ -197,6 +232,7 @@ class PostItem extends React.Component {
                 <div className='post-item__new-comment'>
                     <NewCommentForm
                         openComments={this.openComments.bind(this)}
+                        incrementComment={this.incrementComment.bind(this)}
                         postId={post.id} />
                 </div>
             </Paper>
@@ -206,6 +242,7 @@ class PostItem extends React.Component {
 
 PostItem.contextTypes = {
     groupId: React.PropTypes.string,
+    group: React.PropTypes.object,
     store: React.PropTypes.object,
     masonry: React.PropTypes.object
 }

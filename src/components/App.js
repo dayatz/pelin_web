@@ -52,7 +52,7 @@ class App extends React.Component {
                 <Notification />
                 <AppBar
                     title={
-                        <div className="col-md-8 col-md-offset-2">
+                        <div>
                             <span>{this.state.pageTitle}</span>
 
                             <div className="notification-wrapper">

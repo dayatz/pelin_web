@@ -16,14 +16,18 @@ class Posts extends React.Component {
         if (posts && posts.length) {
             var renderPosts = <PostList posts={posts} />
         } else if (posts && !posts.length) {
-            var renderPosts = <span>No posts</span>
+            var renderPosts = (
+                <div>
+                <NewPostForm />
+                <span>No posts</span>
+                </div>
+            )
         } else {
             var renderPosts = <span>Loading...</span>
         }
         return (
             <div>
-                <NewPostForm />
-                {renderPosts}
+                <div className='post-list'>{renderPosts}</div>
             </div>
         )
     }

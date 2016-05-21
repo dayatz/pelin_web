@@ -6,6 +6,8 @@ body {
 .notification-wrapper {
     float: right;
     color: #fff;
+    padding-top: 6px;
+    margin-right: 10px;
 }
 
 .background-content {
@@ -14,6 +16,17 @@ body {
     position: absolute;
     top: 60px;
     width: 100%;
+}
+
+.post-form {
+    width: 400px;
+    padding: 16px;
+    margin-right: 25px;
+    margin-bottom: 25px;
+}
+
+.post-list {
+    margin-top: 30px;
 }
 
 .group-action {
@@ -32,6 +45,9 @@ body {
 .post-item__text,
 .post-item__action {
     margin: 0 16px 16px;
+}
+.post-item__action {
+    text-align: center;
 }
 .post-item__new-comment__text {
     font-size: 12px;
@@ -55,6 +71,15 @@ body {
     margin-top: 12px;
     width: 320px;
 }
+.post-item__attachment {
+    color: rgba(0,0,0,0.6);
+    text-decoration: none !important;
+    background: #e4e4e4;
+    padding: 1px 5px 1px 0;
+    border-radius: 12px;
+    display: inline-block;
+    margin-top: 3px;
+}
 .post-item__comments {
     padding: 16px 16px 0;
     background-color: #F5F5F5;
@@ -63,10 +88,18 @@ body {
     overflow-x: hidden;
     border-top: 1px solid #eee;
 }
+.post-item__votes-count,
+.post-item__comments-count {
+    font-size: 12px;
+    position: relative;
+    top: -3px;
+    color: #757575;
+}
 .post-item__votes-count {
     margin-left: 10px;
-    font-size: 12px;
-    color: #757575;
+}
+.post-item__comments-count {
+    margin-right: 10px;
 }
 
 .comment-item:not(:last-child) {

@@ -36,6 +36,7 @@ class NewCommentForm extends React.Component {
                     })
                     this.clean()
                     this.props.openComments()
+                    this.props.incrementComment()
                 })
                 .catch( error => {
                     console.log(error)
