@@ -19,6 +19,7 @@
     "intl-locales-supported": "^1.0.0",
     "material-ui": "^0.15.0-alpha.2",
     "moment": "^2.13.0",
+    "prettysize": "0.0.3",
     "react": "^0.14.8",
     "react-async-script-loader": "^0.2.1",
     "react-autosize-textarea": "^0.3.1",

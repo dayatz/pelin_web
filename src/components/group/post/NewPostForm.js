@@ -21,17 +21,21 @@ class NewPostForm extends React.Component {
         }
     }
     componentDidMount() {
-        var txt = document.getElementById('new-post')
-        var t = this
-        autosize(txt)
-        txt.addEventListener('autosize:resized', () => {
-            setTimeout(() => {
-                t.relayout()
-            }, 150)
-        })
+        autosize(this.getTextareaNode())
+        this.getTextareaNode()
+            .addEventListener('autosize:resized', this.relayout.bind(this))
+    }
+    componentWillUnmount() {
+        this.getTextareaNode()
+            .removeEventListener('autosize:resized', this.relayout.bind(this))
+    }
+    getTextareaNode() {
+        return document.getElementById('new-post')
     }
     relayout() {
-        this.context.masonry.masonry.layout()
+        setTimeout(() => {
+            this.context.masonry.masonry.layout()
+        }, 100)
     }
     onChange(e) {
         this.setState({ value: e.target.value })
