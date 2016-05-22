@@ -146,10 +146,9 @@ body {
     display: table-cell;
     vertical-align: middle;
 }
-.lesson-item__action .action-delete {
-    position: absolute;
-    top: 0;
-    right: 0;
+.lesson-item .action-delete {
+    display: block;
+    width: 100%;
 }
 .lesson-item__files {
     padding: 0;
@@ -158,9 +157,13 @@ body {
 .lesson-item__title {
     color: #424242;
 }
+.lesson-item__created {
+    color: #9E9E9E;
+    font-size: 12px;
+}
 .lesson-item__description {
     color: #616161;
-    font-size: 12px;
+    font-size: 13px;
 }
 .lesson-item__file-item {
     list-style: none;
@@ -175,4 +178,9 @@ body {
     width: 100%;
     height: 100%;
     text-decoration: none !important;
+}
+.lesson-add-fab {
+    position: absolute;
+    bottom: 20px;
+    right: 35px;
 }

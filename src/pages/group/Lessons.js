@@ -13,8 +13,8 @@ class Lessons extends React.Component {
     renderAddButton() {
         if (this.context.group.is_owner) {
             return (
-                <FabAdd onClick={() => {
-                    this.context.router.replace(
+                <FabAdd className='lesson-add-fab' onClick={() => {
+                    this.context.router.push(
                         `/groups/${this.context.groupId}/lessons/add`
                     )
                 }} />
@@ -26,23 +26,16 @@ class Lessons extends React.Component {
         const lessons = this.props.lessons.items[this.context.groupId]
         if (lessons && lessons.length) {
             var renderLessonList = (
-                <div>
-                    {this.renderAddButton()}
                     <LessonList lessons={lessons} />
-                </div>
             )
         } else if (lessons && !lessons.length) {
-            var renderLessonList = (
-                <div>
-                    No lessons found
-                    {this.renderAddButton()}
-                </div>
-            )
+            var renderLessonList = ('No lessons found')
         } else {
             var renderLessonList = <span>Loading...</span>
         }
         return (
-            <div>
+            <div style={{ marginBottom: 30 }}>
+                {this.renderAddButton()}
                 {renderLessonList}
             </div>
         )

@@ -36,7 +36,7 @@ class App extends React.Component {
     }
 
     showSnackbar(msg) {
-        this.setState({ 
+        this.setState({
             snackbarOpen: true,
             snackbarMsg: msg
         })

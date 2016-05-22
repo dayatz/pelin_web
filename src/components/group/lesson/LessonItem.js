@@ -6,6 +6,7 @@ import FontIcon from 'material-ui/lib/font-icon'
 
 import shortid from 'shortid'
 import prettysize from 'prettysize'
+import customMoment, { formatDateTime } from '../../../config/customMoment'
 
 
 class LessonItem extends React.Component {
@@ -18,16 +19,20 @@ class LessonItem extends React.Component {
     renderDeleteButton() {
         if (this.context.group.is_owner) {
             return (
-                <IconButton
+                <FlatButton
                     className='action-delete'
                     onClick={() => {
                         this.props.onDeleteClick(this.props.lesson)
-                    }}>
-                    <FontIcon className='material-icons'>clear</FontIcon>
-                </IconButton>
+                    }}
+                    label='Hapus'
+                    secondary={true}
+                    icon={<FontIcon className='material-icons'>delete</FontIcon>} />
             )
         }
         return
+    }
+    renderLessonDate() {
+        return customMoment(this.props.lesson.created_at)
     }
 
     renderItemList(){
@@ -61,7 +66,7 @@ class LessonItem extends React.Component {
         if (this.state.showFiles) {
             renderUl = (
                 <ul className='lesson-item__files'>
-                    {/**renderDeleteButton**/}
+                    {this.renderDeleteButton()}
                     {this.renderItemList()}
                 </ul>
             )
@@ -80,6 +85,10 @@ class LessonItem extends React.Component {
                     </div>
                     <div className='lesson-item__body'>
                         <span className='lesson-item__title'>{this.props.lesson.title}</span>
+                        <p className='lesson-item__created'
+                            title={formatDateTime(this.props.lesson.created_at)}>
+                            {this.renderLessonDate().fromNow()}
+                        </p>
                         {renderDescription}
                     </div>
                     <div className='lesson-item__action'>
