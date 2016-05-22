@@ -14,6 +14,7 @@ import MenuItem from 'material-ui/lib/menus/menu-item'
 import CommentList from './CommentList'
 import NewCommentForm from './NewCommentForm'
 import Text from '../../Text'
+import Time from '../../Time'
 import { fetchComment } from '../../../actions/post'
 
 class PostItem extends React.Component {
@@ -118,7 +119,7 @@ class PostItem extends React.Component {
             }
 
             var renderComments = renderCommentList
-            
+
         }
 
         // voted
@@ -173,16 +174,17 @@ class PostItem extends React.Component {
                 onMouseEnter={() => { this.itemFocus() }}
                 onMouseLeave={() => { this.itemUnfocus() }}>
                 <div className='post-item__user-info'>
-                    {avatar}
-                    <b className='post-item__user-info__name'>
-                        {post.user.name} {userStatus}
-                    </b>
+                    <div className='post-item__avatar'>{avatar}</div>
+                    <div className='post-item__user-info__name'>
+                        <b>{post.user.name} {userStatus}</b>
+                        <Time isoDate={post.created_at} />
+                    </div>
+                    <div style={{ clear: 'both' }}></div>
                     <div className='post-item__option'>{this.renderDeleteBtn()}</div>
                 </div>
 
                 <div className='post-item__text'>
                     <p><Text text={post.text} /></p>
-                    {/**renderAttachment**/}
                 </div>
 
                 <div className='post-item__action'>

@@ -55,11 +55,17 @@ body {
 .post-item__new-comment__text {
     font-size: 12px;
 }
+.post-item__avatar {
+    float: left;
+    margin-right: 12px;
+}
 .post-item__user-info__name {
-    margin-left: 8px;
+    float: left;
 }
 .post-item__option {
-    float: right;
+    position: absolute;
+    right: 0;
+    top: 0;
 }
 .post-item__new-comment {
     padding-left: 16px;
@@ -156,10 +162,6 @@ body {
 }
 .lesson-item__title {
     color: #424242;
-}
-.lesson-item__created {
-    color: #9E9E9E;
-    font-size: 12px;
 }
 .lesson-item__description {
     color: #616161;

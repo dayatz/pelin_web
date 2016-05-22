@@ -1,6 +1,6 @@
 import moment from 'moment'
 
-const customMoment = (isoDate) => {
+export const customMoment = (isoDate) => {
     const date = new Date(isoDate)
     return moment(date).locale('id')
 }
@@ -16,5 +16,3 @@ export const formatDateTime = (isoDate) => {
 
     return `${day}, ${date.getDate()} ${month} ${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
 }
-
-export default customMoment

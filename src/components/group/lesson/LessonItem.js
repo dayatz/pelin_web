@@ -6,7 +6,7 @@ import FontIcon from 'material-ui/lib/font-icon'
 
 import shortid from 'shortid'
 import prettysize from 'prettysize'
-import customMoment, { formatDateTime } from '../../../config/customMoment'
+import Time from '../../Time'
 
 
 class LessonItem extends React.Component {
@@ -30,9 +30,6 @@ class LessonItem extends React.Component {
             )
         }
         return
-    }
-    renderLessonDate() {
-        return customMoment(this.props.lesson.created_at)
     }
 
     renderItemList(){
@@ -85,10 +82,7 @@ class LessonItem extends React.Component {
                     </div>
                     <div className='lesson-item__body'>
                         <span className='lesson-item__title'>{this.props.lesson.title}</span>
-                        <p className='lesson-item__created'
-                            title={formatDateTime(this.props.lesson.created_at)}>
-                            {this.renderLessonDate().fromNow()}
-                        </p>
+                        <Time isoDate={this.props.lesson.created_at} />
                         {renderDescription}
                     </div>
                     <div className='lesson-item__action'>
