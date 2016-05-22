@@ -13,7 +13,7 @@ class NewLessonForm extends React.Component {
         super(props)
         this.state = {
             files: [],
-            loading: false
+            sending: false
         }
     }
     backButton() {
@@ -25,7 +25,7 @@ class NewLessonForm extends React.Component {
         const description = this.refs.description.getValue()
 
         if (title && this.state.files.length) {
-            this.setState({ loading: true })
+            this.setState({ sending: true })
             var lesson = new FormData()
             this.state.files.map(file => {
                 lesson.append('files', file)
@@ -40,7 +40,7 @@ class NewLessonForm extends React.Component {
                 .then(r => {
                     const lesson = r.data
                     console.log(lesson)
-                    this.setState({ loading: false })
+                    this.setState({ sending: false })
                     this.context.router.replace(`/groups/${this.context.groupId}/lessons`)
                 })
         }
@@ -52,10 +52,16 @@ class NewLessonForm extends React.Component {
         var renderUploader
         if (this.state.files.length) {
             renderUploader = this.state.files.map(file => {
+                var filename = file.name
+                if (file.name.length > 25) {
+                    filename = filename.substring(0, 25) + '...'
+                }
                 return (
                     <li className='lesson-item__file-item' key={file.name}>
-                        <span style={{float: 'left'}}>{file.name}</span>
-                        <span style={{ float: 'right' }}>{prettysize(file.size)}</span>
+                        <span style={{float: 'left', fontSize: 13}}>
+                            {filename}
+                        </span>
+                        <span style={{ float: 'right', fontSize: 13 }}>{prettysize(file.size)}</span>
                         <div style={{clear: 'both'}}></div>
                     </li>
                 )
@@ -91,6 +97,7 @@ class NewLessonForm extends React.Component {
                                 autoFocus={true}
                                 autoComplete='off'
                                 fullWidth={true}
+                                disabled={this.state.sending}
                                 ref='title' />
                         </div>
                         <div>
@@ -101,12 +108,15 @@ class NewLessonForm extends React.Component {
                                 autoComplete='off'
                                 multiLine={true}
                                 fullWidth={true}
+                                disabled={this.state.sending}
                                 rows={3} />
                         </div>
 
                         <FlatButton secondary={true}
+                            disabled={this.state.sending}
                             label='Batal' onClick={this.backButton.bind(this)} />
                         <RaisedButton style={{float: 'right'}}
+                            disabled={this.state.sending}
                             type='submit' primary={true} label='Upload' />
                     </div>
                     <div style={{clear: 'both'}}></div>

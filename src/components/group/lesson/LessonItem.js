@@ -34,10 +34,14 @@ class LessonItem extends React.Component {
 
     renderItemList(){
         return this.props.lesson.files.map(file => {
+            var filename = file.name
+            if (file.name.length > 25) {
+                filename = filename.substring(0, 25) + '...'
+            }
             return (
                 <li className='lesson-item__file-item' key={shortid.generate()}>
                     <a href={file.file} target='_blank' className='lesson-item__file'>
-                        <span>{file.name}</span>
+                        <span>{filename}</span>
                         <span style={{ float: 'right' }}>{prettysize(file.size)}</span>
                     </a>
                 </li>

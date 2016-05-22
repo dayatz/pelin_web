@@ -1,5 +1,6 @@
 import React from 'react'
 import Snackbar from 'material-ui/lib/snackbar'
+import Push from 'push.js'
 import scriptLoader from 'react-async-script-loader'
 import { addNotification } from '../actions/notification'
 
@@ -27,9 +28,18 @@ class Notification extends React.Component {
             } else if (data.action_type == 'assignment') {
                 snackbarMsg = `${data.actor.name} ${data.verb} ${data.action_object.title} di grup ${data.target.title}`
             }
-            this.setState({ snackbarOpen: true, snackbarMsg })
 
-            this.context.store.dispatch(addNotification(data))
+            if (!document.hidden) {
+                this.context.store.dispatch(addNotification(data))
+            } else {
+                Push.create(`${data.actor.name}`, {
+                    body: `${snackbarMsg}`,
+                    icon: {
+                        x32: '${data.actor.photo.thumbnail}'
+                    }
+                })
+            }
+            this.setState({ snackbarOpen: true, snackbarMsg })
         })
     }
     componentDidMount() {
@@ -39,7 +49,7 @@ class Notification extends React.Component {
         }
     }
     componentWillReceiveProps ({ isScriptLoaded, isScriptLoadSucceed }) {
-        if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished 
+        if (isScriptLoaded && !this.props.isScriptLoaded) { // load finished
             if (isScriptLoadSucceed) {
                 this.initPusher()
             }
