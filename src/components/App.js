@@ -12,7 +12,7 @@ import IconButton from 'material-ui/lib/icon-button'
 import FlatButton from 'material-ui/lib/flat-button'
 
 import NavMenu from '../components/NavMenu'
-import Notification from '../components/Notification'
+import NotificationComponent from '../components/NotificationComponent'
 
 
 class App extends React.Component {
@@ -42,6 +42,15 @@ class App extends React.Component {
         })
     }
 
+    componentDidMount() {
+        if (Notification.permission !== "granted") {
+            console.log('notification not granted, request it now', Notification);
+            Notification.requestPermission();
+        } else {
+            console.log('notification granted');
+        }
+    }
+
     setPageTitle(pageTitle) {
         this.setState({ pageTitle })
     }
@@ -49,7 +58,7 @@ class App extends React.Component {
     render() {
         return (
             <div>
-                <Notification />
+                <NotificationComponent />
                 <AppBar
                     title={
                         <div>

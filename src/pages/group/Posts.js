@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { fetchPost } from '../../actions/post'
 
 import PostList from '../../components/group/post/PostList'
+import NewPostForm from '../../components/group/post/NewPostForm'
 
 class Posts extends React.Component {
     componentDidMount() {
@@ -15,12 +16,7 @@ class Posts extends React.Component {
         if (posts && posts.length) {
             var renderPosts = <PostList posts={posts} />
         } else if (posts && !posts.length) {
-            var renderPosts = (
-                <div>
-                <NewPostForm />
-                <span>No posts</span>
-                </div>
-            )
+            var renderPosts = <NewPostForm />
         } else {
             var renderPosts = <span>Loading...</span>
         }

@@ -27,8 +27,18 @@ class Group extends React.Component {
     }
 
     componentDidMount() {
-        if (!this.props.groups.items[this.state.groupId]) {
+        const group = this.props.groups.items[this.state.groupId]
+        if (!group) {
             this.props.fetchSingleGroup(this.state.groupId)
+        }
+        if (group) {
+            this.context.setPageTitle(group.title)
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        const group = nextProps.groups.items[this.state.groupId]
+        if (group) {
+            this.context.setPageTitle(group.title)
         }
     }
 
@@ -46,7 +56,7 @@ class Group extends React.Component {
             } else {
                 renderGroupDetail = <GroupDetailNotJoined />
             }
-            this.context.setPageTitle(group.title)
+            // this.context.setPageTitle(group.title)
         } else {
             renderGroupDetail = <span>Loading...</span>
         }

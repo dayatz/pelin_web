@@ -5,7 +5,7 @@ import scriptLoader from 'react-async-script-loader'
 import { addNotification } from '../actions/notification'
 
 
-class Notification extends React.Component {
+class NotificationComponent extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -78,9 +78,9 @@ class Notification extends React.Component {
     }
 }
 
-Notification.contextTypes = {
+NotificationComponent.contextTypes = {
     auth: React.PropTypes.object,
     store: React.PropTypes.object
 }
 
-export default scriptLoader('http://js.pusher.com/3.1/pusher.min.js')(Notification)
+export default scriptLoader('http://js.pusher.com/3.1/pusher.min.js')(NotificationComponent)
