@@ -16,6 +16,7 @@ import NewCommentForm from './NewCommentForm'
 import Text from '../../Text'
 import Time from '../../Time'
 import { fetchComment } from '../../../actions/post'
+import materialLetter from '../../../config/materialLetter'
 
 class PostItem extends React.Component {
     constructor(props) {
@@ -139,10 +140,10 @@ class PostItem extends React.Component {
 
         // avatar
         if (post.user.photo && post.user.photo.thumbnail) {
-            var avatar = <Avatar src={post.user.photo.thumbnail} />
+            var avatar = <Avatar src={post.user.photo.thumbnail} backgroundColor={'#fff'} />
         } else {
-            let name = post.user.name
-            var avatar = <Avatar>{name.charAt(0)}</Avatar>
+            const char = post.user.name.charAt(0).toUpperCase()
+            var avatar = <Avatar src={materialLetter(char)} backgroundColor={'#fff'} />
         }
 
         // userStatus
