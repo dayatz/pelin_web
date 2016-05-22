@@ -186,3 +186,52 @@ body {
     bottom: 20px;
     right: 35px;
 }
+
+.lesson-form__title {
+    background-color: #CFD8DC;
+    padding: 16px;
+    text-align: center;
+    color: #616161;
+    margin: 0
+}
+.lesson-form__right {
+    padding: 0 16px 16px;
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    -o-flex: 1;
+    flex: 1;
+}
+.lesson-form__left {
+    position: relative;
+    text-align: center;
+    -webkit-flex: 1;
+    -moz-flex: 1;
+    -ms-flex: 1;
+    -o-flex: 1;
+    flex: 1;
+    padding: 0 16px 16px 0;
+    background-color: #E3F2FD;
+}
+.lesson-form__dropzone {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+.lesson-form__form {
+    display: flex;
+    flex-direction: row;
+}
+.lesson-form__icon span {
+    font-size: 48px !important;
+    margin-top: 25px;
+    border: 3px dashed #42A5F5;
+    padding: 32px;
+    margin-bottom: 10px;
+    color: #42A5F5 !important;
+    border-radius: 25px;
+}
+.lesson-form__dropzone-text {
+    font-size: 16px;
+    color: #42A5F5;
+}

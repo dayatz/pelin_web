@@ -10,10 +10,7 @@ class LessonAdd extends React.Component {
     }
     render () {
         return (
-            <div>
-                <div>
-                    <h5>Tambah Materi</h5>
-                </div>
+            <div className='col-md-10 col-md-offset-1' style={{ float: 'none' }}>
                 <NewLessonForm />
             </div>
         )
