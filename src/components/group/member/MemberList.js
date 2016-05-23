@@ -13,7 +13,7 @@ const MemberList = (props, context) => {
         )
     })
     return (
-        <div>{renderMember}</div>
+        <div className='member-list'>{renderMember}</div>
     )
 }
 

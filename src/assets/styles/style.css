@@ -236,3 +236,20 @@ body {
     font-size: 16px;
     color: #42A5F5;
 }
+
+.pending-list {
+    margin: 25px 0 10px;
+}
+.pending-item__user {
+    padding: 10px;
+}
+.pending-item__user p {
+    margin: 0;
+}
+.pending-item__user .name {
+    color: #212121;
+}
+.pending-item__user .nim {
+    font-size: 13px;
+    color: #424242;
+}

@@ -1,4 +1,5 @@
 import React from 'react'
+import RaisedButton from 'material-ui/lib/raised-button'
 import PendingItem from './PendingItem'
 import MemberService from '../../../api/member'
 import { fetchMembers, approveAll, addMember, pendingApprove } from '../../../actions/member'
@@ -35,18 +36,25 @@ class PendingList extends React.Component {
     render() {
         const renderPending = this.props.pendings.map(pending => {
             return (
-                <div key={pending.id}>
-                    <PendingItem
-                        pending={pending}
-                        approve={this.approve.bind(this)}
-                        decline={this.decline.bind(this)} />
-                </div>
+                <PendingItem
+                    key={pending.id}
+                    pending={pending}
+                    approve={this.approve.bind(this)}
+                    decline={this.decline.bind(this)} />
             )
         })
         return (
-            <div>
-                <button onClick={this.approveAll.bind(this)}>approve all</button>
-                <div>{renderPending}</div>
+            <div style={{position: 'relative'}}>
+                <p>Permintaan Bergabung ({this.props.pendings.length})</p>
+                <RaisedButton
+                    style={{position: 'absolute', top: 0, right: 0}}
+                    onTouchTap={this.approveAll.bind(this)}
+                    label='Terima Semua' />
+                <div className='pending-list'>
+                    {renderPending}
+                    <div style={{clear:'both'}}></div>
+                </div>
+                <hr />
             </div>
         )
     }

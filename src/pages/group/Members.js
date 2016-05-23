@@ -82,7 +82,7 @@ class Members extends React.Component {
                     members={members} />
             )
         } else {
-            renderMembers = <span>No members</span>
+            renderMembers = <div className='member-list'>Belum ada member</div>
         }
 
         var renderPendings
@@ -91,12 +91,7 @@ class Members extends React.Component {
             renderPendings = <span>Loading...</span>
             if (pendings && pendings.length) {
                 renderPendings = (
-                    <div>
-                        <hr />
-                        <p>Persetujuan bergabung</p>
-                        <PendingList pendings={pendings} />
-                        <hr />
-                    </div>
+                    <PendingList pendings={pendings} />
                 )
             } else {
                 renderPendings = ''
@@ -121,6 +116,7 @@ class Members extends React.Component {
                 
                 {renderPendings}
                 {renderMembers}
+                <div style={{clear:'both'}}></div>
             </div>
         )
     }
