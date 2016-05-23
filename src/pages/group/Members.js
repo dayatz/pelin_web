@@ -1,14 +1,23 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import Popover from 'material-ui/lib/popover/popover'
+import PopoverAnimationFromTop from 'material-ui/lib/popover/popover-animation-from-top'
 import MemberList from '../../components/group/member/MemberList'
 import PendingList from '../../components/group/member/PendingList'
 import InviteMemberForm from '../../components/group/member/InviteMemberForm'
+import FabAdd from '../../components/FabAdd'
 
 import MemberService from '../../api/member'
 import { fetchMembers, fetchPendings, kickMember } from '../../actions/member'
 
 class Members extends React.Component {
+    constructor(props) {
+        super(props);
+    
+        this.state = {
+            openPopover: false
+        }
+    }
     componentDidMount() {
         this.props.fetchMembers(this.context.groupId)
 
@@ -37,6 +46,7 @@ class Members extends React.Component {
                     this.context.showSnackbar('Tunggu konfirmasi dari dosen.')
                 }
                 clean()
+                this.handleRequestClose()
             })
             .catch(error => {
                 if (error.status == 400) {
@@ -50,6 +60,17 @@ class Members extends React.Component {
                 }
                 clean()
             })
+    }
+    onTouchTap(event) {
+        this.setState({
+            openPopover: true,
+            anchorEl: event.currentTarget
+        })
+    }
+    handleRequestClose() {
+        this.setState({
+            openPopover: false
+        })
     }
     render () {
         const members = this.props.members.items[this.context.groupId]
@@ -84,7 +105,20 @@ class Members extends React.Component {
 
         return (
             <div>
-                <InviteMemberForm onInviteFormSubmit={this.onInviteFormSubmit.bind(this)} />
+                <Popover
+                    style={{padding: '0 10px'}}
+                    open={this.state.openPopover}
+                    anchorEl={this.state.anchorEl}
+                    anchorOrigin={{horizontal: 'right', vertical: 'top'}}
+                    targetOrigin={{horizontal: 'right', vertical: 'top'}}
+                    onRequestClose={this.handleRequestClose.bind(this)}
+                    animation={PopoverAnimationFromTop}>
+                    <InviteMemberForm
+                        open={this.state.openPopover}
+                        onInviteFormSubmit={this.onInviteFormSubmit.bind(this)} />
+                </Popover>
+                <FabAdd className='lesson-add-fab' onTouchTap={this.onTouchTap.bind(this)} />
+                
                 {renderPendings}
                 {renderMembers}
             </div>

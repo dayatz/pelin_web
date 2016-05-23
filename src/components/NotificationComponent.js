@@ -35,7 +35,8 @@ class NotificationComponent extends React.Component {
                 Push.create(`${data.actor.name}`, {
                     body: `${snackbarMsg}`,
                     icon: {
-                        x32: '${data.actor.photo.thumbnail}'
+                        x32: '${data.actor.photo.thumbnail}',
+                        x64: '${data.actor.photo.thumbnail}'
                     }
                 })
             }
