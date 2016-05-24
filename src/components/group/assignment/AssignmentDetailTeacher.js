@@ -1,5 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import RaisedButton from 'material-ui/lib/raised-button'
+import FontIcon from 'material-ui/lib/font-icon'
 import { fetchSubmitted } from '../../../actions/assignment'
 import AssignmentService from '../../../api/assignment'
 import SubmittedAssignmentList from './SubmittedAssignmentList'
@@ -19,8 +21,13 @@ class AssignmentDetailTeacher extends React.Component {
             if (submits && submits.length) {
                 var renderList = (
                     <div>
-                    <p>Mahasiswa yang mengumpulkan tugas</p>
-                    <SubmittedAssignmentList submits={submits} />
+                        <div style={{height: 42}}>
+                            <span>Mahasiswa yang mengumpulkan tugas</span>
+                            <RaisedButton
+                                style={{float: 'right'}}
+                                icon={<FontIcon className='material-icons'>file_download</FontIcon>} />
+                        </div>
+                        <SubmittedAssignmentList submits={submits} />
                     </div>
                 )
             } else {
@@ -28,7 +35,7 @@ class AssignmentDetailTeacher extends React.Component {
             }
         }
         return (
-            <div style={{marginTop: 16}}>
+            <div style={{marginTop: 20}}>
                 {renderList}
             </div>
         )
