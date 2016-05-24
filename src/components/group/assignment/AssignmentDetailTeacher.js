@@ -28,7 +28,7 @@ class AssignmentDetailTeacher extends React.Component {
             }
         }
         return (
-            <div>
+            <div style={{marginTop: 16}}>
                 {renderList}
             </div>
         )

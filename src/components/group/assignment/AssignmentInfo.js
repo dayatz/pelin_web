@@ -7,7 +7,7 @@ import {splitText} from '../../../config'
 
 
 const AssignmentInfo = (props) => {
-    const { assignment } = props
+    const { assignment, isTeacher } = props
     var file
     if (assignment.file) {
         const filename = assignment.file.split('/')[assignment.file.split('/').length-1]
@@ -22,13 +22,20 @@ const AssignmentInfo = (props) => {
     if (assignment.description) {
         description = <p className='assignment-info__text'>{assignment.description}</p>
     }
+
+    var className
+    if (isTeacher) {
+        className = 'col-md-6 col-md-offset-3'
+    }
     return (
-        <Paper style={{padding: 16}}>
-            <p className='assignment-info__title'>{assignment.title}</p>
-            <Time isoDate={assignment.due_date} />
-            {description}
-            {file}
-        </Paper>
+        <div className={className}>
+            <Paper style={{padding: 16}}>
+                <p className='assignment-info__title'>{assignment.title}</p>
+                <Time isoDate={assignment.due_date} />
+                {description}
+                {file}
+            </Paper>
+        </div>
     )
 }
 

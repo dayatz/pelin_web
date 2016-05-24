@@ -6,8 +6,8 @@ import materialLetter from '../../../config/materialLetter'
 const CommentItem = (props) => {
     const { comment } = props
 
-    if (comment.user.photo.hasOwnProperty('thumbnail')) {
-        var avatar = <Avatar size={24} backgroundColor={'#fff'} src={comment.user.photo.thumbnail} />
+    if (comment.user.photo.hasOwnProperty('small')) {
+        var avatar = <Avatar size={24} backgroundColor={'#fff'} src={comment.user.photo.small} />
     } else {
         const char = comment.user.name.charAt(0).toUpperCase()
         var avatar = <Avatar size={24} src={materialLetter(char)} backgroundColor={'#fff'} />
