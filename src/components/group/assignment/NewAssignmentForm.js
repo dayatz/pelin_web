@@ -113,7 +113,7 @@ class NewAssignmentForm extends React.Component {
     render() {
         var btnlabel = 'Pilih File'
         if (this.state.file) {
-            btnlabel = this.state.files.name
+            btnlabel = this.state.file.name
         }
 
         if (this.state.editing) {

@@ -280,3 +280,16 @@ body {
 .assignment-item__due p {
     margin: 0;
 }
+
+.assignment-info {
+    padding: 16px;
+    margin-top: 16px;
+}
+.assignment-info__title {
+    color: #424242;
+}
+.assignment-info__text {
+    color: #616161;
+    margin-top: 10px;
+    font-size: 13px;
+}

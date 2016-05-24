@@ -1,5 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
+
+import Paper from 'material-ui/lib/paper'
+import Avatar from 'material-ui/lib/avatar'
+import FontIcon from 'material-ui/lib/font-icon'
+
 import { submitAddAction } from '../../../actions/assignment'
 import AssignmentService from '../../../api/assignment'
 import AssignmentSubmitForm from './AssignmentSubmitForm'
@@ -23,9 +28,15 @@ class AssignmentDetailStudent extends React.Component {
                 var filename = submitted.file.split('/')
                 filename = filename[filename.length - 1]
                 renderSubmitted = (
-                    <div>
-                        <p>{submitted.text} <a href={submitted.file}>{filename}</a></p>
-                    </div>
+                    <span>
+                        <p className='assignment-info__text'>{submitted.text}</p>
+                        <a className='post-item__attachment' href={submitted.file} target='_blank'>
+                            <Avatar size={24} style={{ marginRight: 5 }}>
+                                <FontIcon style={{ fontSize: 14, color: '#757575' }} className='material-icons'>attach_file</FontIcon>
+                            </Avatar>
+                            <span style={{ fontSize: 13 }}>{filename}</span>
+                        </a>
+                    </span>
                 )
             } else {
                 AssignmentService(this.context.groupId)
@@ -35,10 +46,12 @@ class AssignmentDetailStudent extends React.Component {
                     })
             }
             return (
-                <div>
-                    <b>Anda telah mengumpulkan tugas ini</b>
+                <Paper className='assignment-info'>
+                    <b className='assignment-info__title'>
+                        Anda telah mengumpulkan tugas ini
+                    </b>
                     {renderSubmitted}
-                </div>
+                </Paper>
             )
         }
         return

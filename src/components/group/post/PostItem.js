@@ -152,6 +152,7 @@ class PostItem extends React.Component {
             userStatus = <i style={{ color: '#9e9e9e' }}>Dosen</i>
         }
 
+        // attachment
         var renderAttachment
         if (post.file) {
             var filename = post.file.split('/')[post.file.split('/').length-1]
