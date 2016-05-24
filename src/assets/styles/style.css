@@ -253,3 +253,30 @@ body {
     font-size: 13px;
     color: #424242;
 }
+
+.assignment-item {
+    height: 70px;
+    margin-bottom: 25px;
+}
+.assignment-item__action {
+    display: table-cell;
+    vertical-align: middle;
+}
+.assignment-item__action button {
+    float: right;
+}
+.assignment-item .left {
+    vertical-align: middle;
+    display: table-cell;
+    text-align: center;
+    width: 90px;
+}
+.assignment-item__title {
+    padding: 16px;
+}
+.assignment-item__due {
+    color: #fff;
+}
+.assignment-item__due p {
+    margin: 0;
+}

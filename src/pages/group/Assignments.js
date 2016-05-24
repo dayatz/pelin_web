@@ -22,11 +22,13 @@ class Assignments extends React.Component {
         var renderAddButton
         if (this.context.group.is_owner) {
             renderAddButton = (
-                <FabAdd onClick={() => {
-                    this.context.router.push(
-                        `/groups/${this.context.groupId}/assignments/add`
+                <FabAdd
+                    className='lesson-add-fab'
+                    onTouchTap={() => {
+                        this.context.router.push(
+                            `/groups/${this.context.groupId}/assignments/add`
                         )
-                }} />
+                    }} />
             )
         }
 

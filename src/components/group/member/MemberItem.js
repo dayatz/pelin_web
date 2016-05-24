@@ -4,6 +4,7 @@ import FontIcon from 'material-ui/lib/font-icon'
 import Paper from 'material-ui/lib/paper'
 
 import materialLetter from '../../../config/materialLetter'
+import {splitText} from '../../../config'
 
 
 class MemberItem extends React.Component {
@@ -27,11 +28,7 @@ class MemberItem extends React.Component {
         }
         return
     }
-    getName() {
-        return (this.props.member.name.length > 12) ?
-            this.props.member.name.substring(0, 12) + '...' :
-            this.props.member.name
-    }
+
     render() {
         if (this.props.member.photo.hasOwnProperty('medium')) {
             var photo = this.props.member.photo.medium
@@ -47,7 +44,9 @@ class MemberItem extends React.Component {
                 }}>
                     <img src={photo} style={{ width: '100%' }} />
                     <div style={{padding: 5}}>
-                        <p style={{margin: 0}} title={this.props.member.name}>{this.getName()}</p>
+                        <p style={{margin: 0}} title={this.props.member.name}>
+                            {splitText(12, this.props.member.name)}
+                        </p>
                         <p style={{margin: 0, fontSize: 12, color: '#757575'}}>{this.props.member.student.nim}</p>
                     </div>
                 </div>

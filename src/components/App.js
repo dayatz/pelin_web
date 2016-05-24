@@ -44,10 +44,7 @@ class App extends React.Component {
 
     componentDidMount() {
         if (Notification.permission !== "granted") {
-            console.log('notification not granted, request it now', Notification);
             Notification.requestPermission();
-        } else {
-            console.log('notification granted');
         }
     }
 

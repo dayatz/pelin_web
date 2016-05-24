@@ -7,6 +7,7 @@ import FontIcon from 'material-ui/lib/font-icon'
 import shortid from 'shortid'
 import prettysize from 'prettysize'
 import Time from '../../Time'
+import {splitText} from '../../../config'
 
 
 class LessonItem extends React.Component {
@@ -34,14 +35,10 @@ class LessonItem extends React.Component {
 
     renderItemList(){
         return this.props.lesson.files.map(file => {
-            var filename = file.name
-            if (file.name.length > 25) {
-                filename = filename.substring(0, 25) + '...'
-            }
             return (
                 <li className='lesson-item__file-item' key={shortid.generate()}>
                     <a href={file.file} target='_blank' className='lesson-item__file'>
-                        <span>{filename}</span>
+                        <span>{splitText(25, file.name)}</span>
                         <span style={{ float: 'right' }}>{prettysize(file.size)}</span>
                     </a>
                 </li>
@@ -73,9 +70,9 @@ class LessonItem extends React.Component {
             )
         }
 
-        var btnIcon = <FontIcon className='material-icons'>expand_more</FontIcon>
+        var btnIcon = <FontIcon color='#757575' className='material-icons'>expand_more</FontIcon>
         if (this.state.showFiles) {
-            btnIcon = <FontIcon className='material-icons'>expand_less</FontIcon>
+            btnIcon = <FontIcon color='#757575' className='material-icons'>expand_less</FontIcon>
         }
 
         return (

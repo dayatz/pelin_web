@@ -6,6 +6,7 @@ import Paper from 'material-ui/lib/paper'
 import FontIcon from 'material-ui/lib/font-icon'
 import Dropzone from 'react-dropzone'
 import LessonService from '../../../api/lesson'
+import {splitText} from '../../../config'
 import prettysize from 'prettysize'
 
 class NewLessonForm extends React.Component {
@@ -52,14 +53,10 @@ class NewLessonForm extends React.Component {
         var renderUploader
         if (this.state.files.length) {
             renderUploader = this.state.files.map(file => {
-                var filename = file.name
-                if (file.name.length > 25) {
-                    filename = filename.substring(0, 25) + '...'
-                }
                 return (
                     <li className='lesson-item__file-item' key={file.name}>
                         <span style={{float: 'left', fontSize: 13}}>
-                            {filename}
+                            {splitText(25, file.name)}
                         </span>
                         <span style={{ float: 'right', fontSize: 13 }}>{prettysize(file.size)}</span>
                         <div style={{clear: 'both'}}></div>
