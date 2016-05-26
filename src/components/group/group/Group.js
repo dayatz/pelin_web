@@ -7,6 +7,23 @@ import { Link } from 'react-router'
 import {getBg, materialLetter} from '../../../config'
 
 class Group extends React.Component {
+    constructor(props) {
+        super(props)
+    
+        this.state = {
+            pending: this.props.group.is_pending
+        }
+    }
+
+    toggleJoin() {
+        this.setState({ pending: !this.state.pending })
+        if (this.state.pending) {
+            this.props.cancel(this.props.group.id) 
+        } else {
+            this.props.join(this.props.group.id)
+        }
+    }
+
     btnLabel() {
         var btn
         if (this.props.group.is_joined || this.props.group.is_owner) {
@@ -18,24 +35,24 @@ class Group extends React.Component {
                     this.context.router.push(`/groups/${this.props.group.id}`)
                 }} />
         } else {
-            if (this.props.group.is_pending) {
-                btn = <RaisedButton fullWidth={true} label='Batal Bergabung' secondary={true} />
+            if (this.state.pending) {
+                btn = <RaisedButton
+                    fullWidth={true}
+                    label='Batal Bergabung'
+                    secondary={true}
+                    onTouchTap={this.toggleJoin.bind(this)} />
             } else {
-                btn = <RaisedButton fullWidth={true} label='Gabung' />
+                btn = <RaisedButton fullWidth={true} label='Gabung' onTouchTap={this.toggleJoin.bind(this)} />
             }
         }
         return btn
     }
     getAvatar() {
-        return (this.props.group.teacher.photo.hasOwnProperty('thumbnail')) ?
-        <Avatar
-            size={32}
-            background='#fff'
-            src={this.props.group.teacher.photo.thumbnail} /> :
-        <Avatar
-            size={32}
-            background='#fff'
-            src={materialLetter(this.props.group.teacher.name.charAt(0).toUpperCase())} />
+        const src = (this.props.group.teacher.photo.hasOwnProperty('thumbnail')) ?
+            this.props.group.teacher.photo.thumbnail :
+            materialLetter(this.props.group.teacher.name.charAt(0).toUpperCase())
+        
+        return (<Avatar size={32} backgroundColor='#fff' src={src} />)
     }
     render() {
         return (

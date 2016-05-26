@@ -52,7 +52,7 @@ class Home extends React.Component {
                 const myGroups = getMyGroups(this.context.store.getState())
                 var renderGroupList = <GroupList groups={myGroups} />
             } else {
-                var renderGroupList = 'belum ada group'
+                var renderGroupList = 'Anda belum memiliki grup, gabung sekarang.'
             }
         }
         return (

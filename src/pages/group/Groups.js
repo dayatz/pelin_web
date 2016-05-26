@@ -11,6 +11,18 @@ class Groups extends React.Component {
     componentDidMount() {
         this.props.fetchAllGroup()
     }
+    join(groupId) {
+        GroupService.join(groupId)
+            .then(r => {
+                console.log(r)
+            })
+    }
+    cancel(groupId) {
+        GroupService.cancel(groupId)
+            .then(r => {
+                console.log(r)
+            })
+    }
 
     render() {
         const groups = this.props.groups.items
@@ -18,7 +30,10 @@ class Groups extends React.Component {
             // TODO: render loading message
             var renderGroupList = 'Loading...'
         } else {
-            var renderGroupList = <GroupList groups={groups} />
+            var renderGroupList = <GroupList
+                join={this.join.bind(this)}
+                cancel={this.cancel.bind(this)}
+                groups={groups} />
         }
 
         return (
