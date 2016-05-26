@@ -52,6 +52,10 @@ class App extends React.Component {
         this.setState({ pageTitle })
     }
 
+    closeNavMenu() {
+        this.setState({ navMenuOpen: false })
+    }
+
     render() {
         return (
             <div>
@@ -92,6 +96,7 @@ class App extends React.Component {
                     handleOpen={ navMenuOpen => {
                         this.setState({navMenuOpen})
                     }}
+                    closeNavMenu={this.closeNavMenu.bind(this)}
                     {...this.props}
                     user={this.context.store.getState().auth.user}
                     router={this.context.router}

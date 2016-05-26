@@ -3,8 +3,7 @@ import RaisedButton from 'material-ui/lib/raised-button'
 import FontIcon from 'material-ui/lib/font-icon'
 import Paper from 'material-ui/lib/paper'
 
-import materialLetter from '../../../config/materialLetter'
-import {splitText} from '../../../config'
+import { splitText, materialLetter } from '../../../config'
 
 
 class MemberItem extends React.Component {

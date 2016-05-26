@@ -2,7 +2,7 @@ import React from 'react'
 import ListItem from 'material-ui/lib/lists/list-item'
 import Avatar from 'material-ui/lib/avatar'
 import FontIcon from 'material-ui/lib/font-icon'
-import materialLetter from '../../../config/materialLetter'
+import { materialLetter } from '../../../config'
 
 const SubmittedAssignmentItem = (props) => {
     const { submit } = props

@@ -7,14 +7,17 @@ const GroupList = (props) => {
     var renderGroup = []
     for (var id in groups) {
         renderGroup.push(
-            <div style={{marginBottom: 30}} className="col-md-6" key={id}>
+            <div style={{marginBottom: 30}} className="col-md-4" key={id}>
                 <Group group={groups[id]} />
             </div>
         )
     }
 
     return (
-        <div>{renderGroup}</div>
+        <div>
+            {renderGroup}
+            <div style={{clear:'both'}}></div>
+        </div>
     )
 }
 

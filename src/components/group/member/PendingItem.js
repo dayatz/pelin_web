@@ -3,7 +3,7 @@ import Paper from 'material-ui/lib/paper'
 import Avatar from 'material-ui/lib/avatar'
 import RaisedButton from 'material-ui/lib/raised-button'
 import FontIcon from 'material-ui/lib/font-icon'
-import materialLetter from '../../../config/materialLetter'
+import { materialLetter } from '../../../config'
 
 const PendingItem = (props) => {
     const { pending, approve, decline } = props

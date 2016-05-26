@@ -293,3 +293,66 @@ body {
     margin-top: 10px;
     font-size: 13px;
 }
+
+.nav-menu__profile-container {
+    height: 200px;
+    color: #fff;    
+    display: table;
+    width: 100%;
+}
+.nav-menu__profile-container p {
+    margin-bottom: 0;
+    margin-top: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.nav-menu__profile-user {
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+}
+
+.group-item__bg {
+    height: 100px;
+    position: relative;
+    color: #f5f5f5;
+    background-size: cover;
+}
+.group-item__title {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    font-size: 16px;
+    font-weight: 500;
+}
+.group-item__teacher {
+    padding: 10px;
+}
+.group-item__teacher-name {
+    display: inline;
+    margin-left: 10px;
+}
+.group-item__info {
+    padding: 10px;
+    background-color: #F5F5F5;
+}
+.group-item__info .left {
+    float: left;
+}
+.group-item__info .right {
+    float: right;
+}
+.group-item__info-semester {
+    font-size: 12px;
+    display: block;
+    margin-top: 5px;
+    float: right;
+}
+.group-item__info-members {
+    font-size: 12px;
+    display: block;
+    float: left;
+    margin-right: 5px;
+    margin-top: 5px;
+}

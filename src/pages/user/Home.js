@@ -34,7 +34,7 @@ class Home extends React.Component {
         if (this.context.auth.user.is_teacher) {
             return (
                 <div>
-                    <FabAdd onClick={this._toggleModal.bind(this)} />
+                    <FabAdd className='lesson-add-fab' onClick={this._toggleModal.bind(this)} />
                     <GroupModal
                         toggleModal={this._toggleModal.bind(this)}
                         open={this.state.openModal} />
@@ -57,7 +57,7 @@ class Home extends React.Component {
         }
         return (
             <div>
-                <Paper className='paper'>
+                <Paper className='paper' style={{padding: '30px 15px'}}>
                 {this.renderAddGroupButton()}
                 {renderGroupList}
                 </Paper>

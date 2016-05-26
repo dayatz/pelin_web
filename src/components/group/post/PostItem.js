@@ -16,7 +16,7 @@ import NewCommentForm from './NewCommentForm'
 import Text from '../../Text'
 import Time from '../../Time'
 import { fetchComment } from '../../../actions/post'
-import materialLetter from '../../../config/materialLetter'
+import {materialLetter} from '../../../config'
 
 class PostItem extends React.Component {
     constructor(props) {

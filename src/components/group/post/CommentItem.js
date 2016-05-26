@@ -1,13 +1,13 @@
 import React from 'react'
 import Avatar from 'material-ui/lib/avatar'
 import Text from '../../Text'
-import materialLetter from '../../../config/materialLetter'
+import {materialLetter} from '../../../config'
 
 const CommentItem = (props) => {
     const { comment } = props
 
-    if (comment.user.photo.hasOwnProperty('small')) {
-        var avatar = <Avatar size={24} backgroundColor={'#fff'} src={comment.user.photo.small} />
+    if (comment.user.photo.hasOwnProperty('thumbnail')) {
+        var avatar = <Avatar size={24} backgroundColor={'#fff'} src={comment.user.photo.thumbnail} />
     } else {
         const char = comment.user.name.charAt(0).toUpperCase()
         var avatar = <Avatar size={24} src={materialLetter(char)} backgroundColor={'#fff'} />

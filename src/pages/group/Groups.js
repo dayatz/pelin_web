@@ -1,6 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import Paper from 'material-ui/lib/paper'
 import GroupService from '../../api/group'
 import GroupList from '../../components/group/group/GroupList'
 
@@ -13,7 +13,6 @@ class Groups extends React.Component {
     }
 
     render() {
-        // TODO: render error messages
         const groups = this.props.groups.items
         if (!groups) {
             // TODO: render loading message
@@ -23,10 +22,9 @@ class Groups extends React.Component {
         }
 
         return (
-            <div>
-                <h4>Semua Grup</h4>
+            <Paper className='paper' style={{padding: '30px 15px'}}>
                 {renderGroupList}
-            </div>
+            </Paper>
         )
     }
 }
