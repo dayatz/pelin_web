@@ -65,7 +65,9 @@ class Group extends React.Component {
                 <div className='group-item__teacher'>
                     {this.getAvatar()}
                     <p className='group-item__teacher-name'>
-                        {this.props.group.teacher.name}
+                        <Link to={`users/${this.props.group.teacher.teacher.username}`}>
+                            {this.props.group.teacher.name}
+                        </Link>
                     </p>
                 </div>
                 <div className='group-item__info'>

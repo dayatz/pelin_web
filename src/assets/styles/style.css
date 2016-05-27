@@ -257,6 +257,8 @@ body {
 .assignment-item {
     height: 70px;
     margin-bottom: 25px;
+    display: table;
+    width: 100%;
 }
 .assignment-item__action {
     display: table-cell;
@@ -333,6 +335,9 @@ body {
     display: inline;
     margin-left: 10px;
 }
+.group-item__teacher-name a {
+    text-decoration: none !important;
+}
 .group-item__info {
     padding: 10px;
     background-color: #F5F5F5;
@@ -355,4 +360,41 @@ body {
     float: left;
     margin-right: 5px;
     margin-top: 5px;
+}
+
+.user__paper {
+    min-height: 350px;
+    position: relative;
+    margin-bottom: 30px;
+    padding-top: 30px;
+}
+.user__info-wrapper {
+    text-align: center;
+}
+.user__info-wrapper p {
+    margin: 0;
+}
+.user__avatar {
+    padding: 4px;
+    border: 1px solid #90CAF9 !important;
+    transition: border 0.3s ease-out;
+    margin-bottom: 20px;
+}
+.user__avatar:hover {
+    border: 1px solid #2196F3 !important;
+}
+.user__name {
+    font-size: 18px;
+    color: #424242;
+    font-weight: 500;
+}
+.user__id {
+    color: #616161
+}
+.user__group-list__title {
+    margin: 20px 0;
+    background-color: #eee;
+    padding: 10px;
+    text-align: center;
+    font-weight: 500;
 }

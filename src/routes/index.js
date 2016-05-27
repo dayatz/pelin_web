@@ -14,6 +14,7 @@ import Groups from '../pages/group/Groups'
 
 import MyProfile from '../pages/user/MyProfile'
 import UserDetail from '../pages/user/UserDetail'
+
 import MyAssignment from '../pages/user/MyAssignment'
 import Notifications from '../pages/user/Notifications'
 
@@ -61,7 +62,9 @@ const routes = (
             {GroupRoute}
 
             <Route name="profile" path="profile" component={MyProfile} />
+            
             <Route name="user-detail" path="users/:userId" component={UserDetail} />
+
             <Route name="my-assignment" path="assignments" component={MyAssignment} />
             <Route name="notifications" path="notifications" component={Notifications} />
 

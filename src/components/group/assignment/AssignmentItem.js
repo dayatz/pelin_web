@@ -1,6 +1,5 @@
 import React from 'react'
 import { Link } from 'react-router'
-import FlatButton from 'material-ui/lib/flat-button'
 import FontIcon from 'material-ui/lib/font-icon'
 import Paper from 'material-ui/lib/paper'
 import IconButton from 'material-ui/lib/icon-button'
@@ -97,14 +96,9 @@ const AssignmentItem = (props, context) => {
         }
     }
 
-    var style = {
-        backgroundColor: bgColor,
-        display: 'table',
-        width: '100%'
-    }
     return (
         <div className='col-md-6'>
-            <Paper style={style} className='assignment-item'>
+            <Paper style={{backgroundColor: bgColor}} className='assignment-item'>
                 <div className='left' style={{backgroundColor: leftBg}}>{left}</div>
                 <div className='assignment-item__title'>
                     <p>{splitText(30, assignment.title)}</p>

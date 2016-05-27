@@ -8,6 +8,9 @@ const GroupService = {
     myGroup: function() {
         return ajax().get('users/me/groups')
     },
+    userGroup: function(id) {
+        return ajax().get(`users/${id}/groups`)
+    },
     fetch: function(id) {
         return ajax().get(`${url}/${id}`)
     },

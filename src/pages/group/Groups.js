@@ -10,18 +10,7 @@ import { fetchAllGroup } from '../../actions/group'
 class Groups extends React.Component {
     componentDidMount() {
         this.props.fetchAllGroup()
-    }
-    join(groupId) {
-        GroupService.join(groupId)
-            .then(r => {
-                console.log(r)
-            })
-    }
-    cancel(groupId) {
-        GroupService.cancel(groupId)
-            .then(r => {
-                console.log(r)
-            })
+        this.context.setPageTitle('Cari Group')
     }
 
     render() {
@@ -30,10 +19,7 @@ class Groups extends React.Component {
             // TODO: render loading message
             var renderGroupList = 'Loading...'
         } else {
-            var renderGroupList = <GroupList
-                join={this.join.bind(this)}
-                cancel={this.cancel.bind(this)}
-                groups={groups} />
+            var renderGroupList = <GroupList groups={groups} />
         }
 
         return (
@@ -53,5 +39,9 @@ const mapDispatchToProps = dispatch => ({
         dispatch(fetchAllGroup())
     }
 })
+
+Groups.contextTypes = {
+    setPageTitle: React.PropTypes.func
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Groups)

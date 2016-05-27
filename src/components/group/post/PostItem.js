@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'react-router/lib/Link'
 
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
@@ -151,6 +152,12 @@ class PostItem extends React.Component {
         if (post.user.teacher) {
             userStatus = <i style={{ color: '#9e9e9e' }}>Dosen</i>
         }
+        var userUsername
+        if (post.user.hasOwnProperty('teacher')) {
+            userUsername = post.user.teacher.username
+        } else {
+            userUsername = post.user.student.nim
+        }
 
         // attachment
         var renderAttachment
@@ -178,7 +185,7 @@ class PostItem extends React.Component {
                 <div className='post-item__user-info'>
                     <div className='post-item__avatar'>{avatar}</div>
                     <div className='post-item__user-info__name'>
-                        <b>{post.user.name} {userStatus}</b>
+                        <b><Link to={`users/${userUsername}`}>{post.user.name}</Link> {userStatus}</b>
                         <Time isoDate={post.created_at} />
                     </div>
                     <div style={{ clear: 'both' }}></div>

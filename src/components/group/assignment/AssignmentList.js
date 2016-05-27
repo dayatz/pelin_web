@@ -36,6 +36,7 @@ class AssignmentList extends React.Component {
         return (
             <div className='assignment-list'>
                 {renderAssignment}
+                <div style={{clear:'both'}}></div>
             </div>
         )
     }

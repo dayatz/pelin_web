@@ -1,8 +1,22 @@
 import React from 'react'
 import Group from './Group'
+import GroupService from '../../../api/group'
 
 const GroupList = (props) => {
-    const { groups, join, cancel } = props
+    const { groups } = props
+
+    const join = (groupId) => {
+        GroupService.join(groupId)
+            .then(r => {
+                console.log(r)
+            })
+    }
+    const cancel = (groupId) => {
+        GroupService.cancel(groupId)
+            .then(r => {
+                console.log(r)
+            })
+    }
 
     var renderGroup = []
     for (var id in groups) {

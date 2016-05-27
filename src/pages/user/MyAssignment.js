@@ -1,4 +1,5 @@
 import React from 'react'
+import Paper from 'material-ui/lib/paper'
 import { connect } from 'react-redux'
 import { fetchMyAssignment } from '../../actions/assignment'
 import MyAssignmentList from '../../components/group/assignment/MyAssignmentList'
@@ -6,6 +7,7 @@ import MyAssignmentList from '../../components/group/assignment/MyAssignmentList
 class MyAssignment extends React.Component {
     componentDidMount() {
         this.props.fetchMyAssignment()
+        this.context.setPageTitle('Semua Tugas')
     }
     render() {
         const assignments = this.props.assignments
@@ -21,7 +23,9 @@ class MyAssignment extends React.Component {
             }
         }
         return (
-            <div>{renderMyAssignmentList}</div>
+            <Paper className='paper' style={{padding: '30px 15px'}}>
+                {renderMyAssignmentList}
+            </Paper>
         )
     }
 }
@@ -35,5 +39,9 @@ const dispatchToProps = dispatch => ({
         dispatch(fetchMyAssignment())
     }
 })
+
+MyAssignment.contextTypes = {
+    setPageTitle: React.PropTypes.func
+}
 
 export default connect(stateToProps, dispatchToProps)(MyAssignment)
