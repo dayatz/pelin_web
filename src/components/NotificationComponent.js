@@ -41,6 +41,7 @@ class NotificationComponent extends React.Component {
                 })
             }
             this.setState({ snackbarOpen: true, snackbarMsg })
+            this.context.markNotifBadge()
         })
     }
     componentDidMount() {
@@ -81,7 +82,8 @@ class NotificationComponent extends React.Component {
 
 NotificationComponent.contextTypes = {
     auth: React.PropTypes.object,
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    markNotifBadge: React.PropTypes.func
 }
 
 export default scriptLoader('http://js.pusher.com/3.1/pusher.min.js')(NotificationComponent)

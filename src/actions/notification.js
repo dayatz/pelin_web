@@ -5,6 +5,10 @@ import UserService from '../api/user'
 export var notificationAction = createAsyncAction('NOTIFICATION')
 export function fetchNotification() {
     return (dispatch, getState) => {
+        if (getState().notification.items.length) {
+            return Promise.resolve()
+        }
+
         dispatch({ type: notificationAction.start })
 
         UserService.getNotifications()
@@ -27,5 +31,17 @@ export function addNotification(item) {
     return {
         type: 'NOTIFICATION_ADD',
         item
+    }
+}
+
+export function cleanNotification() {
+    return {
+        type: 'NOTIFICATION_CLEAN'
+    }
+}
+
+export function markReadNotification() {
+    return {
+        type: 'NOTIFICATION_READ'
     }
 }
