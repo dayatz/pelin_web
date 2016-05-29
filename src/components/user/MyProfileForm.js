@@ -18,29 +18,33 @@ class MyProfileForm extends React.Component {
     }
     onSubmit(e) {
         e.preventDefault()
-        this.setState({ loading: true })
+        if (confirm('Simpan profil ?')) {
+            this.setState({ loading: true })
 
-        const name = this.refs.name.getValue()
-        const email = this.refs.email.getValue()
-        const phone = this.refs.phone.getValue()
-        const password = this.refs.password.getValue()
+            const name = this.refs.name.getValue()
+            const email = this.refs.email.getValue()
+            const phone = this.refs.phone.getValue()
+            const password = this.refs.password.getValue()
 
-        const data = new FormData()
-        data.append('name', name)
-        data.append('email', email)
-        data.append('phone', phone)
-        if (password) {
+            const data = new FormData()
             data.append('name', name)
-        }
-        if (this.state.photo) {
-            data.append('photo', this.state.photo)
-        }
+            data.append('email', email)
+            data.append('phone', phone)
+            if (password) {
+                data.append('name', name)
+            }
+            if (this.state.photo) {
+                data.append('photo', this.state.photo)
+            }
 
-        UserService.update(data)
-        .then(r => {
-            UserService.saveUser(r.data)
-            this.context.store.dispatch(updateProfileAction(r.data))
-        })
+            UserService.update(data)
+            .then(r => {
+                UserService.saveUser(r.data)
+                this.context.store.dispatch(updateProfileAction(r.data))
+                this.context.showSnackbar('Berhasil menyimpan profil')
+                this.context.router.push('/')
+            })
+        }
     }
 
     _openFileDialog() {
@@ -80,27 +84,56 @@ class MyProfileForm extends React.Component {
                     ref='file' type='file' multiple
                     style={{display: 'none'}} />
             </div>
-            <TextField 
-                ref='name' id='name'
-                defaultValue={user.name} />
-            <br />
-            <TextField type='email' id='email' ref='email' defaultValue={user.email} />
-            <br />
-            <TextField ref='phone' id='phone' defaultValue={user.phone} />
-            <br />
-            <TextField type='password' ref='password' id='password' />
-            <br />
+            <div>
+                <TextField 
+                    hintText='Nama Lengkap'
+                    fullWidth={true}
+                    ref='name' id='name'
+                    defaultValue={user.name} />
+            </div>
+            
+            <div>
+            <TextField
+                hintText='Email'
+                fullWidth={true}
+                type='email'
+                id='email'
+                ref='email'
+                defaultValue={user.email} />
+            </div>
+            <div>
+            <TextField
+                hintText='HP'
+                fullWidth={true}
+                ref='phone'
+                id='phone'
+                defaultValue={user.phone} />
+            </div>
+            <div>
+            <TextField
+                hintText='Password baru'
+                fullWidth={true}
+                type='password'
+                ref='password'
+                id='password' />
+            </div>
+            <div>
             <RaisedButton
+                style={{marginTop: 15}}
+                fullWidth={true}
                 type='submit'
                 label='Simpan'
                 primary={true} />
+            </div>
         </form>
         )
     }
 }
 
 MyProfileForm.contextTypes = {
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    router: React.PropTypes.object,
+    showSnackbar: React.PropTypes.func
 }
 
 export default MyProfileForm

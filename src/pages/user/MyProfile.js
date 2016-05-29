@@ -11,8 +11,11 @@ class MyProfile extends React.Component {
     }
     render() {
         return (
-            <Paper className='paper'>
-                <MyProfileForm user={this.props.user} />
+            <Paper className='paper' style={{padding: 30}}>
+                <div className='col-md-6 col-md-offset-3'>
+                    <MyProfileForm user={this.props.user} />
+                </div>
+                <div style={{clear:'both'}}></div>
             </Paper>
         )
     }
