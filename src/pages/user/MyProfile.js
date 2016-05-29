@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
+import Paper from 'material-ui/lib/paper'
 
 import MyProfileForm from '../../components/user/MyProfileForm'
 import { updateProfile } from '../../actions/auth'
@@ -10,7 +11,9 @@ class MyProfile extends React.Component {
     }
     render() {
         return (
-            <MyProfileForm user={this.props.user} />
+            <Paper className='paper'>
+                <MyProfileForm user={this.props.user} />
+            </Paper>
         )
     }
 }

@@ -6,6 +6,7 @@ import GroupTabs from './GroupTabs'
 import GroupActionTeacher from './GroupActionTeacher'
 import GroupActionStudent from './GroupActionStudent'
 import GroupModal from './GroupModal'
+import GroupInfoModal from './GroupInfoModal'
 
 import GroupService from '../../../api/group'
 import { myGroupLeaveAction } from '../../../actions/group'
@@ -44,7 +45,15 @@ class GroupDetailJoined extends React.Component {
             </div>
             )
         } else {
-            groupAction = <GroupActionStudent />
+            groupAction = (
+                <div>
+                    <GroupInfoModal
+                        toggleModal={this._toggleEditModal.bind(this)}
+                        open={this.state.openEditModal} />
+                    <GroupActionStudent
+                        toggleModal={this._toggleEditModal.bind(this)} />
+                </div>
+            )
         }
         return (
         <div>

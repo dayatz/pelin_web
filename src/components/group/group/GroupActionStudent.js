@@ -29,6 +29,12 @@ class GroupActionStudent extends React.Component {
             }
             anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
             targetOrigin={{ horizontal: 'right', vertical: 'top' }} >
+            <MenuItem 
+                primaryText='Info Grup'
+                leftIcon={
+                    <FontIcon className='material-icons'>info</FontIcon>
+                }
+                onClick={this.props.toggleModal} />
             <MenuItem
                 primaryText='Keluar dari group'
                 leftIcon={
