@@ -1,10 +1,9 @@
 import React from 'react'
 
-const MessageItem = (props) => {
-    const { message } = props
+export default function MessageItem(props) {
     
     var style
-    if (!message.me) {
+    if (!props.message.me) {
         style = {
             fontWeight: 'bold'
         }
@@ -12,10 +11,8 @@ const MessageItem = (props) => {
     return (
         <div>
             <p>
-                <span style={style}>{message.text}</span>
+                <span style={style}>{props.message.text}</span>
             </p>
         </div>
     )
 }
-
-export default MessageItem

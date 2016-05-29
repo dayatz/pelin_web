@@ -5,20 +5,19 @@ import RaisedButton from 'material-ui/lib/raised-button'
 import FontIcon from 'material-ui/lib/font-icon'
 import { materialLetter } from '../../../config'
 
-const PendingItem = (props) => {
-    const { pending, approve, decline } = props
+export default function PendingItem(props) {
 
     return (
         <div className='col-md-3'>
         <Paper>
             <div className='pending-item__user'>
-                <p className='name'>{pending.user.name}</p>
-                <p className='nim'>{pending.user.student.nim}</p>
+                <p className='name'>{props.pending.user.name}</p>
+                <p className='nim'>{props.pending.user.student.nim}</p>
             </div>
             <div className='pending-item__action'>
                 <RaisedButton
                     onTouchTap={() => {
-                        approve(props.pending)
+                        props.approve(props.pending)
                     }}
                     style={{width: '50%'}}
                     primary={true}
@@ -27,7 +26,7 @@ const PendingItem = (props) => {
                 <RaisedButton
                     style={{width: '50%'}}
                     onTouchTap={() => {
-                        decline(props.pending)
+                        props.decline(props.pending)
                     }}
                     icon={<FontIcon className='material-icons'>clear</FontIcon>} />
             </div>
@@ -36,5 +35,3 @@ const PendingItem = (props) => {
         </div>
     )
 }
-
-export default PendingItem

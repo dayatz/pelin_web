@@ -1,8 +1,7 @@
 import React from 'react'
 import {customMoment, formatDateTime } from '../config/customMoment.js'
 
-const Time = (props) => {
-    const { isoDate } = props
+const Time = function(props) {
     if (props.style) {
         var style = props.style
     } else {
@@ -10,8 +9,8 @@ const Time = (props) => {
     }
     return (
         <p {...props} style={style}
-            title={formatDateTime(isoDate)}>
-            {customMoment(isoDate).fromNow()}
+            title={formatDateTime(props.isoDate)}>
+            {customMoment(props.isoDate).fromNow()}
         </p>
     )
 }

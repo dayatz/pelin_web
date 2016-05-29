@@ -6,12 +6,11 @@ import Time from '../../Time'
 import {splitText} from '../../../config'
 
 
-const AssignmentInfo = (props) => {
-    const { assignment, isTeacher } = props
+const AssignmentInfo = function(props) {
     var file
-    if (assignment.file) {
-        const filename = assignment.file.split('/')[assignment.file.split('/').length-1]
-        file = <a className='post-item__attachment' href={assignment.file} target='_blank'>
+    if (props.assignment.file) {
+        const filename = props.assignment.file.split('/')[props.assignment.file.split('/').length-1]
+        file = <a className='post-item__attachment' href={props.assignment.file} target='_blank'>
             <Avatar size={24} style={{ marginRight: 5 }}>
                 <FontIcon style={{ fontSize: 14, color: '#757575' }} className='material-icons'>attach_file</FontIcon>
             </Avatar>
@@ -19,19 +18,14 @@ const AssignmentInfo = (props) => {
         </a>
     }
     var description
-    if (assignment.description) {
-        description = <p className='assignment-info__text'>{assignment.description}</p>
-    }
-
-    var className
-    if (isTeacher) {
-        className = 'col-md-6 col-md-offset-3'
+    if (props.assignment.description) {
+        description = <p className='assignment-info__text'>{props.assignment.description}</p>
     }
     return (
-        <div className={className}>
+        <div className={(props.isTeacher) ? 'col-md-6 col-md-offset-3':null}>
             <Paper style={{padding: 16}}>
-                <p className='assignment-info__title'>{assignment.title}</p>
-                <Time isoDate={assignment.due_date} />
+                <p className='assignment-info__title'>{props.assignment.title}</p>
+                <Time isoDate={props.assignment.due_date} />
                 {description}
                 {file}
             </Paper>

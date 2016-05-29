@@ -8,11 +8,9 @@ import MenuItem from 'material-ui/lib/menus/menu-item'
 import Time from '../../Time'
 import {splitText} from '../../../config'
 
-const AssignmentItem = (props, context) => {
-    const { assignment } = props
-    const { groupId } = context
+const AssignmentItem = function(props, context) {
 
-    const dueDate = new Date(assignment.due_date)
+    const dueDate = new Date(props.assignment.due_date)
     const date = `${dueDate.getDate()}/${dueDate.getMonth()}/${dueDate.getFullYear()} ${dueDate.getHours()}:${dueDate.getMinutes()}`
 
     var left, leftBg, actionBtn, bgColor
@@ -20,7 +18,7 @@ const AssignmentItem = (props, context) => {
         leftBg = '#2196F3'
         left =
             <span style={{fontSize: 18, color: '#fff'}}>
-                {assignment.submitted_student}
+                {props.assignment.submitted_student}
             </span>
         actionBtn =
             <IconMenu
@@ -35,20 +33,20 @@ const AssignmentItem = (props, context) => {
                 >
                 <MenuItem
                     onTouchTap={() => {
-                        props.assignmentDetail(assignment.id)
+                        props.assignmentDetail(props.assignment.id)
                     }}
                     primaryText='Lihat'
                     leftIcon={<FontIcon className='material-icons'>view_list</FontIcon>} />
                 <MenuItem
                     onTouchTap={() => {
-                        props.editAssignment(assignment.id)
+                        props.editAssignment(props.assignment.id)
                     }}
                     primaryText='Edit'
                     leftIcon={<FontIcon className='material-icons'>edit</FontIcon>} />
                 <MenuItem
                     onTouchTap={() => {
                         if (confirm('Hapus tugas ?')) {
-                            props.deleteItem(assignment.id)
+                            props.deleteItem(props.assignment.id)
                         }
                     }}
                     primaryText='Hapus'
@@ -57,25 +55,25 @@ const AssignmentItem = (props, context) => {
 
         bgColor = '#fff'
     } else {
-        if (!assignment.is_passed) {
+        if (!props.assignment.is_passed) {
             actionBtn =
                 <IconButton
                     onTouchTap={() => {
-                        props.assignmentDetail(assignment.id)
+                        props.assignmentDetail(props.assignment.id)
                     }}>
                     <FontIcon color='#757575' className='material-icons'>chevron_right</FontIcon>
                 </IconButton>
         }
 
-        if (assignment.is_submitted) {
+        if (props.assignment.is_submitted) {
             leftBg = '#009688'
             left = <FontIcon style={{ fontSize: 36 }} color='#fff' className='material-icons'>mood</FontIcon>
 
-            if (assignment.is_passed) {
+            if (props.assignment.is_passed) {
                 bgColor = '#E0E0E0'
             }
         } else {
-            if (assignment.is_passed) {
+            if (props.assignment.is_passed) {
                 bgColor = '#E0E0E0'
                 leftBg = '#F44336'
                 left =
@@ -101,8 +99,8 @@ const AssignmentItem = (props, context) => {
             <Paper style={{backgroundColor: bgColor}} className='assignment-item'>
                 <div className='left' style={{backgroundColor: leftBg}}>{left}</div>
                 <div className='assignment-item__title'>
-                    <p>{splitText(30, assignment.title)}</p>
-                    <Time isoDate={assignment.due_date} />
+                    <p>{splitText(30, props.assignment.title)}</p>
+                    <Time isoDate={props.assignment.due_date} />
                 </div>
                 <div className='assignment-item__action'>
                     {actionBtn}

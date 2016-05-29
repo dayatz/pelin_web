@@ -1,7 +1,9 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import FabAdd from '../../components/FabAdd'
+
 import Dialog from 'material-ui/lib/dialog'
+import Paper from 'material-ui/lib/paper'
 
 import { fetchConversation, removeConversationAction } from '../../actions/message'
 import ConversationList from '../../components/message/ConversationList'
@@ -14,6 +16,11 @@ class Conversations extends React.Component {
         super(props)
         this.state = {
             openModal: false
+        }
+    }
+    getChildContext() {
+        return {
+            removeConversation: this.removeConversation.bind(this)
         }
     }
     componentDidMount() {
@@ -42,31 +49,34 @@ class Conversations extends React.Component {
             if ( conversation.items ) {
                 renderConversationList = 
                 <div>
-                    <ConversationList
-                        removeConversation={this.removeConversation.bind(this)}
-                        conversations={conversation.items} />
-                    <div>{this.props.children}</div>
+                    <div className='col-md-4 message-col'>
+                        <ConversationList
+                            newConversation={this._toggleModal.bind(this)}
+                            conversations={conversation.items} />
+                    </div>
+                    <div className='col-md-8'>{this.props.children}</div>
                 </div>
             } else {
                 renderConversationList = 'Belum ada pesan'
             }
         }
         return (
-            <div>
-                <h3>Conversation List</h3>
-                <FabAdd onClick={this._toggleModal.bind(this)} />
+            <Paper className='paper' style={{padding: '30px 15px'}}>
                 <NewConversationModal
                     handleSubmit={this.newConversation.bind(this)}
                     toggle={this._toggleModal.bind(this)}
                     open={this.state.openModal} />
                 {renderConversationList}
-            </div>
+            </Paper>
         )
     }
 }
 
 Conversations.contextTypes = {
     router: React.PropTypes.object
+}
+Conversations.childContextTypes = {
+    removeConversation: React.PropTypes.func
 }
 
 const stateToProps = state => ({

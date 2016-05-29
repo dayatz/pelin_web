@@ -69,6 +69,10 @@ export const messages = (state = {
             const { items: messageSend } = state
             messageSend[action.userId].push(action.item)
             return { ...state, items: messageSend }
+        case 'CONVERSATION_REMOVE':
+            const { items: conversationRemove } = state
+            delete conversationRemove[action.userId]
+            return { ...state, items: conversationRemove }
         default:
             return state
     }

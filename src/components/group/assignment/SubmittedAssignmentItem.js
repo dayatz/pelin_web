@@ -4,25 +4,21 @@ import Avatar from 'material-ui/lib/avatar'
 import FontIcon from 'material-ui/lib/font-icon'
 import { materialLetter } from '../../../config'
 
-const SubmittedAssignmentItem = (props) => {
-    const { submit } = props
-    console.log(submit)
+export default function SubmittedAssignmentItem(props) {
     var photo
-    if (submit.user.photo.hasOwnProperty('small')) {
-        photo = submit.user.photo.small
+    if (props.submit.user.photo.hasOwnProperty('small')) {
+        photo = props.submit.user.photo.small
     } else {
-        photo = materialLetter(submit.user.name.charAt(0))
+        photo = materialLetter(props.submit.user.name.charAt(0))
     }
     return (
         <ListItem
             leftAvatar={<Avatar src={photo} />}
-            primaryText={submit.user.name}
-            secondaryText={submit.user.student.nim}
+            primaryText={props.submit.user.name}
+            secondaryText={props.submit.user.student.nim}
             rightIcon={<FontIcon className='material-icons'>file_download</FontIcon>}
             onTouchTap={() => {
-                window.open(submit.file, '_blank')
+                window.open(props.submit.file, '_blank')
             }} />
     )
 }
-
-export default SubmittedAssignmentItem

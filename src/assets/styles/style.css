@@ -408,3 +408,20 @@ body {
     text-align: center;
     font-weight: 500;
 }
+
+.message-col {
+    height: 440px;
+    overflow-x: hidden;
+}
+
+.message-detail__container {
+    overflow-x: hidden;
+    height: 350px;
+    padding: 20px;
+    background-color: #fff;
+    margin-top: 20px;
+}
+.link-active {
+    color: #fff !important;
+    background-color: #2196F3 !important;
+}
