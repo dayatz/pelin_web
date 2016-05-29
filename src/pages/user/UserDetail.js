@@ -1,8 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { fetchUser } from '../../actions/user'
-import UserDetailProfile from '../../components/user/UserDetailProfile.js'
-
+import UserDetailProfile from '../../components/user/UserDetailProfile'
+import Loading from '../../components/Loading'
 
 class UserDetail extends React.Component {
     constructor(props) {
@@ -33,7 +33,7 @@ class UserDetail extends React.Component {
         if (user) {
             var renderUser = <UserDetailProfile user={user} userId={this.props.params.userId} />
         } else if (!user || this.props.user.isLoading) {
-            var renderUser = 'Loading...'
+            var renderUser = <Loading />
         }
         return (
             <div>{renderUser}</div>

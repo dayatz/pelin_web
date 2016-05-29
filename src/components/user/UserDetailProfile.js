@@ -4,6 +4,7 @@ import Avatar from 'material-ui/lib/avatar'
 
 import GroupService from '../../api/group'
 import GroupList from '../group/group/GroupList'
+import Loading from '../Loading'
 import { materialLetter } from '../../config'
 
 class UserDetailProfile extends React.Component {
@@ -60,7 +61,7 @@ class UserDetailProfile extends React.Component {
         var userPhone = (user.phone) ? <span> | {user.phone}</span> : null
 
         var renderGroups = (this.state.loading && !this.state.groups ) ?
-            'Loading...' : 
+            <Loading /> : 
             <div>
                 <p className='user__group-list__title'>Group</p>
                 <div style={{padding: '0 15px'}}>

@@ -7,6 +7,7 @@ import { connect } from 'react-redux'
 import { fetchMessage } from '../../actions/message'
 import MessageList from '../../components/message/MessageList'
 import MessageForm from '../../components/message/MessageForm'
+import Loading from '../../components/Loading'
 
 class MessageDetail extends React.Component {
     getChildContext() {
@@ -62,7 +63,7 @@ class MessageDetail extends React.Component {
         } else if (messages && !messages.length) {
             renderMessageDetail = <span>No message</span>
         } else {
-            renderMessageDetail = <span>Loading...</span>
+            renderMessageDetail = <Loading />
         }
 
         return (

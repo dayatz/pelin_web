@@ -5,6 +5,7 @@ import { fetchPost } from '../../actions/post'
 
 import PostList from '../../components/group/post/PostList'
 import NewPostForm from '../../components/group/post/NewPostForm'
+import Loading from '../../components/Loading'
 
 class Posts extends React.Component {
     componentDidMount() {
@@ -18,7 +19,7 @@ class Posts extends React.Component {
         } else if (posts && !posts.length) {
             var renderPosts = <NewPostForm />
         } else {
-            var renderPosts = <span>Loading...</span>
+            var renderPosts = <Loading />
         }
         return (
             <div>

@@ -25,6 +25,7 @@ class Conversations extends React.Component {
     }
     componentDidMount() {
         this.props.fetchConversation()
+        this.context.setPageTitle('Pesan')
     }
     removeConversation(userId) {
         this.props.removeConversation(userId)
@@ -63,6 +64,7 @@ class Conversations extends React.Component {
         return (
             <Paper className='paper' style={{padding: '30px 15px'}}>
                 <NewConversationModal
+                    contentStyle={{width: 350}}
                     handleSubmit={this.newConversation.bind(this)}
                     toggle={this._toggleModal.bind(this)}
                     open={this.state.openModal} />
@@ -73,7 +75,8 @@ class Conversations extends React.Component {
 }
 
 Conversations.contextTypes = {
-    router: React.PropTypes.object
+    router: React.PropTypes.object,
+    setPageTitle: React.PropTypes.func
 }
 Conversations.childContextTypes = {
     removeConversation: React.PropTypes.func

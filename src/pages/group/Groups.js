@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import Paper from 'material-ui/lib/paper'
 import GroupService from '../../api/group'
 import GroupList from '../../components/group/group/GroupList'
+import Loading from '../../components/Loading'
 
 import { fetchAllGroup } from '../../actions/group'
 
@@ -16,8 +17,7 @@ class Groups extends React.Component {
     render() {
         const groups = this.props.groups.items
         if (!groups) {
-            // TODO: render loading message
-            var renderGroupList = 'Loading...'
+            var renderGroupList = <Loading />
         } else {
             var renderGroupList = <GroupList groups={groups} />
         }

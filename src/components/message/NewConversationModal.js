@@ -15,6 +15,7 @@ class NewConversationModal extends React.Component {
         ]
         return (
             <Dialog
+                {...this.props}
                 open={this.props.open}
                 actions={actions}>
                 <NewConversationForm

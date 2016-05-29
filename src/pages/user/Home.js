@@ -9,6 +9,7 @@ import Dialog from 'material-ui/lib/dialog'
 import GroupList from '../../components/group/group/GroupList'
 import GroupModal from '../../components/group/group/GroupModal'
 import FabAdd from '../../components/FabAdd'
+import Loading from '../../components/Loading'
 
 import { fetchMyGroups } from '../../actions/group'
 import { getMyGroups } from '../../reducers/group'
@@ -46,7 +47,7 @@ class Home extends React.Component {
     render() {
         if (this.props.myGroups.isLoading) {
             // TODO: render loading message
-            var renderGroupList = 'Loading...'
+            var renderGroupList = <Loading />
         } else {
             if (this.props.myGroups.ids.length) {
                 const myGroups = getMyGroups(this.context.store.getState())

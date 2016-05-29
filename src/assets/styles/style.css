@@ -412,6 +412,7 @@ body {
 .message-col {
     height: 440px;
     overflow-x: hidden;
+    border-right: 2px solid #eee;
 }
 
 .message-detail__container {
@@ -424,4 +425,23 @@ body {
 .link-active {
     color: #fff !important;
     background-color: #2196F3 !important;
+}
+
+.chat-item__text {
+    display: inline-block;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    width: 350px;
+    word-wrap: break-word;
+}
+
+.chat-item__text.not-me {
+    background-color: #eee;
+}
+
+.chat-item__text.me {
+    color: #fff !important;
+    background-color: #2196F3 !important;
+    float: right;
 }

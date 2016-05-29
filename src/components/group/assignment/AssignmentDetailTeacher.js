@@ -5,6 +5,7 @@ import FontIcon from 'material-ui/lib/font-icon'
 import { fetchSubmitted } from '../../../actions/assignment'
 import AssignmentService from '../../../api/assignment'
 import SubmittedAssignmentList from './SubmittedAssignmentList'
+import Loading from '../../Loading'
 
 
 class AssignmentDetailTeacher extends React.Component {
@@ -16,7 +17,7 @@ class AssignmentDetailTeacher extends React.Component {
     render() {
         const submits = this.props.submits.items[this.context.assignmentId]
         if (this.props.submits.isLoading) {
-            var renderList = <span>Loading...</span>
+            var renderList = <Loading />
         } else {
             if (submits && submits.length) {
                 var renderList = (

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import FabAdd from '../../components/FabAdd'
+import Loading from '../../components/Loading'
 import LessonList from '../../components/group/lesson/LessonList'
 
 import { fetchLessons } from '../../actions/lesson'
@@ -31,7 +32,7 @@ class Lessons extends React.Component {
         } else if (lessons && !lessons.length) {
             var renderLessonList = ('No lessons found')
         } else {
-            var renderLessonList = <span>Loading...</span>
+            var renderLessonList = <Loading />
         }
         return (
             <div style={{ marginBottom: 30 }}>

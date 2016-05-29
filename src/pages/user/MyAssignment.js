@@ -3,6 +3,7 @@ import Paper from 'material-ui/lib/paper'
 import { connect } from 'react-redux'
 import { fetchMyAssignment } from '../../actions/assignment'
 import MyAssignmentList from '../../components/group/assignment/MyAssignmentList'
+import Loading from '../../components/Loading'
 
 class MyAssignment extends React.Component {
     componentDidMount() {
@@ -14,7 +15,7 @@ class MyAssignment extends React.Component {
 
         var renderMyAssignmentList
         if (assignments.isLoading) {
-            renderMyAssignmentList = 'Loading...'
+            renderMyAssignmentList = <Loading />
         } else {
             if (assignments.items.length) {
                 renderMyAssignmentList = <MyAssignmentList assignments={assignments.items} />

@@ -110,7 +110,7 @@ class PostItem extends React.Component {
         var renderComments = ''
         if (this.state.showComment) {
             const comments = this.props.comments
-            renderCommentList = <div className='post-item__comments'><span>Loading...</span></div>
+            renderCommentList = <div className='post-item__comments'>Loading...</div>
 
             if (comments && comments.length) {
                 var renderCommentList = (

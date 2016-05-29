@@ -10,7 +10,7 @@ const Text = function(props) {
             </span>
         )
     })
-    return <span>{renderText}</span>
+    return <span style={props.style}>{renderText}</span>
 }
 
 export default Text

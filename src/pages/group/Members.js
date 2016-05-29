@@ -6,6 +6,7 @@ import MemberList from '../../components/group/member/MemberList'
 import PendingList from '../../components/group/member/PendingList'
 import InviteMemberForm from '../../components/group/member/InviteMemberForm'
 import FabAdd from '../../components/FabAdd'
+import Loading from '../../components/Loading'
 
 import MemberService from '../../api/member'
 import { fetchMembers, fetchPendings, kickMember } from '../../actions/member'
@@ -74,7 +75,7 @@ class Members extends React.Component {
     }
     render () {
         const members = this.props.members.items[this.context.groupId]
-        var renderMembers = <span>Loading...</span>
+        var renderMembers = <Loading />
         if (members && members.length) {
             renderMembers = (
                 <MemberList

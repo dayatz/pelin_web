@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import AssignmentList from '../../components/group/assignment/AssignmentList'
 import FabAdd from '../../components/FabAdd'
+import Loading from '../../components/Loading'
 import { fetchAllAssignment } from '../../actions/assignment'
 
 class Assignments extends React.Component {
@@ -16,7 +17,7 @@ class Assignments extends React.Component {
         } else if (assignments && !assignments.length) {
             var renderAssignmentList = <span>No assignments</span>
         } else {
-            var renderAssignmentList = <span>Loading...</span>
+            var renderAssignmentList = <Loading />
         }
 
         var renderAddButton

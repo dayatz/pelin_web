@@ -7,6 +7,7 @@ import RaisedButton from 'material-ui/lib/raised-button'
 import GroupTabs from '../../components/group/group/GroupTabs'
 import GroupDetailJoined from '../../components/group/group/GroupDetailJoined'
 import GroupDetailNotJoined from '../../components/group/group/GroupDetailNotJoined'
+import Loading from '../../components/Loading'
 import { fetchSingleGroup } from '../../actions/group'
 
 
@@ -56,9 +57,8 @@ class Group extends React.Component {
             } else {
                 renderGroupDetail = <GroupDetailNotJoined />
             }
-            // this.context.setPageTitle(group.title)
         } else {
-            renderGroupDetail = <span>Loading...</span>
+            renderGroupDetail = <Loading />
         }
 
         return (

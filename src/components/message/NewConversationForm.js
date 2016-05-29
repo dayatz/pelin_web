@@ -13,12 +13,14 @@ class NewConversationForm extends React.Component {
     return (
         <form onSubmit={this.submit.bind(this)} ref='form'>
             <TextField
+                fullWidth={true}
                 autoFocus={this.props.openModal}
                 id='userId'
                 ref='userId'
                 hintText='Masukkan NIM atau Username' />
             <br />
             <TextField
+                fullWidth={true}
                 id='text'
                 ref='text'
                 hintText='Pesan'
