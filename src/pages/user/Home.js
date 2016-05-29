@@ -37,6 +37,7 @@ class Home extends React.Component {
                 <div>
                     <FabAdd className='lesson-add-fab' onClick={this._toggleModal.bind(this)} />
                     <GroupModal
+                        edit={false}
                         toggleModal={this._toggleModal.bind(this)}
                         open={this.state.openModal} />
                 </div>

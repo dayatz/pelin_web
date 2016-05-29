@@ -85,7 +85,8 @@ class GroupForm extends React.Component {
                 autoFocus={true}
                 disabled={this.state.loading}
                 defaultValue={this.state.title}
-                ref='title' />
+                ref='title'
+                fullWidth={true} />
             <TextField id='description'
                 hintText='Deskripsi grup'
                 autoComplete='off'
@@ -93,9 +94,10 @@ class GroupForm extends React.Component {
                 defaultValue={this.state.description}
                 ref='description'
                 multiLine={true}
-                rows={2} />
+                rows={2}
+                fullWidth={true} />
             <br />
-            <DropDownMenu value={this.state.major} onChange={this._handleDropDown.bind(this)}>
+            <DropDownMenu value={this.state.major} onChange={this._handleDropDown.bind(this)} fullWidth={true}>
                 <MenuItem value='S1 TI' primaryText='S1 TI' />
                 <MenuItem value='D3 TI' primaryText='D3 TI' />
                 <MenuItem value='D3 MI' primaryText='D3 MI' />

@@ -38,6 +38,7 @@ class GroupDetailJoined extends React.Component {
             groupAction = (
             <div>
                 <GroupModal
+                    edit={true}
                     toggleModal={this._toggleEditModal.bind(this)}
                     open={this.state.openEditModal} />
                 <GroupActionTeacher

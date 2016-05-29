@@ -19,6 +19,7 @@ class NotificationComponent extends React.Component {
 
         var snackbarMsg
         notification.bind('new-notif', (data) => {
+            console.log(data)
             if (!data.action_type) {
                 snackbarMsg = `${data.actor.name} ${data.verb} di grup ${data.target.title}`
             } else if (data.action_type == 'post') {
@@ -29,9 +30,7 @@ class NotificationComponent extends React.Component {
                 snackbarMsg = `${data.actor.name} ${data.verb} ${data.action_object.title} di grup ${data.target.title}`
             }
 
-            if (!document.hidden) {
-                this.context.store.dispatch(addNotification(data))
-            } else {
+            if (document.hidden) {
                 Push.create(`${data.actor.name}`, {
                     body: `${snackbarMsg}`,
                     icon: {
@@ -40,6 +39,7 @@ class NotificationComponent extends React.Component {
                     }
                 })
             }
+            this.context.store.dispatch(addNotification(data))
             this.setState({ snackbarOpen: true, snackbarMsg })
             this.context.markNotifBadge()
         })

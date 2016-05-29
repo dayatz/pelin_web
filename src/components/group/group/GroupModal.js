@@ -18,6 +18,9 @@ class GroupModal extends React.Component {
     _toggleLoading() {
         this.setState({ loading: !this.state.loading })
     }
+    _getTitle() {
+        return (this.props.edit) ? 'Edit Grup': 'Buat Grup Baru'
+    }
     render() {
         const actions = [
             <FlatButton
@@ -32,7 +35,8 @@ class GroupModal extends React.Component {
         ]
         return (
             <Dialog
-                title='Edit Grup'
+                contentStyle={{width: 450}}
+                title={this._getTitle()}
                 open={this.props.open}
                 actions={actions}
                 modal={true} >
