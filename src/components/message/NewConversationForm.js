@@ -8,6 +8,7 @@ class NewConversationForm extends React.Component {
         const userId = this.refs.userId.getValue()
         const text = this.refs.text.getValue()
         this.props.handleSubmit(userId, text)
+        this.props.toggle()
     }
     render() {
     return (
@@ -17,7 +18,8 @@ class NewConversationForm extends React.Component {
                 autoFocus={this.props.openModal}
                 id='userId'
                 ref='userId'
-                hintText='Masukkan NIM atau Username' />
+                hintText='Masukkan NIM atau Username'
+                autoComplete='off' />
             <br />
             <TextField
                 fullWidth={true}
@@ -25,6 +27,7 @@ class NewConversationForm extends React.Component {
                 ref='text'
                 hintText='Pesan'
                 multiLine={true}
+                autoComplete='off'
                 rows={2} />
         </form>
     )
