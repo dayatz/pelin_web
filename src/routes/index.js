@@ -3,6 +3,7 @@ import React from 'react'
 import Router from 'react-router/lib/Router'
 import Route from 'react-router/lib/Route'
 import IndexRoute from 'react-router/lib/IndexRoute'
+import browserHistory from 'react-router/lib/browserHistory'
 import useRouterHistory from 'react-router/lib/useRouterHistory'
 
 import createHashHistory from 'history/lib/createHashHistory'
@@ -37,7 +38,7 @@ import {store} from '../reducers'
 
 import GroupRoute from './group'
 
-const browserHistory = useRouterHistory(createHashHistory)({queryKey: false})
+// const browserHistory = useRouterHistory(createHashHistory)({queryKey: false})
 // TODO: use browserHistory provided by react-router
 const history = syncHistoryWithStore(browserHistory, store)
 
