@@ -10,6 +10,8 @@ import { materialLetter } from '../config'
 const NavMenu = (props) => {
     var renderCariGroup
     var renderAssignments
+    var renderVideos
+
     if (!props.user.is_teacher) {
         renderCariGroup = (
             <MenuItem onTouchTap={() => {
@@ -26,6 +28,17 @@ const NavMenu = (props) => {
             }}
             leftIcon={<FontIcon className="material-icons">assignment</FontIcon>}
             primaryText='Tugas Saya' />
+        )
+    }
+
+    if (props.user.is_teacher || props.user.is_admin || props.user.is_superuser) {
+        renderVideos = (
+            <MenuItem onTouchTap={() => {
+                props.closeNavMenu()
+                props.router.push('/videos')
+            }}
+            leftIcon={<FontIcon className="material-icons">video_library</FontIcon>}
+            primaryText='Video' />
         )
     }
 
@@ -69,6 +82,7 @@ const NavMenu = (props) => {
             leftIcon={<FontIcon className="material-icons">home</FontIcon>} />
             {renderCariGroup}
             {renderAssignments}
+            {renderVideos}
 
             <div  style={{position: 'absolute', bottom: 0, width: '100%'}}>
                 <Divider />

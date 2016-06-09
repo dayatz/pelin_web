@@ -25,6 +25,12 @@ import MessageDetail from '../pages/message/MessageDetail'
 import Login from '../pages/auth/Login'
 import Signup from '../pages/auth/Signup'
 import About from '../pages/other/About'
+
+import VideosPage from '../pages/vidoes/VideosPage'
+import Videos from '../pages/vidoes/Videos'
+import VideosAdd from '../pages/vidoes/VideosAdd'
+import VideosAuth from '../pages/vidoes/VideosAuth'
+
 import AuthService from '../api/auth'
 import UserService from '../api/user'
 import {store} from '../reducers'
@@ -47,8 +53,14 @@ function isLoggedIn(nextState, replace) {
     }
 }
 
-function isTeacher(nextState, replace) {
+function forStudent(nextState, replace) {
     if (UserService.getUserFromStore().is_teacher) {
+        replace({ pathname: '/' })
+    }
+}
+
+function forTeacher(nextState, replace) {
+    if (!UserService.getUserFromStore().is_teacher) {
         replace({ pathname: '/' })
     }
 }
@@ -58,7 +70,7 @@ const routes = (
         <Route name="app-route" path="/" component={App} onEnter={isAuthenticated}>
             <IndexRoute component={Home} />
 
-            <Route path="groups" name="groups" component={Groups} onEnter={isTeacher} />
+            <Route path="groups" name="groups" component={Groups} onEnter={forStudent} />
             {GroupRoute}
 
             <Route name="profile" path="profile" component={MyProfile} />
@@ -67,6 +79,12 @@ const routes = (
 
             <Route name="my-assignment" path="assignments" component={MyAssignment} />
             <Route name="notifications" path="notifications" component={Notifications} />
+
+            <Route name="videos" path="videos" component={VideosPage} onEnter={forTeacher}>
+                <IndexRoute component={Videos} />
+                <Route name="videos-add" path="add" component={VideosAdd} />
+                <Route name="videos-oauth" path="add/oauth" component={VideosAuth} />
+            </Route>
 
             <Route path="messages" component={Conversations}>
                 <IndexRoute component={MessageNoSelected} />
