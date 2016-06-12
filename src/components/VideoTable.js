@@ -3,7 +3,6 @@ import FlatButton from 'material-ui/lib/flat-button'
 
 
 const VideoTable = function(props) {
-    console.log(props.items)
     const video = Object.keys(props.items).map(function(key) {
         return (
             <tr key={key}>
@@ -21,7 +20,12 @@ const VideoTable = function(props) {
                     {props.items[key].description}
                 </td>
                 <td>
-                    <FlatButton label='Hapus' secondary={true} />
+                    <FlatButton
+                        onTouchTap={function() {
+                            props.delete(props.items[key].id, props.items[key].youtube_id)
+                        }}
+                        label='Hapus'
+                        secondary={true} />
                 </td>
             </tr>
         )
@@ -29,7 +33,7 @@ const VideoTable = function(props) {
 
     return (
         <table className="table table-striped" style={{marginTop: 25}}>
-            {video}
+            <tbody>{video}</tbody>
         </table>
     )
 }

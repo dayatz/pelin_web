@@ -1,3 +1,4 @@
+import axios from 'axios'
 import { ajax } from './index'
 import store from 'store'
 
@@ -7,6 +8,14 @@ const VideoService = {
     },
     delete: function(id) {
         return ajax().delete(`videos/${id}`)
+    },
+    deleteFromYoutube(id) {
+        return axios.delete(
+            `https://www.googleapis.com/youtube/v3/videos?id=${id}` +
+            '&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube' +
+            '&key=AIzaSyAX6VRFwfsf8ZKPTo18ZKReQD5ko-WGB-U',
+            {headers: {'Authorization': 'Bearer ' + store.get('at')}}
+        )
     },
     setAccessToken: function(token) {
         store.set('at', token)

@@ -25,3 +25,10 @@ export function fetchVideo() {
             })
     }
 }
+
+export function deleteVideo(id) {
+    return {
+        type: 'VIDEO_DELETE',
+        id
+    }
+}

@@ -5,10 +5,11 @@ import axios from 'axios'
 import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
 import FlatButton from 'material-ui/lib/flat-button'
+import Paper from 'material-ui/lib/paper'
 
 import VideoService from '../../api/video'
 
-export default class VideosAdd extends React.Component {
+class VideosAdd extends React.Component {
     constructor(props) {
         super(props)
     
@@ -106,9 +107,29 @@ export default class VideosAdd extends React.Component {
             var btnUpLabel = this.state.uploading ? 'Uploading...': 'Upload'
             renderForm = (
                 <form onSubmit={this.handleSubmit.bind(this)}>
-                    <div><TextField hintText='Judul' ref='title' /></div>
-                    <div><TextField hintText='Deskripsi' ref='description' multiLine={true} rows={2} /></div>
-                    <div><TextField floatingLabelText='Kategori' hintText='RPL,Multimedia,...' ref='cat' /></div>
+                    <div>
+                        <TextField
+                            disabled={this.state.uploading}
+                            hintText='Judul'
+                            ref='title'
+                            fullWidth={true} />
+                    </div>
+                    <div>
+                        <TextField
+                            disabled={this.state.uploading}
+                            hintText='Deskripsi'
+                            ref='description'
+                            multiLine={true} rows={2}
+                            fullWidth={true} />
+                    </div>
+                    <div>
+                        <TextField
+                            disabled={this.state.uploading}
+                            floatingLabelText='Kategori'
+                            hintText='RPL,Multimedia,...'
+                            ref='cat'
+                            fullWidth={true} />
+                    </div>
                     <div>
                         <FlatButton
                             disabled={this.state.loading}
@@ -119,17 +140,41 @@ export default class VideosAdd extends React.Component {
                             onChange={this._handleFileChange.bind(this)}
                             ref='file' type='file' style={{display: 'none'}} />
                     </div>
-                    <RaisedButton
-                        disabled={this.state.uploading}
-                        label={btnUpLabel}
-                        type='submit' primary={true} />
+                    <div style={{marginTop: 30}}>
+                        <FlatButton
+                            onTouchTap={() => {
+                                this.context.router.push('/videos')
+                            }}
+                            label='Batal' disabled={this.state.uploading}
+                            secondary={true} />
+                        <RaisedButton
+                            style={{float:'right'}}
+                            disabled={this.state.uploading}
+                            label={btnUpLabel}
+                            type='submit' primary={true} />
+                        <div style={{clear:'both'}}></div>
+                    </div>
                 </form>
             )
         }
 
 
         return (
-            <div>{renderForm}</div>
+            <div className='col-md-6 col-md-offset-3'>
+                <div>
+                    <h5>Upload vidio</h5>
+                    <i style={{color:'#757575'}}>*) video yang diupload akan tersimpan di youtube</i>
+                </div>
+                <Paper style={{padding: 10, marginTop:20}}>
+                    {renderForm}
+                </Paper>
+            </div>
         )
     }
 }
+
+VideosAdd.contextTypes = {
+    router: React.PropTypes.object
+}
+
+export default VideosAdd

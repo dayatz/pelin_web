@@ -25,6 +25,11 @@ const video = (state = {
                 error: action.error
             }
 
+        case 'VIDEO_DELETE':
+            const { items: groupRemove } = state
+            delete groupRemove[action.id]
+            return { ...state, items:groupRemove }
+
         default:
             return state
     }
