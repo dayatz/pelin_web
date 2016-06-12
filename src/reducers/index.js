@@ -11,6 +11,7 @@ import posts, { comments } from './post'
 import conversation, { messages } from './message.js'
 import user from './user'
 import notification from './notification'
+import video from './video'
 
 
 const reducers = combineReducers({
@@ -23,7 +24,7 @@ const reducers = combineReducers({
     assignments, myAssignments, submits,
     members, pendings,
     conversation, messages,
-    user, notification,
+    user, notification, video,
     routing: routerReducer
 })
 

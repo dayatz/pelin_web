@@ -15,10 +15,8 @@ export default class VideosAdd extends React.Component {
         this.state = {
             file: null,
             uploading: false,
-            tokenIsValid: false
+            tokenIsValid: true
         }
-
-        // this.componentWillMount = this.componentWillMount.bind(this)
     }
 
     componentWillMount() {
@@ -44,13 +42,14 @@ export default class VideosAdd extends React.Component {
     }
     handleSubmit(e) {
         e.preventDefault()
+        const t = this
 
         const title = this.refs.title.getValue()
         const description = this.refs.description.getValue()
 
         if (title && this.state.file) {
-            // axios.post('https://www.googleapis.com/upload/youtube/v3/videos?part=snippet', 
-            //     )
+            this.setState({ uploading: true })
+
             var params = JSON.stringify({
                 "snippet": {
                     "title": title,
@@ -68,16 +67,31 @@ export default class VideosAdd extends React.Component {
             var req = new XMLHttpRequest()
             req.open('POST', 'https://www.googleapis.com/upload/youtube/v3/videos?part=snippet,status', true)
             req.setRequestHeader('Authorization', 'Bearer ' + VideoService.getAccessToken())
-            req.send(fd)
 
             req.onreadystatechange = function(e) {
-                console.log(e)
+                if (req.readyState == 4 && req.status == 200) {
+                    const data = JSON.parse(req.response)
+
+                    const v = { title }
+                    if (description) {
+                        v.description = description
+                    }
+                    v.youtube_id = data.id
+                    VideoService.create(v)
+                        .then(function(r) {
+                            t.setState({ uploading: false })
+                        })
+                        .catch(function(err){
+                            console.log(err)
+                        })
+                }
             }
+            req.send(fd)
         }
     }
 
     render() {
-        var renderForm
+        var renderForm = 'Loading'
         if (!VideoService.getAccessToken() || !this.state.tokenIsValid) {
             renderForm = (
             <a href={VideoService.authUrl()}>
@@ -89,10 +103,12 @@ export default class VideosAdd extends React.Component {
             if (this.state.file) {
                 btnlabel = this.state.file.name
             }
+            var btnUpLabel = this.state.uploading ? 'Uploading...': 'Upload'
             renderForm = (
                 <form onSubmit={this.handleSubmit.bind(this)}>
                     <div><TextField hintText='Judul' ref='title' /></div>
-                    <div><TextField hintText='Deskripsi' ref='description' multiline={true} /></div>
+                    <div><TextField hintText='Deskripsi' ref='description' multiLine={true} rows={2} /></div>
+                    <div><TextField floatingLabelText='Kategori' hintText='RPL,Multimedia,...' ref='cat' /></div>
                     <div>
                         <FlatButton
                             disabled={this.state.loading}
@@ -103,7 +119,10 @@ export default class VideosAdd extends React.Component {
                             onChange={this._handleFileChange.bind(this)}
                             ref='file' type='file' style={{display: 'none'}} />
                     </div>
-                    <RaisedButton type='submit' label='Upload' primary={true} />
+                    <RaisedButton
+                        disabled={this.state.uploading}
+                        label={btnUpLabel}
+                        type='submit' primary={true} />
                 </form>
             )
         }

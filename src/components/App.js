@@ -13,6 +13,7 @@ import IconButton from 'material-ui/lib/icon-button'
 import FlatButton from 'material-ui/lib/flat-button'
 
 import UserService from '../api/user'
+import AuthService from '../api/auth.js'
 import NavMenu from '../components/NavMenu'
 import NotificationComponent from '../components/NotificationComponent'
 
@@ -64,6 +65,18 @@ class App extends React.Component {
                     this.markNotifBadge()
                 }
             })
+    }
+
+    componentWillMount() {
+        const t = this
+        if (AuthService.getToken()) {
+            AuthService.verifyToken()
+                .catch(function(err){
+                    t.props.logout()
+                })
+        } else {
+            t.props.logout()
+        }
     }
 
     setPageTitle(pageTitle) {

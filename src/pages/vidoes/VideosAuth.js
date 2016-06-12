@@ -8,7 +8,7 @@ export default class VideosAuth extends React.Component {
         const accessToken = hash.split('&')[0].split('=')[1]
 
         VideoService.setAccessToken(accessToken)
-        this.context.router.replace('/videos/add')
+        this.context.router.replace('/videos')
     }
 
     render() {

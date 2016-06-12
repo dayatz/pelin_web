@@ -25,6 +25,9 @@ const VideoService = {
             "&redirect_uri=http://localhost:9000/videos/add/oauth" +
             "&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube" +
             "&response_type=token&pageId=none"
+    },
+    create: function(v) {
+        return ajax().post('videos', v)
     }
 }
 

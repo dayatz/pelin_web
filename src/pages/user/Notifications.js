@@ -6,7 +6,7 @@ import Paper from 'material-ui/lib/paper'
 import Avatar from 'material-ui/lib/avatar'
 import RaisedButton from 'material-ui/lib/raised-button'
 import FontIcon from 'material-ui/lib/font-icon'
-
+import Loading from '../../components/Loading'
 import {materialLetter} from '../../config'
 import {customMoment} from '../../config/customMoment'
 import UserService from '../../api/user'
@@ -67,7 +67,7 @@ class Notifications extends React.Component {
         const notification = this.props.notification
         var renderItems
         if (notification.isLoading && !notification.items.length) {
-            renderItems = 'Loading'
+            renderItems = <Loading />
         } else if (!notification.isLoading && notification.items.length) {
             const items = notification.items.map(notif => {
                 const text = `${notif.actor.name} ${notif.verb} di grup ${notif.target.title}`

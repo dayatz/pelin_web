@@ -23,6 +23,11 @@ var AuthService = {
 
     setToken: function (token) {
         store.set('bearer', token)
+    },
+
+    verifyToken: function() {
+        return axios.post(BASE_URL + 'tokeninfo',
+            {'token': store.get('bearer', null)})
     }
 }
 

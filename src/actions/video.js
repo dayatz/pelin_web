@@ -6,20 +6,20 @@ export var fetchVideoAction = createAsyncAction('FETCH_VIDEO')
 export function fetchVideo() {
     return (dispatch, getState) => {
 
-        dispatch({ type: fetchGroupAction.start})
+        dispatch({ type: fetchVideoAction.start})
 
         return VideoService.fetchAll()
             .then((r) => {
                 const items = r.data
                 dispatch({
-                    type: fetchGroupAction.success,
+                    type: fetchVideoAction.success,
                     items
                 })
             })
             .catch((error) => {
                 console.log(error)
                 dispatch({
-                    type: fetchGroupAction.fail,
+                    type: fetchVideoAction.fail,
                     error
                 })
             })
