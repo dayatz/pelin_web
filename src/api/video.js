@@ -4,7 +4,7 @@ import store from 'store'
 
 const VideoService = {
     fetchAll: function() {
-        return ajax().get('videos')
+        return ajax().get('videos?mine')
     },
     delete: function(id) {
         return ajax().delete(`videos/${id}`)

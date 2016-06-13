@@ -47,19 +47,30 @@ class VideosAdd extends React.Component {
 
         const title = this.refs.title.getValue()
         const description = this.refs.description.getValue()
+        const cat = this.refs.cat.getValue()
 
+        var tags
         if (title && this.state.file) {
             this.setState({ uploading: true })
 
-            var params = JSON.stringify({
-                "snippet": {
-                    "title": title,
-                    "description": description
+            var params = {
+                snippet: {
+                    title: title
                 },
-                "status": {
-                    "privacyStatus": "public"
+                status: {
+                    privacyStatus: "public"
                 }
-            })
+            }
+
+            if (description) {
+                params.snippet.description = description
+            }
+            if (cat) {
+                tags = cat.replace(/\s/g, '').split(',')
+                params.snippet.tags = tags
+            }
+
+            params = JSON.stringify(params)
             var jsonBlob = new Blob([params], {"type": "application\/json"})
             var fd = new FormData()
             fd.append("snippet", jsonBlob, "file.json")
@@ -76,6 +87,9 @@ class VideosAdd extends React.Component {
                     const v = { title }
                     if (description) {
                         v.description = description
+                    }
+                    if (cat) {
+                        v.category = tags
                     }
                     v.youtube_id = data.id
                     VideoService.create(v)
@@ -126,7 +140,7 @@ class VideosAdd extends React.Component {
                         <TextField
                             disabled={this.state.uploading}
                             floatingLabelText='Kategori'
-                            hintText='RPL,Multimedia,...'
+                            hintText='RPL, Multimedia, ...'
                             ref='cat'
                             fullWidth={true} />
                     </div>
@@ -157,7 +171,6 @@ class VideosAdd extends React.Component {
                 </form>
             )
         }
-
 
         return (
             <div className='col-md-6 col-md-offset-3'>
