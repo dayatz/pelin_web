@@ -27,6 +27,7 @@ class NotificationComponent extends React.Component {
             } else if (data.action_type == 'lesson') {
                 snackbarMsg = `${data.actor.name} ${data.verb} ${data.action_object.title} di grup ${data.target.title}`
             } else if (data.action_type == 'assignment') {
+                this.context.fetchAssignmentCount()
                 snackbarMsg = `${data.actor.name} ${data.verb} ${data.action_object.title} di grup ${data.target.title}`
             }
 
@@ -83,7 +84,8 @@ class NotificationComponent extends React.Component {
 NotificationComponent.contextTypes = {
     auth: React.PropTypes.object,
     store: React.PropTypes.object,
-    markNotifBadge: React.PropTypes.func
+    markNotifBadge: React.PropTypes.func,
+    fetchAssignmentCount: React.PropTypes.func
 }
 
 export default scriptLoader('http://js.pusher.com/3.1/pusher.min.js')(NotificationComponent)
