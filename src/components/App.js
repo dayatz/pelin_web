@@ -26,7 +26,8 @@ class App extends React.Component {
             showSnackbar: this.showSnackbar.bind(this),
             setPageTitle: this.setPageTitle.bind(this),
             markNotifBadge: this.markNotifBadge.bind(this),
-            unMarkNotifBadge: this.unMarkNotifBadge.bind(this)
+            unMarkNotifBadge: this.unMarkNotifBadge.bind(this),
+            fetchAssignmentCount: this.fetchAssignmentCount.bind(this)
         }
     }
 
@@ -37,7 +38,8 @@ class App extends React.Component {
             snackbarOpen: false,
             snackbarMsg: '',
             pageTitle: '',
-            notifBadge: false || this.props.notification.items.length
+            notifBadge: false || this.props.notification.items.length,
+            assignmentCount: 0
         }
     }
 
@@ -55,6 +57,13 @@ class App extends React.Component {
         this.setState({ notifBadge: false })
     }
 
+    fetchAssignmentCount() {
+        UserService.getAssignmentCount()
+            .then(r => {
+                this.setState({ assignmentCount: r.data.count })
+            })
+    }
+
     componentDidMount() {
         if (Notification.permission !== "granted") {
             Notification.requestPermission();
@@ -65,6 +74,7 @@ class App extends React.Component {
                     this.markNotifBadge()
                 }
             })
+        this.fetchAssignmentCount()
     }
 
     componentWillMount() {
@@ -88,9 +98,13 @@ class App extends React.Component {
     }
 
     render() {
-        var notifBadge
+        var notifBadge, assignmentBadge
         if (this.state.notifBadge) {
             notifBadge = <div className='notif-unread'></div>
+        }
+
+        if (this.state.assignmentCount) {
+            assignmentBadge = <span className='assignment-badge'>{this.state.assignmentCount}</span>
         }
         return (
             <div>
@@ -105,6 +119,7 @@ class App extends React.Component {
                                     onClick={() => {
                                         this.context.router.push('/assignments')
                                     }}>
+                                    {assignmentBadge}
                                     <FontIcon
                                         hoverColor="#fff"
                                         color="rgba(255, 255, 255, 0.701961)"
@@ -182,7 +197,8 @@ App.childContextTypes = {
     showSnackbar: React.PropTypes.func,
     setPageTitle: React.PropTypes.func,
     markNotifBadge: React.PropTypes.func,
-    unMarkNotifBadge: React.PropTypes.func
+    unMarkNotifBadge: React.PropTypes.func,
+    fetchAssignmentCount: React.PropTypes.func
 }
 
 App.contextTypes = {

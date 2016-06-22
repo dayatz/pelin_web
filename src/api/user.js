@@ -28,6 +28,9 @@ const UserService = {
     },
     getNotificationsCount() {
         return ajax().get('notifications?count')
+    },
+    getAssignmentCount() {
+        return ajax().get('my_assignments?count')
     }
 }
 

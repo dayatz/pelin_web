@@ -34,6 +34,7 @@ class AssignmentSubmitForm extends React.Component {
                         )
                     this.goBack()
                     this.context.showSnackbar('Berhasil mengumpulkan tugas')
+                    this.context.fetchAssignmentCount()
                 })
                 .catch(error => {
                     console.log(error)
@@ -93,7 +94,8 @@ AssignmentSubmitForm.contextTypes = {
     groupId: React.PropTypes.string,
     router: React.PropTypes.object,
     showSnackbar: React.PropTypes.func,
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    fetchAssignmentCount: React.PropTypes.func
 }
 
 export default AssignmentSubmitForm
