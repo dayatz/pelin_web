@@ -97,6 +97,24 @@ class App extends React.Component {
         this.setState({ navMenuOpen: false })
     }
 
+    renderAssignmentIcon() {
+        if (!this.props.auth.user.is_teacher) {
+            return (
+                <IconButton style={{paddingTop: 5}}
+                    onClick={() => {
+                        this.context.router.push('/assignments')
+                    }}>
+                    {assignmentBadge}
+                    <FontIcon
+                        hoverColor="#fff"
+                        color="rgba(255, 255, 255, 0.701961)"
+                        className="material-icons">event_note</FontIcon>
+                </IconButton>
+            )
+        }
+        return
+    }
+
     render() {
         var notifBadge, assignmentBadge
         if (this.state.notifBadge) {
@@ -115,16 +133,7 @@ class App extends React.Component {
                             <span>{this.state.pageTitle}</span>
 
                             <div className="notification-wrapper">
-                                <IconButton style={{paddingTop: 5}}
-                                    onClick={() => {
-                                        this.context.router.push('/assignments')
-                                    }}>
-                                    {assignmentBadge}
-                                    <FontIcon
-                                        hoverColor="#fff"
-                                        color="rgba(255, 255, 255, 0.701961)"
-                                        className="material-icons">event_note</FontIcon>
-                                </IconButton>
+                                {this.renderAssignmentIcon()}
                                 <IconButton style={{paddingTop: 5}}
                                     onClick={() => {
                                         this.context.router.push('/messages')
