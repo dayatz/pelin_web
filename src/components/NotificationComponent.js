@@ -3,6 +3,7 @@ import Snackbar from 'material-ui/lib/snackbar'
 import Push from 'push.js'
 import scriptLoader from 'react-async-script-loader'
 import { addNotification } from '../actions/notification'
+import { BASE_URL, materialLetter } from '../config/'
 
 
 class NotificationComponent extends React.Component {
@@ -32,11 +33,20 @@ class NotificationComponent extends React.Component {
             }
 
             if (document.hidden) {
+                var photo32
+                var photo64
+                if (data.actor.photo.hasOwnProperty('thumbnail')) {
+                    photo32 = BASE_URL + `${data.actor.photo.small}`
+                    photo64 = BASE_URL + `${data.actor.photo.thumbnail}`
+                } else {
+                    photo32 = materialLetter(data.actor.name.charAt(0))
+                    photo64 = materialLetter(data.actor.name.charAt(0))
+                }
                 Push.create(`${data.actor.name}`, {
                     body: `${snackbarMsg}`,
                     icon: {
-                        x32: '${data.actor.photo.small}',
-                        x64: '${data.actor.photo.thumbnail}'
+                        x32: photo32,
+                        x64: photo64
                     }
                 })
             }

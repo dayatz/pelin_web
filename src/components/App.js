@@ -99,6 +99,7 @@ class App extends React.Component {
 
     renderAssignmentIcon() {
         if (!this.props.auth.user.is_teacher) {
+            var assignmentBadge
             return (
                 <IconButton style={{paddingTop: 5}}
                     onClick={() => {
