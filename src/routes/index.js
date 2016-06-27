@@ -3,8 +3,9 @@ import React from 'react'
 import Router from 'react-router/lib/Router'
 import Route from 'react-router/lib/Route'
 import IndexRoute from 'react-router/lib/IndexRoute'
-import browserHistory from 'react-router/lib/browserHistory'
-import useRouterHistory from 'react-router/lib/useRouterHistory'
+// import browserHistory from 'react-router/lib/browserHistory'
+// import useRouterHistory from 'react-router/lib/useRouterHistory'
+import {createHistory, useBasename} from 'history'
 
 import createHashHistory from 'history/lib/createHashHistory'
 import { syncHistoryWithStore } from 'react-router-redux'
@@ -40,7 +41,11 @@ import GroupRoute from './group'
 
 // const browserHistory = useRouterHistory(createHashHistory)({queryKey: false})
 // TODO: use browserHistory provided by react-router
-const history = syncHistoryWithStore(browserHistory, store)
+// const history = syncHistoryWithStore(browserHistory, store)
+const myhistory = useBasename(createHistory)({
+    basename: '/kelas'
+})
+const history = syncHistoryWithStore(myhistory, store)
 
 function isAuthenticated(nextState, replace) {
     if (!AuthService.isLoggedIn() && !UserService.getUserFromStore()) {

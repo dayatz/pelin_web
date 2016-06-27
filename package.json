@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack -p --progress",
+    "build": "webpack -p --progress --define process.env.NODE_ENV='\"production\"' --config webpack.config.prod.js",
     "dev": "webpack-dev-server --history-api-fallback --hot --inline --progress --port 9000"
   },
   "keywords": [],

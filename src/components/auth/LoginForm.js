@@ -74,7 +74,10 @@ class LoginForm extends React.Component {
                     {errorMsg}
                     <div style={btnStyle}>
                         {loginBtn}
-                        <a href="#" style={{float: 'right', fontSize: 13, textDecoration: 'none'}}>Register</a>
+                        <a href="/forgot_password" style={{float: 'right', fontSize: 13, textDecoration: 'none'}}>Lupa password</a>
+                        <div style={{marginTop: 10}}>
+                            <a href="/register" style={{fontSize: 13, textDecoration: 'none', color: '#455A64'}}>Buat akun</a>
+                        </div>
                     </div>
                     </form>
                 </div>
