@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { ajax } from './index'
 import store from 'store'
+import {BASE_URL} from '../config'
 
 const VideoService = {
     fetchAll: function() {
@@ -31,7 +32,7 @@ const VideoService = {
     authUrl: function() {
         return "https://accounts.google.com/o/oauth2/auth" +
             "?client_id=1093193982584-s7pmusr1e3i87gm5183j96e7kodee19q.apps.googleusercontent.com" +
-            "&redirect_uri=http://localhost:9000/videos/add/oauth" +
+            "&redirect_uri=" + BASE_URL + "/kelas/videos/add/oauth" +
             "&scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fyoutube" +
             "&response_type=token&pageId=none"
     },

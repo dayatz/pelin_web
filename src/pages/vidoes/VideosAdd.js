@@ -95,6 +95,7 @@ class VideosAdd extends React.Component {
                     VideoService.create(v)
                         .then(function(r) {
                             t.setState({ uploading: false })
+                            t.context.router.push('/videos')
                         })
                         .catch(function(err){
                             console.log(err)
