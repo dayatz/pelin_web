@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from 'store'
 import { BASE_URL } from './index'
 
-const url = 'jwt'
+const url = 'auth'
 
 var AuthService = {
     login: function(email, password) {
