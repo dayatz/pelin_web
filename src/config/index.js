@@ -1,4 +1,5 @@
 export const BASE_URL = 'http://localhost:8000'
+// export const BASE_URL = 'http://elearning.stmikbumigora.ac.id'
 
 export const splitText = (num, text) => {
     return (text.length > num) ?

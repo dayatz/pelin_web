@@ -65,6 +65,13 @@ class GroupTabs extends React.Component {
 
             <Tab
                 value={3}
+                icon={<FontIcon className="material-icons">format_list_bulleted</FontIcon>}
+                label="Evaluasi"
+                route="evaluations"
+                onActive={this.handleActive.bind(this)} />
+
+            <Tab
+                value={4}
                 icon={<FontIcon className="material-icons">people</FontIcon>}
                 label="Member"
                 route='members'
