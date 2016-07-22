@@ -41,7 +41,7 @@ class MemberItem extends React.Component {
                 <div onClick={() => {
                     this.props.openProfile(this.props.member.student.nim)
                 }}>
-                    <img src={photo} style={{ width: '100%' }} />
+                    <img src={photo} style={{ width: '100%', height: 113.5 }} />
                     <div style={{padding: 5}}>
                         <p style={{margin: 0}} title={this.props.member.name}>
                             {splitText(12, this.props.member.name)}

@@ -20,8 +20,11 @@ class GroupTabs extends React.Component {
                 case 'assignments':
                     this.setState({ selectedTab: 2 })
                     break
-                case 'members':
+                case 'exams':
                     this.setState({ selectedTab: 3 })
+                    break
+                case 'members':
+                    this.setState({ selectedTab: 4 })
             }
         }
     }
@@ -67,7 +70,7 @@ class GroupTabs extends React.Component {
                 value={3}
                 icon={<FontIcon className="material-icons">format_list_bulleted</FontIcon>}
                 label="Evaluasi"
-                route="evaluations"
+                route="exams"
                 onActive={this.handleActive.bind(this)} />
 
             <Tab
