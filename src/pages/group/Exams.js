@@ -1,6 +1,11 @@
 import React from 'react'
+import { connect } from 'react-redux'
+
 import FabAdd from '../../components/FabAdd'
+import Loading from '../../components/Loading'
+import ExamList from '../../components/group/group/ExamList'
 import NewExamDialog from '../../components/group/group/NewExamDialog'
+import {fetchAllExam} from '../../actions/exam'
 
 
 class Exams extends React.Component {
@@ -12,6 +17,9 @@ class Exams extends React.Component {
     }
     _toggleModal() {
         this.setState({ openModal: !this.state.openModal })
+    }
+    componentDidMount() {
+        this.props.fetchAllExam(this.context.groupId)
     }
     renderAddBtn() {
         if (this.context.group.is_owner) {
@@ -31,10 +39,18 @@ class Exams extends React.Component {
         return null
     }
     render() {
+        const exams = this.props.exams.items[this.context.groupId]
+        if (exams && exams.length) {
+            var renderExamList = <ExamList exams={exams} />
+        } else if (exams && !exams.length) {
+            var renderExamList = <span>No exams</span>
+        } else {
+            var renderExamList = <Loading />
+        }
         return (
             <div>
                 {this.renderAddBtn()}
-                <span>Exams</span>
+                {renderExamList}
             </div>
         )
     }
@@ -42,7 +58,18 @@ class Exams extends React.Component {
 
 Exams.contextTypes = {
   group: React.PropTypes.object,
+  groupId: React.PropTypes.string,
   auth: React.PropTypes.object
 }
 
-export default Exams
+const stateToProps = (state) => ({
+    exams: state.exams
+})
+
+const dispatchToProps = (dispatch) => ({
+    fetchAllExam: (groupId) => {
+        dispatch(fetchAllExam(groupId))
+    }
+})
+
+export default connect(stateToProps, dispatchToProps)(Exams)
