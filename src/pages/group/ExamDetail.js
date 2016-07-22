@@ -3,6 +3,8 @@ import Paper from 'material-ui/lib/paper'
 import RaisedButton from 'material-ui/lib/raised-button'
 import Time from '../../components/Time'
 import Text from '../../components/Text'
+import ExamStudentScores from '../../components/group/group/ExamStudentScores'
+
 
 class ExamDetail extends React.Component {
     render() {
@@ -24,14 +26,28 @@ class ExamDetail extends React.Component {
             </Paper>
         ) : null
 
-        const studentScores = this.context.group.is_owner ? (
-            null
-        ) : null
+        var studentScores
+        var questionPage
+        if (this.context.group.is_owner) {
+            studentScores = (
+                <ExamStudentScores />
+            )
+            questionPage = (
+                <RaisedButton
+                    onTouchTap={() => {
+                        this.context.router.push(
+                            `/groups/${this.context.groupId}/exams/${this.context.examId}/questions`
+                        )
+                    }}
+                    label='Halaman soal >' />
+            )
+        }
 
         return (
             <div>
                 <div className='col-md-6 col-md-offset-3'>
                     {score}
+                    {questionPage}
                     <Paper style={{padding: 16, marginTop: 8}}>
                         <p className='assignment-info__title'>{this.context.exam.title}</p>
                         <Time isoDate={this.context.exam.created_at} />
@@ -49,7 +65,9 @@ class ExamDetail extends React.Component {
 ExamDetail.contextTypes = {
     exam: React.PropTypes.object,
     examId: React.PropTypes.string,
-    group: React.PropTypes.object
+    groupId: React.PropTypes.string,
+    group: React.PropTypes.object,
+    router: React.PropTypes.object
 }
 
 export default ExamDetail
