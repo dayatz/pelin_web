@@ -42,11 +42,19 @@ class NewExamDialog extends React.Component {
         e.preventDefault()
         const title = this.refs.title.getValue()
         const duration = this.refs.duration.getValue()
+        const description = this.refs.description.getValue()
+
+        var exam = {
+            title, duration
+        }
+        if (description) {
+            exam['description'] = description
+        }
 
         ExamService(this.context.groupId)
-            .create({title, duration})
+            .create(exam)
             .then(r => {
-                console.log(r.data)
+                this.context.router.push(`/groups/${this.context.groupId}/exams/${r.data.id}`)
             })
             .catch(rs => {
                 console.log(r)
@@ -76,6 +84,17 @@ class NewExamDialog extends React.Component {
 
                     <div>
                     <TextField
+                        hintText='Deskripsi'
+                        ref='description'
+                        disabled={this.state.loading}
+                        fullWidth={true}
+                        autoComplete={false}
+                        multiLine={true} rows={2}
+                        />
+                    </div>
+
+                    <div>
+                    <TextField
                         hintText='Durasi'
                         ref='duration'
                         disabled={this.state.loading}
@@ -92,7 +111,8 @@ class NewExamDialog extends React.Component {
 }
 
 NewExamDialog.contextTypes = {
-    groupId: React.PropTypes.string
+    groupId: React.PropTypes.string,
+    router: React.PropTypes.object
 }
 
 export default NewExamDialog
