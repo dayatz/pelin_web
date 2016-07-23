@@ -42,7 +42,8 @@ class ExamList extends React.Component {
 
 ExamList.contextTypes = {
     groupId: React.PropTypes.string,
-    router: React.PropTypes.object
+    router: React.PropTypes.object,
+    store: React.PropTypes.object
 }
 
 export default ExamList
