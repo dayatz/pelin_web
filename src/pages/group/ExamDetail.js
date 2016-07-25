@@ -16,7 +16,10 @@ class ExamDetail extends React.Component {
             <RaisedButton
                 label={`Ujian sekarang (${this.context.exam.duration} menit)`}
                 primary={true}
-                fullWidth={true} />
+                fullWidth={true}
+                onTouchTap={() => {
+                    this.context.router.push(`/groups/${this.context.groupId}/exams/${this.context.examId}/answer`)
+                }} />
         ) : null
 
         const score = this.context.exam.score ? (
