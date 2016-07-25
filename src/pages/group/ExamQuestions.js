@@ -85,15 +85,21 @@ class ExamQuestions extends React.Component {
         if (this.state.loading) {
             renderQuestions = <Loading />
         } else if (!this.state.loading && this.state.questions.length) {
+            const style = (k, a) => {
+                console.log(k, a)
+                if (k == a) {
+                    return {borderLeft: '3px solid #009688', paddingLeft: 3}
+                }
+            }
             renderQuestions = this.state.questions.map(q => {
                 return (
                 <Paper key={q.id} style={{padding: 16, marginBottom: 6}}>
                     <p>{q.text}</p>
 
-                    <p>A. {q.answer_a}</p>
-                    <p>B. {q.answer_b}</p>
-                    <p>C. {q.answer_c}</p>
-                    <p>D. {q.answer_d}</p>
+                    <p><span style={style(q.answer_key, 'a')}>A. </span>{q.answer_a}</p>
+                    <p><span style={style(q.answer_key, 'b')}>B. </span>{q.answer_b}</p>
+                    <p><span style={style(q.answer_key, 'c')}>C. </span>{q.answer_c}</p>
+                    <p><span style={style(q.answer_key, 'd')}>D. </span>{q.answer_d}</p>
 
                     <RaisedButton
                         label='Hapus'
