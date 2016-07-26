@@ -8,7 +8,7 @@ import Time from '../../Time'
 import {splitText} from '../../../config/'
 
 const ExamItem = (props, context) => {
-    const left = props.exam.score ? (props.exam.score * 100) : null
+    const left = props.exam.score != null ? (props.exam.score * 100) : null
 
     const iconBtn = context.group.is_owner ?
         (

@@ -12,17 +12,19 @@ class ExamDetail extends React.Component {
             <Text text={this.context.exam.description} />
         ) : null
 
-        const actionBtn = (!this.context.exam.score && !this.context.group.is_owner) ? (
+        const actionBtn = (this.context.exam.score == null && !this.context.group.is_owner) ? (
             <RaisedButton
                 label={`Ujian sekarang (${this.context.exam.duration} menit)`}
                 primary={true}
                 fullWidth={true}
                 onTouchTap={() => {
-                    this.context.router.push(`/groups/${this.context.groupId}/exams/${this.context.examId}/answer`)
+                    if (confirm('Jika anda keluar dari halaman soal, akan dianggap mengumpulkan, ujian sekarang?')) {
+                        this.context.router.push(`/groups/${this.context.groupId}/exams/${this.context.examId}/answer`)
+                    }
                 }} />
         ) : null
 
-        const score = this.context.exam.score ? (
+        const score = this.context.exam.score != null ? (
             <Paper style={{padding: 16, color: '#fff', backgroundColor: '#2196F3'}}>
                 <span>Score</span>
                 <span style={{float: 'right', fontSize: 22}}>{this.context.exam.score*100}</span>

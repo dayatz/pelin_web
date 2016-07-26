@@ -86,7 +86,6 @@ class ExamQuestions extends React.Component {
             renderQuestions = <Loading />
         } else if (!this.state.loading && this.state.questions.length) {
             const style = (k, a) => {
-                console.log(k, a)
                 if (k == a) {
                     return {borderLeft: '3px solid #009688', paddingLeft: 3}
                 }
@@ -167,7 +166,10 @@ class ExamQuestions extends React.Component {
                     <button ref='submit' style={{display: 'none'}}></button>
                 </form>
             </Dialog>
-            <div className='col-md-8 col-md-offset-2'>{renderQuestions}</div>
+            <div className='col-md-8 col-md-offset-2'>
+                <h5>{this.context.exam.title}</h5>
+                {renderQuestions}
+            </div>
             <div style={{clear: 'both'}} />
             </div>
         )
