@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import { fetchMyAssignment } from '../../actions/assignment'
 import MyAssignmentList from '../../components/group/assignment/MyAssignmentList'
 import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 
 class MyAssignment extends React.Component {
     componentDidMount() {
@@ -25,6 +26,7 @@ class MyAssignment extends React.Component {
         }
         return (
             <Paper className='paper' style={{padding: '30px 15px'}}>
+                <Help text='Ini adalah halaman daftar tugas dari semua grup yang anda ikuti.' />
                 {renderMyAssignmentList}
             </Paper>
         )

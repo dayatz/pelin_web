@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import FabAdd from '../../components/FabAdd'
 import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 import ExamList from '../../components/group/group/ExamList'
 import NewExamDialog from '../../components/group/group/NewExamDialog'
 import {fetchAllExam} from '../../actions/exam'
@@ -49,6 +50,7 @@ class Exams extends React.Component {
         }
         return (
             <div>
+                <Help text='Ini adalah halaman daftar evaluasi, angka di sebelah kiri adalah score anda jika sudah mengambil ujian.' />
                 {this.renderAddBtn()}
                 {renderExamList}
             </div>

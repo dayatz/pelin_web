@@ -36,7 +36,10 @@ class UserDetail extends React.Component {
             var renderUser = <Loading />
         }
         return (
-            <div>{renderUser}</div>
+            <div>
+                <Help text='Ini adalah halaman profil user' />
+                {renderUser}
+            </div>
         )
     }
 }

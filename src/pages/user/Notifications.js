@@ -7,6 +7,7 @@ import Avatar from 'material-ui/lib/avatar'
 import RaisedButton from 'material-ui/lib/raised-button'
 import FontIcon from 'material-ui/lib/font-icon'
 import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 import {materialLetter} from '../../config'
 import {customMoment} from '../../config/customMoment'
 import UserService from '../../api/user'
@@ -110,6 +111,7 @@ class Notifications extends React.Component {
         }
         return (
             <Paper className='paper' style={{padding: 30}}>
+                <Help text='Ini adalah halaman daftar notifikasi aktifitas grup.' />
                 <div className='col-md-10 col-md-offset-1'>
                     {renderItems}
                 </div>

@@ -6,6 +6,7 @@ import RadioButton from 'material-ui/lib/radio-button'
 import RadioButtonGroup from 'material-ui/lib/radio-button-group'
 
 import Loading from '../../components/Loading'
+import CountdownTimer from '../../components/CountdownTimer'
 import ExamService, {QuestionService} from '../../api/exam'
 
 
@@ -33,6 +34,13 @@ class ExamAnswer extends React.Component {
             .catch(er => {
                 console.log(er)
             })
+    }
+    componentWillUnmount() {
+        if (Object.keys(window.answers).length) {
+            if (confirm('Keluar dari ujian akan otomatis mengumpulkan, keluar ?')) {
+                this.answerNow()
+            }
+        }
     }
     _handleChange(e, v) {
         const val = v.split('-')
@@ -81,7 +89,14 @@ class ExamAnswer extends React.Component {
             <div className='col-md-8 col-md-offset-2'>
                 <div style={{marginBottom: 16}}>
                     <h5 style={{float:'left'}}>{this.context.exam.title}</h5>
-                    <h5 style={{float:'right', marginLeft: 16}}>0:0</h5>
+                    <h5 style={{float:'right', marginLeft: 16}}>
+                        <CountdownTimer
+                            initialTimeRemaining={this.context.exam.duration*60*1000}
+                            completeCallback={() => {
+                                alert('Waktu habis!')
+                                this.answerNow()
+                            }} />
+                    </h5>
                     <RaisedButton
                         primary={true}
                         label='Kumpulkan'

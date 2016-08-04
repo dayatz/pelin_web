@@ -7,6 +7,7 @@ import PendingList from '../../components/group/member/PendingList'
 import InviteMemberForm from '../../components/group/member/InviteMemberForm'
 import FabAdd from '../../components/FabAdd'
 import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 
 import MemberService from '../../api/member'
 import { fetchMembers, fetchPendings, kickMember } from '../../actions/member'
@@ -101,6 +102,7 @@ class Members extends React.Component {
 
         return (
             <div>
+                <Help text='Ini adalah halaman daftar member di group, untuk mengundang mahasiswa lain silahkan klik tombol tambah.' />
                 <Popover
                     style={{padding: '0 10px'}}
                     open={this.state.openPopover}

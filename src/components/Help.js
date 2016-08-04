@@ -2,9 +2,10 @@ import React from 'react'
 import FloatingActionButton from 'material-ui/lib/floating-action-button'
 import FontIcon from 'material-ui/lib/font-icon'
 import Dialog from 'material-ui/lib/dialog'
+import RaisedButton from 'material-ui/lib/raised-button'
 
 
-export class Help extends React.Component {
+class Help extends React.Component {
     constructor(props) {
         super(props);
     
@@ -16,8 +17,15 @@ export class Help extends React.Component {
         this.setState({open: !this.state.open})
     }
     render() {
+        const actions = [
+            <RaisedButton 
+                label='OK'
+                primary={true}
+                onTouchTap={this._toggleModal.bind(this)}
+                />
+        ]
         return (
-            <div>
+            <div style={{position: 'absolute', bottom: 20, left: 35}}>
                 <FloatingActionButton
                     mini={true}
                     onTouchTap={this._toggleModal.bind(this)}
@@ -27,12 +35,14 @@ export class Help extends React.Component {
                 <Dialog
                     contentStyle={{width: 450}}
                     title='Info'
-                    open={this.props.open}
+                    open={this.state.open}
                     actions={actions}
-                    modal={true} />
+                    modal={true}>
+                    <p>{this.props.text}</p>
                 </Dialog>
             </div>
         )
     }
 }
 
+export default Help

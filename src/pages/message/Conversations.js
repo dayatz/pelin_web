@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import FabAdd from '../../components/FabAdd'
+import Help from '../../components/Help'
 
 import Dialog from 'material-ui/lib/dialog'
 import Paper from 'material-ui/lib/paper'
@@ -63,6 +64,7 @@ class Conversations extends React.Component {
         }
         return (
             <Paper className='paper' style={{padding: '30px 15px'}}>
+                <Help text='Ini adalah halaman pesan, silahkan pilih percakapan di sebelah kiri atau buat perakapan baru.' />
                 <NewConversationModal
                     contentStyle={{width: 350}}
                     handleSubmit={this.newConversation.bind(this)}

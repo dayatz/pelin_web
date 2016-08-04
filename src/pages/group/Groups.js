@@ -4,6 +4,7 @@ import Paper from 'material-ui/lib/paper'
 import GroupService from '../../api/group'
 import GroupList from '../../components/group/group/GroupList'
 import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 
 import { fetchAllGroup } from '../../actions/group'
 
@@ -24,6 +25,7 @@ class Groups extends React.Component {
 
         return (
             <Paper className='paper' style={{padding: '30px 15px'}}>
+                <Help text='Ini adalah halaman daftar group yang ada di sistem, bergabung sekarang.' />
                 {renderGroupList}
             </Paper>
         )

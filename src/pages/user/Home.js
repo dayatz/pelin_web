@@ -10,6 +10,7 @@ import GroupList from '../../components/group/group/GroupList'
 import GroupModal from '../../components/group/group/GroupModal'
 import FabAdd from '../../components/FabAdd'
 import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 
 import { fetchMyGroups } from '../../actions/group'
 import { getMyGroups } from '../../reducers/group'
@@ -59,6 +60,7 @@ class Home extends React.Component {
         }
         return (
             <div>
+                <Help text='Ini adalah halaman list group yang anda ikuti.' />
                 <Paper className='paper' style={{padding: '30px 15px'}}>
                 {this.renderAddGroupButton()}
                 {renderGroupList}

@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 
 import FabAdd from '../../components/FabAdd'
 import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 import LessonList from '../../components/group/lesson/LessonList'
 
 import { fetchLessons } from '../../actions/lesson'
@@ -36,6 +37,7 @@ class Lessons extends React.Component {
         }
         return (
             <div style={{ marginBottom: 30 }}>
+                <Help text='Ini adalah halaman daftar materi yang sudah diupload oleh dosen.' />
                 {this.renderAddButton()}
                 {renderLessonList}
             </div>

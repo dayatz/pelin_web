@@ -3,6 +3,7 @@ import { connect } from 'react-redux'
 import AssignmentList from '../../components/group/assignment/AssignmentList'
 import FabAdd from '../../components/FabAdd'
 import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 import { fetchAllAssignment } from '../../actions/assignment'
 
 class Assignments extends React.Component {
@@ -33,8 +34,14 @@ class Assignments extends React.Component {
             )
         }
 
+        var renderHelp
+        if (!this.context.group.is_owner) {
+            renderHelp = <Help text='Ini adalah halaman daftar tugas yang diberikan dosen, klik salah satu untuk mengumpulkan.' />
+        }
+
         return (
             <div>
+                {renderHelp}
                 {renderAddButton}
                 {renderAssignmentList}
             </div>
