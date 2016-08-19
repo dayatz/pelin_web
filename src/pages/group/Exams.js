@@ -20,6 +20,7 @@ class Exams extends React.Component {
         this.setState({ openModal: !this.state.openModal })
     }
     componentDidMount() {
+        console.log(this.context.router)
         this.props.fetchAllExam(this.context.groupId)
     }
     renderAddBtn() {
@@ -60,6 +61,7 @@ class Exams extends React.Component {
 
 Exams.contextTypes = {
   group: React.PropTypes.object,
+  router: React.PropTypes.object,
   groupId: React.PropTypes.string,
   auth: React.PropTypes.object
 }

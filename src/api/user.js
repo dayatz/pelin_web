@@ -31,6 +31,9 @@ const UserService = {
     },
     getAssignmentCount() {
         return ajax().get('my_assignments?count')
+    },
+    getMessageCount() {
+        return ajax().get('messages/unread_count')
     }
 }
 

@@ -27,6 +27,7 @@ class App extends React.Component {
             setPageTitle: this.setPageTitle.bind(this),
             markNotifBadge: this.markNotifBadge.bind(this),
             unMarkNotifBadge: this.unMarkNotifBadge.bind(this),
+            toggleMsgBadge: this.toggleMsgBadge.bind(this),
             fetchAssignmentCount: this.fetchAssignmentCount.bind(this)
         }
     }
@@ -39,7 +40,8 @@ class App extends React.Component {
             snackbarMsg: '',
             pageTitle: '',
             notifBadge: false || this.props.notification.items.length,
-            assignmentCount: 0
+            assignmentCount: 0, msgCount: 0, notifCount: 0,
+            msgBadge: false
         }
     }
 
@@ -56,11 +58,21 @@ class App extends React.Component {
     unMarkNotifBadge() {
         this.setState({ notifBadge: false })
     }
+    toggleMsgBadge() {
+        this.setState({ msgCount: 0 })
+    }
 
     fetchAssignmentCount() {
         UserService.getAssignmentCount()
             .then(r => {
                 this.setState({ assignmentCount: r.data.count })
+            })
+    }
+
+    fetchMessageCount() {
+        UserService.getMessageCount()
+            .then(r => {
+                this.setState({ msgCount: r.data.count })
             })
     }
 
@@ -75,6 +87,7 @@ class App extends React.Component {
                 }
             })
         this.fetchAssignmentCount()
+        this.fetchMessageCount()
     }
 
     componentWillMount() {
@@ -100,8 +113,11 @@ class App extends React.Component {
     renderAssignmentIcon() {
         if (!this.props.auth.user.is_teacher) {
             var assignmentBadge
+            if (this.state.assignmentCount) {
+                assignmentBadge = <span className='assignment-badge'>{this.state.assignmentCount}</span>
+            }
             return (
-                <IconButton style={{paddingTop: 5}}
+                <IconButton style={{paddingTop: 5}} title='Tugas anda'
                     onClick={() => {
                         this.context.router.push('/assignments')
                     }}>
@@ -117,13 +133,12 @@ class App extends React.Component {
     }
 
     render() {
-        var notifBadge, assignmentBadge
+        var notifBadge, msgBadge
         if (this.state.notifBadge) {
             notifBadge = <div className='notif-unread'></div>
         }
-
-        if (this.state.assignmentCount) {
-            assignmentBadge = <span className='assignment-badge'>{this.state.assignmentCount}</span>
+        if (this.state.msgCount) {
+            msgBadge = <span className='assignment-badge'>{this.state.msgCount}</span>
         }
         return (
             <div>
@@ -135,16 +150,17 @@ class App extends React.Component {
 
                             <div className="notification-wrapper">
                                 {this.renderAssignmentIcon()}
-                                <IconButton style={{paddingTop: 5}}
+                                <IconButton style={{paddingTop: 5}} title='Pesan'
                                     onClick={() => {
                                         this.context.router.push('/messages')
                                     }}>
+                                    {msgBadge}
                                     <FontIcon
                                         hoverColor="#fff"
                                         color="rgba(255, 255, 255, 0.701961)"
                                         className="material-icons">chat_bubble</FontIcon>
                                 </IconButton>
-                                <IconButton style={{paddingTop: 5}}
+                                <IconButton style={{paddingTop: 5}} title='Notifikasi'
                                     onClick={() => {
                                         this.context.router.push('/notifications')
                                     }}>
@@ -158,7 +174,7 @@ class App extends React.Component {
                         </div>
                     }
                     iconElementRight={
-                        <FlatButton
+                        <FlatButton title='Halaman profil anda'
                             onClick={() => { this.context.router.push('/profile') }}
                             label={this.props.auth.user.name.split(' ')[0]}
                             icon={<FontIcon className="material-icons">face</FontIcon>}
@@ -181,7 +197,6 @@ class App extends React.Component {
                     router={this.context.router}
                 />
 
-                {/* TODO: design container */}
                 <div className="container" style={{marginTop: 20}}>
                     <div className="col-md-10 col-md-offset-1">
                         {this.props.children}
@@ -208,6 +223,7 @@ App.childContextTypes = {
     setPageTitle: React.PropTypes.func,
     markNotifBadge: React.PropTypes.func,
     unMarkNotifBadge: React.PropTypes.func,
+    toggleMsgBadge: React.PropTypes.func,
     fetchAssignmentCount: React.PropTypes.func
 }
 

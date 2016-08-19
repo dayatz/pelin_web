@@ -27,6 +27,7 @@ class Conversations extends React.Component {
     componentDidMount() {
         this.props.fetchConversation()
         this.context.setPageTitle('Pesan')
+        this.context.toggleMsgBadge()
     }
     removeConversation(userId) {
         this.props.removeConversation(userId)
@@ -78,7 +79,8 @@ class Conversations extends React.Component {
 
 Conversations.contextTypes = {
     router: React.PropTypes.object,
-    setPageTitle: React.PropTypes.func
+    setPageTitle: React.PropTypes.func,
+    toggleMsgBadge: React.PropTypes.func
 }
 Conversations.childContextTypes = {
     removeConversation: React.PropTypes.func

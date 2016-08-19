@@ -74,7 +74,7 @@ class AssignmentSubmitForm extends React.Component {
                     <FlatButton label={btnLabel} onClick={this._openFileDialog.bind(this)} />
                     <input
                         onChange={this._handleFileChange.bind(this)}
-                        ref='file' type='file'
+                        ref='file' type='file' accept='.doc, .docx, .xls, .xlsx, .ppt, pptx, .pdf, image/*, .zip, .rar, .txt'
                         style={{display: 'none'}} />
                 </div>
 

@@ -37,7 +37,6 @@ class UserDetail extends React.Component {
         }
         return (
             <div>
-                <Help text='Ini adalah halaman profil user' />
                 {renderUser}
             </div>
         )

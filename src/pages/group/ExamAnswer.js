@@ -30,6 +30,7 @@ class ExamAnswer extends React.Component {
             .all()
             .then(r => {
                 this.setState({loading: false, questions: r.data})
+                window.answers[this.state.questions[0].id] = 'e'
             })
             .catch(er => {
                 console.log(er)
@@ -56,6 +57,7 @@ class ExamAnswer extends React.Component {
             .then(r => {
                 const score = r.data.score
                 alert('Score anda: ' + score*100)
+                window.answers = {}
                 this.context.router.replace(`/groups/${this.context.groupId}/exams`)
             })
             .catch(er => {
@@ -68,10 +70,12 @@ class ExamAnswer extends React.Component {
         if (this.state.loading) {
             renderQuestions = <Loading />
         } else if (!this.state.lading && this.state.questions.length) {
+            var num = 0
             renderQuestions = this.state.questions.map(q => {
+                num++
                 return (
                 <Paper style={{padding: 16, marginBottom: 6}} key={q.id}>
-                    <p>{q.text}</p>
+                    <p>{num}. {q.text}</p>
                     <div>
                         <RadioButtonGroup name={`question-${q.id}`} onChange={this._handleChange.bind(this)} >
                             <RadioButton value={`${q.id}-a`} label={`A. ${q.answer_a}`} labelStyle={{fontWeight: 'normal'}} />
