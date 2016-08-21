@@ -4,18 +4,18 @@ const conversation = (state = {
         isLoading: false,
         isError: false,
         error: null,
-        items: {}
+        items: []
     }, action) => {
     switch(action.type) {
         case fetchConversationAction.start:
             return { ...state, isLoading: true }
 
         case fetchConversationAction.success:
-            const { items } = state
-            for (const i of action.items) {
-                items[i.id] = i
-            }
-            return {...state, isLoading: false, items }
+            // const { items } = state
+            // for (const i of action.items) {
+            //     items[i.id] = i
+            // }
+            return {...state, isLoading: false, items: action.items }
 
         case fetchConversationAction.fail:
             return { ...state,

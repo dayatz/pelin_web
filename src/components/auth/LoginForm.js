@@ -61,7 +61,7 @@ class LoginForm extends React.Component {
                             disabled={this.props.auth.isLoading}
                             hintText="NIM/Username/Email"
                             autoFocus={true}
-                            autoComplete={false} />
+                            autoComplete='off' />
                     </div>
 
                     <div style={{marginTop: 20}}>
@@ -69,7 +69,7 @@ class LoginForm extends React.Component {
                             ref="password"
                             disabled={this.props.auth.isLoading}
                             type="password" hintText="Password"
-                            autoComplete={false} />
+                            autoComplete='off' />
                     </div>
                     {errorMsg}
                     <div style={btnStyle}>

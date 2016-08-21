@@ -36,7 +36,8 @@ class MessageForm extends React.Component {
             <TextField
                 style={{width: '80%'}}
                 autoFocus={true}
-                id='new-message' ref='text' />
+                id='new-message' ref='text'
+                autoComplete='off' />
             <RaisedButton type='submit' label='Kirim' />
         </form>
         )

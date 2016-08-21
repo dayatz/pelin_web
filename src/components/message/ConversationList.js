@@ -5,16 +5,24 @@ import List from 'material-ui/lib/lists/list'
 import ConversationItem from './ConversationItem.js'
 
 export default function ConversationList(props) {
-
-    var items = []
-    for (var id in props.conversations) {
-        items.push(
+    // var items = []
+    // for (var id in props.conversations) {
+    //     items.push(
+    //         <ConversationItem
+    //             key={id}
+    //             removeConversation={props.removeConversation}
+    //             conversation={props.conversations[id]} />
+    //     )
+    // }
+    console.log(props.conversations)
+    var items = props.conversations.map(c => {
+        return (
             <ConversationItem
-                key={id}
+                key={c.id}
                 removeConversation={props.removeConversation}
-                conversation={props.conversations[id]} />
+                conversation={c} />
         )
-    }
+    })
 
     return (
         <div>

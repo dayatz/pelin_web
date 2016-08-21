@@ -1,5 +1,6 @@
 var webpack = require('webpack');
-var BASE_URL = 'http://elearning.stmikbumigora.ac.id';
+// var BASE_URL = 'http://elearning.stmikbumigora.ac.id';
+var BASE_URL = 'http://localhost:8000';
 
 module.exports = {
     entry: {

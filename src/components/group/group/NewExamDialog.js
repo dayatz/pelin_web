@@ -78,7 +78,7 @@ class NewExamDialog extends React.Component {
                         disabled={this.state.loading}
                         autoFocus={true}
                         fullWidth={true}
-                        autoComplete={false}
+                        autoComplete='off'
                         />
                     </div>
 
@@ -88,7 +88,7 @@ class NewExamDialog extends React.Component {
                         ref='description'
                         disabled={this.state.loading}
                         fullWidth={true}
-                        autoComplete={false}
+                        autoComplete='off'
                         multiLine={true} rows={2}
                         />
                     </div>
@@ -98,7 +98,7 @@ class NewExamDialog extends React.Component {
                         hintText='Durasi'
                         ref='duration'
                         disabled={this.state.loading}
-                        autoComplete={false}
+                        autoComplete='off'
                         />
                     menit
                     </div>

@@ -56,7 +56,7 @@ class App extends React.Component {
         this.setState({ notifBadge: true })
     }
     unMarkNotifBadge() {
-        this.setState({ notifBadge: false })
+        this.setState({ notifBadge: false, notifCount: 0 })
     }
     toggleMsgBadge() {
         this.setState({ msgCount: 0 })
