@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
-import FlatButton from 'material-ui/lib/flat-button'
 
 import UserService from '../../api/user'
 import { updateProfileAction } from '../../actions/auth.js'
@@ -74,7 +73,7 @@ class MyProfileForm extends React.Component {
         <form onSubmit={this.onSubmit.bind(this)}>
             <div>
                 <img height='200' width='200' src={photo} /><br />
-                <FlatButton
+                <RaisedButton
                     disabled={this.state.loading}
                     onClick={this._openFileDialog.bind(this)}
                     label='Pilih Photo'

@@ -34,6 +34,9 @@ const UserService = {
     },
     getMessageCount() {
         return ajax().get('messages/unread_count')
+    },
+    search(q) {
+        return ajax().get('users?q=' + q)
     }
 }
 
