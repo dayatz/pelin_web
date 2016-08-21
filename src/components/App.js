@@ -82,6 +82,7 @@ class App extends React.Component {
         }
         UserService.getNotificationsCount()
             .then(r => {
+                this.setState({ notifCount: r.data.count })
                 if (r.data.count != 0) {
                     this.markNotifBadge()
                 }
@@ -134,8 +135,11 @@ class App extends React.Component {
 
     render() {
         var notifBadge, msgBadge
-        if (this.state.notifBadge) {
-            notifBadge = <div className='notif-unread'></div>
+        // if (this.state.notifBadge) {
+        //     notifBadge = <div className='notif-unread'></div>
+        // }
+        if (this.state.notifCount) {
+            notifBadge = <span className='assignment-badge'>{this.state.notifCount}</span>
         }
         if (this.state.msgCount) {
             msgBadge = <span className='assignment-badge'>{this.state.msgCount}</span>
