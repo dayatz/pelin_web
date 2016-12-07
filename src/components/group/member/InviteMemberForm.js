@@ -1,6 +1,6 @@
 import React from 'react'
 import TextField from 'material-ui/lib/text-field'
-import FabAdd from '../../FabAdd'
+import RaisedButton from 'material-ui/lib/raised-button'
 
 class InviteMemberForm extends React.Component {
     constructor(props) {
@@ -32,10 +32,15 @@ class InviteMemberForm extends React.Component {
                     id='nim'
                     value={this.state.nim}
                     hintText='Masukkan nim'
+                    autoFocus={this.props.open}
                     autoComplete='off'
                     disabled={this.state.loading}
                     onChange={this.onChange.bind(this)} />
-                <FabAdd disabled={this.state.loading} type='submit' />
+                <RaisedButton
+                    label='OK'
+                    disabled={this.state.loading}
+                    type='submit'
+                    secondary={true} />
             </form>
         )
     }

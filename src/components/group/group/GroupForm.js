@@ -14,7 +14,7 @@ class GroupForm extends React.Component {
             major: 'S1 TI',
             title: null,
             description: null,
-            semester: null,
+            semester: '1',
 
             loading: false,
             editing: false
@@ -24,7 +24,6 @@ class GroupForm extends React.Component {
     componentWillMount() {
         if (this.props.group) {
             const { group } = this.props
-            console.log(group)
             this.setState({
                 editing: true,
                 major: group.major,
@@ -40,7 +39,7 @@ class GroupForm extends React.Component {
 
         const title = this.refs.title.getValue()
         const description = this.refs.description.getValue()
-        const semester = this.refs.semester.getValue()
+        const semester = this.state.semester
         const major = this.state.major
 
         if (title && semester && major) {
@@ -72,8 +71,11 @@ class GroupForm extends React.Component {
         }
     }
 
-    _handleDropDown(event, index, value) {
+    _handleMajor(event, index, value) {
         this.setState({ major: value })
+    }
+    _handleSemester(e, i, v) {
+        this.setState({ semester: v })
     }
 
     render() {
@@ -85,7 +87,8 @@ class GroupForm extends React.Component {
                 autoFocus={true}
                 disabled={this.state.loading}
                 defaultValue={this.state.title}
-                ref='title' />
+                ref='title'
+                fullWidth={true} />
             <TextField id='description'
                 hintText='Deskripsi grup'
                 autoComplete='off'
@@ -93,17 +96,24 @@ class GroupForm extends React.Component {
                 defaultValue={this.state.description}
                 ref='description'
                 multiLine={true}
-                rows={2} />
+                rows={2}
+                fullWidth={true} />
             <br />
-            <DropDownMenu value={this.state.major} onChange={this._handleDropDown.bind(this)}>
+            <DropDownMenu value={this.state.major} onChange={this._handleMajor.bind(this)} fullWidth={true}>
                 <MenuItem value='S1 TI' primaryText='S1 TI' />
                 <MenuItem value='D3 TI' primaryText='D3 TI' />
                 <MenuItem value='D3 MI' primaryText='D3 MI' />
             </DropDownMenu>
-            <TextField id='semester'
-                ref='semester'
-                defaultValue={this.state.semester}
-                hintText='Semester' />
+            <DropDownMenu value={this.state.semester} onChange={this._handleSemester.bind(this)} fullWidth={true} >
+                <MenuItem value='1' primaryText='I' />
+                <MenuItem value='2' primaryText='II' />
+                <MenuItem value='3' primaryText='III' />
+                <MenuItem value='4' primaryText='IV' />
+                <MenuItem value='5' primaryText='V' />
+                <MenuItem value='6' primaryText='VI' />
+                <MenuItem value='7' primaryText='VII' />
+                <MenuItem value='8' primaryText='VIII' />
+            </DropDownMenu>
             <button type='submit' style={{ display: 'none' }} ref='btnSubmit' />
         </form>
         )

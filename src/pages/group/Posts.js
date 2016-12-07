@@ -5,6 +5,9 @@ import { fetchPost } from '../../actions/post'
 
 import PostList from '../../components/group/post/PostList'
 import NewPostForm from '../../components/group/post/NewPostForm'
+import Loading from '../../components/Loading'
+import Help from '../../components/Help'
+
 
 class Posts extends React.Component {
     componentDidMount() {
@@ -16,14 +19,14 @@ class Posts extends React.Component {
         if (posts && posts.length) {
             var renderPosts = <PostList posts={posts} />
         } else if (posts && !posts.length) {
-            var renderPosts = <span>No posts</span>
+            var renderPosts = <NewPostForm />
         } else {
-            var renderPosts = <span>Loading...</span>
+            var renderPosts = <Loading />
         }
         return (
             <div>
-                <NewPostForm />
-                {renderPosts}
+                <Help text='Ini adalah halaman diskusi, silahkan posting diskusi di sini.' />
+                <div className='post-list'>{renderPosts}</div>
             </div>
         )
     }

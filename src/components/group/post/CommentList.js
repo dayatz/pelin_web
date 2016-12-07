@@ -4,14 +4,12 @@ import CommentItem from './CommentItem'
 const CommentList = (props) => {
     const renderComment = props.comments.map(comment => {
         return (
-            <div key={comment.id}>
-                <CommentItem comment={comment} />
-            </div>
+            <CommentItem key={comment.id} comment={comment} />
         )
     })
 
     return (
-        <div>{renderComment}</div>
+        <div className='post-item__comments'>{renderComment}</div>
     )
 }
 

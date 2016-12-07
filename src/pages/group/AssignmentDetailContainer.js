@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import AssignmentService from '../../api/assignment'
+import Loading from '../../components/Loading'
 
 class AssignmentDetailContainer extends React.Component {
     constructor(props) {
@@ -50,7 +51,7 @@ class AssignmentDetailContainer extends React.Component {
     render () {
         var renderAssignmentDetail
         if (this.state.loading && this.state.assignment) {
-            renderAssignmentDetail = <span>Loading...</span>
+            renderAssignmentDetail = <Loading />
         } else if (!this.state.loading && this.state.assignment) {
             renderAssignmentDetail = this.props.children
         } else {

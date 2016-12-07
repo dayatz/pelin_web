@@ -20,12 +20,11 @@ class NewCommentForm extends React.Component {
     }
     onSubmit(e) {
         e.preventDefault()
-        this.setState({ sending: true })
-
         const postId = this.props.postId
         const text = this.state.commentText.trim()
 
         if (text) {
+            this.setState({ sending: true })
             PostService(this.context.groupId)
                 .comment(postId, { text })
                 .then(r => {
@@ -36,6 +35,7 @@ class NewCommentForm extends React.Component {
                     })
                     this.clean()
                     this.props.openComments()
+                    this.props.incrementComment()
                 })
                 .catch( error => {
                     console.log(error)
@@ -49,18 +49,19 @@ class NewCommentForm extends React.Component {
         return (
             <form onSubmit={this.onSubmit.bind(this)} style={{ width: '100%' }}>
                 <TextareaAutosize
-                    onResize={() => { this.context.masonry.masonry.layout() }}
                     value={this.state.commentText}
                     placeholder='Komentari post ini...'
                     id={this.props.postId.toString()}
-                    onChange={this.handleChange.bind(this)}
                     disabled={this.state.sending}
                     autoComplete='off'
-                    className='post-item__new-comment__text' />
+                    className='post-item__new-comment__text'
+                    onResize={() => { this.context.masonry.masonry.layout() }}
+                    onChange={this.handleChange.bind(this)} />
 
                 <IconButton
                     style={{ float: 'right' }}
                     disabled={this.state.sending}
+                    iconStyle={{ color: '#757575' }}
                     type='submit'>
                     <FontIcon className='material-icons'>send</FontIcon>
                 </IconButton>

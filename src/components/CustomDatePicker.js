@@ -31,6 +31,7 @@ const CustomDatePicker = (props) => {
     }
     return (
         <DatePicker
+            {...props}
             DateTimeFormat={DateTimeFormat}
             hintText='Tanggal'
             mode='landscape'

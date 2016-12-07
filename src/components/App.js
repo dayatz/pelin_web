@@ -6,13 +6,16 @@ import getMuiTheme from 'material-ui/lib/styles/getMuiTheme'
 import customTheme from '../config/theme'
 import AppBar from 'material-ui/lib/app-bar'
 import Snackbar from 'material-ui/lib/snackbar'
+import Badge from 'material-ui/lib/badge'
 import FontIcon from 'material-ui/lib/font-icon'
 import IconMenu from 'material-ui/lib/menus/icon-menu'
 import IconButton from 'material-ui/lib/icon-button'
 import FlatButton from 'material-ui/lib/flat-button'
 
+import UserService from '../api/user'
+import AuthService from '../api/auth.js'
 import NavMenu from '../components/NavMenu'
-import Notification from '../components/Notification'
+import NotificationComponent from '../components/NotificationComponent'
 
 
 class App extends React.Component {
@@ -21,7 +24,11 @@ class App extends React.Component {
             muiTheme: getMuiTheme(customTheme),
             auth: this.context.store.getState().auth,
             showSnackbar: this.showSnackbar.bind(this),
-            setPageTitle: this.setPageTitle.bind(this)
+            setPageTitle: this.setPageTitle.bind(this),
+            markNotifBadge: this.markNotifBadge.bind(this),
+            unMarkNotifBadge: this.unMarkNotifBadge.bind(this),
+            toggleMsgBadge: this.toggleMsgBadge.bind(this),
+            fetchAssignmentCount: this.fetchAssignmentCount.bind(this)
         }
     }
 
@@ -31,45 +38,147 @@ class App extends React.Component {
             navMenuOpen: false,
             snackbarOpen: false,
             snackbarMsg: '',
-            pageTitle: ''
+            pageTitle: '',
+            notifBadge: false || this.props.notification.items.length,
+            assignmentCount: 0, msgCount: 0, notifCount: 0,
+            msgBadge: false
         }
     }
 
     showSnackbar(msg) {
-        this.setState({ 
+        this.setState({
             snackbarOpen: true,
             snackbarMsg: msg
         })
+    }
+
+    markNotifBadge() {
+        this.setState({ notifBadge: true })
+    }
+    unMarkNotifBadge() {
+        this.setState({ notifBadge: false, notifCount: 0 })
+    }
+    toggleMsgBadge() {
+        this.setState({ msgCount: 0 })
+    }
+
+    fetchAssignmentCount() {
+        UserService.getAssignmentCount()
+            .then(r => {
+                this.setState({ assignmentCount: r.data.count })
+            })
+    }
+
+    fetchMessageCount() {
+        UserService.getMessageCount()
+            .then(r => {
+                this.setState({ msgCount: r.data.count })
+            })
+    }
+
+    componentDidMount() {
+        if (Notification.permission !== "granted") {
+            Notification.requestPermission();
+        }
+        UserService.getNotificationsCount()
+            .then(r => {
+                this.setState({ notifCount: r.data.count })
+                if (r.data.count != 0) {
+                    this.markNotifBadge()
+                }
+            })
+        this.fetchAssignmentCount()
+        this.fetchMessageCount()
+    }
+
+    componentWillMount() {
+        const t = this
+        if (AuthService.getToken()) {
+            AuthService.verifyToken()
+                .catch(function(err){
+                    t.props.logout()
+                })
+        } else {
+            t.props.logout()
+        }
     }
 
     setPageTitle(pageTitle) {
         this.setState({ pageTitle })
     }
 
+    closeNavMenu() {
+        this.setState({ navMenuOpen: false })
+    }
+
+    renderAssignmentIcon() {
+        if (!this.props.auth.user.is_teacher) {
+            var assignmentBadge
+            if (this.state.assignmentCount) {
+                assignmentBadge = <span className='assignment-badge'>{this.state.assignmentCount}</span>
+            }
+            return (
+                <IconButton style={{paddingTop: 5}} title='Tugas anda'
+                    onClick={() => {
+                        this.context.router.push('/assignments')
+                    }}>
+                    {assignmentBadge}
+                    <FontIcon
+                        hoverColor="#fff"
+                        color="rgba(255, 255, 255, 0.701961)"
+                        className="material-icons">event_note</FontIcon>
+                </IconButton>
+            )
+        }
+        return
+    }
+
     render() {
+        var notifBadge, msgBadge
+        // if (this.state.notifBadge) {
+        //     notifBadge = <div className='notif-unread'></div>
+        // }
+        if (this.state.notifCount) {
+            notifBadge = <span className='assignment-badge'>{this.state.notifCount}</span>
+        }
+        if (this.state.msgCount) {
+            msgBadge = <span className='assignment-badge'>{this.state.msgCount}</span>
+        }
         return (
             <div>
-                <Notification />
+                <NotificationComponent />
                 <AppBar
                     title={
-                        <div className="col-md-8 col-md-offset-2">
+                        <div>
                             <span>{this.state.pageTitle}</span>
 
                             <div className="notification-wrapper">
-                                <IconButton style={{paddingTop: 5}}>
-                                    <FontIcon hoverColor="#fff" color="rgba(255, 255, 255, 0.701961)" className="material-icons">event_note</FontIcon>
+                                {this.renderAssignmentIcon()}
+                                <IconButton style={{paddingTop: 5}} title='Pesan'
+                                    onClick={() => {
+                                        this.context.router.push('/messages')
+                                    }}>
+                                    {msgBadge}
+                                    <FontIcon
+                                        hoverColor="#fff"
+                                        color="rgba(255, 255, 255, 0.701961)"
+                                        className="material-icons">chat_bubble</FontIcon>
                                 </IconButton>
-                                <IconButton style={{paddingTop: 5}}>
-                                    <FontIcon hoverColor="#fff" color="rgba(255, 255, 255, 0.701961)" className="material-icons">chat_bubble</FontIcon>
-                                </IconButton>
-                                <IconButton style={{paddingTop: 5}}>
-                                    <FontIcon hoverColor="#fff" color="rgba(255, 255, 255, 0.701961)" className="material-icons">public</FontIcon>
+                                <IconButton style={{paddingTop: 5}} title='Notifikasi'
+                                    onClick={() => {
+                                        this.context.router.push('/notifications')
+                                    }}>
+                                    {notifBadge}
+                                    <FontIcon
+                                        hoverColor="#fff"
+                                        color="rgba(255, 255, 255, 0.701961)"
+                                        className="material-icons">public</FontIcon>
                                 </IconButton>
                             </div>
                         </div>
                     }
                     iconElementRight={
-                        <FlatButton
+                        <FlatButton title='Halaman profil anda'
                             onClick={() => { this.context.router.push('/profile') }}
                             label={this.props.auth.user.name.split(' ')[0]}
                             icon={<FontIcon className="material-icons">face</FontIcon>}
@@ -86,12 +195,12 @@ class App extends React.Component {
                     handleOpen={ navMenuOpen => {
                         this.setState({navMenuOpen})
                     }}
+                    closeNavMenu={this.closeNavMenu.bind(this)}
                     {...this.props}
                     user={this.context.store.getState().auth.user}
                     router={this.context.router}
                 />
 
-                {/* TODO: design container */}
                 <div className="container" style={{marginTop: 20}}>
                     <div className="col-md-10 col-md-offset-1">
                         {this.props.children}
@@ -115,7 +224,11 @@ App.childContextTypes = {
     muiTheme: React.PropTypes.object,
     auth: React.PropTypes.object,
     showSnackbar: React.PropTypes.func,
-    setPageTitle: React.PropTypes.func
+    setPageTitle: React.PropTypes.func,
+    markNotifBadge: React.PropTypes.func,
+    unMarkNotifBadge: React.PropTypes.func,
+    toggleMsgBadge: React.PropTypes.func,
+    fetchAssignmentCount: React.PropTypes.func
 }
 
 App.contextTypes = {
@@ -124,12 +237,12 @@ App.contextTypes = {
 }
 
 const mapStateToProps = state => ({
-    auth: state.auth
+    auth: state.auth,
+    notification: state.notification
 })
 
 const mapDispatchToProps = dispatch => ({
     logout: router => {
-        // dispatch({ type: 'RESET'})
         dispatch(logout(router))
     }
 })

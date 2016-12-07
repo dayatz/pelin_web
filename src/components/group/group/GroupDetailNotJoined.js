@@ -34,9 +34,6 @@ class GroupDetailNotJoined extends React.Component {
         }
     }
     render() {
-        const btnLabel = () => {
-            return this.state.pending ? 'Batal' : 'Gabung'
-        }
         return <div>
             <div>
                 <h3>{this.context.group.title}</h3>
@@ -44,7 +41,7 @@ class GroupDetailNotJoined extends React.Component {
             </div>
             <RaisedButton
                 disabled={this.state.loading}
-                label={btnLabel()}
+                label={this.state.pending ? 'Batal' : 'Gabung'}
                 onClick={this.toggleJoin.bind(this)} />
         </div>
     }

@@ -1,21 +1,20 @@
 import React from 'react'
+import Text from '../Text'
 
-const MessageItem = (props) => {
-    const { message } = props
+export default function MessageItem(props) {
     
-    var style
-    if (!message.me) {
-        style = {
-            fontWeight: 'bold'
-        }
+    var className
+    if (props.message.me) {
+        className = 'me'
+    } else {
+        className = 'not-me'
     }
     return (
         <div>
-            <p>
-                <span style={style}>{message.text}</span>
-            </p>
+            <div className={`chat-item__text ${className}`}>
+                <Text text={props.message.text} />
+            </div>
+            <div style={{clear:'both'}}></div>
         </div>
     )
 }
-
-export default MessageItem

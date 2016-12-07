@@ -4,6 +4,7 @@ import { connect } from 'react-redux'
 import Masonry from 'react-masonry-component'
 
 import PostItem from './PostItem'
+import NewPostForm from './NewPostForm'
 import PostService from '../../../api/post'
 
 class PostList extends React.Component {
@@ -19,15 +20,17 @@ class PostList extends React.Component {
         }
     }
     handleDelete(post) {
-        const postId = post.id
-        const groupId = this.context.groupId
-        this.props.deletePost(groupId, postId)
+        if (confirm('Hapus post ?')) {
+            const postId = post.id
+            const groupId = this.context.groupId
+            this.props.deletePost(groupId, postId)
 
-        PostService(groupId)
-            .delete(postId)
-            .then(r => {
-                console.log(r)
-            })
+            PostService(groupId)
+                .delete(postId)
+                .then(r => {
+                    console.log(r)
+                })
+        }
     }
     handleVote(post) {
         PostService(this.context.groupId)
@@ -43,18 +46,19 @@ class PostList extends React.Component {
     render () {
         var renderPost = this.props.posts.map(post => {
             return (
-                <div key={post.id}>
-                    <PostItem
-                        post={post}
-                        handleDelete={this.handleDelete.bind(this)}
-                        handleVote={this.handleVote.bind(this)}
-                        comments={this.props.comments.items[post.id]} />
-                </div>
+                <PostItem
+                    key={post.id}
+                    post={post}
+                    handleDelete={this.handleDelete.bind(this)}
+                    handleVote={this.handleVote.bind(this)}
+                    comments={this.props.comments.items[post.id]} />
             )
         })
 
         return (
             <Masonry ref='masonry'>
+                <div style={{ width: 1, height: 0 }}></div>
+                <NewPostForm />
                 {renderPost}
             </Masonry>
         )

@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import FabAdd from '../../components/FabAdd'
+import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 import LessonList from '../../components/group/lesson/LessonList'
 
 import { fetchLessons } from '../../actions/lesson'
@@ -13,8 +15,8 @@ class Lessons extends React.Component {
     renderAddButton() {
         if (this.context.group.is_owner) {
             return (
-                <FabAdd onClick={() => {
-                    this.context.router.replace(
+                <FabAdd className='lesson-add-fab' onClick={() => {
+                    this.context.router.push(
                         `/groups/${this.context.groupId}/lessons/add`
                     )
                 }} />
@@ -26,23 +28,17 @@ class Lessons extends React.Component {
         const lessons = this.props.lessons.items[this.context.groupId]
         if (lessons && lessons.length) {
             var renderLessonList = (
-                <div>
-                    {this.renderAddButton()}
                     <LessonList lessons={lessons} />
-                </div>
             )
         } else if (lessons && !lessons.length) {
-            var renderLessonList = (
-                <div>
-                    No lessons found
-                    {this.renderAddButton()}
-                </div>
-            )
+            var renderLessonList = ('No lessons found')
         } else {
-            var renderLessonList = <span>Loading...</span>
+            var renderLessonList = <Loading />
         }
         return (
-            <div>
+            <div style={{ marginBottom: 30 }}>
+                <Help text='Ini adalah halaman daftar materi yang sudah diupload oleh dosen.' />
+                {this.renderAddButton()}
                 {renderLessonList}
             </div>
         )

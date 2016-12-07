@@ -5,6 +5,7 @@ import TextField from 'material-ui/lib/text-field'
 import RaisedButton from 'material-ui/lib/raised-button'
 import TimePicker from 'material-ui/lib/time-picker/time-picker'
 import FlatButton from 'material-ui/lib/flat-button'
+import Paper from 'material-ui/lib/paper'
 
 import CustomDatePicker from '../../CustomDatePicker'
 
@@ -113,7 +114,7 @@ class NewAssignmentForm extends React.Component {
     render() {
         var btnlabel = 'Pilih File'
         if (this.state.file) {
-            btnlabel = this.state.files.name
+            btnlabel = this.state.file.name
         }
 
         if (this.state.editing) {
@@ -123,6 +124,7 @@ class NewAssignmentForm extends React.Component {
         }
 
         return (
+            <Paper style={{padding: 16}}>
             <form onSubmit={this.handleSubmit.bind(this)}>
                 <div>
                     <TextField
@@ -130,7 +132,8 @@ class NewAssignmentForm extends React.Component {
                         hintText='Judul tugas' id='title' ref='title'
                         autoComplete='off'
                         defaultValue={this.state.defaultTitle}
-                        autoFocus={true} />
+                        autoFocus={true}
+                        fullWidth={true} />
                 </div>
 
                 <div>
@@ -139,7 +142,8 @@ class NewAssignmentForm extends React.Component {
                         hintText='Deskripsi tugas' id='description' ref='description'
                         multiLine={true} rows={3}
                         defaultValue={this.state.defaultDescription}
-                        autoComplete='off' />
+                        autoComplete='off'
+                        fullWidth={true} />
                 </div>
 
                 <div>
@@ -148,8 +152,11 @@ class NewAssignmentForm extends React.Component {
                         disabled={this.state.loading}
                         value={this.state.date}
                         onChange={this._handleDateChange.bind(this)}
-                        style={{float: 'left'}} />
+                        style={{float: 'left', width: '50%'}}
+                        textFieldStyle={{paddingRight: 5}} />
                     <TimePicker
+                        textFieldStyle={{width: '100%', paddingLeft: 5}}
+                        style={{float: 'left', width: '50%'}}
                         disabled={this.state.loading}
                         value={this.state.time}
                         onChange={this._handleTimeChange.bind(this)}
@@ -168,18 +175,22 @@ class NewAssignmentForm extends React.Component {
                         style={{display: 'none'}} />
                 </div>
 
-                <RaisedButton
-                    label='Batal'
-                    disabled={this.state.loading}
-                    onClick={() => {
-                        this.context.router.replace(
-                            `/groups/${this.context.groupId}/assignments`
-                            )
-                    }} />
-                <RaisedButton
-                    type='submit' primary={true}
-                    label={btnSave} disabled={this.state.loading} />
+                <div style={{marginTop: 32}}>
+                    <RaisedButton
+                        label='Batal'
+                        disabled={this.state.loading}
+                        onClick={() => {
+                            this.context.router.replace(
+                                `/groups/${this.context.groupId}/assignments`
+                                )
+                        }} />
+                    <RaisedButton
+                        style={{float: 'right'}}
+                        type='submit' primary={true}
+                        label={btnSave} disabled={this.state.loading} />
+                </div>
             </form>
+            </Paper>
         )
     }
 }

@@ -7,6 +7,7 @@ import RaisedButton from 'material-ui/lib/raised-button'
 import GroupTabs from '../../components/group/group/GroupTabs'
 import GroupDetailJoined from '../../components/group/group/GroupDetailJoined'
 import GroupDetailNotJoined from '../../components/group/group/GroupDetailNotJoined'
+import Loading from '../../components/Loading'
 import { fetchSingleGroup } from '../../actions/group'
 
 
@@ -27,8 +28,18 @@ class Group extends React.Component {
     }
 
     componentDidMount() {
-        if (!this.props.groups.items[this.state.groupId]) {
+        const group = this.props.groups.items[this.state.groupId]
+        if (!group) {
             this.props.fetchSingleGroup(this.state.groupId)
+        }
+        if (group) {
+            this.context.setPageTitle(group.title)
+        }
+    }
+    componentWillReceiveProps(nextProps) {
+        const group = nextProps.groups.items[this.state.groupId]
+        if (group) {
+            this.context.setPageTitle(group.title)
         }
     }
 
@@ -46,9 +57,8 @@ class Group extends React.Component {
             } else {
                 renderGroupDetail = <GroupDetailNotJoined />
             }
-            this.context.setPageTitle(group.title)
         } else {
-            renderGroupDetail = <span>Loading...</span>
+            renderGroupDetail = <Loading />
         }
 
         return (

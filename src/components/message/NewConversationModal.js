@@ -11,13 +11,21 @@ class NewConversationModal extends React.Component {
             <FlatButton label='Batal' onClick={this.props.toggle} />,
             <RaisedButton
                 primary={true}
-                label='Kirim' />
+                label='Kirim'
+                onClick={() => {
+                    const form =  this.refs.conversationForm
+                    const userId = form.refs.userId.getValue()
+                    const text = form.refs.text.getValue()
+                    this.props.handleSubmit(userId, text)
+                }} />
         ]
         return (
             <Dialog
+                {...this.props}
                 open={this.props.open}
                 actions={actions}>
                 <NewConversationForm
+                    ref='conversationForm'
                     openModal={this.props.open}
                     closeModal={this.props.toggle}
                     handleSubmit={this.props.handleSubmit} />

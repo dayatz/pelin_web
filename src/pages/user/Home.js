@@ -9,6 +9,8 @@ import Dialog from 'material-ui/lib/dialog'
 import GroupList from '../../components/group/group/GroupList'
 import GroupModal from '../../components/group/group/GroupModal'
 import FabAdd from '../../components/FabAdd'
+import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 
 import { fetchMyGroups } from '../../actions/group'
 import { getMyGroups } from '../../reducers/group'
@@ -34,8 +36,9 @@ class Home extends React.Component {
         if (this.context.auth.user.is_teacher) {
             return (
                 <div>
-                    <FabAdd onClick={this._toggleModal.bind(this)} />
+                    <FabAdd className='lesson-add-fab' onClick={this._toggleModal.bind(this)} />
                     <GroupModal
+                        edit={false}
                         toggleModal={this._toggleModal.bind(this)}
                         open={this.state.openModal} />
                 </div>
@@ -46,18 +49,19 @@ class Home extends React.Component {
     render() {
         if (this.props.myGroups.isLoading) {
             // TODO: render loading message
-            var renderGroupList = 'Loading...'
+            var renderGroupList = <Loading />
         } else {
             if (this.props.myGroups.ids.length) {
                 const myGroups = getMyGroups(this.context.store.getState())
                 var renderGroupList = <GroupList groups={myGroups} />
             } else {
-                var renderGroupList = 'belum ada group'
+                var renderGroupList = 'Anda belum memiliki grup, gabung sekarang.'
             }
         }
         return (
             <div>
-                <Paper style={{minHeight: 500}}>
+                <Help text='Ini adalah halaman list group yang anda ikuti.' />
+                <Paper className='paper' style={{padding: '30px 15px'}}>
                 {this.renderAddGroupButton()}
                 {renderGroupList}
                 </Paper>

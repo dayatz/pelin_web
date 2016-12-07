@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'react-router/lib/Link'
 
 import TextField from 'material-ui/lib/text-field'
 import FlatButton from 'material-ui/lib/flat-button'
@@ -8,9 +9,15 @@ import Paper from 'material-ui/lib/paper'
 import Avatar from 'material-ui/lib/avatar'
 import Divider from 'material-ui/lib/divider'
 
+import IconMenu from 'material-ui/lib/menus/icon-menu'
+import MenuItem from 'material-ui/lib/menus/menu-item'
+
 import CommentList from './CommentList'
 import NewCommentForm from './NewCommentForm'
+import Text from '../../Text'
+import Time from '../../Time'
 import { fetchComment } from '../../../actions/post'
+import {materialLetter} from '../../../config'
 
 class PostItem extends React.Component {
     constructor(props) {
@@ -18,6 +25,7 @@ class PostItem extends React.Component {
         this.state = {
             commentText: '',
             votesCount: this.props.post.votes_count,
+            commentsCount: this.props.post.comments_count,
             isVoted: this.props.post.is_voted,
             showComment: false,
             zDepth: 1
@@ -42,6 +50,9 @@ class PostItem extends React.Component {
 
         this.props.handleVote(this.props.post)
     }
+    incrementComment() {
+        this.setState({ commentsCount: this.state.commentsCount + 1 })
+    }
 
     toggleComment() {
         this.setState({ showComment: !this.state.showComment })
@@ -62,11 +73,27 @@ class PostItem extends React.Component {
     }
 
     renderDeleteBtn() {
-        if (this.props.post.me) {
-            return <FlatButton label="Delete"
-                onClick={() => {
-                    this.props.handleDelete(this.props.post)
-                }} />
+        if (this.props.post.me || this.context.group.is_owner) {
+            return (
+                <IconMenu
+                    iconButtonElement={
+                        <IconButton>
+                            <FontIcon className='material-icons'>more_vert</FontIcon>
+                        </IconButton>
+                    }
+                    anchorOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    targetOrigin={{ horizontal: 'right', vertical: 'top' }}
+                    >
+                    <MenuItem
+                        primaryText='Hapus'
+                        leftIcon={
+                            <FontIcon className='material-icons'>delete</FontIcon>
+                        }
+                        onClick={ () => {
+                            this.props.handleDelete(this.props.post)
+                        }} />
+                </IconMenu>
+            )
         }
         return
     }
@@ -83,21 +110,18 @@ class PostItem extends React.Component {
         var renderComments = ''
         if (this.state.showComment) {
             const comments = this.props.comments
-            renderCommentList = <span>Loading...</span>
+            renderCommentList = <div className='post-item__comments'>Loading...</div>
 
             if (comments && comments.length) {
                 var renderCommentList = (
-                    <div><CommentList comments={comments} /></div>
+                    <CommentList comments={comments} />
                 )
             } else if (comments && !comments.length) {
-                renderCommentList = ''
+                renderCommentList = <div className='post-item__comments'>Belum ada komentar</div>
             }
 
-            var renderComments = (
-                <div className='post-item__comments'>
-                {renderCommentList}
-                </div>
-            )
+            var renderComments = renderCommentList
+
         }
 
         // voted
@@ -110,19 +134,47 @@ class PostItem extends React.Component {
         if (this.state.votesCount) {
             votesCount = this.state.votesCount
         }
+        var commentsCount
+        if (this.state.commentsCount) {
+            commentsCount = this.state.commentsCount
+        }
 
         // avatar
         if (post.user.photo && post.user.photo.thumbnail) {
-            var avatar = <Avatar src={post.user.photo.thumbnail} />
+            var avatar = <Avatar src={post.user.photo.thumbnail} backgroundColor={'#fff'} />
         } else {
-            let name = post.user.name
-            var avatar = <Avatar>{name.charAt(0)}</Avatar>
+            const char = post.user.name.charAt(0).toUpperCase()
+            var avatar = <Avatar src={materialLetter(char)} backgroundColor={'#fff'} />
         }
 
         // userStatus
         var userStatus
         if (post.user.teacher) {
             userStatus = <i style={{ color: '#9e9e9e' }}>Dosen</i>
+        }
+        var userUsername
+        if (post.user.hasOwnProperty('teacher')) {
+            userUsername = post.user.teacher.username
+        } else {
+            userUsername = post.user.student.nim
+        }
+
+        // attachment
+        var renderAttachment
+        if (post.file) {
+            var filename = post.file.split('/')[post.file.split('/').length-1]
+            if (filename.length >= 10) {
+                var ext = filename.split('.')[1]
+                filename = filename.substring(0,10) + '...' + ext
+            }
+            renderAttachment = (
+                <a className='post-item__attachment' href={post.file} target='_blank'>
+                    <Avatar size={24} style={{ marginRight: 5 }}>
+                        <FontIcon style={{ fontSize: 14, color: '#757575' }} className='material-icons'>attach_file</FontIcon>
+                    </Avatar>
+                    <span style={{ fontSize: 13 }}>{filename}</span>
+                </a>
+            )
         }
 
         return (
@@ -131,17 +183,21 @@ class PostItem extends React.Component {
                 onMouseEnter={() => { this.itemFocus() }}
                 onMouseLeave={() => { this.itemUnfocus() }}>
                 <div className='post-item__user-info'>
-                    {avatar}
-                    <b className='post-item__user-info__name'>
-                        {post.user.name} {userStatus}
-                    </b>
+                    <div className='post-item__avatar'>{avatar}</div>
+                    <div className='post-item__user-info__name'>
+                        <b><Link to={`users/${userUsername}`}>{post.user.name}</Link> {userStatus}</b>
+                        <Time isoDate={post.created_at} />
+                    </div>
+                    <div style={{ clear: 'both' }}></div>
+                    <div className='post-item__option'>{this.renderDeleteBtn()}</div>
                 </div>
 
                 <div className='post-item__text'>
-                    <p>{post.text}</p>
+                    <p><Text text={post.text} /></p>
                 </div>
 
                 <div className='post-item__action'>
+                    <div style={{ float: 'left' }}>
                     <IconButton
                         onClick={this.handleVote.bind(this)}
                         style={{
@@ -156,12 +212,18 @@ class PostItem extends React.Component {
                             color: (this.state.isVoted) ? '#fff' : '#757575'
                         }}>
                         {iconVoted}
-                    </IconButton> {votesCount}
+                    </IconButton>
+                    <span className='post-item__votes-count'>{votesCount}</span>
+                    </div>
 
+                    {renderAttachment}
+
+                    <div style={{ float: 'right'}} >
+                    <span className='post-item__comments-count'>{commentsCount}</span>
                     <IconButton
                         onClick={this.toggleComment.bind(this)}
                         style={{
-                            background: '#eee', borderRadius: '50%', float: 'right',
+                            background: '#eee', borderRadius: '50%',
                             height: 32, width: 32, padding: 2
                         }}
                         iconStyle={{
@@ -170,8 +232,9 @@ class PostItem extends React.Component {
                         }}>
                         <FontIcon className='material-icons'>comment</FontIcon>
                     </IconButton>
+                    </div>
 
-                    {/**this.renderDeleteBtn()**/}
+                    <div style={{ clear: 'both' }} />
                 </div>
 
                 {renderComments}
@@ -180,6 +243,7 @@ class PostItem extends React.Component {
                 <div className='post-item__new-comment'>
                     <NewCommentForm
                         openComments={this.openComments.bind(this)}
+                        incrementComment={this.incrementComment.bind(this)}
                         postId={post.id} />
                 </div>
             </Paper>
@@ -189,6 +253,7 @@ class PostItem extends React.Component {
 
 PostItem.contextTypes = {
     groupId: React.PropTypes.string,
+    group: React.PropTypes.object,
     store: React.PropTypes.object,
     masonry: React.PropTypes.object
 }

@@ -1,8 +1,10 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
+import Paper from 'material-ui/lib/paper'
 import GroupService from '../../api/group'
 import GroupList from '../../components/group/group/GroupList'
+import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 
 import { fetchAllGroup } from '../../actions/group'
 
@@ -10,23 +12,22 @@ import { fetchAllGroup } from '../../actions/group'
 class Groups extends React.Component {
     componentDidMount() {
         this.props.fetchAllGroup()
+        this.context.setPageTitle('Cari Group')
     }
 
     render() {
-        // TODO: render error messages
         const groups = this.props.groups.items
         if (!groups) {
-            // TODO: render loading message
-            var renderGroupList = 'Loading...'
+            var renderGroupList = <Loading />
         } else {
             var renderGroupList = <GroupList groups={groups} />
         }
 
         return (
-            <div>
-                <h4>Semua Grup</h4>
+            <Paper className='paper' style={{padding: '30px 15px'}}>
+                <Help text='Ini adalah halaman daftar group yang ada di sistem, bergabung sekarang.' />
                 {renderGroupList}
-            </div>
+            </Paper>
         )
     }
 }
@@ -40,5 +41,9 @@ const mapDispatchToProps = dispatch => ({
         dispatch(fetchAllGroup())
     }
 })
+
+Groups.contextTypes = {
+    setPageTitle: React.PropTypes.func
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Groups)

@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import AssignmentList from '../../components/group/assignment/AssignmentList'
 import FabAdd from '../../components/FabAdd'
+import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 import { fetchAllAssignment } from '../../actions/assignment'
 
 class Assignments extends React.Component {
@@ -16,22 +18,30 @@ class Assignments extends React.Component {
         } else if (assignments && !assignments.length) {
             var renderAssignmentList = <span>No assignments</span>
         } else {
-            var renderAssignmentList = <span>Loading...</span>
+            var renderAssignmentList = <Loading />
         }
 
         var renderAddButton
         if (this.context.group.is_owner) {
             renderAddButton = (
-                <FabAdd onClick={() => {
-                    this.context.router.push(
-                        `/groups/${this.context.groupId}/assignments/add`
+                <FabAdd
+                    className='lesson-add-fab'
+                    onTouchTap={() => {
+                        this.context.router.push(
+                            `/groups/${this.context.groupId}/assignments/add`
                         )
-                }} />
+                    }} />
             )
+        }
+
+        var renderHelp
+        if (!this.context.group.is_owner) {
+            renderHelp = <Help text='Ini adalah halaman daftar tugas yang diberikan dosen, klik salah satu untuk mengumpulkan.' />
         }
 
         return (
             <div>
+                {renderHelp}
                 {renderAddButton}
                 {renderAssignmentList}
             </div>

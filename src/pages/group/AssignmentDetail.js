@@ -15,8 +15,11 @@ class AssignmentDetail extends React.Component {
 
         return (
             <div>
+            <div className='col-md-6 col-md-offset-3'>
                 <AssignmentInfo assignment={this.context.assignment} />
                 {renderAssignmentUser}
+            </div>
+            <div style={{clear: 'both'}}></div>
             </div>
         )
     }

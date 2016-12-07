@@ -18,6 +18,14 @@ const notification = (state = {
             const { items: notificationAdd } = state
             notificationAdd.unshift(action.item)
             return { ...state, items: notificationAdd }
+        case 'NOTIFICATION_CLEAN':
+            return {...state, items:[]}
+        case 'NOTIFICATION_READ':
+            // const { items: notificationRead } = state
+            const notificationRead = state.items.map(i => {
+                return {...i, unread: false}
+            })
+            return {...state, items: notificationRead}
         default:
             return state
     }

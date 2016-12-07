@@ -34,6 +34,7 @@ class AssignmentSubmitForm extends React.Component {
                         )
                     this.goBack()
                     this.context.showSnackbar('Berhasil mengumpulkan tugas')
+                    this.context.fetchAssignmentCount()
                 })
                 .catch(error => {
                     console.log(error)
@@ -63,21 +64,25 @@ class AssignmentSubmitForm extends React.Component {
                     <TextField
                         ref='text'
                         hintText='Keterangan tambahan'
+                        fullWidth={true}
                         multiLine={true}
-                        rows={2} />
+                        rows={3}
+                        style={{ fontSize: 14}} />
                 </div>
 
                 <div>
                     <FlatButton label={btnLabel} onClick={this._openFileDialog.bind(this)} />
                     <input
                         onChange={this._handleFileChange.bind(this)}
-                        ref='file' type='file'
+                        ref='file' type='file' accept='.doc, .docx, .xls, .xlsx, .ppt, pptx, .pdf, image/*, .zip, .rar, .txt'
                         style={{display: 'none'}} />
                 </div>
 
-                <div>
+                <div style={{marginTop: 15}}>
                     <RaisedButton onClick={this.goBack.bind(this)} label='Batal' />
-                    <RaisedButton type='submit' primary={true} label='Kumpulkan' />
+                    <RaisedButton
+                        style={{float: 'right'}}
+                        type='submit' primary={true} label='Kumpulkan' />
                 </div>
             </form>
         )
@@ -89,7 +94,8 @@ AssignmentSubmitForm.contextTypes = {
     groupId: React.PropTypes.string,
     router: React.PropTypes.object,
     showSnackbar: React.PropTypes.func,
-    store: React.PropTypes.object
+    store: React.PropTypes.object,
+    fetchAssignmentCount: React.PropTypes.func
 }
 
 export default AssignmentSubmitForm

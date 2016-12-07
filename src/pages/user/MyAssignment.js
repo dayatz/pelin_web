@@ -1,18 +1,22 @@
 import React from 'react'
+import Paper from 'material-ui/lib/paper'
 import { connect } from 'react-redux'
 import { fetchMyAssignment } from '../../actions/assignment'
 import MyAssignmentList from '../../components/group/assignment/MyAssignmentList'
+import Loading from '../../components/Loading'
+import Help from '../../components/Help'
 
 class MyAssignment extends React.Component {
     componentDidMount() {
         this.props.fetchMyAssignment()
+        this.context.setPageTitle('Semua Tugas')
     }
     render() {
         const assignments = this.props.assignments
 
         var renderMyAssignmentList
         if (assignments.isLoading) {
-            renderMyAssignmentList = 'Loading...'
+            renderMyAssignmentList = <Loading />
         } else {
             if (assignments.items.length) {
                 renderMyAssignmentList = <MyAssignmentList assignments={assignments.items} />
@@ -21,7 +25,10 @@ class MyAssignment extends React.Component {
             }
         }
         return (
-            <div>{renderMyAssignmentList}</div>
+            <Paper className='paper' style={{padding: '30px 15px'}}>
+                <Help text='Ini adalah halaman daftar tugas dari semua grup yang anda ikuti.' />
+                {renderMyAssignmentList}
+            </Paper>
         )
     }
 }
@@ -35,5 +42,9 @@ const dispatchToProps = dispatch => ({
         dispatch(fetchMyAssignment())
     }
 })
+
+MyAssignment.contextTypes = {
+    setPageTitle: React.PropTypes.func
+}
 
 export default connect(stateToProps, dispatchToProps)(MyAssignment)

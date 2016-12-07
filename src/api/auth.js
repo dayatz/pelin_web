@@ -2,7 +2,7 @@ import axios from 'axios'
 import store from 'store'
 import { BASE_URL } from './index'
 
-const url = 'jwt'
+const url = 'auth'
 
 var AuthService = {
     login: function(email, password) {
@@ -23,6 +23,11 @@ var AuthService = {
 
     setToken: function (token) {
         store.set('bearer', token)
+    },
+
+    verifyToken: function() {
+        return axios.post(BASE_URL + 'tokeninfo',
+            {'token': store.get('bearer', null)})
     }
 }
 
