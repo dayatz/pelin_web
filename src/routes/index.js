@@ -6,6 +6,7 @@ import IndexRoute from 'react-router/lib/IndexRoute'
 // import browserHistory from 'react-router/lib/browserHistory'
 // import useRouterHistory from 'react-router/lib/useRouterHistory'
 import {createHistory, useBasename} from 'history'
+import {browserHistory} from 'react-router'
 
 import createHashHistory from 'history/lib/createHashHistory'
 import { syncHistoryWithStore } from 'react-router-redux'
@@ -72,7 +73,7 @@ function forTeacher(nextState, replace) {
 }
 
 const routes = (
-    <Router history={history}>
+    <Router history={browserHistory}>
         <Route name="app-route" path="/" component={App} onEnter={isAuthenticated}>
             <IndexRoute component={Home} />
 

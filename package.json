@@ -17,7 +17,7 @@
     "history": "^2.0.1",
     "intl": "^1.1.0",
     "intl-locales-supported": "^1.0.0",
-    "material-ui": "^0.15.0-alpha.2",
+    "material-ui": "^0.14.4",
     "moment": "^2.13.0",
     "prettysize": "0.0.3",
     "push.js": "0.0.5",
