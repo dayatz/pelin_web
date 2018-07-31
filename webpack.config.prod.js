@@ -1,5 +1,5 @@
 var webpack = require('webpack');
-var BASE_URL = 'http://pelin.stmikbumigora.ac.id';
+var BASE_URL = "http://103.28.52.56:7000";
 //var BASE_URL = 'http://localhost:8000';
 
 module.exports = {

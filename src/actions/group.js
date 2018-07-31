@@ -3,7 +3,7 @@ import GroupService from '../api/group'
 import { getGroupByIds } from '../reducers/group'
 
 export var fetchGroupAction = createAsyncAction('FETCH_GROUP')
-export var updateGroupAction = createAsyncAction('UPDATE_GROUP')
+// export var updateGroupAction = createAsyncAction('UPDATE_GROUP')
 export var deleteGroupAction = createAsyncAction('DELETE_GROUP')
 
 export function fetchAllGroup() {
