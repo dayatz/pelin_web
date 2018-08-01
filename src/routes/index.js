@@ -43,7 +43,7 @@ import GroupRoute from './group'
 // TODO: use browserHistory provided by react-router
 // const history = syncHistoryWithStore(browserHistory, store)
 const myhistory = useBasename(createHistory)({
-    basename: '/kelas'
+    basename: '/'
 })
 const history = syncHistoryWithStore(myhistory, store)
 
