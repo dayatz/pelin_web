@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 
 import Paper from 'material-ui/lib/paper'
 import Dialog from 'material-ui/lib/dialog'
+import RaisedButton from "material-ui/lib/raised-button";
 
 import GroupList from '../../components/group/group/GroupList'
 import GroupModal from '../../components/group/group/GroupModal'
@@ -47,15 +48,19 @@ class Home extends React.Component {
         return
     }
     render() {
+        var renderGroupList;
         if (this.props.myGroups.isLoading) {
             // TODO: render loading message
-            var renderGroupList = <Loading />
+            renderGroupList = <Loading />
         } else {
             if (this.props.myGroups.ids.length) {
                 const myGroups = getMyGroups(this.context.store.getState())
-                var renderGroupList = <GroupList groups={myGroups} />
+                renderGroupList = <GroupList groups={myGroups} />
             } else {
-                var renderGroupList = 'Anda belum memiliki grup, gabung sekarang.'
+                renderGroupList = <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', height: 450, flexDirection: 'column'}}>
+                        <p>Anda belum memiliki grup.</p>
+                        <RaisedButton onTouchTap={() => { this.context.router.push("/groups") }} label='gabung sekarang' secondary={true} style={{marginLeft: 8}} />
+                  </div>;
             }
         }
         return (
@@ -71,10 +76,11 @@ class Home extends React.Component {
 }
 
 Home.contextTypes = {
-    store: React.PropTypes.object,
-    auth: React.PropTypes.object,
-    setPageTitle: React.PropTypes.func
-}
+  store: React.PropTypes.object,
+  auth: React.PropTypes.object,
+  setPageTitle: React.PropTypes.func,
+  router: React.PropTypes.object
+};
 
 const mapStateToProps = state => ({
     myGroups: state.myGroups
