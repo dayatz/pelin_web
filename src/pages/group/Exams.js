@@ -31,7 +31,6 @@ class Exams extends React.Component {
                     open={this.state.openModal}
                     toggleModal={this._toggleModal.bind(this)} />
                 <FabAdd
-                    className='lesson-add-fab'
                     onTouchTap={() => {
                         this._toggleModal()
                     }} />

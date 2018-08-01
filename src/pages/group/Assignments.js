@@ -25,7 +25,6 @@ class Assignments extends React.Component {
         if (this.context.group.is_owner) {
             renderAddButton = (
                 <FabAdd
-                    className='lesson-add-fab'
                     onTouchTap={() => {
                         this.context.router.push(
                             `/groups/${this.context.groupId}/assignments/add`

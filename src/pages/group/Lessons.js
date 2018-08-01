@@ -15,7 +15,7 @@ class Lessons extends React.Component {
     renderAddButton() {
         if (this.context.group.is_owner) {
             return (
-                <FabAdd className='lesson-add-fab' onClick={() => {
+                <FabAdd onClick={() => {
                     this.context.router.push(
                         `/groups/${this.context.groupId}/lessons/add`
                     )

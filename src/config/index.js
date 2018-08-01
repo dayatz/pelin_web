@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://localhost:8000'
+export const BASE_URL = "http://103.28.52.56:7000";
 // export const BASE_URL = 'http://elearning.stmikbumigora.ac.id'
 
 export const splitText = (num, text) => {

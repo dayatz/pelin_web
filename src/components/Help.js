@@ -25,7 +25,7 @@ class Help extends React.Component {
                 />
         ]
         return (
-            <div style={{position: 'absolute', bottom: 20, left: 35}}>
+            <div style={{position: 'absolute', bottom: 24, left: 40}}>
                 <FloatingActionButton
                     mini={true}
                     onTouchTap={this._toggleModal.bind(this)}

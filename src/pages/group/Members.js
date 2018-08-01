@@ -115,7 +115,7 @@ class Members extends React.Component {
                         open={this.state.openPopover}
                         onInviteFormSubmit={this.onInviteFormSubmit.bind(this)} />
                 </Popover>
-                <FabAdd className='lesson-add-fab' onTouchTap={this.onTouchTap.bind(this)} />
+                <FabAdd onTouchTap={this.onTouchTap.bind(this)} />
                 
                 {renderPendings}
                 {renderMembers}

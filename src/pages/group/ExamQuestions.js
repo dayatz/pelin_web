@@ -127,7 +127,6 @@ class ExamQuestions extends React.Component {
         return (
             <div>
             <FabAdd
-                className='lesson-add-fab'
                 onTouchTap={this._toggleModal.bind(this)} />
             <Dialog
                 contentStyle={{width: 450}}

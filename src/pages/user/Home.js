@@ -36,7 +36,7 @@ class Home extends React.Component {
         if (this.context.auth.user.is_teacher) {
             return (
                 <div>
-                    <FabAdd className='lesson-add-fab' onClick={this._toggleModal.bind(this)} />
+                    <FabAdd onTouchTap={this._toggleModal.bind(this)} />
                     <GroupModal
                         edit={false}
                         toggleModal={this._toggleModal.bind(this)}

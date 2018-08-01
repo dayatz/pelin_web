@@ -206,8 +206,8 @@ body {
 }
 .lesson-add-fab {
     position: absolute;
-    bottom: 20px;
-    right: 35px;
+    bottom: 24px;
+    right: 40px;
 }
 
 .lesson-form__title {
